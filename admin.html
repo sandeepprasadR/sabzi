@@ -2,151 +2,645 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>रेट अपडेट करें | Guru Ashish Vegetable Store</title>
-<link rel="stylesheet" href="assets/styles.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>दुकान अपडेट करें</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700;800&display=swap">
 <style>
-  .adm{max-width:640px;margin:0 auto;padding:16px}
-  .row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);
-       border-radius:12px;padding:10px;margin-bottom:8px}
-  .row .e{font-size:26px}
-  .row .nm{flex:1;font-weight:700}
-  .row .nm small{display:block;font-weight:400;color:var(--muted);font-size:12px}
-  .row input.p{width:84px;text-align:right}
-  .row select{font-family:inherit;font-size:15px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff}
-  .out{width:100%;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;
-       white-space:pre;overflow:auto;min-height:180px}
-  .stack{display:grid;gap:10px;margin-top:14px}
-  .note{background:var(--green-light);border-radius:12px;padding:12px;font-size:14px;color:var(--green-dark)}
+:root{
+  --ink:#1d2420; --muted:#6b7a70; --line:#dfe6e1; --paper:#f5f8f6; --card:#fff;
+  --leaf:#1b7a3e; --leaf-d:#125c2d; --leaf-l:#e6f3ea;
+  --plum:#5c1c3d; --warn:#b3261e; --warn-l:#fdecea; --amber:#8a5a00; --amber-l:#fff6e0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Noto Sans Devanagari","Nirmala UI",system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.6; padding-bottom:96px; -webkit-text-size-adjust:100%;
+}
+h1,h2,h3{margin:0;line-height:1.25}
+.wrap{max-width:640px;margin:0 auto;padding:0 14px}
+
+header{background:var(--plum);color:#fff;padding:18px 14px}
+header .in{max-width:640px;margin:0 auto}
+header h1{font-size:21px;font-weight:800}
+header p{margin:4px 0 0;opacity:.85;font-size:13.5px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:14px}
+.card h2{font-size:17px;font-weight:700;margin-bottom:4px}
+.hint{font-size:13.5px;color:var(--muted);margin:4px 0 0}
+
+label{display:block;margin-top:12px}
+label>span{display:block;font-size:14px;font-weight:600;margin-bottom:5px}
+input,select,textarea{
+  font-family:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);
+  border-radius:11px;background:#fff;color:var(--ink);width:100%
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-color:transparent}
+
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  min-height:52px;padding:10px 14px;border:0;border-radius:14px;
+  font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none
+}
+.btn-go{background:var(--leaf);color:#fff}
+.btn-go:active{background:var(--leaf-d)}
+.btn-go[disabled]{background:#a9c4b3;cursor:default}
+.btn-ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn-sm{min-height:44px;font-size:14px;width:auto;padding:0 14px}
+
+.note{border-radius:12px;padding:11px 13px;font-size:14px;line-height:1.6;margin-top:12px}
+.note-amber{background:var(--amber-l);color:var(--amber)}
+.note-warn{background:var(--warn-l);color:var(--warn)}
+.note-leaf{background:var(--leaf-l);color:var(--leaf-d)}
+
+.tabs{display:flex;gap:8px;margin-top:14px}
+.tabs button{
+  flex:1;min-height:46px;border:1px solid var(--line);background:#fff;border-radius:12px;
+  font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer
+}
+.tabs button[aria-selected="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
+
+.row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.thumb{
+  width:54px;height:54px;flex:0 0 auto;border-radius:12px;background:var(--leaf-l);
+  display:grid;place-items:center;font-size:24px;overflow:hidden;position:relative
+}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.row .nm{flex:1;min-width:0}
+.row .nm b{display:block;font-size:16px;font-weight:700}
+.row .nm small{display:block;color:var(--muted);font-size:12.5px}
+.row .price{width:84px;text-align:right}
+.row .unit{width:104px}
+
+.rowacts{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.chip{
+  min-height:40px;padding:0 12px;border:1px solid var(--line);background:#fff;border-radius:10px;
+  font-family:inherit;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;
+  display:inline-flex;align-items:center;gap:6px
+}
+.chip[aria-pressed="true"]{background:var(--leaf-l);border-color:var(--leaf);color:var(--leaf-d)}
+.chip.danger{color:var(--warn);border-color:#f2c9c5}
+.item{border-bottom:1px solid var(--line);padding:12px 0}
+.item:last-child{border-bottom:0}
+.item.out{opacity:.55}
+
+.savebar{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom));box-shadow:0 -4px 18px rgba(20,60,35,.10)
+}
+.savebar .in{max-width:640px;margin:0 auto;display:flex;gap:10px;align-items:center}
+.savebar .status{flex:1;font-size:13.5px;color:var(--muted);line-height:1.4}
+.savebar .btn{flex:0 0 auto;width:auto;padding:0 22px}
+
+.hidden{display:none!important}
+ol.steps{padding-left:20px;margin:10px 0 0;font-size:14.5px;line-height:1.75}
+ol.steps li{margin-bottom:7px}
+code{background:var(--leaf-l);color:var(--leaf-d);padding:2px 6px;border-radius:6px;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;word-break:break-all}
+a{color:var(--leaf-d)}
+.spin{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
 </style>
 </head>
 <body>
-<header class="hero"><div class="hero-inner">
-  <h1>रेट अपडेट करें</h1>
-  <p class="tagline">Price update — सिर्फ़ दुकानदार के लिए</p>
+
+<header><div class="in">
+  <h1>दुकान अपडेट करें</h1>
+  <p>दाम, स्टॉक और फोटो — सीधे यहीं से</p>
 </div></header>
 
-<div class="adm">
-  <div class="note">
-    यहाँ रेट बदलें → नीचे से <b>WhatsApp रेट लिस्ट</b> कॉपी करके ग्रुप में डालें,
-    और <b>products.json</b> कॉपी करके वेबसाइट में अपडेट करवाएँ।
-  </div>
+<div class="wrap">
 
-  <h2 style="margin:18px 0 10px">सब्ज़ियों के दाम</h2>
-  <div id="rows"></div>
-  <button class="btn btn-ghost" id="addItem" style="margin-top:6px">+ नई सब्ज़ी जोड़ें</button>
+  <!-- ============================ LOGIN ============================ -->
+  <section id="login">
+    <div class="card">
+      <h2>पहली बार? एक बार सेट करना होगा</h2>
+      <p class="hint">यह टोकन सिर्फ़ इसी फ़ोन में सेव रहेगा। किसी को न भेजें।</p>
 
-  <div class="stack">
-    <h2>1. WhatsApp रेट लिस्ट</h2>
-    <textarea class="out" id="waText" readonly rows="14"></textarea>
-    <button class="btn btn-primary" id="copyWa">रेट लिस्ट कॉपी करें</button>
+      <label>
+        <span>GitHub टोकन</span>
+        <input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
+      </label>
+      <button class="btn btn-go" id="doLogin" style="margin-top:14px">खोलें</button>
+      <p class="note note-warn hidden" id="loginErr"></p>
 
-    <h2 style="margin-top:14px">2. products.json (वेबसाइट के लिए)</h2>
-    <textarea class="out" id="jsonText" readonly rows="14"></textarea>
-    <button class="btn btn-ghost" id="copyJson">JSON कॉपी करें</button>
-  </div>
-  <p class="foot">बदलाव इसी फ़ोन में सेव रहते हैं। वेबसाइट पर लागू करने के लिए JSON अपडेट करना ज़रूरी है।</p>
+      <details style="margin-top:16px">
+        <summary style="font-weight:700;cursor:pointer">टोकन कैसे बनाएँ?</summary>
+        <ol class="steps">
+          <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> खोलें</li>
+          <li>Repository access → <b>Only select repositories</b> → <code>sabzi</code> चुनें</li>
+          <li>Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b></li>
+          <li>Expiration में <b>No expiration</b> या 1 साल चुनें</li>
+          <li><b>Generate token</b> दबाएँ, टोकन कॉपी करके ऊपर डालें</li>
+        </ol>
+        <p class="note note-amber">यह टोकन सिर्फ़ इसी एक repository को बदल सकता है, और कुछ नहीं।</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================ EDITOR =========================== -->
+  <section id="editor" class="hidden">
+
+    <div class="tabs" role="tablist">
+      <button id="tabVeg" role="tab" aria-selected="true">सब्ज़ी</button>
+      <button id="tabGar" role="tab" aria-selected="false">कपड़े</button>
+      <button id="tabSet" role="tab" aria-selected="false">सेटिंग</button>
+    </div>
+
+    <!-- ---- vegetables ---- -->
+    <div id="paneVeg">
+      <div class="card">
+        <h2>आज के दाम</h2>
+        <p class="hint">दाम बदलें, स्टॉक खत्म हो तो बंद करें, फोटो लगाएँ।</p>
+        <div id="vegList"></div>
+        <button class="btn btn-ghost" id="addVeg" style="margin-top:12px">+ नई सब्ज़ी जोड़ें</button>
+      </div>
+    </div>
+
+    <!-- ---- garments ---- -->
+    <div id="paneGar" class="hidden">
+      <div class="card">
+        <h2>कपड़े की दुकान</h2>
+        <p class="hint">नाम, दाम, साइज़ और फोटो।</p>
+        <div id="garList"></div>
+        <button class="btn btn-ghost" id="addGar" style="margin-top:12px">+ नया आइटम जोड़ें</button>
+      </div>
+    </div>
+
+    <!-- ---- settings ---- -->
+    <div id="paneSet" class="hidden">
+      <div class="card">
+        <h2>दुकान की सेटिंग</h2>
+        <label><span>दुकान खुलने का समय</span><input id="setOpen" type="time"></label>
+        <label><span>बंद होने का समय</span><input id="setClose" type="time"></label>
+        <label><span>आखिरी ऑर्डर का समय</span><input id="setLast" type="time"></label>
+        <label><span>कम से कम ऑर्डर (₹) — 0 = कोई शर्त नहीं</span><input id="setMin" type="number" min="0" step="10" inputmode="numeric"></label>
+        <label><span>शिकायत कितने घंटे तक ले सकते हैं</span><input id="setHours" type="number" min="1" step="1" inputmode="numeric"></label>
+        <label><span>UPI ID</span><input id="setUpi" type="text" autocomplete="off"></label>
+        <p class="note note-amber">समय बदलने पर वेबसाइट पर "अभी खुला / अभी बंद" अपने आप बदल जाएगा।</p>
+      </div>
+      <div class="card">
+        <h2>WhatsApp रेट लिस्ट</h2>
+        <p class="hint">ग्रुप में डालने के लिए — कॉपी करके पेस्ट कर दें।</p>
+        <textarea id="waList" rows="12" readonly style="margin-top:10px;font-size:14px"></textarea>
+        <button class="btn btn-ghost" id="copyWa" style="margin-top:10px">रेट लिस्ट कॉपी करें</button>
+      </div>
+      <div class="card">
+        <h2>बाहर निकलें</h2>
+        <p class="hint">इस फ़ोन से टोकन हटा दें।</p>
+        <button class="btn btn-ghost" id="logout" style="margin-top:10px;color:var(--warn)">लॉग आउट</button>
+      </div>
+    </div>
+
+  </section>
 </div>
+
+<div class="savebar hidden" id="savebar"><div class="in">
+  <span class="status" id="status"></span>
+  <button class="btn btn-go" id="save">सेव करें</button>
+</div></div>
 
 <script>
 (function () {
   'use strict';
-  var KEY = 'gavs.admin.v1';
-  var data = null;
 
-  var seed = JSON.parse(localStorage.getItem(KEY) || 'null');
-  if (seed) { data = seed; boot(); }
-  else {
-    fetch('data/products.json', { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (d) { data = d; boot(); });
+  var OWNER = 'sandeepprasadR';
+  var REPO  = 'sabzi';
+  var BRANCH = 'main';
+  var TOK_KEY = 'gavs.admin.token.v1';
+  var API = 'https://api.github.com';
+
+  var token = '';
+  var files = {};          /* path -> { sha, text, data, dirty } */
+  var pendingPhotos = [];  /* { path, b64 } committed alongside */
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------------------- base64 that survives Hindi ---------------------- */
+  function b64encode(str) {
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+  function b64decode(b64) {
+    var bin = atob(b64.replace(/\s/g, '')), bytes = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    return new TextDecoder('utf-8').decode(bytes);
   }
 
-  function boot() { render(); }
+  /* ------------------------------ GitHub --------------------------------- */
+  function gh(path, opts) {
+    opts = opts || {};
+    return fetch(API + path, {
+      method: opts.method || 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      },
+      body: opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function (r) {
+      if (r.status === 401 || r.status === 403) throw new Error('AUTH');
+      if (!r.ok) return r.text().then(function (t) { throw new Error(r.status + ' ' + t.slice(0, 160)); });
+      return r.json();
+    });
+  }
 
-  function render() {
-    var host = document.getElementById('rows');
+  function loadFile(path) {
+    return gh('/repos/' + OWNER + '/' + REPO + '/contents/' + path + '?ref=' + BRANCH)
+      .then(function (j) {
+        var text = b64decode(j.content);
+        var m = text.match(/\/\*<CATALOGUE>\*\/([\s\S]*?)\/\*<\/CATALOGUE>\*\//);
+        if (!m) throw new Error(path + ' में CATALOGUE मार्कर नहीं मिला');
+        files[path] = { sha: j.sha, text: text, data: JSON.parse(m[1]), dirty: false };
+      });
+  }
+
+  /* strip our own scratch fields (anything starting with _) so previews and
+     other in-memory state never get written into the published file */
+  function clean(v) {
+    if (Array.isArray(v)) return v.map(clean);
+    if (v && typeof v === 'object') {
+      var o = {};
+      Object.keys(v).forEach(function (k) { if (k.charAt(0) !== '_') o[k] = clean(v[k]); });
+      return o;
+    }
+    return v;
+  }
+
+  function saveFile(path) {
+    var f = files[path];
+    var json = JSON.stringify(clean(f.data), null, 2);
+    json = json.split('\n').map(function (l, i) { return i ? '  ' + l : l; }).join('\n');
+    var out = f.text.replace(/(\/\*<CATALOGUE>\*\/)[\s\S]*?(\/\*<\/CATALOGUE>\*\/)/, function (_, a, b) {
+      return a + json + b;
+    });
+    return gh('/repos/' + OWNER + '/' + REPO + '/contents/' + path, {
+      method: 'PUT',
+      body: { message: 'Update ' + path + ' from shop admin', content: b64encode(out), sha: f.sha, branch: BRANCH }
+    }).then(function (j) { f.sha = j.content.sha; f.text = out; f.dirty = false; });
+  }
+
+  function savePhoto(ph) {
+    var body = { message: 'Add photo ' + ph.path, content: ph.b64, branch: BRANCH };
+    return gh('/repos/' + OWNER + '/' + REPO + '/contents/' + ph.path + '?ref=' + BRANCH)
+      .then(function (j) { body.sha = j.sha; }, function () { /* new file */ })
+      .then(function () {
+        return gh('/repos/' + OWNER + '/' + REPO + '/contents/' + ph.path, { method: 'PUT', body: body });
+      });
+  }
+
+  /* ------------------------------ photos --------------------------------- */
+  function pickPhoto(cb) {
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*';
+    inp.addEventListener('change', function () {
+      var file = inp.files && inp.files[0];
+      if (!file) return;
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var MAX = 640;
+        var w = img.width, h = img.height;
+        if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+        var cv = document.createElement('canvas');
+        cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(img, 0, 0, w, h);
+        URL.revokeObjectURL(url);
+        cb(cv.toDataURL('image/jpeg', 0.75).split(',')[1]);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); alert('यह फोटो नहीं खुल पाई।'); };
+      img.src = url;
+    });
+    inp.click();
+  }
+
+  function attachPhoto(item, path, redraw) {
+    pickPhoto(function (b64) {
+      var p = 'photos/' + path;
+      pendingPhotos = pendingPhotos.filter(function (x) { return x.path !== p; });
+      pendingPhotos.push({ path: p, b64: b64 });
+      item.photo = p;
+      item._preview = 'data:image/jpeg;base64,' + b64;
+      markDirty(); redraw();
+    });
+  }
+
+  /* ------------------------------- state --------------------------------- */
+  function markDirty() {
+    Object.keys(files).forEach(function (k) { files[k].dirty = true; });
+    setStatus('सेव नहीं हुआ');
+    $('save').disabled = false;
+  }
+  function setStatus(msg, spin) {
+    $('status').innerHTML = spin ? '<span class="spin"></span> ' + msg : msg;
+  }
+
+  /* ------------------------------ rendering ------------------------------ */
+  function drawVeg() {
+    var d = files['index.html'].data, host = $('vegList');
     host.innerHTML = '';
-    data.products.forEach(function (p, i) {
-      var row = document.createElement('div');
-      row.className = 'row';
-      row.innerHTML =
-        '<span class="e">' + p.emoji + '</span>' +
-        '<span class="nm">' + p.hi + '<small>' + p.en + '</small></span>' +
-        '<span>₹</span>';
-      var price = document.createElement('input');
-      price.className = 'p'; price.type = 'number'; price.min = '0'; price.step = '1';
-      price.inputMode = 'numeric'; price.value = p.price;
-      price.addEventListener('input', function () {
-        data.products[i].price = Number(price.value) || 0;
-        persist();
+    (d.products || []).forEach(function (p, i) {
+      var wrap = document.createElement('div');
+      wrap.className = 'item' + (p.available === false ? ' out' : '');
+
+      var row = document.createElement('div'); row.className = 'row';
+      var th = document.createElement('div'); th.className = 'thumb';
+      var src = p._preview || (p.photo ? p.photo : '');
+      if (src) { var im = document.createElement('img'); im.src = src; th.appendChild(im); }
+      else th.textContent = p.emoji || '🥬';
+      row.appendChild(th);
+
+      var nm = document.createElement('div'); nm.className = 'nm';
+      var b = document.createElement('b'); b.textContent = p.hi || p.en || p.id;
+      var s = document.createElement('small'); s.textContent = p.en || '';
+      nm.appendChild(b); nm.appendChild(s); row.appendChild(nm);
+
+      var pr = document.createElement('input');
+      pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
+      pr.inputMode = 'numeric'; pr.value = p.price;
+      pr.setAttribute('aria-label', (p.hi || '') + ' दाम');
+      pr.addEventListener('input', function () { p.price = Number(pr.value) || 0; markDirty(); paintWaList(); });
+      row.appendChild(pr);
+
+      var un = document.createElement('select'); un.className = 'unit';
+      [['kg', 'किलो'], ['250g', '250 ग्राम'], ['pc', 'नग'], ['bunch', 'गड्डी']].forEach(function (u) {
+        var o = document.createElement('option'); o.value = u[0]; o.textContent = u[1];
+        if (p.unit === u[0]) o.selected = true; un.appendChild(o);
       });
-      var unit = document.createElement('select');
-      [['kg', 'किलो'], ['250g', '250 ग्राम']].forEach(function (u) {
-        var o = document.createElement('option');
-        o.value = u[0]; o.textContent = u[1];
-        if (p.unit === u[0]) o.selected = true;
-        unit.appendChild(o);
+      un.addEventListener('change', function () {
+        p.unit = un.value;
+        p.step = un.value === 'kg' ? 0.5 : 1;
+        markDirty(); paintWaList();
       });
-      unit.addEventListener('change', function () {
-        data.products[i].unit = unit.value;
-        data.products[i].step = unit.value === 'kg' ? 0.5 : 1;
-        persist();
+      row.appendChild(un);
+      wrap.appendChild(row);
+
+      var acts = document.createElement('div'); acts.className = 'rowacts';
+
+      var stock = document.createElement('button');
+      stock.type = 'button'; stock.className = 'chip';
+      stock.setAttribute('aria-pressed', String(p.available !== false));
+      stock.textContent = p.available === false ? 'आज नहीं है' : 'स्टॉक में है';
+      stock.addEventListener('click', function () {
+        p.available = (p.available === false);
+        markDirty(); drawVeg(); paintWaList();
       });
-      row.appendChild(price); row.appendChild(unit);
-      host.appendChild(row);
+      acts.appendChild(stock);
+
+      var ph = document.createElement('button');
+      ph.type = 'button'; ph.className = 'chip';
+      ph.textContent = p.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
+      ph.addEventListener('click', function () { attachPhoto(p, (p.id || 'item' + i) + '.jpg', drawVeg); });
+      acts.appendChild(ph);
+
+      if (p.photo) {
+        var rm = document.createElement('button');
+        rm.type = 'button'; rm.className = 'chip danger'; rm.textContent = 'फोटो हटाएँ';
+        rm.addEventListener('click', function () {
+          p.photo = ''; delete p._preview; markDirty(); drawVeg();
+        });
+        acts.appendChild(rm);
+      }
+
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
+      del.addEventListener('click', function () {
+        if (!confirm((p.hi || '') + ' को लिस्ट से हटा दें?')) return;
+        d.products.splice(i, 1); markDirty(); drawVeg(); paintWaList();
+      });
+      acts.appendChild(del);
+
+      wrap.appendChild(acts);
+      host.appendChild(wrap);
     });
-    outputs();
   }
 
-  document.getElementById('addItem').addEventListener('click', function () {
-    var hi = prompt('सब्ज़ी का नाम (हिंदी में):');
-    if (!hi) return;
-    var en = prompt('Name in English:') || hi;
-    var emoji = prompt('इमोजी (जैसे 🥦):') || '🥬';
-    data.products.push({
-      id: 'item' + Date.now(), emoji: emoji, hi: hi, en: en,
-      price: 0, unit: 'kg', step: 0.5
+  function drawGar() {
+    var f = files['garments.html'];
+    var d = f.data, host = $('garList');
+    var list = d.items || d.products || [];
+    host.innerHTML = '';
+    list.forEach(function (p, i) {
+      var wrap = document.createElement('div'); wrap.className = 'item';
+      var row = document.createElement('div'); row.className = 'row';
+
+      var th = document.createElement('div'); th.className = 'thumb';
+      var src = p._preview || (p.photo ? p.photo : '');
+      if (src) { var im = document.createElement('img'); im.src = src; th.appendChild(im); }
+      else th.textContent = '👕';
+      row.appendChild(th);
+
+      var nm = document.createElement('div'); nm.className = 'nm';
+      var ni = document.createElement('input');
+      ni.type = 'text'; ni.value = p.hi || p.name || p.en || '';
+      ni.setAttribute('aria-label', 'आइटम का नाम');
+      ni.addEventListener('input', function () {
+        if ('hi' in p) p.hi = ni.value; else if ('name' in p) p.name = ni.value; else p.hi = ni.value;
+        markDirty();
+      });
+      nm.appendChild(ni); row.appendChild(nm);
+
+      var pr = document.createElement('input');
+      pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
+      pr.inputMode = 'numeric'; pr.value = p.price;
+      pr.setAttribute('aria-label', 'दाम');
+      pr.addEventListener('input', function () { p.price = Number(pr.value) || 0; markDirty(); });
+      row.appendChild(pr);
+      wrap.appendChild(row);
+
+      var acts = document.createElement('div'); acts.className = 'rowacts';
+      var ph = document.createElement('button');
+      ph.type = 'button'; ph.className = 'chip';
+      ph.textContent = p.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
+      ph.addEventListener('click', function () { attachPhoto(p, 'garments/' + (p.id || 'item' + i) + '.jpg', drawGar); });
+      acts.appendChild(ph);
+
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
+      del.addEventListener('click', function () {
+        if (!confirm('इस आइटम को हटा दें?')) return;
+        list.splice(i, 1); markDirty(); drawGar();
+      });
+      acts.appendChild(del);
+
+      wrap.appendChild(acts);
+      host.appendChild(wrap);
     });
-    persist(); render();
+  }
+
+  function drawSet() {
+    var s = files['index.html'].data.store;
+    $('setOpen').value  = s.openTime || '';
+    $('setClose').value = s.closeTime || '';
+    $('setLast').value  = s.lastOrderTime || '';
+    $('setMin').value   = s.minOrder || 0;
+    $('setHours').value = s.reportHours || 24;
+    $('setUpi').value   = s.upiId || '';
+    paintWaList();
+  }
+
+  [['setOpen', 'openTime'], ['setClose', 'closeTime'], ['setLast', 'lastOrderTime'],
+   ['setUpi', 'upiId']].forEach(function (pair) {
+    $(pair[0]).addEventListener('input', function () {
+      files['index.html'].data.store[pair[1]] = $(pair[0]).value; markDirty();
+    });
+  });
+  [['setMin', 'minOrder'], ['setHours', 'reportHours']].forEach(function (pair) {
+    $(pair[0]).addEventListener('input', function () {
+      files['index.html'].data.store[pair[1]] = Number($(pair[0]).value) || 0; markDirty();
+    });
   });
 
-  function persist() {
-    data.store.updatedOn = new Date().toISOString().slice(0, 10);
-    localStorage.setItem(KEY, JSON.stringify(data));
-    outputs();
+  function unitLabel(u) {
+    return u === 'kg' ? '1 किलो' : u === '250g' ? '250 ग्राम' : u === 'bunch' ? '1 गड्डी' : '1 नग';
+  }
+  function paintWaList() {
+    if (!files['index.html']) return;
+    var d = files['index.html'].data, s = d.store;
+    var out = ['🛒 *आज की रेट लिस्ट* 🛒', ''];
+    (d.products || []).forEach(function (p) {
+      if (p.available === false) return;
+      out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' — ₹' + p.price);
+    });
+    out.push('', '✨ 100% ताज़ा — रोज़ सुबह मंडी से ✨',
+      '🚚 फ्री होम डिलीवरी — ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
+      '🛒 ऑर्डर: https://guru-ashish.in',
+      '📞 ' + (s.phone || ''), '📍 ' + (s.address || ''));
+    $('waList').value = out.join('\n');
   }
 
-  function outputs() {
-    var lines = ['🛒 *ताजा सब्जियों की रेट लिस्ट* 🛒', ''];
-    data.products.forEach(function (p) {
-      var u = p.unit === 'kg' ? '1 किलो' : '250 ग्राम';
-      lines.push(p.emoji + ' ' + p.hi + ': ' + u + ' — ₹' + p.price);
-    });
-    lines.push('', '✨ शुद्धता और ताजगी की 100% गारंटी ✨',
-      '🚚 फ्री होम डिलीवरी — ' + data.store.deliveryMinutes + ' मिनट में', '',
-      '📍 पता: ' + data.store.address,
-      '📞 संपर्क: ' + data.store.phone);
-    document.getElementById('waText').value = lines.join('\n');
-    document.getElementById('jsonText').value = JSON.stringify(data, null, 2);
-  }
+  $('copyWa').addEventListener('click', function () {
+    var a = $('waList'); a.select(); a.setSelectionRange(0, 999999);
+    var done = function () {
+      var b = $('copyWa'), old = b.textContent;
+      b.textContent = 'कॉपी हो गया ✓';
+      setTimeout(function () { b.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(a.value).then(done, done);
+    else { try { document.execCommand('copy'); } catch (e) {} done(); }
+  });
 
-  wire('copyWa', 'waText');
-  wire('copyJson', 'jsonText');
-  function wire(btnId, areaId) {
-    var btn = document.getElementById(btnId);
-    btn.addEventListener('click', function () {
-      var area = document.getElementById(areaId);
-      area.select(); area.setSelectionRange(0, 999999);
-      var done = function () {
-        var old = btn.textContent;
-        btn.textContent = 'कॉपी हो गया ✓';
-        setTimeout(function () { btn.textContent = old; }, 1600);
-      };
-      if (navigator.clipboard) navigator.clipboard.writeText(area.value).then(done, done);
-      else { document.execCommand('copy'); done(); }
+  /* ------------------------------- add rows ------------------------------ */
+  $('addVeg').addEventListener('click', function () {
+    var hi = prompt('सब्ज़ी का नाम (हिंदी में):'); if (!hi) return;
+    var en = prompt('Name in English:') || hi;
+    var d = files['index.html'].data;
+    var cat = (d.categories && d.categories[0] && d.categories[0].id) || '';
+    d.products.push({
+      id: 'item' + Date.now(), emoji: '🥬', cat: cat, hi: hi, en: en,
+      bn: hi, pa: hi, te: hi,
+      price: 0, unit: 'kg', step: 0.5, available: true, photo: ''
+    });
+    markDirty(); drawVeg(); paintWaList();
+  });
+
+  $('addGar').addEventListener('click', function () {
+    var hi = prompt('आइटम का नाम:'); if (!hi) return;
+    var f = files['garments.html'].data;
+    var list = f.items || f.products;
+    if (!list) { f.items = []; list = f.items; }
+    list.push({ id: 'g' + Date.now(), hi: hi, en: hi, price: 0, photo: '' });
+    markDirty(); drawGar();
+  });
+
+  /* -------------------------------- tabs --------------------------------- */
+  function tab(which) {
+    [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabSet', 'paneSet']].forEach(function (t) {
+      var on = t[0] === which;
+      $(t[0]).setAttribute('aria-selected', String(on));
+      $(t[1]).classList.toggle('hidden', !on);
     });
   }
+  $('tabVeg').addEventListener('click', function () { tab('tabVeg'); });
+  $('tabGar').addEventListener('click', function () { tab('tabGar'); });
+  $('tabSet').addEventListener('click', function () { tab('tabSet'); });
+
+  /* -------------------------------- save --------------------------------- */
+  $('save').addEventListener('click', function () {
+    $('save').disabled = true;
+    setStatus('सेव हो रहा है…', true);
+    var chain = Promise.resolve();
+    pendingPhotos.forEach(function (ph) {
+      chain = chain.then(function () { return savePhoto(ph); });
+    });
+    chain = chain
+      .then(function () { pendingPhotos = []; return saveFile('index.html'); })
+      .then(function () { return saveFile('garments.html'); })
+      .then(function () {
+        setStatus('सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा');
+        $('save').disabled = true;
+      })
+      .catch(function (e) {
+        $('save').disabled = false;
+        if (e.message === 'AUTH') { setStatus('टोकन काम नहीं कर रहा — दोबारा लॉगिन करें'); logout(); }
+        else if (/409/.test(e.message)) setStatus('किसी और ने भी बदला है — पेज रिफ्रेश करके दोबारा करें');
+        else setStatus('सेव नहीं हो पाया: ' + e.message);
+      });
+  });
+
+  /* -------------------------------- login -------------------------------- */
+  function boot(t) {
+    token = t;
+    $('loginErr').classList.add('hidden');
+    $('doLogin').disabled = true;
+    $('doLogin').textContent = 'खुल रहा है…';
+    Promise.all([loadFile('index.html'), loadFile('garments.html')])
+      .then(function () {
+        try { localStorage.setItem(TOK_KEY, token); } catch (e) {}
+        $('login').classList.add('hidden');
+        $('editor').classList.remove('hidden');
+        $('savebar').classList.remove('hidden');
+        drawVeg(); drawGar(); drawSet();
+        setStatus('सब सेव है');
+        $('save').disabled = true;
+      })
+      .catch(function (e) {
+        $('doLogin').disabled = false;
+        $('doLogin').textContent = 'खोलें';
+        $('loginErr').classList.remove('hidden');
+        $('loginErr').textContent = e.message === 'AUTH'
+          ? 'यह टोकन काम नहीं कर रहा। ऊपर बताए तरीके से नया बनाएँ।'
+          : ('कुछ गड़बड़: ' + e.message);
+      });
+  }
+  $('doLogin').addEventListener('click', function () {
+    var t = $('tok').value.trim();
+    if (!t) { $('loginErr').classList.remove('hidden'); $('loginErr').textContent = 'टोकन डालें।'; return; }
+    boot(t);
+  });
+  $('tok').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('doLogin').click(); });
+
+  function logout() {
+    try { localStorage.removeItem(TOK_KEY); } catch (e) {}
+    token = ''; files = {}; pendingPhotos = [];
+    $('editor').classList.add('hidden');
+    $('savebar').classList.add('hidden');
+    $('login').classList.remove('hidden');
+    $('tok').value = '';
+    $('doLogin').disabled = false;
+    $('doLogin').textContent = 'खोलें';
+  }
+  $('logout').addEventListener('click', function () {
+    if (confirm('इस फ़ोन से टोकन हटा दें?')) logout();
+  });
+
+  window.addEventListener('beforeunload', function (e) {
+    var dirty = Object.keys(files).some(function (k) { return files[k].dirty; });
+    if (dirty || pendingPhotos.length) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* auto-login if a token is already on this phone */
+  var saved = '';
+  try { saved = localStorage.getItem(TOK_KEY) || ''; } catch (e) {}
+  if (saved) boot(saved);
 })();
 </script>
 </body>

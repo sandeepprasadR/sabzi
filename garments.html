@@ -222,54 +222,166 @@ a:hover{color:var(--carrot)}
 (function () {
   'use strict';
 
-  var DATA = {
-    shop: {
-      name: "गुरु आशीष गारमेंट्स",
-      nameEn: "Guru Ashish Garments",
-      whatsapp: "918400357057",          /* WhatsApp number, with 91 */
-      phone1: "8400357057",
-      phone2: "9354001343",
-      address: "धरमपुर मेन रोड, सेक्टर 108, गुरुग्राम",
-      addressEn: "Dharampur Main Road, Sector 108, Gurugram",
-      mapQuery: "Guru Ashish Garments, Dharampur Main Road, Sector 108, Gurugram",
-      openTime: "10:00",
-      closeTime: "21:00",
-      sinceYears: 5,
-      ownerName: "तरुण",
-      ownerNameEn: "Tarun",
-      ownerPhoto: ""                      /* paste an image URL later */
+  var DATA = /*<CATALOGUE>*/{
+    "shop": {
+      "name": "गुरु आशीष गारमेंट्स",
+      "nameEn": "Guru Ashish Garments",
+      "whatsapp": "918400357057",
+      "phone1": "8400357057",
+      "phone2": "9354001343",
+      "address": "धरमपुर मेन रोड, सेक्टर 108, गुरुग्राम",
+      "addressEn": "Dharampur Main Road, Sector 108, Gurugram",
+      "mapQuery": "Guru Ashish Garments, Dharampur Main Road, Sector 108, Gurugram",
+      "openTime": "10:00",
+      "closeTime": "21:00",
+      "sinceYears": 5,
+      "ownerName": "तरुण",
+      "ownerNameEn": "Tarun",
+      "ownerPhoto": ""
     },
-
-    categories: [
-      { id:"men",   hi:"पुरुष",  en:"Men",   bn:"পুরুষ",  pa:"ਮਰਦ",     te:"పురుషులు" },
-      { id:"women", hi:"महिला",  en:"Women", bn:"মহিলা",  pa:"ਔਰਤਾਂ",   te:"మహిళలు" },
-      { id:"kids",  hi:"बच्चे",  en:"Kids",  bn:"বাচ্চা", pa:"ਬੱਚੇ",    te:"పిల్లలు" }
+    "categories": [
+      {
+        "id": "men",
+        "hi": "पुरुष",
+        "en": "Men",
+        "bn": "পুরুষ",
+        "pa": "ਮਰਦ",
+        "te": "పురుషులు"
+      },
+      {
+        "id": "women",
+        "hi": "महिला",
+        "en": "Women",
+        "bn": "মহিলা",
+        "pa": "ਔਰਤਾਂ",
+        "te": "మహిళలు"
+      },
+      {
+        "id": "kids",
+        "hi": "बच्चे",
+        "en": "Kids",
+        "bn": "বাচ্চা",
+        "pa": "ਬੱਚੇ",
+        "te": "పిల్లలు"
+      }
     ],
-
-    /* photo: "" shows a placeholder slot with the filename to drop in.
-       Put photos next to this file, e.g. photos/kurta.jpg
-       sizes: any list — shown as chips. price: ₹, plain number. */
-    items: [
-      { id:"kurta",  cat:"men",   price:649, photo:"", file:"photos/kurta.jpg",
-        hi:"कुर्ता", en:"Kurta", bn:"কুর্তা", pa:"ਕੁੜਤਾ", te:"కుర్తా",
-        sizes:["M","L","XL","XXL"] },
-      { id:"shirt",  cat:"men",   price:499, photo:"", file:"photos/shirt.jpg",
-        hi:"कॉटन शर्ट", en:"Cotton Shirt", bn:"কটন শার্ট", pa:"ਕਾਟਨ ਸ਼ਰਟ", te:"కాటన్ షర్టు",
-        sizes:["M","L","XL","XXL"] },
-      { id:"jeans",  cat:"men",   price:899, photo:"", file:"photos/jeans.jpg",
-        hi:"जीन्स", en:"Jeans", bn:"জিন্স", pa:"ਜੀਨਸ", te:"జీన్స్",
-        sizes:["M","L","XL","XXL"] },
-      { id:"kurti",  cat:"women", price:549, photo:"", file:"photos/kurti.jpg",
-        hi:"कुर्ती", en:"Kurti", bn:"কুর্তি", pa:"ਕੁੜਤੀ", te:"కుర్తీ",
-        sizes:["M","L","XL","XXL"] },
-      { id:"leggings", cat:"women", price:299, photo:"", file:"photos/leggings.jpg",
-        hi:"लेगिंग्स", en:"Leggings", bn:"লেগিংস", pa:"ਲੈਗਿੰਗਸ", te:"లెగ్గింగ్స్",
-        sizes:["M","L","XL","XXL"] },
-      { id:"kidstee", cat:"kids",  price:249, photo:"", file:"photos/kids-tshirt.jpg",
-        hi:"बच्चों की टी-शर्ट", en:"Kids T-Shirt", bn:"বাচ্চাদের টি-শার্ট", pa:"ਬੱਚਿਆਂ ਦੀ ਟੀ-ਸ਼ਰਟ", te:"పిల్లల టీ-షర్ట్",
-        sizes:["M","L","XL","XXL"] }
+    "items": [
+      {
+        "id": "kurta",
+        "cat": "men",
+        "price": 649,
+        "photo": "",
+        "file": "photos/kurta.jpg",
+        "hi": "कुर्ता",
+        "en": "Kurta",
+        "bn": "কুর্তা",
+        "pa": "ਕੁੜਤਾ",
+        "te": "కుర్తా",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      },
+      {
+        "id": "shirt",
+        "cat": "men",
+        "price": 499,
+        "photo": "",
+        "file": "photos/shirt.jpg",
+        "hi": "कॉटन शर्ट",
+        "en": "Cotton Shirt",
+        "bn": "কটন শার্ট",
+        "pa": "ਕਾਟਨ ਸ਼ਰਟ",
+        "te": "కాటన్ షర్టు",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      },
+      {
+        "id": "jeans",
+        "cat": "men",
+        "price": 899,
+        "photo": "",
+        "file": "photos/jeans.jpg",
+        "hi": "जीन्स",
+        "en": "Jeans",
+        "bn": "জিন্স",
+        "pa": "ਜੀਨਸ",
+        "te": "జీన్స్",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      },
+      {
+        "id": "kurti",
+        "cat": "women",
+        "price": 549,
+        "photo": "",
+        "file": "photos/kurti.jpg",
+        "hi": "कुर्ती",
+        "en": "Kurti",
+        "bn": "কুর্তি",
+        "pa": "ਕੁੜਤੀ",
+        "te": "కుర్తీ",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      },
+      {
+        "id": "leggings",
+        "cat": "women",
+        "price": 299,
+        "photo": "",
+        "file": "photos/leggings.jpg",
+        "hi": "लेगिंग्स",
+        "en": "Leggings",
+        "bn": "লেগিংস",
+        "pa": "ਲੈਗਿੰਗਸ",
+        "te": "లెగ్గింగ్స్",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      },
+      {
+        "id": "kidstee",
+        "cat": "kids",
+        "price": 249,
+        "photo": "",
+        "file": "photos/kids-tshirt.jpg",
+        "hi": "बच्चों की टी-शर्ट",
+        "en": "Kids T-Shirt",
+        "bn": "বাচ্চাদের টি-শার্ট",
+        "pa": "ਬੱਚਿਆਂ ਦੀ ਟੀ-ਸ਼ਰਟ",
+        "te": "పిల్లల టీ-షర్ట్",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true
+      }
     ]
-  };
+  }/*</CATALOGUE>*/;
 
   /* ====================== TRANSLATIONS (garments page) ==================== */
   var LANGS = [
