@@ -60,8 +60,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
 
 .tabs{display:flex;gap:8px;margin-top:14px}
 .tabs button{
-  flex:1;min-height:46px;border:1px solid var(--line);background:#fff;border-radius:12px;
-  font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer
+  flex:1;min-height:46px;padding:0 4px;border:1px solid var(--line);background:#fff;border-radius:12px;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer
 }
 .tabs button[aria-selected="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
 
@@ -89,6 +89,12 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
 .item{border-bottom:1px solid var(--line);padding:12px 0}
 .item:last-child{border-bottom:0}
 .item.out{opacity:.55}
+
+.stars{color:#c78100;font-size:16px;letter-spacing:2px}
+.badge{display:inline-block;background:var(--leaf-l);color:var(--leaf-d);border-radius:999px;
+  padding:1px 9px;font-size:12px;font-weight:700;margin-left:8px;vertical-align:2px}
+.rev-meta{color:var(--muted);font-size:12.5px;margin-top:2px}
+.rev-text{margin:6px 0 0;font-size:15px}
 
 .savebar{
   position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);
@@ -152,6 +158,7 @@ a{color:var(--leaf-d)}
     <div class="tabs" role="tablist">
       <button id="tabVeg" role="tab" aria-selected="true">सब्ज़ी</button>
       <button id="tabGar" role="tab" aria-selected="false">कपड़े</button>
+      <button id="tabRev" role="tab" aria-selected="false">राय</button>
       <button id="tabSet" role="tab" aria-selected="false">सेटिंग</button>
     </div>
 
@@ -172,6 +179,32 @@ a{color:var(--leaf-d)}
         <p class="hint">नाम, दाम, साइज़ और फोटो।</p>
         <div id="garList"></div>
         <button class="btn btn-ghost" id="addGar" style="margin-top:12px">+ नया आइटम जोड़ें</button>
+      </div>
+    </div>
+
+    <!-- ---- reviews ---- -->
+    <div id="paneRev" class="hidden">
+      <div class="card">
+        <h2>ग्राहकों की राय</h2>
+        <p class="hint">जो राय सबसे अच्छी लगे उसे वेबसाइट पर ऊपर दिखाएँ। गलत या गंदी राय छुपा दें।</p>
+
+        <label>
+          <span>राय का पता (Reviews API)</span>
+          <input id="revUrl" type="url" autocomplete="off" inputmode="url" placeholder="https://reviews.xxxx.workers.dev">
+        </label>
+        <label>
+          <span>राय की चाबी (Admin key)</span>
+          <input id="revKey" type="password" autocomplete="off" placeholder="••••••••">
+        </label>
+        <p class="hint">चाबी सिर्फ़ इसी फ़ोन में रहती है, वेबसाइट पर कभी नहीं जाती। पता बदलें तो नीचे <b>सेव करें</b> दबाना न भूलें।</p>
+
+        <button class="btn btn-ghost" id="revLoad" style="margin-top:12px">राय देखें</button>
+        <p class="note note-warn hidden" id="revErr"></p>
+      </div>
+
+      <div class="card hidden" id="revCard">
+        <h2>सब राय <span class="hint" id="revCount" style="display:inline;font-weight:400"></span></h2>
+        <div id="revList"></div>
       </div>
     </div>
 
@@ -551,9 +584,184 @@ a{color:var(--leaf-d)}
     markDirty(); drawGar();
   });
 
+  /* ------------------------------- reviews ------------------------------- */
+  var REV_KEY = 'gavs.admin.revkey.v1';
+  var reviews = [];
+
+  function revBase() { return ($('revUrl').value || '').trim().replace(/\/+$/, ''); }
+  function revSecret() { return ($('revKey').value || '').trim(); }
+
+  function revErr(msg) {
+    var p = $('revErr');
+    if (!msg) { p.classList.add('hidden'); p.textContent = ''; return; }
+    p.classList.remove('hidden'); p.textContent = msg;
+  }
+
+  function starText(n) {
+    n = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
+    return '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n);
+  }
+
+  function revDate(ts) {
+    var d = new Date(Number(ts) || 0);
+    if (!ts || isNaN(d.getTime())) return '';
+    try { return d.toLocaleDateString('hi-IN', { day: 'numeric', month: 'short' }); }
+    catch (e) { return d.getDate() + '/' + (d.getMonth() + 1); }
+  }
+
+  /* every review call answers with JSON, so read it either way */
+  function revFetch(url, opts) {
+    return fetch(url, opts).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) {
+        if (!r.ok || !j.ok) {
+          throw new Error(j.error === 'unauthorised' ? 'चाबी गलत है।' : 'सर्वर से जवाब नहीं मिला।');
+        }
+        return j;
+      });
+    }, function () { throw new Error('इंटरनेट या पता गलत है।'); });
+  }
+
+  function loadRev() {
+    if (!revBase()) { revErr('पहले राय का पता डालें।'); return; }
+    if (!revSecret()) { revErr('राय की चाबी डालें।'); return; }
+    try { localStorage.setItem(REV_KEY, revSecret()); } catch (e) {}
+    revErr('');
+    $('revLoad').disabled = true;
+    $('revLoad').textContent = 'ला रहे हैं…';
+    revFetch(revBase() + '/admin?key=' + encodeURIComponent(revSecret()), { cache: 'no-store' })
+      .then(function (j) {
+        reviews = j.reviews || [];
+        $('revCard').classList.remove('hidden');
+        drawRevList();
+      })
+      .catch(function (e) { revErr(e.message); })
+      .then(function () {
+        $('revLoad').disabled = false;
+        $('revLoad').textContent = 'राय दोबारा देखें';
+      });
+  }
+
+  /* moderation goes straight to the reviews server — nothing to save in git */
+  function revAction(r, action, btn) {
+    btn.disabled = true;
+    revFetch(revBase() + '/admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: revSecret(), action: action, id: r.id })
+    })
+      .then(function () {
+        if (action === 'delete') {
+          reviews = reviews.filter(function (x) { return x.id !== r.id; });
+        } else if (action === 'feature')   { r.featured = true;  }
+        else if (action === 'unfeature')   { r.featured = false; }
+        else if (action === 'hide')        { r.hidden = true;    }
+        else if (action === 'show')        { r.hidden = false;   }
+        revErr('');
+        drawRevList();
+      })
+      .catch(function (e) { btn.disabled = false; revErr(e.message); });
+  }
+
+  function drawRevList() {
+    var host = $('revList');
+    host.innerHTML = '';
+
+    var shown = reviews.filter(function (r) { return !r.hidden; });
+    var avg = shown.length
+      ? Math.round((shown.reduce(function (a, r) { return a + (Number(r.stars) || 0); }, 0) / shown.length) * 10) / 10
+      : 0;
+    $('revCount').textContent = shown.length
+      ? '— ' + shown.length + ' राय, औसत ' + avg + ' ★'
+      : '— अभी कोई राय नहीं';
+
+    if (!reviews.length) {
+      var none = document.createElement('p');
+      none.className = 'hint';
+      none.textContent = 'अभी तक किसी ग्राहक ने राय नहीं दी।';
+      host.appendChild(none);
+      return;
+    }
+
+    reviews.forEach(function (r) {
+      var wrap = document.createElement('div');
+      wrap.className = 'item' + (r.hidden ? ' out' : '');
+
+      var head = document.createElement('div');
+      var st = document.createElement('span');
+      st.className = 'stars'; st.textContent = starText(r.stars);
+      head.appendChild(st);
+      if (r.featured) {
+        var bg = document.createElement('span');
+        bg.className = 'badge'; bg.textContent = 'वेबसाइट पर ऊपर';
+        head.appendChild(bg);
+      }
+      wrap.appendChild(head);
+
+      var meta = document.createElement('div');
+      meta.className = 'rev-meta';
+      meta.textContent = [r.name || 'बिना नाम', r.flat || '', revDate(r.ts)]
+        .filter(function (x) { return x; }).join(' • ');
+      wrap.appendChild(meta);
+
+      if (r.text) {
+        var tx = document.createElement('p');
+        tx.className = 'rev-text'; tx.textContent = r.text;
+        wrap.appendChild(tx);
+      }
+
+      var acts = document.createElement('div');
+      acts.className = 'rowacts';
+
+      var feat = document.createElement('button');
+      feat.type = 'button'; feat.className = 'chip';
+      feat.setAttribute('aria-pressed', String(!!r.featured));
+      feat.textContent = r.featured ? 'ऊपर से हटाएँ' : 'ऊपर दिखाएँ';
+      feat.addEventListener('click', function () {
+        revAction(r, r.featured ? 'unfeature' : 'feature', feat);
+      });
+      acts.appendChild(feat);
+
+      var hid = document.createElement('button');
+      hid.type = 'button'; hid.className = 'chip';
+      hid.textContent = r.hidden ? 'फिर दिखाएँ' : 'छुपाएँ';
+      hid.addEventListener('click', function () {
+        revAction(r, r.hidden ? 'show' : 'hide', hid);
+      });
+      acts.appendChild(hid);
+
+      var del = document.createElement('button');
+      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'मिटाएँ';
+      del.addEventListener('click', function () {
+        if (!confirm('यह राय हमेशा के लिए मिट जाएगी। मिटा दें?')) return;
+        revAction(r, 'delete', del);
+      });
+      acts.appendChild(del);
+
+      wrap.appendChild(acts);
+      host.appendChild(wrap);
+    });
+  }
+
+  function drawRev() {
+    var s = files['index.html'].data.store;
+    $('revUrl').value = s.reviewsApi || '';
+    var k = '';
+    try { k = localStorage.getItem(REV_KEY) || ''; } catch (e) {}
+    $('revKey').value = k;
+    if (s.reviewsApi && k) loadRev();
+  }
+
+  $('revUrl').addEventListener('input', function () {
+    files['index.html'].data.store.reviewsApi = revBase();
+    markDirty();
+  });
+  $('revKey').addEventListener('input', function () { revErr(''); });
+  $('revLoad').addEventListener('click', loadRev);
+
   /* -------------------------------- tabs --------------------------------- */
   function tab(which) {
-    [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabSet', 'paneSet']].forEach(function (t) {
+    [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabRev', 'paneRev'],
+     ['tabSet', 'paneSet']].forEach(function (t) {
       var on = t[0] === which;
       $(t[0]).setAttribute('aria-selected', String(on));
       $(t[1]).classList.toggle('hidden', !on);
@@ -561,6 +769,7 @@ a{color:var(--leaf-d)}
   }
   $('tabVeg').addEventListener('click', function () { tab('tabVeg'); });
   $('tabGar').addEventListener('click', function () { tab('tabGar'); });
+  $('tabRev').addEventListener('click', function () { tab('tabRev'); });
   $('tabSet').addEventListener('click', function () { tab('tabSet'); });
 
   /* -------------------------------- save --------------------------------- */
@@ -598,7 +807,7 @@ a{color:var(--leaf-d)}
         $('login').classList.add('hidden');
         $('editor').classList.remove('hidden');
         $('savebar').classList.remove('hidden');
-        drawVeg(); drawGar(); drawSet();
+        drawVeg(); drawGar(); drawSet(); drawRev();
         setStatus('सब सेव है');
         $('save').disabled = true;
       })
@@ -619,8 +828,10 @@ a{color:var(--leaf-d)}
   $('tok').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('doLogin').click(); });
 
   function logout() {
-    try { localStorage.removeItem(TOK_KEY); } catch (e) {}
-    token = ''; files = {}; pendingPhotos = [];
+    try { localStorage.removeItem(TOK_KEY); localStorage.removeItem(REV_KEY); } catch (e) {}
+    token = ''; files = {}; pendingPhotos = []; reviews = [];
+    $('revCard').classList.add('hidden');
+    $('revKey').value = ''; revErr('');
     $('editor').classList.add('hidden');
     $('savebar').classList.add('hidden');
     $('login').classList.remove('hidden');
