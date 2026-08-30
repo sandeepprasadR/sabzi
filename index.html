@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b7a3e">
+<title>गुरु आशीष वेजिटेबल स्टोर | Fresh Vegetables Home Delivery</title>
+<meta name="description" content="ताज़ा और हरी सब्ज़ियां, सीधे आपके दरवाज़े पर। 15-20 मिनट में फ्री होम डिलीवरी। संपर्क: 8400357057">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="badge">🌿 100% ताज़ा • रसायन-मुक्त</div>
+    <h1 id="storeName">गुरु आशीष वेजिटेबल स्टोर</h1>
+    <p class="tagline" id="storeTagline">ताज़ा सब्ज़ियां, सीधा आपके द्वार</p>
+    <ul class="perks">
+      <li><span>🚚</span><b id="deliveryTime">15-20 मिनट</b>में डिलीवरी</li>
+      <li><span>💰</span>बाज़ार से<b>किफ़ायती दाम</b></li>
+      <li><span>🏠</span><b>फ्री</b>होम डिलीवरी</li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="section">
+    <div class="section-head">
+      <h2>आज की रेट लिस्ट</h2>
+      <span class="muted" id="updatedOn"></span>
+    </div>
+    <div id="grid" class="grid" aria-live="polite"></div>
+  </section>
+
+  <section class="section" id="orderForm">
+    <h2>आपकी जानकारी</h2>
+    <div class="fields">
+      <label>
+        <span>आपका नाम <em>Name</em></span>
+        <input id="fName" type="text" autocomplete="name" placeholder="जैसे: रमेश शर्मा">
+      </label>
+      <label>
+        <span>टावर / फ्लैट नंबर <em>Tower / Flat</em></span>
+        <input id="fFlat" type="text" autocomplete="address-line1" placeholder="जैसे: B4-1102">
+      </label>
+      <label>
+        <span>मोबाइल नंबर <em>Mobile</em></span>
+        <input id="fPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10 अंकों का नंबर">
+      </label>
+      <label>
+        <span>कोई और सामान या सूचना? <em>Notes (optional)</em></span>
+        <textarea id="fNote" rows="2" placeholder="जैसे: 1 गड्डी धनिया भी चाहिए"></textarea>
+      </label>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <h2>संपर्क करें</h2>
+    <p class="muted" id="storeAddress"></p>
+    <div class="contact-row">
+      <a class="btn btn-ghost" id="callLink" href="#">📞 कॉल करें</a>
+      <a class="btn btn-ghost" id="waLink" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>बनाया गया प्यार से 💚 — सोसाइटी के लिए</p>
+  </footer>
+</main>
+
+<div class="cartbar" id="cartbar" hidden>
+  <button class="cart-summary" id="cartToggle" aria-expanded="false">
+    <span class="cart-count" id="cartCount">0</span>
+    <span class="cart-total">कुल: ₹<b id="cartTotal">0</b></span>
+    <span class="chev">▲</span>
+  </button>
+  <button class="btn btn-primary" id="sendOrder">WhatsApp पर ऑर्डर भेजें</button>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-head">
+    <h3>आपका ऑर्डर</h3>
+    <button class="close" id="sheetClose" aria-label="बंद करें">✕</button>
+  </div>
+  <div id="sheetItems"></div>
+  <div class="sheet-foot">
+    <span>कुल राशि</span><b>₹<span id="sheetTotal">0</span></b>
+  </div>
+</div>
+<div class="scrim" id="scrim" hidden></div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
