@@ -200,6 +200,10 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 .opt .em{font-size:20px}
 .dlg textarea{width:100%;font-family:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);
   border-radius:12px;background:#fff;color:var(--ink);box-sizing:border-box}
+.card.gone{opacity:.62}
+.card.gone .pr{color:var(--muted)}
+.soldout{display:block;width:100%;margin-top:10px;padding:11px 8px;border-radius:11px;
+  background:#f0eeea;color:#7a6f64;font-weight:700;font-size:13.5px;text-align:center;line-height:1.35}
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:28px 0 6px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
 .crosslink svg{width:16px;height:16px}
@@ -510,62 +514,145 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 (function () {
   'use strict';
 
-  var DATA = {
-    store: {
-      name: "गुरु आशीष वेजिटेबल स्टोर",
-      nameEn: "Guru Ashish Vegetable Store",
-      phone: "8400357057",
-      whatsapp: "918400357057",
-      address: "सिग्नेचर ग्लोबल सोलेरा, टावर A3, फ्लैट नंबर 203",
-      addressEn: "Signature Global Solera, Tower A3, Flat 203",
-      deliveryMinutes: "15-20",
-      /* --- hours: 24h "HH:MM". Drives the open / closed pill. --- */
-      openTime: "08:00",
-      closeTime: "21:00",
-      lastOrderTime: "20:30",
-      /* --- minimum order in ₹. 0 = off. Set to 150 to switch it on. --- */
-      minOrder: 0,
-      updatedOn: "2026-08-30",
-      /* --- shopkeeper --- */
-      ownerName: "तरुण",
-      ownerNameEn: "Tarun",
-      ownerFlat: "A3-203",
-      ownerPhoto: "",  /* paste an image URL here later; blank shows his initial */
-
-      /* --- UPI. Blank upiId hides every UPI control. --- */
-      upiId: "8400357057@ybl",
-      upiName: "Tarun Bhatia",
-
-      /* --- support promise. Shown to customers, so only put here what
-             the shop will actually honour. reportHours = how long after
-             delivery a complaint is accepted. --- */
-      reportHours: 24
+  var DATA = /*<CATALOGUE>*/{
+    "store": {
+      "name": "गुरु आशीष वेजिटेबल स्टोर",
+      "nameEn": "Guru Ashish Vegetable Store",
+      "phone": "8400357057",
+      "whatsapp": "918400357057",
+      "address": "सिग्नेचर ग्लोबल सोलेरा, टावर A3, फ्लैट नंबर 203",
+      "addressEn": "Signature Global Solera, Tower A3, Flat 203",
+      "deliveryMinutes": "15-20",
+      "openTime": "08:00",
+      "closeTime": "21:00",
+      "lastOrderTime": "20:30",
+      "minOrder": 0,
+      "updatedOn": "2026-08-30",
+      "ownerName": "तरुण",
+      "ownerNameEn": "Tarun",
+      "ownerFlat": "A3-203",
+      "ownerPhoto": "",
+      "upiId": "8400357057@ybl",
+      "upiName": "Tarun Bhatia",
+      "reportHours": 24
     },
-
-    /* Categories. Add one line here, then tag products with its id. */
-    categories: [
-      { id: "roz",    hi: "रोज़ की सब्ज़ी", en: "Everyday", bn: "রোজকার", pa: "ਰੋਜ਼ ਦੀ", te: "రోజువారీ" },
-      { id: "masala", hi: "मसाला",        en: "Masala",   bn: "মসলা",   pa: "ਮਸਾਲਾ",  te: "మసాలా" }
+    "categories": [
+      {
+        "id": "roz",
+        "hi": "रोज़ की सब्ज़ी",
+        "en": "Everyday",
+        "bn": "রোজকার",
+        "pa": "ਰੋਜ਼ ਦੀ",
+        "te": "రోజువారీ"
+      },
+      {
+        "id": "masala",
+        "hi": "मसाला",
+        "en": "Masala",
+        "bn": "মসলা",
+        "pa": "ਮਸਾਲਾ",
+        "te": "మసాలా"
+      }
     ],
-
-    /* price = ₹ per unit. unit: "kg" or "250g". step: how much one tap adds.
-       art = which drawing to use (see the <symbol id="v-…"> list above).
-       emoji is used ONLY inside the WhatsApp message. */
-    products: [
-      { id:"aloo",    cat:"roz",    art:"aloo",    emoji:"🥔", price:18, unit:"kg",   step:0.5, photo:"",
-        hi:"आलू",    en:"Potato",       bn:"আলু",     pa:"ਆਲੂ",    te:"బంగాళాదుంప" },
-      { id:"pyaz",    cat:"roz",    art:"pyaz",    emoji:"🧅", price:50, unit:"kg",   step:0.5, photo:"",
-        hi:"प्याज",   en:"Onion",        bn:"পেঁয়াজ",  pa:"ਪਿਆਜ਼",  te:"ఉల్లిపాయ" },
-      { id:"tamatar", cat:"roz",    art:"tamatar", emoji:"🍅", price:35, unit:"kg",   step:0.5, photo:"",
-        hi:"टमाटर",   en:"Tomato",       bn:"টমেটো",   pa:"ਟਮਾਟਰ",  te:"టొమాటో" },
-      { id:"lauki",   cat:"roz",    art:"lauki",   emoji:"🥒", price:25, unit:"kg",   step:0.5, photo:"",
-        hi:"लौकी",    en:"Bottle Gourd", bn:"লাউ",     pa:"ਘੀਆ",    te:"సొరకాయ" },
-      { id:"lahsun",  cat:"masala", art:"lahsun",  emoji:"🧄", price:50, unit:"250g", step:1, photo:"",
-        hi:"लहसुन",   en:"Garlic",       bn:"রসুন",    pa:"ਲਸਣ",    te:"వెల్లుల్లి" },
-      { id:"adrak",   cat:"masala", art:"adrak",   emoji:"🫚", price:40, unit:"250g", step:1, photo:"",
-        hi:"अदरक",    en:"Ginger",       bn:"আদা",     pa:"ਅਦਰਕ",   te:"అల్లం" }
+    "products": [
+      {
+        "id": "aloo",
+        "cat": "roz",
+        "art": "aloo",
+        "emoji": "🥔",
+        "price": 18,
+        "unit": "kg",
+        "step": 0.5,
+        "photo": "",
+        "hi": "आलू",
+        "en": "Potato",
+        "bn": "আলু",
+        "pa": "ਆਲੂ",
+        "te": "బంగాళాదుంప",
+        "available": true
+      },
+      {
+        "id": "pyaz",
+        "cat": "roz",
+        "art": "pyaz",
+        "emoji": "🧅",
+        "price": 50,
+        "unit": "kg",
+        "step": 0.5,
+        "photo": "",
+        "hi": "प्याज",
+        "en": "Onion",
+        "bn": "পেঁয়াজ",
+        "pa": "ਪਿਆਜ਼",
+        "te": "ఉల్లిపాయ",
+        "available": true
+      },
+      {
+        "id": "tamatar",
+        "cat": "roz",
+        "art": "tamatar",
+        "emoji": "🍅",
+        "price": 35,
+        "unit": "kg",
+        "step": 0.5,
+        "photo": "",
+        "hi": "टमाटर",
+        "en": "Tomato",
+        "bn": "টমেটো",
+        "pa": "ਟਮਾਟਰ",
+        "te": "టొమాటో",
+        "available": true
+      },
+      {
+        "id": "lauki",
+        "cat": "roz",
+        "art": "lauki",
+        "emoji": "🥒",
+        "price": 25,
+        "unit": "kg",
+        "step": 0.5,
+        "photo": "",
+        "hi": "लौकी",
+        "en": "Bottle Gourd",
+        "bn": "লাউ",
+        "pa": "ਘੀਆ",
+        "te": "సొరకాయ",
+        "available": true
+      },
+      {
+        "id": "lahsun",
+        "cat": "masala",
+        "art": "lahsun",
+        "emoji": "🧄",
+        "price": 50,
+        "unit": "250g",
+        "step": 1,
+        "photo": "",
+        "hi": "लहसुन",
+        "en": "Garlic",
+        "bn": "রসুন",
+        "pa": "ਲਸਣ",
+        "te": "వెల్లుల్లి",
+        "available": true
+      },
+      {
+        "id": "adrak",
+        "cat": "masala",
+        "art": "adrak",
+        "emoji": "🫚",
+        "price": 40,
+        "unit": "250g",
+        "step": 1,
+        "photo": "",
+        "hi": "अदरक",
+        "en": "Ginger",
+        "bn": "আদা",
+        "pa": "ਅਦਰਕ",
+        "te": "అల్లం",
+        "available": true
+      }
     ]
-  };
+  }/*</CATALOGUE>*/;
 
   /* ==========================================================================
      TRANSLATIONS — add a language by copying a whole block and translating it,
@@ -581,6 +668,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
   var T = {
     hi: {
+      soldOut:"आज उपलब्ध नहीं",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiCopy:"UPI ID कॉपी करें",
       upiCopied:"कॉपी हो गया ✓", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
       ttlHelp:"कोई दिक्कत? बताइए", helpLead:"सीधे तरुण को WhatsApp पर — कोई फ़ॉर्म नहीं, कोई इंतज़ार नहीं।",
@@ -625,6 +713,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएं", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएं", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनें। फोटो छोटी कर दी जाएगी और इसी फोन में सेव होगी — सिर्फ आपको दिखेगी। सबको दिखाने के लिए फोटो फाइल के साथ रखें और DATA में photo लिखें।", photoBig:"यह फोटो सेव नहीं हुई — फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश करें।"
     },
     en: {
+      soldOut:"Not available today",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiCopy:"Copy UPI ID",
       upiCopied:"Copied ✓", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
       ttlHelp:"Something wrong? Tell us", helpLead:"Straight to Tarun on WhatsApp — no forms, no waiting.",
@@ -670,6 +759,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only — customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved — storage is full. Remove one or two photos and try again."
     },
     bn: {
+      soldOut:"আজ পাওয়া যাচ্ছে না",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiCopy:"UPI ID কপি করুন",
       upiCopied:"কপি হয়েছে ✓", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
       ttlHelp:"কোনো সমস্যা? জানান", helpLead:"সরাসরি তরুণকে WhatsApp-এ — কোনো ফর্ম নেই।",
@@ -714,6 +804,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে — খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি — জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
     },
     pa: {
+      soldOut:"ਅੱਜ ਉਪਲਬਧ ਨਹੀਂ",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ",
       upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
       ttlHelp:"ਕੋਈ ਦਿੱਕਤ? ਦੱਸੋ", helpLead:"ਸਿੱਧਾ ਤਰੁਣ ਨੂੰ WhatsApp ਤੇ — ਕੋਈ ਫਾਰਮ ਨਹੀਂ।",
@@ -758,6 +849,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ — ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ — ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
     te: {
+      soldOut:"ఈరోజు అందుబాటులో లేదు",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiCopy:"UPI ID కాపీ చేయండి",
       upiCopied:"కాపీ అయ్యింది ✓", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
       ttlHelp:"ఏదైనా సమస్యా? చెప్పండి", helpLead:"నేరుగా తరుణ్‌కు WhatsApp‌లో — ఫారమ్‌లు లేవు.",
@@ -1019,6 +1111,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         (lang === 'en' ? '' : '<div class="en">' + esc(p.en) + '</div>') +
         '<div class="pr">₹' + p.price + ' <small>' + t.per + ' ' + unitLabel(p.unit) + '</small></div>' +
         '<div class="ctrl"></div>';
+      if (p.available === false) card.classList.add('gone');
       el.grid.appendChild(card);
       addPhotoBtn(card, p, !!src);
       renderControl(p);
@@ -1032,6 +1125,16 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     var qty = cart[p.id] || 0;
     slot.innerHTML = '';
     card.classList.toggle('on', qty > 0);
+
+    /* out of stock today: show it, but keep the item visible so people
+       know it exists and is coming back */
+    if (p.available === false) {
+      var out = document.createElement('span');
+      out.className = 'soldout';
+      out.textContent = t.soldOut;
+      slot.appendChild(out);
+      return;
+    }
 
     if (qty <= 0) {
       var add = document.createElement('button');

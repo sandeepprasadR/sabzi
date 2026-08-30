@@ -1,68 +1,62 @@
-# गुरु आशीष वेजिटेबल स्टोर — Guru Ashish Vegetable Store
+# गुरु आशीष वेजिटेबल स्टोर — guru-ashish.in
 
-A tiny, free, no-backend ordering page for a neighbourhood vegetable seller in
-Signature Global Solera. Neighbours pick vegetables, the page adds up the bill,
-and one tap sends the complete order to the shop's WhatsApp.
+A free, no-backend ordering page for a neighbourhood vegetable seller in
+Signature Global Solera, Gurgaon, plus a catalogue page for the same
+owner's clothing shop.
 
-No app install, no signup, no payment gateway, no server bills.
+Neighbours pick vegetables, the page adds up the bill, and one tap sends
+the complete order to the shop's WhatsApp. Payment is cash or UPI at the
+door. No app, no signup, no payment gateway, no server bills.
 
-## Why this shape
-
-The shop is one person with a phone. Anything that needs him to log into a
-dashboard, reconcile online payments, or pay a monthly fee will be abandoned in
-a week. So:
-
-- **Static site** — hosts free on GitHub Pages / Netlify, nothing to maintain.
-- **WhatsApp is the backend** — orders land where he already works. He replies,
-  delivers, takes cash or UPI at the door, exactly as he does today.
-- **One link** — he pastes the same link into the society WhatsApp group instead
-  of retyping a rate list every morning.
+**Live: https://guru-ashish.in**
 
 ## Files
 
 | File | What it is |
 |---|---|
-| `index.html` | The storefront neighbours open |
-| `admin.html` | Private page for the shop: update prices, copy a WhatsApp rate list |
-| `data/products.json` | The catalogue — name, price, unit. Edit this to change rates |
-| `assets/styles.css` | Styling (mobile-first, Hindi-first) |
-| `assets/app.js` | Cart + WhatsApp order message |
+| `index.html` | The storefront. Self-contained — catalogue, copy and logic all inside |
+| `garments.html` | Catalogue for the clothing shop, WhatsApp enquiry per item |
+| `admin.html` | Private editor the shopkeeper opens on his phone |
+| `CNAME` | The custom domain |
 
-## Run it locally
+## Updating prices, stock and photos
 
-The page fetches `data/products.json`, so it needs a server — opening the file
-directly with `file://` will not work.
+Open **https://guru-ashish.in/admin.html** on a phone. Paste a GitHub
+token once (the page explains how to make one) and it stays on that
+phone. From there:
 
-```bash
-python3 -m http.server 8000
-# then open http://localhost:8000
+- change any price, and the unit it is sold by
+- mark something out of stock — it greys out on the site instead of
+  vanishing, so customers know it is coming back
+- take or pick a photo; it is shrunk to 640px JPEG and committed
+- add or remove items, on either shop
+- set opening hours, minimum order, UPI id, and the complaint window
+- copy a formatted rate list to paste into the society WhatsApp group
+
+Saving commits to this repository, and GitHub Pages republishes within
+about a minute.
+
+### The token
+
+Use a fine-grained personal access token limited to **this repository
+only**, with **Contents: Read and write**. It can change nothing else.
+It is stored in the browser's localStorage on that phone; "लॉग आउट"
+removes it.
+
+## Editing by hand instead
+
+Both pages keep their catalogue as plain JSON between markers:
+
+```js
+var DATA = /*<CATALOGUE>*/{ ... }/*</CATALOGUE>*/;
 ```
 
-## Publish it free (GitHub Pages)
-
-1. Push this branch and merge to `main`.
-2. Repo → **Settings** → **Pages** → Source: `Deploy from a branch` →
-   Branch: `main`, folder: `/ (root)` → **Save**.
-3. In a minute the site is live at
-   `https://<user>.github.io/Guru_Ashish_Vegetable_Store/`.
-4. Share that link in the society WhatsApp group.
-
-## Changing prices
-
-Two ways, both fine:
-
-- **Non-technical:** open `admin.html` on the phone, type the new rates, tap
-  *रेट लिस्ट कॉपी करें* and paste it into the WhatsApp group. Then tap
-  *JSON कॉपी करें* and send it to whoever updates the site.
-- **Technical:** edit `data/products.json` directly and push. Change `price`,
-  `unit` (`kg` or `250g`), or add a new object to the `products` array.
-
-Also editable in `data/products.json`: the phone number, address, and the
-promised delivery time — all shown on the page automatically.
+Edit the JSON and push. Keep the markers — `admin.html` finds the block
+by them.
 
 ## Deliberately left out
 
-Online payments, accounts, and a live order database. They add cost, KYC, and
-failure modes the shop can't absorb yet. Cash/UPI on delivery through WhatsApp
-already works. If order volume grows past what one WhatsApp thread can hold,
-the next step is a shared Google Sheet, not a payment gateway.
+Online payments, accounts, and an order database. They add cost, KYC and
+failure modes the shop cannot absorb. Cash and UPI at the door already
+work. If order volume outgrows one WhatsApp thread, the next step is a
+shared sheet, not a payment gateway.
