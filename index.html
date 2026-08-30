@@ -1260,6 +1260,24 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   }
 
   /* =============================== order ================================= */
+  /* ---------------------------------------------------------------------
+     Opening WhatsApp.
+
+     window.open(url, '_blank', 'noopener') asks for a *popup window*, and
+     mobile Safari and Chrome block that by default — the tap appeared to
+     do nothing at all on a phone. Open a plain tab instead, and if the
+     browser still refuses, navigate this tab; the cart is in localStorage,
+     so coming back loses nothing.
+     --------------------------------------------------------------------- */
+  function openWA(lines) {
+    var url = 'https://wa.me/' + store.whatsapp + '?text=' +
+              encodeURIComponent(lines.join('\n'));
+    var w = null;
+    try { w = window.open(url, '_blank'); } catch (e) { w = null; }
+    if (w) { try { w.opener = null; } catch (e) {} return; }
+    window.location.href = url;
+  }
+
   function trySend() {
     var lines = cartLines();
     if (!lines.length) { openSheet(); return; }
@@ -1308,8 +1326,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     var note = el.fNote.value.trim();
     if (note) msg.push(m.note + ': ' + note);
 
-    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
-      '_blank', 'noopener');
+    openWA(msg);
   }
   el.sendOrder.addEventListener('click', trySend);
   el.sheetSend.addEventListener('click', trySend);
@@ -1594,8 +1611,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     var extra = (el.fbText.value || '').trim();
     if (extra) msg.push(t.mDetail + ': ' + extra);
     var who = whoLine(); if (who) msg.push(who);
-    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
-      '_blank', 'noopener');
+    openWA(msg);
     closeDlg(el.fbDlg);
   });
 
@@ -1606,8 +1622,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     var extra = (el.cmpText.value || '').trim();
     if (extra) msg.push(t.mDetail + ': ' + extra);
     var who = whoLine(); if (who) msg.push(who);
-    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
-      '_blank', 'noopener');
+    openWA(msg);
     closeDlg(el.cmpDlg);
   });
 
