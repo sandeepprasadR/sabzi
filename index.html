@@ -204,6 +204,8 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 .card.gone .pr{color:var(--muted)}
 .soldout{display:block;width:100%;margin-top:10px;padding:11px 8px;border-radius:11px;
   background:#f0eeea;color:#7a6f64;font-weight:700;font-size:13.5px;text-align:center;line-height:1.35}
+.copyrow{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
+.copyrow p{margin:0 0 8px;font-size:13px;color:var(--muted);line-height:1.55}
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:28px 0 6px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
 .crosslink svg{width:16px;height:16px}
@@ -501,6 +503,10 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     <div class="totrow"><span class="k" id="sheetTotLbl"></span><span class="v">₹<span id="sheetTotal">0</span></span></div>
     <p class="note" id="sheetNote"><svg aria-hidden="true"><use href="#i-clock"></use></svg><span></span></p>
     <button class="btn btn-go" id="sheetSend"><span></span></button>
+    <div class="copyrow" id="copyRow" hidden>
+      <p id="copyHint"></p>
+      <button class="btn btn-ghost" id="copyBtn" type="button"></button>
+    </div>
   </div>
 </div>
 
@@ -668,6 +674,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
   var T = {
     hi: {
+      copyHint:"WhatsApp में मैसेज नहीं आया? नीचे से कॉपी करके चैट में पेस्ट कर दें।", copyBtn:"ऑर्डर कॉपी करें", copyDone:"कॉपी हो गया ✓",
       soldOut:"आज उपलब्ध नहीं",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiCopy:"UPI ID कॉपी करें",
       upiCopied:"कॉपी हो गया ✓", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
@@ -713,6 +720,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएं", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएं", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनें। फोटो छोटी कर दी जाएगी और इसी फोन में सेव होगी — सिर्फ आपको दिखेगी। सबको दिखाने के लिए फोटो फाइल के साथ रखें और DATA में photo लिखें।", photoBig:"यह फोटो सेव नहीं हुई — फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश करें।"
     },
     en: {
+      copyHint:"Message box empty in WhatsApp? Copy the order below and paste it into the chat.", copyBtn:"Copy the order", copyDone:"Copied ✓",
       soldOut:"Not available today",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiCopy:"Copy UPI ID",
       upiCopied:"Copied ✓", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
@@ -759,6 +767,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only — customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved — storage is full. Remove one or two photos and try again."
     },
     bn: {
+      copyHint:"WhatsApp-এ মেসেজ আসেনি? নিচ থেকে কপি করে চ্যাটে পেস্ট করুন।", copyBtn:"অর্ডার কপি করুন", copyDone:"কপি হয়েছে ✓",
       soldOut:"আজ পাওয়া যাচ্ছে না",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiCopy:"UPI ID কপি করুন",
       upiCopied:"কপি হয়েছে ✓", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
@@ -804,6 +813,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে — খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি — জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
     },
     pa: {
+      copyHint:"WhatsApp ਵਿੱਚ ਮੈਸੇਜ ਨਹੀਂ ਆਇਆ? ਹੇਠੋਂ ਕਾਪੀ ਕਰਕੇ ਚੈਟ ਵਿੱਚ ਪੇਸਟ ਕਰੋ।", copyBtn:"ਆਰਡਰ ਕਾਪੀ ਕਰੋ", copyDone:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
       soldOut:"ਅੱਜ ਉਪਲਬਧ ਨਹੀਂ",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ",
       upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
@@ -849,6 +859,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ — ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ — ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
     te: {
+      copyHint:"WhatsApp‌లో మెసేజ్ రాలేదా? కింద నుంచి కాపీ చేసి చాట్‌లో పేస్ట్ చేయండి.", copyBtn:"ఆర్డర్ కాపీ చేయండి", copyDone:"కాపీ అయ్యింది ✓",
       soldOut:"ఈరోజు అందుబాటులో లేదు",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiCopy:"UPI ID కాపీ చేయండి",
       upiCopied:"కాపీ అయ్యింది ✓", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
@@ -924,7 +935,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
   var el = {};
   ['grid','tabs','cartbar','cartCount','cartTotal','cartToggle','cartEmptyTxt','cartFull','cartLead','chev',
-   'sendOrder','btnSend','sheet','sheetBody','sheetTotal','sheetClose','sheetSend','sheetWarn','sheetNote',
+   'copyRow','copyHint','copyBtn','sendOrder','btnSend','sheet','sheetBody','sheetTotal','sheetClose','sheetSend','sheetWarn','sheetNote',
    'sheetTitle','sheetSub','sheetTotLbl','scrim','minTrack','minTxt','minFill',
    'fName','fFlat','fPhone','fNote','errName','errFlat',
    'langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerFlat',
@@ -1269,13 +1280,49 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
      browser still refuses, navigate this tab; the cart is in localStorage,
      so coming back loses nothing.
      --------------------------------------------------------------------- */
+  var lastMsg = '';
+
+  /* ---------------------------------------------------------------------
+     Opening WhatsApp.
+
+     Two separate problems were hit here, in order:
+
+     1. window.open(url, '_blank', 'noopener') asks for a *popup window*.
+        Mobile Safari and Chrome block popups and return null silently, so
+        the tap did nothing at all.
+
+     2. Opening a new tab instead did launch WhatsApp, but the app received
+        only the phone number and showed an empty message box. The wa.me
+        redirect hands off to the app, and on Android that hand-off loses
+        the query string when it starts from a freshly-opened tab.
+
+     So on a touch device navigate this tab directly — a top-level
+     navigation carries the whole URL into the app. Desktop keeps the new
+     tab, since there WhatsApp Web opens fine and we would rather not throw
+     away the shop page.
+     --------------------------------------------------------------------- */
   function openWA(lines) {
+    lastMsg = lines.join('\n');
     var url = 'https://wa.me/' + store.whatsapp + '?text=' +
-              encodeURIComponent(lines.join('\n'));
+              encodeURIComponent(lastMsg);
+    showCopyFallback();
+
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (touch) { window.location.href = url; return; }
+
     var w = null;
     try { w = window.open(url, '_blank'); } catch (e) { w = null; }
     if (w) { try { w.opener = null; } catch (e) {} return; }
     window.location.href = url;
+  }
+
+  /* If WhatsApp still opens with an empty box, the order is not lost: this
+     row appears in the sheet so it can be copied and pasted into the chat. */
+  function showCopyFallback() {
+    if (!el.copyRow) return;
+    el.copyRow.hidden = false;
+    el.copyHint.textContent = t.copyHint;
+    el.copyBtn.textContent = t.copyBtn;
   }
 
   function trySend() {
@@ -1624,6 +1671,28 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     var who = whoLine(); if (who) msg.push(who);
     openWA(msg);
     closeDlg(el.cmpDlg);
+  });
+
+
+  /* copy the last order text — the safety net when WhatsApp drops it */
+  el.copyBtn.addEventListener('click', function () {
+    var done = function () {
+      var old = el.copyBtn.textContent;
+      el.copyBtn.textContent = t.copyDone;
+      setTimeout(function () { el.copyBtn.textContent = t.copyBtn; }, 1800);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(lastMsg).then(done, fallbackCopy);
+    else fallbackCopy();
+    function fallbackCopy() {
+      var ta = document.createElement('textarea');
+      ta.value = lastMsg;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta);
+      ta.select(); ta.setSelectionRange(0, 999999);
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove(); done();
+    }
   });
 
 })();
