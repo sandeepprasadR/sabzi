@@ -1,0 +1,13 @@
+name = "guru-ashish-reviews"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Only guru-ashish.in may call this API from a browser.
+[vars]
+ALLOW_ORIGIN = "https://guru-ashish.in"
+
+# Created by: wrangler kv namespace create REVIEWS
+# Paste the id it prints below.
+[[kv_namespaces]]
+binding = "REVIEWS"
+id = "PASTE_KV_NAMESPACE_ID_HERE"
