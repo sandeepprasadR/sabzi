@@ -6,26 +6,33 @@ use well under 1% of the daily request allowance.
 
 ## Deploy (once, about five minutes)
 
+Already deployed, and `wrangler.toml` already carries the KV namespace it
+uses. To deploy a change:
+
+```bash
+cd worker
+wrangler deploy
+```
+
+To rebuild from nothing — a new account, or the namespace deleted:
+
 ```bash
 npm install -g wrangler      # if you don't have it
 wrangler login
 
 cd worker
-wrangler kv namespace create REVIEWS
-```
-
-That prints an `id`. Paste it into `wrangler.toml`, replacing
-`PASTE_KV_NAMESPACE_ID_HERE`.
-
-Then set the shopkeeper's moderation password and deploy:
-
-```bash
-wrangler secret put ADMIN_KEY     # type any long random string
+wrangler kv namespace create REVIEWS   # paste the new id into wrangler.toml
 wrangler deploy
+wrangler secret put ADMIN_KEY          # any long random string
 ```
 
 Wrangler prints a URL like
 `https://guru-ashish-reviews.<your-subdomain>.workers.dev`.
+
+The KV id in `wrangler.toml` is not a secret — it names the storage, it does
+not open it. `ADMIN_KEY` is the secret, and it lives only in Cloudflare and
+on the shopkeeper's phone. To change it, run `wrangler secret put ADMIN_KEY`
+again and update the **राय** tab.
 
 ## Switch it on
 
