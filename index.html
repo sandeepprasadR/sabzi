@@ -1,95 +1,1512 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hi">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1b7a3e">
-<title>गुरु आशीष वेजिटेबल स्टोर | Fresh Vegetables Home Delivery</title>
-<meta name="description" content="ताज़ा और हरी सब्ज़ियां, सीधे आपके दरवाज़े पर। 15-20 मिनट में फ्री होम डिलीवरी। संपर्क: 8400357057">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥬</text></svg>">
-<link rel="stylesheet" href="assets/styles.css">
+<meta name="theme-color" content="#4b1339">
+<title>गुरु आशीष वेजिटेबल स्टोर</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap">
+<style>
+:root{
+  --leaf:#14663a; --leaf-d:#0e4d2b; --leaf-l:#e4f0e7; --leaf-line:#c3ddca;
+  --brand:#4b1339; --brand-2:#6a1b4d; --marigold:#e8a92c;
+  --carrot:#b8480a; --carrot-d:#8f3706;
+  --cream:#fdf8ee; --paper:#ffffff; --ink:#1b211c; --muted:#57655a;
+  --line:#e3ddcd; --r:18px;
+  --shadow:0 1px 2px rgba(27,45,32,.06), 0 6px 18px rgba(27,45,32,.06);
+  --tap:52px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Noto Sans Devanagari","Nirmala UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16.5px; line-height:1.62; text-wrap:pretty;
+  padding-bottom:calc(122px + env(safe-area-inset-bottom));
+}
+html[lang="bn"] body{font-family:"Noto Sans Bengali","Nirmala UI",system-ui,sans-serif}
+html[lang="pa"] body{font-family:"Noto Sans Gurmukhi","Nirmala UI",system-ui,sans-serif}
+html[lang="te"] body{font-family:"Noto Sans Telugu","Nirmala UI",system-ui,sans-serif}
+html[lang="en"] body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{margin:0;line-height:1.3;font-weight:800}
+button,input,textarea,select{font-family:inherit;font-size:inherit}
+a{color:var(--leaf-d);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--carrot)}
+:focus-visible{outline:3px solid var(--leaf-d);outline-offset:2px;border-radius:6px}
+.wrap{max-width:660px;margin:0 auto;padding:0 14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.hdr{background:var(--brand);background-image:linear-gradient(178deg,var(--brand-2),var(--brand));color:#fff;padding:12px 0 0;position:relative}
+.hdr:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:14px;background:var(--cream);
+  border-radius:16px 16px 0 0;border-top:3px solid var(--marigold)}
+.hdr-top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.shop{min-width:0}
+.shop h1{font-family:"Baloo 2","Noto Sans Devanagari",system-ui,sans-serif;font-size:23px;font-weight:700;letter-spacing:.2px;line-height:1.24}
+.shop .sub{font-size:12.5px;opacity:.82;font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+
+/* language control */
+.lang{position:relative;flex:0 0 auto}
+.lang-btn{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:12px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;cursor:pointer}
+.lang-btn:active{background:rgba(255,255,255,.26)}
+.lang-btn svg{width:17px;height:17px;flex:0 0 auto}
+.lang-btn .cur{font-size:15px}
+.lang-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:60;background:var(--paper);color:var(--ink);
+  border-radius:14px;box-shadow:0 10px 30px rgba(10,30,18,.28);padding:6px;min-width:172px;border:1px solid var(--line)}
+.lang-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;
+  min-height:46px;padding:0 12px;border:0;background:transparent;border-radius:10px;font-weight:600;
+  cursor:pointer;color:var(--ink);text-align:left}
+.lang-menu button:active{background:var(--leaf-l)}
+.lang-menu button[aria-checked="true"]{background:var(--leaf-l);color:var(--leaf-d)}
+.lang-menu .tick{color:var(--leaf);font-weight:800}
+
+/* owner card */
+.owner{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px;border-radius:16px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16)}
+.avatar{width:52px;height:52px;flex:0 0 auto;border-radius:50%;background:#f0e2c4;color:#7a4a12;
+  display:grid;place-items:center;font-family:"Baloo 2",sans-serif;font-size:24px;font-weight:700;overflow:hidden;
+  border:2px solid rgba(255,255,255,.5)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-txt{min-width:0}
+.owner-name{font-weight:800;font-size:16.5px;line-height:1.35}
+.owner-flat{font-size:13.5px;opacity:.85}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:13px;font-weight:700;
+  padding:2px 9px 2px 7px;border-radius:999px;background:rgba(255,255,255,.16)}
+.dot{width:8px;height:8px;border-radius:50%;background:#54e08a;box-shadow:0 0 0 3px rgba(84,224,138,.28)}
+.status.shut .dot{background:#ffb35c;box-shadow:0 0 0 3px rgba(255,179,92,.25)}
+.quote{margin:10px 0 0;padding:0 2px;font-size:15.5px;line-height:1.65;opacity:.95}
+.quote b{font-weight:700}
+
+.perks{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0 0;padding:0 0 20px}
+.perks li{background:rgba(255,255,255,.12);border-radius:12px;padding:9px 7px;font-size:11.5px;
+  line-height:1.4;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center}
+.perks li b{font-size:13.5px;font-weight:800;line-height:1.3}
+.perks li svg{width:20px;height:20px;opacity:.9}
+
+/* ---------- catalogue ---------- */
+.section{margin-top:24px}
+.section h2{font-size:19.5px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:4px}
+.updated{font-size:12.5px;color:var(--muted);white-space:nowrap;font-weight:600}
+.hint{color:var(--muted);font-size:14px;margin:2px 0 12px}
+
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 14px 10px;margin:0 -14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--paper);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:12px 11px 11px;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
+.card.on{border-color:var(--leaf);box-shadow:0 0 0 3px var(--leaf-l),var(--shadow)}
+.art{width:76px;height:76px;display:block}
+.shotwrap{margin:-12px -11px 0;width:calc(100% + 22px);aspect-ratio:4/3;overflow:hidden;
+  background:#f6f1e4;border-radius:16px 16px 0 0;position:relative}
+.shotwrap img{width:100%;height:100%;object-fit:cover;display:block}
+.photobtn{margin-top:9px;width:100%;min-height:44px;border:1.5px dashed var(--leaf-line);border-radius:11px;
+  background:#fffdf6;color:var(--leaf-d);font-weight:700;font-size:13.5px;cursor:pointer;
+  display:none;align-items:center;justify-content:center;gap:7px}
+.photobtn svg{width:16px;height:16px}
+.photobtn:active{background:var(--leaf-l)}
+body.photomode .photobtn{display:flex}
+.photorm{position:absolute;top:7px;right:7px;width:34px;height:34px;border-radius:999px;border:0;
+  background:rgba(255,255,255,.92);color:#8f1d16;font-size:15px;font-weight:800;cursor:pointer;display:none;
+  place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+body.photomode .photorm{display:grid}
+.photobar{background:#fff6e6;border:1.5px solid #f0d69c;border-radius:14px;padding:12px 14px;margin:0 0 14px;
+  font-size:13.5px;line-height:1.55;color:#7a4a06;font-weight:600;display:none}
+body.photomode .photobar{display:block}
+.phototoggle{background:none;border:0;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;
+  text-decoration:underline;text-underline-offset:2px;padding:6px 4px;min-height:34px}
+.card .nm{font-weight:700;font-size:19px;line-height:1.35;margin-top:6px}
+.card .en{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.2px;line-height:1.3;margin-top:1px}
+.card .pr{margin-top:7px;font-size:20px;font-weight:800;color:var(--leaf-d);font-variant-numeric:tabular-nums}
+.card .pr small{font-size:12px;font-weight:600;color:var(--muted)}
+.ctrl{margin-top:11px;width:100%}
+.add{width:100%;min-height:var(--tap);border:0;border-radius:13px;background:var(--leaf);color:#fff;
+  font-weight:800;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.add:active{background:var(--leaf-d)}
+.stepper{width:100%;display:flex;align-items:center;justify-content:space-between;
+  background:var(--leaf-l);border:1.5px solid var(--leaf-line);border-radius:13px;padding:3px}
+.stepper button{width:46px;height:46px;flex:0 0 auto;border:0;border-radius:10px;background:var(--leaf);
+  color:#fff;font-size:24px;font-weight:700;line-height:1;cursor:pointer;display:grid;place-items:center}
+.stepper button:active{background:var(--leaf-d)}
+.stepper .q{font-weight:800;font-size:15px;color:var(--leaf-d);padding:0 2px;font-variant-numeric:tabular-nums;
+  line-height:1.25;min-width:0}
+
+/* ---------- form ---------- */
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:15px;box-shadow:var(--shadow)}
+.fields{display:grid;gap:14px;margin-top:12px}
+.fld{display:grid;gap:6px}
+.fld>.lbl{font-size:15px;font-weight:700;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;line-height:1.4}
+.fld>.lbl em{font-style:normal;color:var(--muted);font-weight:600;font-size:12.5px}
+input,textarea{font-size:17px;padding:14px 14px;border:1.5px solid var(--line);border-radius:13px;
+  background:#fffdf8;color:var(--ink);width:100%;min-height:var(--tap)}
+input::placeholder,textarea::placeholder{color:#8d998f}
+input:focus,textarea:focus{outline:3px solid var(--leaf-d);outline-offset:1px;border-color:var(--leaf)}
+input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
+.errmsg{color:#8f1d16;font-size:14px;font-weight:700;display:flex;gap:6px;align-items:flex-start;line-height:1.45}
+.errmsg svg{width:17px;height:17px;flex:0 0 auto;margin-top:3px}
+
+.row2{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;min-height:var(--tap);padding:0 18px;font-size:16px;font-weight:800;
+  cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn svg{width:19px;height:19px;flex:0 0 auto}
+.btn-ghost{flex:1 1 130px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:active{background:var(--leaf-l)}
+.btn-go{background:var(--carrot);color:#fff;box-shadow:0 3px 0 var(--carrot-d)}
+.btn-go:active{background:var(--carrot-d);box-shadow:0 1px 0 var(--carrot-d);transform:translateY(2px)}
+.btn-go[data-idle="1"]{background:#e9e2d2;color:#6c7568;box-shadow:none}
+.addr{color:var(--muted);font-size:14.5px;margin:6px 0 0}
+/* ---- UPI + support ---- */
+.upi{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.upi h3{font-size:15px;margin:0 0 8px}
+.upi-id{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.upi-id code{font:600 15px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--leaf-l);
+  color:var(--leaf-d);padding:7px 10px;border-radius:9px}
+.upi-copy{min-height:44px;padding:0 12px;border:1px solid var(--line);background:#fff;border-radius:10px;
+  font:600 14px/1 inherit;font-family:inherit;color:var(--ink);cursor:pointer}
+.upi-note{font-size:13.5px;color:var(--muted);margin:8px 0 0;line-height:1.6}
+.btn-upi{display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+  margin-top:10px;width:100%;background:#5f259f;color:#fff;border:0;border-radius:14px;
+  min-height:52px;padding:10px 14px;text-align:center;text-decoration:none;
+  font-family:inherit;font-size:16px;font-weight:700;line-height:1.3;cursor:pointer}
+.btn-upi:active{background:#4d1e80}
+.helprow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.helprow .btn{width:100%}
+.promise{margin:14px 0 0;padding:12px 14px;background:var(--leaf-l);border-radius:12px}
+.promise h3{font-size:14px;margin:0 0 8px;color:var(--leaf-d)}
+.promise ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink);line-height:1.75}
+.promise li{margin-bottom:3px}
+.dlg{position:fixed;inset:auto 0 0 0;z-index:80;background:var(--paper);border-radius:22px 22px 0 0;
+  max-height:82vh;overflow:auto;padding:18px 16px calc(20px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 34px rgba(0,0,0,.22)}
+.dlg h3{margin:0 0 4px;font-size:19px}
+.dlg .lead{margin:0 0 14px;font-size:14px;color:var(--muted);line-height:1.6}
+.dlg .close{position:absolute;right:14px;top:14px;width:36px;height:36px;border:0;border-radius:999px;
+  background:var(--leaf-l);color:var(--leaf-d);font-size:16px;cursor:pointer}
+.opts{display:grid;gap:8px;margin-bottom:12px}
+.opt{display:flex;align-items:center;gap:10px;min-height:52px;padding:0 14px;border:1.5px solid var(--line);
+  background:#fff;border-radius:13px;font:600 15px/1.3 inherit;font-family:inherit;color:var(--ink);
+  cursor:pointer;text-align:left}
+.opt[aria-pressed="true"]{border-color:var(--leaf);background:var(--leaf-l);color:var(--leaf-d)}
+.opt .em{font-size:20px}
+.dlg textarea{width:100%;font-family:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line);
+  border-radius:12px;background:#fff;color:var(--ink);box-sizing:border-box}
+.foot{text-align:center;color:var(--muted);font-size:13.5px;margin:28px 0 6px;line-height:1.7}
+.crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
+.crosslink svg{width:16px;height:16px}
+
+/* ---------- cart bar ---------- */
+.cartbar{position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--paper);
+  border-top:1.5px solid var(--line);box-shadow:0 -6px 22px rgba(20,60,35,.13);
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
+.cartbar-in{max-width:660px;margin:0 auto;display:flex;gap:11px;align-items:center}
+.cart-sum{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:9px;background:transparent;border:0;
+  cursor:pointer;color:var(--ink);text-align:left;padding:4px 0;min-height:48px}
+.cart-count{background:var(--leaf);color:#fff;min-width:30px;height:30px;border-radius:999px;display:grid;
+  place-items:center;font-size:15px;font-weight:800;padding:0 8px;flex:0 0 auto}
+.cart-txt{min-width:0}
+.cart-lead{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.5px;text-transform:uppercase;line-height:1.3}
+.cart-amt{font-size:23px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums;color:var(--leaf-d)}
+.cart-empty{font-size:15px;font-weight:700;color:var(--muted);line-height:1.35}
+.chev{color:var(--muted);font-size:12px;flex:0 0 auto}
+.cartbar .btn-go{flex:0 0 auto;max-width:56%}
+.cartbar[data-empty="1"] .btn-go{opacity:1}
+.mintrack{max-width:660px;margin:0 auto 7px;display:flex;align-items:center;gap:8px;font-size:12.5px;
+  font-weight:700;color:var(--carrot-d)}
+.mintrack .bar{flex:1;height:7px;border-radius:99px;background:#eee6d6;overflow:hidden}
+.mintrack .fill{height:100%;background:var(--carrot);border-radius:99px;transition:width .25s ease}
+
+/* ---------- sheet ---------- */
+.scrim{position:fixed;inset:0;background:rgba(12,32,19,.5);z-index:50}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:55;background:var(--cream);
+  border-radius:22px 22px 0 0;max-height:86vh;display:flex;flex-direction:column;
+  box-shadow:0 -10px 34px rgba(0,0,0,.24);animation:up .22s ease}
+@keyframes up{from{transform:translateY(14px);opacity:.6}to{transform:none;opacity:1}}
+.sheet-hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px 10px}
+.sheet-hd h3{font-size:20px}
+.sheet-hd .sub{font-size:13px;color:var(--muted);font-weight:600}
+.close{border:1.5px solid var(--line);background:var(--paper);width:44px;height:44px;flex:0 0 auto;border-radius:999px;
+  font-size:17px;cursor:pointer;color:var(--ink);display:grid;place-items:center}
+.sheet-body{overflow:auto;padding:0 16px;-webkit-overflow-scrolling:touch}
+.oline{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.oline .art{width:44px;height:44px;flex:0 0 auto}
+.oline .who{flex:1 1 auto;min-width:0}
+.oline .who b{display:block;font-size:16.5px;font-weight:700;line-height:1.35}
+.oline .who span{font-size:12.5px;color:var(--muted);font-weight:600}
+.oline .mini{display:flex;align-items:center;gap:2px;background:var(--paper);border:1.5px solid var(--leaf-line);
+  border-radius:11px;padding:2px;flex:0 0 auto}
+.oline .mini button{width:40px;height:40px;border:0;background:var(--leaf-l);color:var(--leaf-d);border-radius:8px;
+  font-size:21px;font-weight:800;line-height:1;cursor:pointer}
+.oline .mini button:active{background:var(--leaf-line)}
+.oline .mini span{min-width:66px;text-align:center;font-size:13.5px;font-weight:800;color:var(--leaf-d);
+  font-variant-numeric:tabular-nums;line-height:1.2}
+.oline .amt{flex:0 0 auto;font-size:16.5px;font-weight:800;font-variant-numeric:tabular-nums;min-width:60px;text-align:right}
+.sheet-ft{padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1.5px solid var(--line);
+  background:var(--paper);display:grid;gap:11px}
+.totrow{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.totrow .k{font-size:15px;font-weight:700;color:var(--muted)}
+.totrow .v{font-size:27px;font-weight:800;color:var(--leaf-d);font-variant-numeric:tabular-nums}
+.note{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--muted);font-weight:600}
+.note svg{width:17px;height:17px;flex:0 0 auto;margin-top:3px}
+.warn{background:#fff6e6;border:1.5px solid #f0d69c;color:#7a4a06;border-radius:12px;padding:10px 12px;
+  font-size:14px;font-weight:700;line-height:1.5}
+.sheet-ft .btn-go{width:100%;min-height:58px;font-size:18px}
+
+/* ---------- empty state ---------- */
+.empty{background:var(--paper);border:1.5px dashed var(--leaf-line);border-radius:var(--r);
+  padding:22px 18px;text-align:center;display:grid;gap:6px;justify-items:center}
+.empty svg{width:64px;height:64px;opacity:.9}
+.empty b{font-size:17.5px;font-weight:800;line-height:1.4}
+.empty p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55;max-width:34ch}
+.empty .btn{margin-top:6px}
+
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .btn-go:active{transform:none}
+}
+@media (max-width:339px){
+  .card .nm{font-size:17px}.card .pr{font-size:18px}.stepper button{width:40px;height:40px}
+  .cart-amt{font-size:20px}.cartbar .btn-go{font-size:15px;padding:0 12px}
+  .perks{grid-template-columns:1fr 1fr}.perks li:last-child{grid-column:span 2}
+}
+</style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-inner">
-    <div class="badge">🌿 100% ताज़ा • रसायन-मुक्त</div>
-    <h1 id="storeName">गुरु आशीष वेजिटेबल स्टोर</h1>
-    <p class="tagline" id="storeTagline">ताज़ा सब्ज़ियां, सीधा आपके द्वार</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="v-aloo" viewBox="0 0 64 64">
+  <path d="M13.5 33.5c-1.5-12 8-23 20-22.5 12 .5 19.5 9 18.5 21C51 43.5 43 53 32.5 53S15 45 13.5 33.5z" fill="#d3a874" stroke="#8a6236" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M24 27.5c1.6-.4 2.6.6 2.3 2.1M38 24.5c1.6-.3 2.5.8 2.1 2.2M29 41c1.6-.4 2.6.6 2.3 2.1M41 36.5c1.6-.3 2.5.8 2.1 2.2" stroke="#8a6236" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+</symbol>
+<symbol id="v-pyaz" viewBox="0 0 64 64">
+  <path d="M32 17c10.5 1 18 10 17.5 20.5C49 47 41.5 54 32 54s-17-7-17.5-16.5C14 27 21.5 18 32 17z" fill="#c98fb4" stroke="#7d4470" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M24.5 20.5C21 27 20.5 41 24.5 51M39.5 20.5C43 27 43.5 41 39.5 51M32 17.5v36" stroke="#7d4470" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".75"/>
+  <path d="M32 17c-1-4.5-4-7-8-8 2.5 4 3 6.5 3 8M32 17c1-4.5 4-6.5 8-7.5-2.5 3.5-3 6-3 7.5" fill="#7fa855" stroke="#4d7030" stroke-width="2.2" stroke-linejoin="round"/>
+</symbol>
+<symbol id="v-tamatar" viewBox="0 0 64 64">
+  <path d="M32 18c11 0 19.5 7.5 19.5 18S43 54 32 54s-19.5-7.5-19.5-18S21 18 32 18z" fill="#d9463a" stroke="#8e2a20" stroke-width="2.6"/>
+  <path d="M23 30c-1.5 4-1 8 1.5 11" stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none" opacity=".45"/>
+  <path d="M32 18v-6M32 18l-9-6c0 4 3.5 6 9 6M32 18l9-6c0 4-3.5 6-9 6M32 18l-11 1c2 3 6.5 3.5 11-1M32 18l11 1c-2 3-6.5 3.5-11-1" fill="#5f8f3c" stroke="#3d6425" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+</symbol>
+<symbol id="v-lauki" viewBox="0 0 64 64">
+  <path d="M31 51c-8 0-13.5-6-13.5-14 0-7 4.5-10.5 6-15.5 1.2-4 .5-7 3-8.5 2.5-1.5 5 .5 5 4 0 4-1.5 6.5-1.5 10.5 0 5 14 5 14 15.5 0 5.5-5 8-13 8z" fill="#9dbf60" stroke="#5b7a2c" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M33.5 39c4 1.5 6 4 6 7.5" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".45"/>
+  <path d="M31 13c1-2.5 3-3.5 5.5-3" stroke="#5b7a2c" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+</symbol>
+<symbol id="v-lahsun" viewBox="0 0 64 64">
+  <path d="M32 20c9.5 1.5 16.5 9.5 16 18.5C47.5 47 41 53 32 53s-15.5-6-16-14.5C15.5 29.5 22.5 21.5 32 20z" fill="#f4ecef" stroke="#8a7079" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M32 20.5v32M24 22.5c-3 7-3.5 21 0 28M40 22.5c3 7 3.5 21 0 28" stroke="#8a7079" stroke-width="2.2" stroke-linecap="round" fill="none" opacity=".8"/>
+  <path d="M32 20c-.5-4 .5-7 2.5-9-.5 3.5 0 6.5 1 9" fill="#ddd0be" stroke="#8a7079" stroke-width="2.2" stroke-linejoin="round"/>
+</symbol>
+<symbol id="v-adrak" viewBox="0 0 64 64">
+  <path d="M14 36c0-8 6-12 12-12 5 0 6.5-6 12-6 5 0 8 4 7 8.5-.8 3.5-4 4.5-4 7.5 0 3.5 5 3.5 5 8.5 0 6-6.5 9-14 9-11 0-18-5-18-15.5z" fill="#dbb789" stroke="#8a6236" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M26 24c-1.5 4-1 7 1.5 9.5M39 41c-3.5.5-6 2.5-7 5.5" stroke="#8a6236" stroke-width="2.3" stroke-linecap="round" fill="none" opacity=".8"/>
+</symbol>
+<symbol id="i-basket" viewBox="0 0 64 64">
+  <path d="M9 24h46l-5 26a5 5 0 0 1-5 4H19a5 5 0 0 1-5-4L9 24z" fill="#f4ecdd" stroke="#5b7a2c" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M20 24 27 9M44 24 37 9" stroke="#5b7a2c" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+  <path d="M20 31l2 18M32 31v18M44 31l-2 18" stroke="#a8b995" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+</symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.5 3H20a1 1 0 0 1 1 1v7.5L11 21.5 2.5 13 12.5 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="16.5" cy="7.5" r="1.6" fill="currentColor"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.6 8.2c-.5.6-.6 1.6.3 2.9.9 1.3 2.2 2.2 3.4 2.6 1.1.4 1.9.2 2.3-.4l-1.6-1.1-1 .6c-.7-.4-1.5-1.2-1.9-2l.6-.9-1.1-1.7z" fill="currentColor"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l1.6 4-2 1.5c.8 2.6 3.3 5.1 5.9 5.9l1.5-2 4 1.6V18c0 1.4-1.3 2.5-2.7 2.3C11 19.5 4.5 13 3.7 5.7 3.5 4.3 4.6 3 6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20H2.5L12 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9.5v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.2" fill="currentColor"/></symbol>
+<symbol id="i-scoot" viewBox="0 0 24 24"><circle cx="6" cy="17.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18.5" cy="17.5" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 17.5h6.5M6 17.5 10 6h3M13 6h3l2.5 11.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-shirt" viewBox="0 0 24 24"><path d="M9 3l3 2.5L15 3l5.5 3-1.5 4-2-1v10.5a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V9l-2 1L3.5 6 9 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><path d="M3.5 8h4L9 5.5h6L16.5 8h4a1 1 0 0 1 1 1v9.5a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="13.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" fill="none"/></symbol>
+</defs></svg>
+
+<header class="hdr">
+  <div class="wrap">
+    <div class="hdr-top">
+      <div class="shop">
+        <h1 id="shopName">गुरु आशीष वेजिटेबल स्टोर</h1>
+        <div class="sub" id="shopSub"></div>
+      </div>
+      <div class="lang">
+        <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <svg aria-hidden="true"><use href="#i-globe"></use></svg>
+          <span class="cur" id="langCur">हिं</span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" hidden></div>
+      </div>
+    </div>
+
+    <div class="owner">
+      <div class="avatar" id="ownerAvatar"></div>
+      <div class="owner-txt">
+        <div class="owner-name" id="ownerName"></div>
+        <div class="owner-flat" id="ownerFlat"></div>
+        <div class="status" id="statusPill"><span class="dot"></span><span id="statusTxt"></span></div>
+      </div>
+    </div>
+    <p class="quote" id="ownerQuote"></p>
+
     <ul class="perks">
-      <li><span>🚚</span><b id="deliveryTime">15-20 मिनट</b>में डिलीवरी</li>
-      <li><span>💰</span>बाज़ार से<b>किफ़ायती दाम</b></li>
-      <li><span>🏠</span><b>फ्री</b>होम डिलीवरी</li>
+      <li><svg aria-hidden="true"><use href="#i-scoot"></use></svg><b id="perk1b"></b><span id="perk1a"></span></li>
+      <li><svg aria-hidden="true"><use href="#i-tag"></use></svg><b id="perk2b"></b><span id="perk2a"></span></li>
+      <li><svg aria-hidden="true"><use href="#i-home"></use></svg><b id="perk3b"></b><span id="perk3a"></span></li>
     </ul>
   </div>
 </header>
 
-<main>
-  <section class="section">
-    <div class="section-head">
-      <h2>आज की रेट लिस्ट</h2>
-      <span class="muted" id="updatedOn"></span>
+<main class="wrap">
+  <section class="section" id="catalogue">
+    <div class="sec-head">
+      <h2 id="ttlRates"></h2>
+      <span class="updated" id="updatedOn"></span>
     </div>
-    <div id="grid" class="grid" aria-live="polite"></div>
+    <p class="hint" id="ratesHint"></p>
+    <p class="photobar" id="photoBar"></p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div id="grid" class="grid"></div>
   </section>
 
   <section class="section" id="orderForm">
-    <h2>आपकी जानकारी</h2>
-    <div class="fields">
-      <label>
-        <span>आपका नाम <em>Name</em></span>
-        <input id="fName" type="text" autocomplete="name" placeholder="जैसे: रमेश शर्मा">
-      </label>
-      <label>
-        <span>टावर / फ्लैट नंबर <em>Tower / Flat</em></span>
-        <input id="fFlat" type="text" autocomplete="address-line1" placeholder="जैसे: B4-1102">
-      </label>
-      <label>
-        <span>मोबाइल नंबर <em>Mobile</em></span>
-        <input id="fPhone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="10 अंकों का नंबर">
-      </label>
-      <label>
-        <span>कोई और सामान या सूचना? <em>Notes (optional)</em></span>
-        <textarea id="fNote" rows="2" placeholder="जैसे: 1 गड्डी धनिया भी चाहिए"></textarea>
-      </label>
+    <div class="panel">
+      <h2 id="ttlYou"></h2>
+      <div class="fields">
+        <div class="fld">
+          <label class="lbl" for="fName"><span id="lblName"></span><em id="lblNameEn">Name</em></label>
+          <input id="fName" type="text" autocomplete="name" aria-describedby="errName">
+          <p class="errmsg" id="errName" role="alert" hidden><svg aria-hidden="true"><use href="#i-warn"></use></svg><span></span></p>
+        </div>
+        <div class="fld">
+          <label class="lbl" for="fFlat"><span id="lblFlat"></span><em id="lblFlatEn">Tower / Flat</em></label>
+          <input id="fFlat" type="text" autocomplete="address-line1" aria-describedby="errFlat">
+          <p class="errmsg" id="errFlat" role="alert" hidden><svg aria-hidden="true"><use href="#i-warn"></use></svg><span></span></p>
+        </div>
+        <div class="fld">
+          <label class="lbl" for="fPhone"><span id="lblPhone"></span><em id="lblPhoneEn">Mobile</em></label>
+          <input id="fPhone" type="tel" inputmode="numeric" autocomplete="tel">
+        </div>
+        <div class="fld">
+          <label class="lbl" for="fNote"><span id="lblNote"></span><em id="lblNoteEn">Notes (optional)</em></label>
+          <textarea id="fNote" rows="2"></textarea>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section contact">
-    <h2>संपर्क करें</h2>
-    <p class="muted" id="storeAddress"></p>
-    <div class="contact-row">
-      <a class="btn btn-ghost" id="callLink" href="#">📞 कॉल करें</a>
-      <a class="btn btn-ghost" id="waLink" href="#" target="_blank" rel="noopener">💬 WhatsApp</a>
+  <section class="section">
+    <div class="panel">
+      <h2 id="ttlContact"></h2>
+      <p class="addr" id="storeAddress"></p>
+      <div class="row2">
+        <a class="btn btn-ghost" id="callLink" href="#"><svg aria-hidden="true"><use href="#i-phone"></use></svg><span id="btnCall"></span></a>
+        <a class="btn btn-ghost" id="waLink" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span id="btnWa"></span></a>
+      </div>
+
+      <div class="upi" id="upiBox" hidden>
+        <h3 id="upiTtl"></h3>
+        <div class="upi-id">
+          <code id="upiIdTxt"></code>
+          <button class="upi-copy" id="upiCopy" type="button"></button>
+        </div>
+        <a class="btn-upi" id="upiPayBtn" href="#" role="button"></a>
+        <p class="upi-note" id="upiNote"></p>
+      </div>
     </div>
   </section>
 
-  <footer class="foot">
-    <p>बनाया गया प्यार से 💚 — सोसाइटी के लिए</p>
+  <section class="section">
+    <div class="panel">
+      <h2 id="ttlHelp"></h2>
+      <p class="upi-note" id="helpLead" style="margin-top:2px"></p>
+      <div class="helprow">
+        <button class="btn btn-ghost" id="openFb" type="button"><span id="btnFeedback"></span></button>
+        <button class="btn btn-ghost" id="openCmp" type="button"><span id="btnComplaint"></span></button>
+      </div>
+      <div class="promise">
+        <h3 id="polTtl"></h3>
+        <ul><li id="pol1"></li><li id="pol2"></li><li id="pol3"></li><li id="pol4"></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot"><p id="footTxt"></p>
+    <p><button class="phototoggle" id="photoToggle" type="button" aria-pressed="false"></button></p>
+    <a class="crosslink" href="garments.html"><svg aria-hidden="true"><use href="#i-shirt"></use></svg><span id="crossTxt"></span></a>
   </footer>
+
+<div class="dlg" id="fbDlg" hidden role="dialog" aria-modal="true">
+  <button class="close" id="fbClose" aria-label="close">&#10005;</button>
+  <h3 id="fbTtl"></h3>
+  <p class="lead" id="fbLead"></p>
+  <div class="opts" id="fbOpts"></div>
+  <textarea id="fbText" rows="3"></textarea>
+  <button class="btn btn-go" id="fbSend" style="margin-top:12px;width:100%"><span></span></button>
+</div>
+
+<div class="dlg" id="cmpDlg" hidden role="dialog" aria-modal="true">
+  <button class="close" id="cmpClose" aria-label="close">&#10005;</button>
+  <h3 id="cmpTtl"></h3>
+  <p class="lead" id="cmpLead"></p>
+  <div class="opts" id="cmpOpts"></div>
+  <textarea id="cmpText" rows="3"></textarea>
+  <button class="btn btn-go" id="cmpSend" style="margin-top:12px;width:100%"><span></span></button>
+</div>
 </main>
 
-<div class="cartbar" id="cartbar" hidden>
-  <button class="cart-summary" id="cartToggle" aria-expanded="false">
-    <span class="cart-count" id="cartCount">0</span>
-    <span class="cart-total">कुल: ₹<b id="cartTotal">0</b></span>
-    <span class="chev">▲</span>
-  </button>
-  <button class="btn btn-primary" id="sendOrder">WhatsApp पर ऑर्डर भेजें</button>
+<div class="cartbar" id="cartbar" data-empty="1">
+  <div class="mintrack" id="minTrack" hidden>
+    <span id="minTxt"></span>
+    <span class="bar"><span class="fill" id="minFill" style="width:0%"></span></span>
+  </div>
+  <div class="cartbar-in">
+    <button class="cart-sum" id="cartToggle" aria-expanded="false" aria-controls="sheet">
+      <span class="cart-count" id="cartCount" hidden>0</span>
+      <span class="cart-txt">
+        <span class="cart-empty" id="cartEmptyTxt"></span>
+        <span id="cartFull" hidden>
+          <span class="cart-lead" id="cartLead"></span>
+          <span class="cart-amt">₹<span id="cartTotal">0</span></span>
+        </span>
+      </span>
+      <span class="chev" id="chev" hidden>▲</span>
+    </button>
+    <button class="btn btn-go" id="sendOrder" data-idle="1"><span id="btnSend"></span></button>
+  </div>
 </div>
 
-<div class="sheet" id="sheet" hidden>
-  <div class="sheet-head">
-    <h3>आपका ऑर्डर</h3>
-    <button class="close" id="sheetClose" aria-label="बंद करें">✕</button>
-  </div>
-  <div id="sheetItems"></div>
-  <div class="sheet-foot">
-    <span>कुल राशि</span><b>₹<span id="sheetTotal">0</span></b>
-  </div>
-</div>
 <div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-hd">
+    <div>
+      <h3 id="sheetTitle"></h3>
+      <div class="sub" id="sheetSub"></div>
+    </div>
+    <button class="close" id="sheetClose" aria-label="close">✕</button>
+  </div>
+  <div class="sheet-body" id="sheetBody"></div>
+  <div class="sheet-ft">
+    <div class="warn" id="sheetWarn" hidden></div>
+    <div class="totrow"><span class="k" id="sheetTotLbl"></span><span class="v">₹<span id="sheetTotal">0</span></span></div>
+    <p class="note" id="sheetNote"><svg aria-hidden="true"><use href="#i-clock"></use></svg><span></span></p>
+    <button class="btn btn-go" id="sheetSend"><span></span></button>
+  </div>
+</div>
 
-<script src="assets/app.js"></script>
+<script>
+/* ============================================================================
+   Guru Ashish Vegetable Store — single-file order page.
+   No backend, no build step. The cart becomes a WhatsApp message.
+
+   EDIT PRICES AND SHOP DETAILS ONLY INSIDE THE `DATA` OBJECT BELOW.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var DATA = {
+    store: {
+      name: "गुरु आशीष वेजिटेबल स्टोर",
+      nameEn: "Guru Ashish Vegetable Store",
+      phone: "8400357057",
+      whatsapp: "918400357057",
+      address: "सिग्नेचर ग्लोबल सोलेरा, टावर A3, फ्लैट नंबर 203",
+      addressEn: "Signature Global Solera, Tower A3, Flat 203",
+      deliveryMinutes: "15-20",
+      /* --- hours: 24h "HH:MM". Drives the open / closed pill. --- */
+      openTime: "08:00",
+      closeTime: "21:00",
+      lastOrderTime: "20:30",
+      /* --- minimum order in ₹. 0 = off. Set to 150 to switch it on. --- */
+      minOrder: 0,
+      updatedOn: "2026-08-30",
+      /* --- shopkeeper --- */
+      ownerName: "तरुण",
+      ownerNameEn: "Tarun",
+      ownerFlat: "A3-203",
+      ownerPhoto: "",  /* paste an image URL here later; blank shows his initial */
+
+      /* --- UPI. Blank upiId hides every UPI control. --- */
+      upiId: "8400357057@ybl",
+      upiName: "Tarun Bhatia",
+
+      /* --- support promise. Shown to customers, so only put here what
+             the shop will actually honour. reportHours = how long after
+             delivery a complaint is accepted. --- */
+      reportHours: 24
+    },
+
+    /* Categories. Add one line here, then tag products with its id. */
+    categories: [
+      { id: "roz",    hi: "रोज़ की सब्ज़ी", en: "Everyday", bn: "রোজকার", pa: "ਰੋਜ਼ ਦੀ", te: "రోజువారీ" },
+      { id: "masala", hi: "मसाला",        en: "Masala",   bn: "মসলা",   pa: "ਮਸਾਲਾ",  te: "మసాలా" }
+    ],
+
+    /* price = ₹ per unit. unit: "kg" or "250g". step: how much one tap adds.
+       art = which drawing to use (see the <symbol id="v-…"> list above).
+       emoji is used ONLY inside the WhatsApp message. */
+    products: [
+      { id:"aloo",    cat:"roz",    art:"aloo",    emoji:"🥔", price:18, unit:"kg",   step:0.5, photo:"",
+        hi:"आलू",    en:"Potato",       bn:"আলু",     pa:"ਆਲੂ",    te:"బంగాళాదుంప" },
+      { id:"pyaz",    cat:"roz",    art:"pyaz",    emoji:"🧅", price:50, unit:"kg",   step:0.5, photo:"",
+        hi:"प्याज",   en:"Onion",        bn:"পেঁয়াজ",  pa:"ਪਿਆਜ਼",  te:"ఉల్లిపాయ" },
+      { id:"tamatar", cat:"roz",    art:"tamatar", emoji:"🍅", price:35, unit:"kg",   step:0.5, photo:"",
+        hi:"टमाटर",   en:"Tomato",       bn:"টমেটো",   pa:"ਟਮਾਟਰ",  te:"టొమాటో" },
+      { id:"lauki",   cat:"roz",    art:"lauki",   emoji:"🥒", price:25, unit:"kg",   step:0.5, photo:"",
+        hi:"लौकी",    en:"Bottle Gourd", bn:"লাউ",     pa:"ਘੀਆ",    te:"సొరకాయ" },
+      { id:"lahsun",  cat:"masala", art:"lahsun",  emoji:"🧄", price:50, unit:"250g", step:1, photo:"",
+        hi:"लहसुन",   en:"Garlic",       bn:"রসুন",    pa:"ਲਸਣ",    te:"వెల్లుల్లి" },
+      { id:"adrak",   cat:"masala", art:"adrak",   emoji:"🫚", price:40, unit:"250g", step:1, photo:"",
+        hi:"अदरक",    en:"Ginger",       bn:"আদা",     pa:"ਅਦਰਕ",   te:"అల్లం" }
+    ]
+  };
+
+  /* ==========================================================================
+     TRANSLATIONS — add a language by copying a whole block and translating it,
+     then adding its code to LANGS below and a name field to every product.
+     ======================================================================== */
+  var LANGS = [
+    { code:"hi", label:"हिंदी",   short:"हिं", font:null },
+    { code:"en", label:"English", short:"EN",  font:null },
+    { code:"bn", label:"বাংলা",    short:"বাং", font:"Noto+Sans+Bengali" },
+    { code:"pa", label:"ਪੰਜਾਬੀ",   short:"ਪੰਜ", font:"Noto+Sans+Gurmukhi" },
+    { code:"te", label:"తెలుగు",   short:"తె",  font:"Noto+Sans+Telugu" }
+  ];
+
+  var T = {
+    hi: {
+      upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiCopy:"UPI ID कॉपी करें",
+      upiCopied:"कॉपी हो गया ✓", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
+      ttlHelp:"कोई दिक्कत? बताइए", helpLead:"सीधे तरुण को WhatsApp पर — कोई फ़ॉर्म नहीं, कोई इंतज़ार नहीं।",
+      btnFeedback:"सुझाव भेजें", btnComplaint:"शिकायत करें",
+      fbTtl:"आपका अनुभव कैसा रहा?", fbGood:"अच्छा रहा", fbOk:"ठीक-ठाक", fbBad:"खराब रहा",
+      fbSend:"WhatsApp पर भेजें", fbPh:"कुछ और कहना चाहें तो लिखिए (optional)",
+      cmpTtl:"क्या दिक्कत हुई?",
+      cmp1:"सब्ज़ी खराब निकली", cmp2:"गलत सामान आया", cmp3:"सामान कम निकला",
+      cmp4:"देर से आया", cmp5:"पैसों में गड़बड़ी", cmp6:"कुछ और",
+      cmpPh:"थोड़ा बताइए — कौन सी सब्ज़ी, क्या हुआ (optional)",
+      cmpSend:"WhatsApp पर शिकायत भेजें",
+      polTtl:"हमारा वादा", pol1:"सब्ज़ी खराब निकले तो {h} घंटे के अंदर बताइए।",
+      pol2:"बदल कर देंगे या पूरे पैसे वापस — जो आप कहें।",
+      pol3:"वापसी अगली डिलीवरी में एडजस्ट या तुरंत UPI से।", pol4:"कोई सवाल-जवाब नहीं।",
+      mFb:"सुझाव", mCmp:"शिकायत", mRating:"अनुभव", mIssue:"दिक्कत", mDetail:"जानकारी", mFrom:"फ्लैट",
+      sub:"सोसाइटी की सब्ज़ी की दुकान", chooseLang:"भाषा चुनें",
+      ownerFlatLbl:"फ्लैट", quote:"नमस्ते! मैं <b>तरुण</b> — इसी सोसाइटी में रहता हूँ। सुबह मंडी से लाता हूँ, और सब्ज़ी खुद आपके दरवाज़े तक पहुँचाता हूँ।",
+      openNow:"अभी डिलीवरी चालू", closedNow:"अभी बंद", opensAt:"सुबह {t} बजे खुलेगा",
+      lastOrder:"आखिरी ऑर्डर {t} तक",
+      perk1b:"{m} मिनट", perk1a:"में घर पर", perk2b:"किफ़ायती", perk2a:"बाज़ार से कम दाम",
+      perk3b:"फ्री", perk3a:"होम डिलीवरी",
+      ttlRates:"आज की रेट लिस्ट", updated:"अपडेट: {d}",
+      ratesHint:"दाम रोज़ मंडी के हिसाब से बदलते हैं। पैसे डिलीवरी के समय — नकद या UPI।",
+      allCat:"सब", add:"जोड़ें", per:"/", kg:"किलो", g:"ग्राम", gram250:"250 ग्राम",
+      more:"बढ़ाएं", less:"कम करें",
+      ttlYou:"आपकी जानकारी", lblName:"आपका नाम", lblFlat:"टावर / फ्लैट नंबर",
+      lblPhone:"मोबाइल नंबर", lblNote:"कोई और सामान या सूचना?",
+      phName:"जैसे: रमेश शर्मा", phFlat:"जैसे: B4-1102", phPhone:"10 अंकों का नंबर",
+      phNote:"जैसे: 1 गड्डी धनिया भी चाहिए",
+      errName:"ऑर्डर भेजने के लिए अपना नाम लिखें।", errFlat:"टावर और फ्लैट नंबर लिखें, वरना सब्ज़ी पहुँचाना मुश्किल है।",
+      ttlContact:"संपर्क करें", btnCall:"कॉल करें", btnWa:"WhatsApp",
+      cartEmpty:"टोकरी अभी खाली है", cartLead:"कुल", send:"ऑर्डर भेजें", sendLong:"WhatsApp पर ऑर्डर भेजें",
+      review:"टोकरी देखें", yourOrder:"आपका ऑर्डर", sheetSub:"{n} चीज़ें · भेजने से पहले जाँच लें",
+      grandTotal:"कुल राशि", close:"बंद करें",
+      sheetNote:"{m} मिनट में डिलीवरी · पैसे दरवाज़े पर — नकद या UPI",
+      warnClosed:"दुकान अभी बंद है। ऑर्डर भेज सकते हैं — तरुण कल सुबह {t} बजे के बाद पहुँचाएंगे।",
+      minLeft:"₹{n} और जोड़ें", minOk:"मिनिमम ऑर्डर पूरा हुआ",
+      minBlock:"मिनिमम ऑर्डर ₹{n} है। थोड़ा और जोड़ें।",
+      emptyTitle:"अभी कुछ नहीं चुना", emptyBody:"ऊपर की लिस्ट से सब्ज़ी जोड़ें — आलू, प्याज, टमाटर। एक तरफ़ से बढ़ाना-घटाना यहीं हो जाएगा।",
+      emptyCta:"रेट लिस्ट देखें",
+      foot:"तरुण द्वारा, सोसाइटी के लिए · A3-203", cross:"कपड़े की दुकान देखें",
+      photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएं", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएं", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनें। फोटो छोटी कर दी जाएगी और इसी फोन में सेव होगी — सिर्फ आपको दिखेगी। सबको दिखाने के लिए फोटो फाइल के साथ रखें और DATA में photo लिखें।", photoBig:"यह फोटो सेव नहीं हुई — फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश करें।"
+    },
+    en: {
+      upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiCopy:"Copy UPI ID",
+      upiCopied:"Copied ✓", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
+      ttlHelp:"Something wrong? Tell us", helpLead:"Straight to Tarun on WhatsApp — no forms, no waiting.",
+      btnFeedback:"Send feedback", btnComplaint:"Report a problem",
+      fbTtl:"How was it?", fbGood:"Good", fbOk:"Okay", fbBad:"Poor",
+      fbSend:"Send on WhatsApp", fbPh:"Anything else you'd like to say (optional)",
+      cmpTtl:"What went wrong?",
+      cmp1:"Vegetables were not fresh", cmp2:"Wrong item delivered", cmp3:"Quantity was short",
+      cmp4:"Delivered late", cmp5:"Problem with the amount", cmp6:"Something else",
+      cmpPh:"Tell us a little — which item, what happened (optional)",
+      cmpSend:"Send complaint on WhatsApp",
+      polTtl:"Our promise", pol1:"If anything is not fresh, tell us within {h} hours.",
+      pol2:"We replace it or refund in full — your choice.",
+      pol3:"Refunds are adjusted on your next delivery, or sent by UPI straight away.",
+      pol4:"No questions asked.",
+      mFb:"Feedback", mCmp:"Complaint", mRating:"Experience", mIssue:"Issue", mDetail:"Details", mFrom:"Flat",
+      sub:"Your society vegetable shop", chooseLang:"Choose language",
+      ownerFlatLbl:"Flat", quote:"Hello! I'm <b>Tarun</b> — I live in this society. I buy at the mandi each morning and bring the vegetables to your door myself.",
+      openNow:"Delivering now", closedNow:"Closed right now", opensAt:"Opens at {t}",
+      lastOrder:"Last order by {t}",
+      perk1b:"{m} min", perk1a:"to your door", perk2b:"Cheaper", perk2a:"than the market",
+      perk3b:"Free", perk3a:"home delivery",
+      ttlRates:"Today's rate list", updated:"Updated {d}",
+      ratesHint:"Prices follow the morning mandi. Pay at the door — cash or UPI.",
+      allCat:"All", add:"Add", per:"/", kg:"kg", g:"g", gram250:"250 g",
+      more:"increase", less:"decrease",
+      ttlYou:"Your details", lblName:"Your name", lblFlat:"Tower / flat number",
+      lblPhone:"Mobile number", lblNote:"Anything else, or a note?",
+      phName:"e.g. Ramesh Sharma", phFlat:"e.g. B4-1102", phPhone:"10-digit number",
+      phNote:"e.g. one bunch of coriander too",
+      errName:"Please enter your name to send the order.", errFlat:"Please add your tower and flat number, or delivery isn't possible.",
+      ttlContact:"Contact", btnCall:"Call", btnWa:"WhatsApp",
+      cartEmpty:"Your basket is empty", cartLead:"Total", send:"Send order", sendLong:"Send order on WhatsApp",
+      review:"View basket", yourOrder:"Your order", sheetSub:"{n} items · check before sending",
+      grandTotal:"Total", close:"Close",
+      sheetNote:"Delivery in {m} min · pay at the door, cash or UPI",
+      warnClosed:"The shop is closed now. You can still send — Tarun will deliver after {t} tomorrow morning.",
+      minLeft:"₹{n} more to go", minOk:"Minimum order reached",
+      minBlock:"Minimum order is ₹{n}. Please add a little more.",
+      emptyTitle:"Nothing chosen yet", emptyBody:"Add vegetables from the list above — potato, onion, tomato. You can change quantities right here.",
+      emptyCta:"See the rate list",
+      foot:"By Tarun, for the society · A3-203", cross:"See the clothing shop",
+      photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only — customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved — storage is full. Remove one or two photos and try again."
+    },
+    bn: {
+      upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiCopy:"UPI ID কপি করুন",
+      upiCopied:"কপি হয়েছে ✓", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
+      ttlHelp:"কোনো সমস্যা? জানান", helpLead:"সরাসরি তরুণকে WhatsApp-এ — কোনো ফর্ম নেই।",
+      btnFeedback:"মতামত পাঠান", btnComplaint:"অভিযোগ জানান",
+      fbTtl:"অভিজ্ঞতা কেমন ছিল?", fbGood:"ভালো", fbOk:"মোটামুটি", fbBad:"খারাপ",
+      fbSend:"WhatsApp-এ পাঠান", fbPh:"আর কিছু বলতে চাইলে লিখুন (optional)",
+      cmpTtl:"কী সমস্যা হয়েছে?",
+      cmp1:"সবজি টাটকা ছিল না", cmp2:"ভুল জিনিস এসেছে", cmp3:"পরিমাণ কম ছিল",
+      cmp4:"দেরিতে এসেছে", cmp5:"টাকার হিসাবে গড়বড়", cmp6:"অন্য কিছু",
+      cmpPh:"একটু জানান — কোন জিনিস, কী হয়েছে (optional)",
+      cmpSend:"WhatsApp-এ অভিযোগ পাঠান",
+      polTtl:"আমাদের প্রতিশ্রুতি", pol1:"টাটকা না হলে {h} ঘণ্টার মধ্যে জানান।",
+      pol2:"বদলে দেব বা পুরো টাকা ফেরত — আপনার ইচ্ছা।",
+      pol3:"ফেরত পরের ডেলিভারিতে সমন্বয় বা সঙ্গে সঙ্গে UPI-তে।", pol4:"কোনো প্রশ্ন করব না।",
+      mFb:"মতামত", mCmp:"অভিযোগ", mRating:"অভিজ্ঞতা", mIssue:"সমস্যা", mDetail:"বিবরণ", mFrom:"ফ্ল্যাট",
+      sub:"আপনার সোসাইটির সবজির দোকান", chooseLang:"ভাষা বাছুন",
+      ownerFlatLbl:"ফ্ল্যাট", quote:"নমস্কার! আমি <b>তরুণ</b> — এই সোসাইটিতেই থাকি। রোজ সকালে মান্ডি থেকে এনে নিজেই আপনার দরজায় পৌঁছে দিই।",
+      openNow:"এখন ডেলিভারি চালু", closedNow:"এখন বন্ধ", opensAt:"সকাল {t}-এ খুলবে",
+      lastOrder:"শেষ অর্ডার {t} পর্যন্ত",
+      perk1b:"{m} মিনিট", perk1a:"বাড়িতে", perk2b:"সস্তা", perk2a:"বাজারের চেয়ে কম",
+      perk3b:"ফ্রি", perk3a:"হোম ডেলিভারি",
+      ttlRates:"আজকের দাম", updated:"আপডেট {d}",
+      ratesHint:"দাম রোজ মান্ডি অনুযায়ী বদলায়। টাকা দরজায় — নগদ বা UPI।",
+      allCat:"সব", add:"যোগ করুন", per:"/", kg:"কেজি", g:"গ্রাম", gram250:"250 গ্রাম",
+      more:"বাড়ান", less:"কমান",
+      ttlYou:"আপনার তথ্য", lblName:"আপনার নাম", lblFlat:"টাওয়ার / ফ্ল্যাট নম্বর",
+      lblPhone:"মোবাইল নম্বর", lblNote:"আর কিছু বা কোনো কথা?",
+      phName:"যেমন: রমেশ শর্মা", phFlat:"যেমন: B4-1102", phPhone:"10 সংখ্যার নম্বর",
+      phNote:"যেমন: এক আঁটি ধনেপাতাও চাই",
+      errName:"অর্ডার পাঠাতে নাম লিখুন।", errFlat:"টাওয়ার ও ফ্ল্যাট নম্বর লিখুন, নইলে পৌঁছে দেওয়া যাবে না।",
+      ttlContact:"যোগাযোগ", btnCall:"ফোন করুন", btnWa:"WhatsApp",
+      cartEmpty:"ঝুড়ি এখন খালি", cartLead:"মোট", send:"অর্ডার পাঠান", sendLong:"WhatsApp-এ অর্ডার পাঠান",
+      review:"ঝুড়ি দেখুন", yourOrder:"আপনার অর্ডার", sheetSub:"{n}টি জিনিস · পাঠানোর আগে দেখে নিন",
+      grandTotal:"মোট টাকা", close:"বন্ধ করুন",
+      sheetNote:"{m} মিনিটে ডেলিভারি · টাকা দরজায়, নগদ বা UPI",
+      warnClosed:"দোকান এখন বন্ধ। পাঠাতে পারেন — তরুণ কাল সকাল {t}-এর পরে পৌঁছে দেবেন।",
+      minLeft:"আরও ₹{n} যোগ করুন", minOk:"সর্বনিম্ন অর্ডার হয়ে গেছে",
+      minBlock:"সর্বনিম্ন অর্ডার ₹{n}। আরেকটু যোগ করুন।",
+      emptyTitle:"এখনও কিছু বাছা হয়নি", emptyBody:"উপরের তালিকা থেকে সবজি যোগ করুন — আলু, পেঁয়াজ, টমেটো। পরিমাণ এখানেই বদলাতে পারবেন।",
+      emptyCta:"দামের তালিকা দেখুন",
+      foot:"তরুণের তরফে, সোসাইটির জন্য · A3-203", cross:"কাপড়ের দোকান দেখুন",
+      photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে — খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি — জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
+    },
+    pa: {
+      upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ",
+      upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
+      ttlHelp:"ਕੋਈ ਦਿੱਕਤ? ਦੱਸੋ", helpLead:"ਸਿੱਧਾ ਤਰੁਣ ਨੂੰ WhatsApp ਤੇ — ਕੋਈ ਫਾਰਮ ਨਹੀਂ।",
+      btnFeedback:"ਸੁਝਾਅ ਭੇਜੋ", btnComplaint:"ਸ਼ਿਕਾਇਤ ਕਰੋ",
+      fbTtl:"ਤਜਰਬਾ ਕਿਵੇਂ ਰਿਹਾ?", fbGood:"ਵਧੀਆ", fbOk:"ਠੀਕ-ਠਾਕ", fbBad:"ਮਾੜਾ",
+      fbSend:"WhatsApp ਤੇ ਭੇਜੋ", fbPh:"ਹੋਰ ਕੁਝ ਕਹਿਣਾ ਹੋਵੇ ਤਾਂ ਲਿਖੋ (optional)",
+      cmpTtl:"ਕੀ ਦਿੱਕਤ ਆਈ?",
+      cmp1:"ਸਬਜ਼ੀ ਤਾਜ਼ੀ ਨਹੀਂ ਸੀ", cmp2:"ਗਲਤ ਸਮਾਨ ਆਇਆ", cmp3:"ਮਾਤਰਾ ਘੱਟ ਸੀ",
+      cmp4:"ਦੇਰ ਨਾਲ ਆਇਆ", cmp5:"ਪੈਸਿਆਂ ਵਿੱਚ ਗੜਬੜ", cmp6:"ਕੁਝ ਹੋਰ",
+      cmpPh:"ਥੋੜ੍ਹਾ ਦੱਸੋ — ਕਿਹੜੀ ਸਬਜ਼ੀ, ਕੀ ਹੋਇਆ (optional)",
+      cmpSend:"WhatsApp ਤੇ ਸ਼ਿਕਾਇਤ ਭੇਜੋ",
+      polTtl:"ਸਾਡਾ ਵਾਅਦਾ", pol1:"ਤਾਜ਼ੀ ਨਾ ਨਿਕਲੇ ਤਾਂ {h} ਘੰਟੇ ਵਿੱਚ ਦੱਸੋ।",
+      pol2:"ਬਦਲ ਕੇ ਦੇਵਾਂਗੇ ਜਾਂ ਪੂਰੇ ਪੈਸੇ ਵਾਪਸ — ਜੋ ਤੁਸੀਂ ਕਹੋ।",
+      pol3:"ਵਾਪਸੀ ਅਗਲੀ ਡਿਲੀਵਰੀ ਵਿੱਚ ਜਾਂ ਤੁਰੰਤ UPI ਨਾਲ।", pol4:"ਕੋਈ ਸਵਾਲ-ਜਵਾਬ ਨਹੀਂ।",
+      mFb:"ਸੁਝਾਅ", mCmp:"ਸ਼ਿਕਾਇਤ", mRating:"ਤਜਰਬਾ", mIssue:"ਦਿੱਕਤ", mDetail:"ਜਾਣਕਾਰੀ", mFrom:"ਫਲੈਟ",
+      sub:"ਤੁਹਾਡੀ ਸੋਸਾਇਟੀ ਦੀ ਸਬਜ਼ੀ ਦੀ ਦੁਕਾਨ", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
+      ownerFlatLbl:"ਫਲੈਟ", quote:"ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਮੈਂ <b>ਤਰੁਣ</b> — ਇਸੇ ਸੋਸਾਇਟੀ ਵਿੱਚ ਰਹਿੰਦਾ ਹਾਂ। ਸਵੇਰੇ ਮੰਡੀ ਤੋਂ ਲਿਆ ਕੇ ਆਪ ਤੁਹਾਡੇ ਦਰਵਾਜ਼ੇ ਤੱਕ ਪਹੁੰਚਾਉਂਦਾ ਹਾਂ।",
+      openNow:"ਹੁਣ ਡਿਲੀਵਰੀ ਚਾਲੂ", closedNow:"ਹੁਣ ਬੰਦ", opensAt:"ਸਵੇਰੇ {t} ਵਜੇ ਖੁੱਲ੍ਹੇਗੀ",
+      lastOrder:"ਆਖਰੀ ਆਰਡਰ {t} ਤੱਕ",
+      perk1b:"{m} ਮਿੰਟ", perk1a:"ਘਰ ਤੱਕ", perk2b:"ਸਸਤਾ", perk2a:"ਬਾਜ਼ਾਰ ਤੋਂ ਘੱਟ",
+      perk3b:"ਮੁਫ਼ਤ", perk3a:"ਹੋਮ ਡਿਲੀਵਰੀ",
+      ttlRates:"ਅੱਜ ਦੇ ਭਾਅ", updated:"ਅਪਡੇਟ {d}",
+      ratesHint:"ਭਾਅ ਰੋਜ਼ ਮੰਡੀ ਮੁਤਾਬਕ ਬਦਲਦੇ ਹਨ। ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ — ਨਕਦ ਜਾਂ UPI।",
+      allCat:"ਸਭ", add:"ਪਾਓ", per:"/", kg:"ਕਿਲੋ", g:"ਗ੍ਰਾਮ", gram250:"250 ਗ੍ਰਾਮ",
+      more:"ਵਧਾਓ", less:"ਘਟਾਓ",
+      ttlYou:"ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ", lblName:"ਤੁਹਾਡਾ ਨਾਮ", lblFlat:"ਟਾਵਰ / ਫਲੈਟ ਨੰਬਰ",
+      lblPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblNote:"ਹੋਰ ਕੁਝ ਜਾਂ ਕੋਈ ਗੱਲ?",
+      phName:"ਜਿਵੇਂ: ਰਮੇਸ਼ ਸ਼ਰਮਾ", phFlat:"ਜਿਵੇਂ: B4-1102", phPhone:"10 ਅੰਕਾਂ ਦਾ ਨੰਬਰ",
+      phNote:"ਜਿਵੇਂ: ਇੱਕ ਗੁੱਟੀ ਧਨੀਆ ਵੀ",
+      errName:"ਆਰਡਰ ਭੇਜਣ ਲਈ ਆਪਣਾ ਨਾਮ ਲਿਖੋ।", errFlat:"ਟਾਵਰ ਅਤੇ ਫਲੈਟ ਨੰਬਰ ਲਿਖੋ, ਨਹੀਂ ਤਾਂ ਪਹੁੰਚਾਉਣਾ ਮੁਸ਼ਕਲ ਹੈ।",
+      ttlContact:"ਸੰਪਰਕ ਕਰੋ", btnCall:"ਕਾਲ ਕਰੋ", btnWa:"WhatsApp",
+      cartEmpty:"ਟੋਕਰੀ ਹਾਲੇ ਖਾਲੀ ਹੈ", cartLead:"ਕੁੱਲ", send:"ਆਰਡਰ ਭੇਜੋ", sendLong:"WhatsApp 'ਤੇ ਆਰਡਰ ਭੇਜੋ",
+      review:"ਟੋਕਰੀ ਵੇਖੋ", yourOrder:"ਤੁਹਾਡਾ ਆਰਡਰ", sheetSub:"{n} ਚੀਜ਼ਾਂ · ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਵੇਖੋ",
+      grandTotal:"ਕੁੱਲ ਰਕਮ", close:"ਬੰਦ ਕਰੋ",
+      sheetNote:"{m} ਮਿੰਟ ਵਿੱਚ ਡਿਲੀਵਰੀ · ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ, ਨਕਦ ਜਾਂ UPI",
+      warnClosed:"ਦੁਕਾਨ ਹੁਣ ਬੰਦ ਹੈ। ਭੇਜ ਸਕਦੇ ਹੋ — ਤਰੁਣ ਕੱਲ੍ਹ ਸਵੇਰੇ {t} ਤੋਂ ਬਾਅਦ ਪਹੁੰਚਾਉਣਗੇ।",
+      minLeft:"₹{n} ਹੋਰ ਪਾਓ", minOk:"ਘੱਟੋ-ਘੱਟ ਆਰਡਰ ਪੂਰਾ",
+      minBlock:"ਘੱਟੋ-ਘੱਟ ਆਰਡਰ ₹{n} ਹੈ। ਥੋੜ੍ਹਾ ਹੋਰ ਪਾਓ।",
+      emptyTitle:"ਹਾਲੇ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ", emptyBody:"ਉੱਪਰ ਦੀ ਲਿਸਟ ਤੋਂ ਸਬਜ਼ੀ ਪਾਓ — ਆਲੂ, ਪਿਆਜ਼, ਟਮਾਟਰ। ਮਾਤਰਾ ਇੱਥੇ ਹੀ ਬਦਲ ਸਕਦੇ ਹੋ।",
+      emptyCta:"ਭਾਅ ਦੀ ਲਿਸਟ ਵੇਖੋ",
+      foot:"ਤਰੁਣ ਵੱਲੋਂ, ਸੋਸਾਇਟੀ ਲਈ · A3-203", cross:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਵੇਖੋ",
+      photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ — ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ — ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+    },
+    te: {
+      upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiCopy:"UPI ID కాపీ చేయండి",
+      upiCopied:"కాపీ అయ్యింది ✓", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
+      ttlHelp:"ఏదైనా సమస్యా? చెప్పండి", helpLead:"నేరుగా తరుణ్‌కు WhatsApp‌లో — ఫారమ్‌లు లేవు.",
+      btnFeedback:"సలహా పంపండి", btnComplaint:"ఫిర్యాదు చేయండి",
+      fbTtl:"అనుభవం ఎలా ఉంది?", fbGood:"బాగుంది", fbOk:"ఫర్వాలేదు", fbBad:"బాగోలేదు",
+      fbSend:"WhatsApp‌లో పంపండి", fbPh:"ఇంకేమైనా చెప్పాలంటే రాయండి (optional)",
+      cmpTtl:"ఏమి సమస్య వచ్చింది?",
+      cmp1:"కూరగాయలు తాజాగా లేవు", cmp2:"తప్పు వస్తువు వచ్చింది", cmp3:"పరిమాణం తక్కువ",
+      cmp4:"ఆలస్యంగా వచ్చింది", cmp5:"డబ్బు లెక్కలో తేడా", cmp6:"ఇంకేదైనా",
+      cmpPh:"కొంచెం చెప్పండి — ఏ వస్తువు, ఏమి జరిగింది (optional)",
+      cmpSend:"WhatsApp‌లో ఫిర్యాదు పంపండి",
+      polTtl:"మా వాగ్దానం", pol1:"తాజాగా లేకపోతే {h} గంటల్లో చెప్పండి.",
+      pol2:"మార్చి ఇస్తాం లేదా పూర్తి డబ్బు వాపసు — మీ ఇష్టం.",
+      pol3:"వాపసు తదుపరి డెలివరీలో సర్దుబాటు లేదా వెంటనే UPI ద్వారా.", pol4:"ఎలాంటి ప్రశ్నలు ఉండవు.",
+      mFb:"సలహా", mCmp:"ఫిర్యాదు", mRating:"అనుభవం", mIssue:"సమస్య", mDetail:"వివరాలు", mFrom:"ఫ్లాట్",
+      sub:"మీ సొసైటీ కూరగాయల దుకాణం", chooseLang:"భాష ఎంచుకోండి",
+      ownerFlatLbl:"ఫ్లాట్", quote:"నమస్కారం! నేను <b>తరుణ్</b> — ఇదే సొసైటీలో ఉంటాను. ఉదయం మండీ నుంచి తెచ్చి నేనే మీ ఇంటికి తెస్తాను।",
+      openNow:"ఇప్పుడు డెలివరీ ఉంది", closedNow:"ఇప్పుడు మూసివేసి ఉంది", opensAt:"ఉదయం {t}కి తెరుస్తారు",
+      lastOrder:"చివరి ఆర్డర్ {t} వరకు",
+      perk1b:"{m} నిమిషాల్లో", perk1a:"ఇంటికి", perk2b:"చౌక", perk2a:"మార్కెట్ కంటే తక్కువ",
+      perk3b:"ఉచితం", perk3a:"హోమ్ డెలివరీ",
+      ttlRates:"నేటి రేట్లు", updated:"అప్‌డేట్ {d}",
+      ratesHint:"రేట్లు రోజూ మండీ ప్రకారం మారుతాయి. డబ్బు ఇంటి వద్ద — నగదు లేదా UPI.",
+      allCat:"అన్నీ", add:"చేర్చండి", per:"/", kg:"కిలో", g:"గ్రా", gram250:"250 గ్రా",
+      more:"పెంచు", less:"తగ్గించు",
+      ttlYou:"మీ వివరాలు", lblName:"మీ పేరు", lblFlat:"టవర్ / ఫ్లాట్ నంబర్",
+      lblPhone:"మొబైల్ నంబర్", lblNote:"ఇంకేమైనా లేదా సందేశం?",
+      phName:"ఉదా: రమేష్ శర్మ", phFlat:"ఉదా: B4-1102", phPhone:"10 అంకెల నంబర్",
+      phNote:"ఉదా: ఒక కట్ట కొత్తిమీర కూడా",
+      errName:"ఆర్డర్ పంపడానికి మీ పేరు రాయండి.", errFlat:"టవర్ మరియు ఫ్లాట్ నంబర్ రాయండి, లేకపోతే డెలివరీ కష్టం.",
+      ttlContact:"సంప్రదించండి", btnCall:"కాల్ చేయండి", btnWa:"WhatsApp",
+      cartEmpty:"బుట్ట ఇంకా ఖాళీగా ఉంది", cartLead:"మొత్తం", send:"ఆర్డర్ పంపండి", sendLong:"WhatsAppలో ఆర్డర్ పంపండి",
+      review:"బుట్ట చూడండి", yourOrder:"మీ ఆర్డర్", sheetSub:"{n} వస్తువులు · పంపే ముందు చూడండి",
+      grandTotal:"మొత్తం", close:"మూసివేయి",
+      sheetNote:"{m} నిమిషాల్లో డెలివరీ · డబ్బు ఇంటి వద్ద, నగదు లేదా UPI",
+      warnClosed:"దుకాణం ఇప్పుడు మూసివేసి ఉంది. పంపవచ్చు — తరుణ్ రేపు ఉదయం {t} తర్వాత తెస్తారు.",
+      minLeft:"₹{n} ఇంకా చేర్చండి", minOk:"కనీస ఆర్డర్ పూర్తయింది",
+      minBlock:"కనీస ఆర్డర్ ₹{n}. కొంచెం ఇంకా చేర్చండి.",
+      emptyTitle:"ఇంకా ఏమీ ఎంచుకోలేదు", emptyBody:"పైన ఉన్న జాబితా నుంచి కూరగాయలు చేర్చండి — బంగాళాదుంప, ఉల్లిపాయ, టొమాటో. పరిమాణం ఇక్కడే మార్చుకోవచ్చు.",
+      emptyCta:"రేట్ల జాబితా చూడండి",
+      foot:"తరుణ్ నుంచి, సొసైటీ కోసం · A3-203", cross:"బట్టల దుకాణం చూడండి",
+      photoOn:"ఫోటోలు చేర్చండి", photoOff:"ఫోటోలు చేర్చడం పూర్తి", photoAdd:"ఫోటో పెట్టండి", photoChange:"ఫోటో మార్చండి", photoRm:"ఫోటో తీసేయండి", photoNote:"ఈ ఫోన్ నుంచి కూరగాయ ఫోటో ఎంచుకోండి. ఫోటో చిన్నదిగా మారి ఈ ఫోన్‌లోనే సేవ్ అవుతుంది — కస్టమర్లకు కనిపించదు. అందరికీ కనిపించాలంటే ఫైల్‌ను పేజీ పక్కన ఉంచి DATAలో photo రాయండి.", photoBig:"ఫోటో సేవ్ కాలేదు — స్థలం లేదు. ఒకటి రెండు ఫోటోలు తీసేసి మళ్లీ ప్రయత్నించండి."
+    }
+  };
+
+  /* WhatsApp message labels. Hindi is the original wording, unchanged.
+     Non-Hindi labels carry the Hindi word alongside so Tarun can always read it. */
+  var MSG = {
+    hi: { neworder:"नया ऑर्डर", total:"कुल", name:"नाम", flat:"टावर/फ्लैट", mobile:"मोबाइल", note:"सूचना" },
+    en: { neworder:"New order", total:"Total", name:"Name", flat:"Tower/Flat", mobile:"Mobile", note:"Note" },
+    bn: { neworder:"নতুন অর্ডার / नया ऑर्डर", total:"মোট / कुल", name:"নাম / नाम", flat:"টাওয়ার/ফ্ল্যাট / टावर/फ्लैट", mobile:"মোবাইল / मोबाइल", note:"নোট / सूचना" },
+    pa: { neworder:"ਨਵਾਂ ਆਰਡਰ / नया ऑर्डर", total:"ਕੁੱਲ / कुल", name:"ਨਾਮ / नाम", flat:"ਟਾਵਰ/ਫਲੈਟ / टावर/फ्लैट", mobile:"ਮੋਬਾਈਲ / मोबाइल", note:"ਨੋਟ / सूचना" },
+    te: { neworder:"కొత్త ఆర్డర్ / नया ऑर्डर", total:"మొత్తం / कुल", name:"పేరు / नाम", flat:"టవర్/ఫ్లాట్ / टावर/फ्लैट", mobile:"మొబైల్ / मोबाइल", note:"నోట్ / सूचना" }
+  };
+
+  /* ======================== state (unchanged keys) ======================== */
+  var CART_KEY = 'gavs.cart.v1';
+  var INFO_KEY = 'gavs.info.v1';
+  var LANG_KEY = 'gavs.lang.v1';
+  var PHOTO_KEY = 'gavs.photos.v1';
+
+  var store = DATA.store;
+  var products = DATA.products || [];
+  var cart = load(CART_KEY, {});
+  var info = load(INFO_KEY, {});
+  var photos = load(PHOTO_KEY, {});
+  var photoMode = false;
+  var lang = load(LANG_KEY, null);
+  if (typeof lang !== 'string' || !T[lang]) lang = 'hi';
+  var activeCat = 'all';
+  var t = T[lang];
+
+  var el = {};
+  ['grid','tabs','cartbar','cartCount','cartTotal','cartToggle','cartEmptyTxt','cartFull','cartLead','chev',
+   'sendOrder','btnSend','sheet','sheetBody','sheetTotal','sheetClose','sheetSend','sheetWarn','sheetNote',
+   'sheetTitle','sheetSub','sheetTotLbl','scrim','minTrack','minTxt','minFill',
+   'fName','fFlat','fPhone','fNote','errName','errFlat',
+   'langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerFlat',
+   'statusPill','statusTxt','ownerQuote','updatedOn','storeAddress','callLink','waLink','footTxt','crossTxt',
+   'photoToggle','photoBar',
+   'upiBox','upiTtl','upiIdTxt','upiCopy','upiNote','upiPayBtn','ttlHelp','helpLead','btnFeedback','btnComplaint',
+   'polTtl','pol1','pol2','pol3','pol4','openFb','openCmp',
+   'fbDlg','fbClose','fbTtl','fbLead','fbOpts','fbText','fbSend',
+   'cmpDlg','cmpClose','cmpTtl','cmpLead','cmpOpts','cmpText','cmpSend'
+  ].forEach(function (id) { el[id] = document.getElementById(id); });
+
+  /* ============================== boot ================================== */
+  buildLangMenu();
+  renderTabs();
+  renderGrid();
+  restoreInfo();
+  applyLang();
+  renderCart();
+  setInterval(paintStatus, 60000);
+
+  /* ============================ language ================================= */
+  function buildLangMenu() {
+    LANGS.forEach(function (L) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'menuitemradio');
+      b.innerHTML = '<span>' + L.label + '</span><span class="tick"></span>';
+      b.addEventListener('click', function () { setLang(L.code); closeLangMenu(); });
+      b.dataset.code = L.code;
+      el.langMenu.appendChild(b);
+    });
+    el.langBtn.addEventListener('click', function () {
+      if (el.langMenu.hidden) {
+        el.langMenu.hidden = false; el.langBtn.setAttribute('aria-expanded', 'true');
+      } else closeLangMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!el.langMenu.hidden && !e.target.closest('.lang')) closeLangMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (!el.langMenu.hidden) closeLangMenu();
+      else if (!el.sheet.hidden) closeSheet();
+    });
+  }
+  function closeLangMenu() {
+    el.langMenu.hidden = true; el.langBtn.setAttribute('aria-expanded', 'false');
+  }
+  function setLang(code) {
+    if (!T[code]) return;
+    lang = code; t = T[code]; save(LANG_KEY, code);
+    applyLang(); renderTabs(); renderGrid(); renderCart();
+  }
+  function loadFont(name) {
+    if (!name) return;
+    var href = 'https://fonts.googleapis.com/css2?family=' + name + ':wght@400;500;600;700;800&display=swap';
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet'; l.href = href;
+    document.head.appendChild(l);
+  }
+
+  function applyLang() {
+    var L = LANGS.filter(function (x) { return x.code === lang; })[0];
+    loadFont(L.font);
+    document.documentElement.lang = lang;
+    el.langCur.textContent = L.short;
+    el.langBtn.setAttribute('aria-label', t.chooseLang);
+    Array.prototype.forEach.call(el.langMenu.children, function (b) {
+      var on = b.dataset.code === lang;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.querySelector('.tick').textContent = on ? '✓' : '';
+    });
+
+    el.shopName.textContent = lang === 'en' ? store.nameEn : store.name;
+    el.shopSub.textContent = t.sub;
+    document.title = (lang === 'en' ? store.nameEn : store.name);
+
+    el.ownerName.textContent = lang === 'en' ? store.ownerNameEn : store.ownerName;
+    el.ownerFlat.textContent = t.ownerFlatLbl + ' ' + store.ownerFlat;
+    el.ownerAvatar.innerHTML = store.ownerPhoto
+      ? '<img src="' + store.ownerPhoto + '" alt="">'
+      : (lang === 'en' ? store.ownerNameEn : store.ownerName).charAt(0);
+    el.ownerQuote.innerHTML = t.quote;
+
+    set('perk1b', fill(t.perk1b, { m: store.deliveryMinutes }));
+    set('perk1a', t.perk1a);
+    set('perk2b', t.perk2b); set('perk2a', t.perk2a);
+    set('perk3b', t.perk3b); set('perk3a', t.perk3a);
+
+    set('ttlRates', t.ttlRates); set('ratesHint', t.ratesHint);
+    el.updatedOn.textContent = store.updatedOn ? fill(t.updated, { d: formatDate(store.updatedOn) }) : '';
+
+    set('ttlYou', t.ttlYou);
+    set('lblName', t.lblName); set('lblFlat', t.lblFlat);
+    set('lblPhone', t.lblPhone); set('lblNote', t.lblNote);
+    hideEn(lang === 'en');
+    el.fName.placeholder = t.phName; el.fFlat.placeholder = t.phFlat;
+    el.fPhone.placeholder = t.phPhone; el.fNote.placeholder = t.phNote;
+    el.errName.querySelector('span').textContent = t.errName;
+    el.errFlat.querySelector('span').textContent = t.errFlat;
+
+    set('ttlContact', t.ttlContact); set('btnCall', t.btnCall); set('btnWa', t.btnWa);
+    el.storeAddress.textContent = (lang === 'en' ? store.addressEn : store.address) + ' · ' + store.phone;
+    el.callLink.href = 'tel:+91' + store.phone;
+    el.waLink.href = 'https://wa.me/' + store.whatsapp;
+    el.footTxt.textContent = t.foot;
+    el.crossTxt.textContent = t.cross;
+    el.photoBar.textContent = t.photoNote;
+    el.photoToggle.textContent = photoMode ? t.photoOff : t.photoOn;
+
+    el.sheetTitle.textContent = t.yourOrder;
+    el.sheetTotLbl.textContent = t.grandTotal;
+    el.sheetClose.setAttribute('aria-label', t.close);
+    el.sheetSend.querySelector('span').textContent = t.sendLong;
+    paintSupport(t);
+    paintStatus();
+  }
+  function set(id, text) { var n = document.getElementById(id); if (n) n.textContent = text; }
+  function hideEn(hide) {
+    ['lblNameEn','lblFlatEn','lblPhoneEn','lblNoteEn'].forEach(function (id) {
+      document.getElementById(id).style.display = hide ? 'none' : '';
+    });
+  }
+
+  /* ============================ open / closed ============================ */
+  function mins(hhmm) {
+    var p = String(hhmm || '').split(':');
+    return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+  }
+  function isOpen() {
+    var now = new Date(), m = now.getHours() * 60 + now.getMinutes();
+    return m >= mins(store.openTime) && m <= mins(store.lastOrderTime);
+  }
+  function pretty(hhmm) {
+    var p = String(hhmm || '').split(':'), h = parseInt(p[0], 10) || 0, mm = p[1] || '00';
+    var ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ':' + mm + ' ' + ap;
+  }
+  function paintStatus() {
+    var open = isOpen();
+    el.statusPill.classList.toggle('shut', !open);
+    el.statusTxt.textContent = open
+      ? t.openNow + ' · ' + fill(t.lastOrder, { t: pretty(store.lastOrderTime) })
+      : t.closedNow + ' · ' + fill(t.opensAt, { t: pretty(store.openTime) });
+  }
+
+  /* ============================== catalogue ============================== */
+  function renderTabs() {
+    var cats = DATA.categories || [];
+    el.tabs.innerHTML = '';
+    if (cats.length < 2) { el.tabs.hidden = true; return; }
+    el.tabs.hidden = false;
+    var all = [{ id: 'all', label: t.allCat }].concat(cats.map(function (c) {
+      return { id: c.id, label: c[lang] || c.en };
+    }));
+    all.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', c.id === activeCat ? 'true' : 'false');
+      b.textContent = c.label;
+      b.addEventListener('click', function () { activeCat = c.id; renderTabs(); renderGrid(); });
+      el.tabs.appendChild(b);
+    });
+  }
+
+  function visible() {
+    return products.filter(function (p) { return activeCat === 'all' || p.cat === activeCat; });
+  }
+
+  function renderGrid() {
+    el.grid.innerHTML = '';
+    visible().forEach(function (p) {
+      var card = document.createElement('div');
+      card.className = 'card';
+      card.id = 'card-' + p.id;
+      var src = photoFor(p);
+      card.innerHTML =
+        (src
+          ? '<div class="shotwrap"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async">' +
+            '<button class="photorm" type="button" data-rm="' + p.id + '" aria-label="' + esc(t.photoRm) + '">✕</button></div>'
+          : '<svg class="art" aria-hidden="true"><use href="#v-' + p.art + '"></use></svg>') +
+        '<div class="nm">' + esc(name(p)) + '</div>' +
+        (lang === 'en' ? '' : '<div class="en">' + esc(p.en) + '</div>') +
+        '<div class="pr">₹' + p.price + ' <small>' + t.per + ' ' + unitLabel(p.unit) + '</small></div>' +
+        '<div class="ctrl"></div>';
+      el.grid.appendChild(card);
+      addPhotoBtn(card, p, !!src);
+      renderControl(p);
+    });
+  }
+
+  function renderControl(p) {
+    var card = document.getElementById('card-' + p.id);
+    if (!card) return;
+    var slot = card.querySelector('.ctrl');
+    var qty = cart[p.id] || 0;
+    slot.innerHTML = '';
+    card.classList.toggle('on', qty > 0);
+
+    if (qty <= 0) {
+      var add = document.createElement('button');
+      add.className = 'add'; add.type = 'button';
+      add.innerHTML = '<svg aria-hidden="true" style="width:17px;height:17px"><use href="#i-plus"></use></svg>' + esc(t.add);
+      add.setAttribute('aria-label', t.add + ' — ' + name(p));
+      add.addEventListener('click', function () { change(p, p.step); });
+      slot.appendChild(add);
+      return;
+    }
+    slot.appendChild(stepper(p, qty, 'stepper', 'q'));
+  }
+
+  function stepper(p, qty, boxClass, qClass) {
+    var box = document.createElement('div');
+    box.className = boxClass;
+    var minus = document.createElement('button');
+    minus.type = 'button'; minus.textContent = '−';
+    minus.setAttribute('aria-label', name(p) + ' ' + t.less);
+    minus.addEventListener('click', function () { change(p, -p.step); });
+    var label = document.createElement('span');
+    label.className = qClass;
+    label.setAttribute('aria-live', 'polite');
+    label.textContent = qtyLabel(p, qty);
+    var plus = document.createElement('button');
+    plus.type = 'button'; plus.textContent = '+';
+    plus.setAttribute('aria-label', name(p) + ' ' + t.more);
+    plus.addEventListener('click', function () { change(p, p.step); });
+    box.appendChild(minus); box.appendChild(label); box.appendChild(plus);
+    return box;
+  }
+
+  /* cart logic — unchanged from the original */
+  function change(p, delta) {
+    var qty = round2((cart[p.id] || 0) + delta);
+    if (qty <= 0) delete cart[p.id];
+    else cart[p.id] = qty;
+    save(CART_KEY, cart);
+    renderControl(p);
+    renderCart();
+  }
+
+  function cartLines() {
+    return products
+      .filter(function (p) { return cart[p.id] > 0; })
+      .map(function (p) {
+        var qty = cart[p.id];
+        return { p: p, qty: qty, amount: round2(qty * p.price) };
+      });
+  }
+
+  function renderCart() {
+    var lines = cartLines();
+    var total = lines.reduce(function (s, l) { return s + l.amount; }, 0);
+    var count = lines.length;
+    var empty = count === 0;
+
+    el.cartbar.dataset.empty = empty ? '1' : '0';
+    el.cartCount.hidden = empty; el.chev.hidden = empty;
+    el.cartFull.hidden = empty; el.cartEmptyTxt.hidden = !empty;
+    el.cartEmptyTxt.textContent = t.cartEmpty;
+    el.cartCount.textContent = String(count);
+    el.cartLead.textContent = t.cartLead;
+    el.cartTotal.textContent = fmt(total);
+    el.sheetTotal.textContent = fmt(total);
+    el.btnSend.textContent = empty ? t.review : t.send;
+    el.sendOrder.dataset.idle = empty ? '1' : '0';
+    el.sheetSub.textContent = fill(t.sheetSub, { n: count });
+
+    /* minimum-order progress (only when store.minOrder > 0) */
+    var min = Number(store.minOrder) || 0;
+    if (min > 0 && !empty) {
+      el.minTrack.hidden = false;
+      var short = round2(min - total);
+      el.minTxt.textContent = short > 0 ? fill(t.minLeft, { n: fmt(short) }) : t.minOk;
+      el.minFill.style.width = Math.min(100, (total / min) * 100) + '%';
+    } else el.minTrack.hidden = true;
+
+    /* sheet body: lines, or the empty state */
+    el.sheetBody.innerHTML = '';
+    if (empty) {
+      var box = document.createElement('div');
+      box.className = 'empty';
+      box.style.margin = '4px 0 16px';
+      box.innerHTML =
+        '<svg aria-hidden="true"><use href="#i-basket"></use></svg>' +
+        '<b>' + esc(t.emptyTitle) + '</b><p>' + esc(t.emptyBody) + '</p>';
+      var cta = document.createElement('button');
+      cta.className = 'btn btn-ghost'; cta.type = 'button';
+      cta.textContent = t.emptyCta;
+      cta.addEventListener('click', function () {
+        closeSheet();
+        window.scrollTo({ top: Math.max(0, document.getElementById('catalogue').offsetTop - 12), behavior: 'smooth' });
+      });
+      box.appendChild(cta);
+      el.sheetBody.appendChild(box);
+    } else {
+      lines.forEach(function (l) {
+        var row = document.createElement('div');
+        row.className = 'oline';
+        row.innerHTML =
+          (photoFor(l.p)
+            ? '<img class="art" style="border-radius:9px;object-fit:cover" src="' + esc(photoFor(l.p)) + '" alt="">'
+            : '<svg class="art" aria-hidden="true"><use href="#v-' + l.p.art + '"></use></svg>') +
+          '<span class="who"><b>' + esc(name(l.p)) + '</b>' +
+          (lang === 'en' ? '' : '<span>' + esc(l.p.en) + '</span>') + '</span>';
+        row.appendChild(stepper(l.p, l.qty, 'mini', ''));
+        var amt = document.createElement('span');
+        amt.className = 'amt'; amt.textContent = '₹' + fmt(l.amount);
+        row.appendChild(amt);
+        el.sheetBody.appendChild(row);
+      });
+    }
+
+    var open = isOpen();
+    el.sheetWarn.hidden = open;
+    if (!open) el.sheetWarn.textContent = fill(t.warnClosed, { t: pretty(store.openTime) });
+    el.sheetNote.querySelector('span').textContent = fill(t.sheetNote, { m: store.deliveryMinutes });
+    el.sheetSend.disabled = empty;
+    el.sheetSend.dataset.idle = empty ? '1' : '0';
+  }
+
+  /* =============================== order ================================= */
+  function trySend() {
+    var lines = cartLines();
+    if (!lines.length) { openSheet(); return; }
+
+    var name_ = el.fName.value.trim();
+    var flat = el.fFlat.value.trim();
+    var phone = el.fPhone.value.replace(/\D/g, '');
+
+    var okFlat = requireField(el.fFlat, el.errFlat, flat);
+    var okName = requireField(el.fName, el.errName, name_);
+    if (!okName || !okFlat) {
+      closeSheet();
+      var target = !okName ? el.fName : el.fFlat;
+      window.scrollTo({
+        top: Math.max(0, document.getElementById('orderForm').offsetTop - 16),
+        behavior: 'smooth'
+      });
+      setTimeout(function () { try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); } }, 350);
+      return;
+    }
+
+    var min = Number(store.minOrder) || 0;
+    var total = lines.reduce(function (s, l) { return s + l.amount; }, 0);
+    if (min > 0 && total < min) {
+      openSheet();
+      el.sheetWarn.hidden = false;
+      el.sheetWarn.textContent = fill(t.minBlock, { n: fmt(min) });
+      return;
+    }
+
+    saveInfo();
+
+    /* WhatsApp message — same shape as before; only the labels follow the
+       chosen language. Quantities, flat and totals stay Hindi/English with
+       Western numerals so Tarun can read any order at a glance. */
+    var m = MSG[lang] || MSG.hi;
+    var msg = ['*' + store.name + '* — ' + m.neworder, ''];
+    lines.forEach(function (l, i) {
+      msg.push((i + 1) + '. ' + l.p.emoji + ' ' + l.p.hi + ' — ' +
+        qtyLabelHi(l.p, l.qty) + ' = ₹' + fmt(l.amount));
+    });
+    msg.push('', '*' + m.total + ': ₹' + fmt(total) + '*', '');
+    msg.push(m.name + ': ' + name_);
+    msg.push(m.flat + ': ' + flat);
+    if (phone) msg.push(m.mobile + ': ' + phone);
+    var note = el.fNote.value.trim();
+    if (note) msg.push(m.note + ': ' + note);
+
+    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
+      '_blank', 'noopener');
+  }
+  el.sendOrder.addEventListener('click', trySend);
+  el.sheetSend.addEventListener('click', trySend);
+
+  function requireField(node, errNode, value) {
+    var ok = value.length > 0;
+    node.classList.toggle('bad', !ok);
+    node.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    errNode.hidden = ok;
+    return ok;
+  }
+
+  /* ================================ sheet ================================ */
+  el.cartToggle.addEventListener('click', function () {
+    if (el.sheet.hidden) openSheet(); else closeSheet();
+  });
+  el.sheetClose.addEventListener('click', closeSheet);
+  el.scrim.addEventListener('click', closeSheet);
+
+  function openSheet() {
+    el.sheet.hidden = false; el.scrim.hidden = false;
+    el.cartToggle.setAttribute('aria-expanded', 'true');
+    el.sheetClose.focus();
+  }
+  function closeSheet() {
+    el.sheet.hidden = true; el.scrim.hidden = true;
+    el.cartToggle.setAttribute('aria-expanded', 'false');
+  }
+
+  /* ===================== customer info persistence ======================= */
+  function restoreInfo() {
+    el.fName.value = info.name || '';
+    el.fFlat.value = info.flat || '';
+    el.fPhone.value = info.phone || '';
+    [el.fName, el.fFlat, el.fPhone].forEach(function (n) {
+      n.addEventListener('input', function () {
+        n.classList.remove('bad');
+        n.setAttribute('aria-invalid', 'false');
+        if (n === el.fName) el.errName.hidden = true;
+        if (n === el.fFlat) el.errFlat.hidden = true;
+      });
+      n.addEventListener('change', saveInfo);
+    });
+    el.fNote.addEventListener('change', saveInfo);
+  }
+  function saveInfo() {
+    save(INFO_KEY, {
+      name: el.fName.value.trim(),
+      flat: el.fFlat.value.trim(),
+      phone: el.fPhone.value.trim()
+    });
+  }
+
+  /* ============================== photos ================================= */
+  function photoFor(p) { return photos[p.id] || p.photo || ''; }
+
+  el.photoToggle.addEventListener('click', function () {
+    photoMode = !photoMode;
+    document.body.classList.toggle('photomode', photoMode);
+    el.photoToggle.setAttribute('aria-pressed', photoMode ? 'true' : 'false');
+    el.photoToggle.textContent = photoMode ? t.photoOff : t.photoOn;
+    if (photoMode) window.scrollTo({ top: Math.max(0, el.photoBar.offsetTop - 60), behavior: 'smooth' });
+  });
+
+  function addPhotoBtn(card, p, has) {
+    var btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'photobtn';
+    btn.innerHTML = '<svg aria-hidden="true"><use href="#i-cam"></use></svg>' +
+      esc(has ? t.photoChange : t.photoAdd);
+    var inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = 'image/*'; inp.hidden = true;
+    inp.addEventListener('change', function () {
+      if (inp.files && inp.files[0]) takePhoto(p, inp.files[0]);
+      inp.value = '';
+    });
+    btn.addEventListener('click', function () { inp.click(); });
+    card.appendChild(btn); card.appendChild(inp);
+    var rm = card.querySelector('[data-rm]');
+    if (rm) rm.addEventListener('click', function () {
+      delete photos[p.id]; save(PHOTO_KEY, photos); renderGrid(); renderCart();
+    });
+  }
+
+  /* Shrunk on the device and kept in localStorage — nothing is uploaded anywhere. */
+  function takePhoto(p, file) {
+    var fr = new FileReader();
+    fr.onload = function () {
+      var img = new Image();
+      img.onload = function () {
+        if (!keep(p, shrink(img, 360, 0.72)) && !keep(p, shrink(img, 240, 0.5))) {
+          el.photoBar.textContent = t.photoBig; return;
+        }
+        el.photoBar.textContent = t.photoNote;
+        renderGrid(); renderCart();
+      };
+      img.src = fr.result;
+    };
+    fr.readAsDataURL(file);
+  }
+  function shrink(img, max, q) {
+    var w = img.naturalWidth || img.width, hh = img.naturalHeight || img.height;
+    var cw = Math.min(w, hh * 4 / 3), ch = cw * 3 / 4;   /* centre-crop to 4:3 */
+    var c = document.createElement('canvas');
+    c.width = max; c.height = Math.round(max * 0.75);
+    c.getContext('2d').drawImage(img, (w - cw) / 2, (hh - ch) / 2, cw, ch, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', q);
+  }
+  function keep(p, dataUrl) {
+    var prev = photos[p.id];
+    photos[p.id] = dataUrl;
+    try { localStorage.setItem(PHOTO_KEY, JSON.stringify(photos)); return true; }
+    catch (e) { if (prev) photos[p.id] = prev; else delete photos[p.id]; return false; }
+  }
+
+  /* =============================== helpers =============================== */
+  function name(p) { return p[lang] || p.en; }
+  function unitLabel(unit) { return unit === 'kg' ? t.kg : unit === '250g' ? t.gram250 : unit; }
+
+  function qtyLabel(p, qty) {
+    var grams = p.unit === 'kg' ? qty * 1000 : qty * 250;
+    if (grams < 1000) return grams + ' ' + t.g;
+    return fmt(grams / 1000) + ' ' + t.kg;
+  }
+  function qtyLabelHi(p, qty) {
+    var grams = p.unit === 'kg' ? qty * 1000 : qty * 250;
+    if (grams < 1000) return grams + ' ग्राम';
+    return fmt(grams / 1000) + ' किलो';
+  }
+
+  function fmt(n) { return (Math.round(n * 100) / 100).toString(); }
+  function round2(n) { return Math.round(n * 100) / 100; }
+  function fill(str, vals) {
+    return String(str).replace(/\{(\w+)\}/g, function (_, k) {
+      return vals[k] === undefined ? '' : vals[k];
+    });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    });
+  }
+  function formatDate(iso) {
+    var d = new Date(iso + 'T00:00:00');
+    if (isNaN(d)) return iso;
+    var loc = { hi:'hi-IN', en:'en-IN', bn:'bn-IN', pa:'pa-IN', te:'te-IN' }[lang] || 'hi-IN';
+    try { return d.toLocaleDateString(loc, { day:'numeric', month:'short' }); }
+    catch (e) { return iso; }
+  }
+  function load(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch (e) { return fallback; }
+  }
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* private mode */ }
+  }
+
+  /* ===================== UPI · feedback · complaints ===================== */
+  var FB_KEY = null, CMP_KEY = null;
+
+  function paintSupport(t) {
+    /* --- UPI --- */
+    var upi = (store.upiId || '').trim();
+    el.upiBox.hidden = !upi;
+    if (upi) {
+      el.upiTtl.textContent   = t.upiTtl;
+      el.upiIdTxt.textContent = upi;
+      el.upiCopy.textContent  = t.upiCopy;
+      el.upiNote.textContent  = t.upiNote;
+      /* no amount is pre-filled: money changes hands at the door, and the
+         customer types whatever the final bill came to. */
+      el.upiPayBtn.textContent = t.upiTtl;
+      el.upiPayBtn.setAttribute('href', upiLink(0));
+    }
+    /* --- help --- */
+    el.ttlHelp.textContent      = t.ttlHelp;
+    el.helpLead.textContent     = t.helpLead;
+    el.btnFeedback.textContent  = t.btnFeedback;
+    el.btnComplaint.textContent = t.btnComplaint;
+    el.polTtl.textContent       = t.polTtl;
+    el.pol1.textContent = (t.pol1 || '').replace('{h}', store.reportHours || 24);
+    el.pol2.textContent = t.pol2;
+    el.pol3.textContent = t.pol3;
+    el.pol4.textContent = t.pol4;
+
+    /* --- dialogs --- */
+    el.fbTtl.textContent  = t.fbTtl;
+    el.fbLead.textContent = t.helpLead;
+    el.fbText.placeholder = t.fbPh;
+    el.fbSend.querySelector('span').textContent = t.fbSend;
+    buildOpts(el.fbOpts, [
+      { k:'good', em:'😊', label:t.fbGood },
+      { k:'ok',   em:'😐', label:t.fbOk   },
+      { k:'bad',  em:'😟', label:t.fbBad  }
+    ], function (k) { FB_KEY = k; }, FB_KEY);
+
+    el.cmpTtl.textContent  = t.cmpTtl;
+    el.cmpLead.textContent = (t.pol1 || '').replace('{h}', store.reportHours || 24);
+    el.cmpText.placeholder = t.cmpPh;
+    el.cmpSend.querySelector('span').textContent = t.cmpSend;
+    buildOpts(el.cmpOpts, [
+      { k:t.cmp1 }, { k:t.cmp2 }, { k:t.cmp3 },
+      { k:t.cmp4 }, { k:t.cmp5 }, { k:t.cmp6 }
+    ].map(function (o) { return { k:o.k, label:o.k }; }),
+      function (k) { CMP_KEY = k; }, CMP_KEY);
+  }
+
+  function buildOpts(host, items, onPick, current) {
+    host.innerHTML = '';
+    items.forEach(function (it) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt';
+      b.setAttribute('aria-pressed', String(it.k === current));
+      if (it.em) { var e = document.createElement('span'); e.className = 'em'; e.textContent = it.em; b.appendChild(e); }
+      var sp = document.createElement('span'); sp.textContent = it.label; b.appendChild(sp);
+      b.addEventListener('click', function () {
+        onPick(it.k);
+        [].forEach.call(host.children, function (c) { c.setAttribute('aria-pressed', 'false'); });
+        b.setAttribute('aria-pressed', 'true');
+      });
+      host.appendChild(b);
+    });
+  }
+
+  /* copy UPI id */
+  el.upiCopy.addEventListener('click', function () {
+    var t = T[lang] || T.hi, id = (store.upiId || '').trim();
+    var done = function () {
+      var old = el.upiCopy.textContent;
+      el.upiCopy.textContent = t.upiCopied;
+      setTimeout(function () { el.upiCopy.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, done);
+    else {
+      var ta = document.createElement('textarea');
+      ta.value = id; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      ta.remove(); done();
+    }
+  });
+
+  /* UPI deep link, added into the order sheet when a total exists */
+  function upiLink(amount) {
+    var q = 'pa=' + encodeURIComponent(store.upiId) +
+            '&pn=' + encodeURIComponent(store.upiName || store.name) +
+            '&cu=INR';
+    if (amount > 0) q += '&am=' + encodeURIComponent(fmt(amount));
+    return 'upi://pay?' + q;
+  }
+
+  /* dialogs */
+  function openDlg(d) { d.hidden = false; el.scrim.hidden = false; }
+  function closeDlg(d) { d.hidden = true; if (el.sheet.hidden) el.scrim.hidden = true; }
+  el.openFb.addEventListener('click', function () { openDlg(el.fbDlg); });
+  el.openCmp.addEventListener('click', function () { openDlg(el.cmpDlg); });
+  el.fbClose.addEventListener('click', function () { closeDlg(el.fbDlg); });
+  el.cmpClose.addEventListener('click', function () { closeDlg(el.cmpDlg); });
+
+  /* tapping the dim area, or Escape, closes whichever dialog is open */
+  el.scrim.addEventListener('click', function () {
+    if (!el.fbDlg.hidden) closeDlg(el.fbDlg);
+    if (!el.cmpDlg.hidden) closeDlg(el.cmpDlg);
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key !== 'Escape') return;
+    if (!el.fbDlg.hidden) closeDlg(el.fbDlg);
+    if (!el.cmpDlg.hidden) closeDlg(el.cmpDlg);
+  });
+
+  function whoLine() {
+    var t = T[lang] || T.hi, bits = [];
+    var n = (el.fName.value || '').trim(), f = (el.fFlat.value || '').trim();
+    if (n) bits.push(n);
+    if (f) bits.push(t.mFrom + ' ' + f);
+    return bits.join(', ');
+  }
+
+  el.fbSend.addEventListener('click', function () {
+    var t = T[lang] || T.hi;
+    var label = FB_KEY === 'good' ? t.fbGood : FB_KEY === 'ok' ? t.fbOk : FB_KEY === 'bad' ? t.fbBad : '';
+    var msg = ['*' + store.name + '* — ' + t.mFb, ''];
+    if (label) msg.push(t.mRating + ': ' + label);
+    var extra = (el.fbText.value || '').trim();
+    if (extra) msg.push(t.mDetail + ': ' + extra);
+    var who = whoLine(); if (who) msg.push(who);
+    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
+      '_blank', 'noopener');
+    closeDlg(el.fbDlg);
+  });
+
+  el.cmpSend.addEventListener('click', function () {
+    var t = T[lang] || T.hi;
+    var msg = ['*' + store.name + '* — ' + t.mCmp, ''];
+    if (CMP_KEY) msg.push(t.mIssue + ': ' + CMP_KEY);
+    var extra = (el.cmpText.value || '').trim();
+    if (extra) msg.push(t.mDetail + ': ' + extra);
+    var who = whoLine(); if (who) msg.push(who);
+    window.open('https://wa.me/' + store.whatsapp + '?text=' + encodeURIComponent(msg.join('\n')),
+      '_blank', 'noopener');
+    closeDlg(el.cmpDlg);
+  });
+
+})();
+</script>
 </body>
 </html>
