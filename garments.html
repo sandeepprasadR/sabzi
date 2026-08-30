@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4b1339">
+<title>गुरु आशीष गारमेंट्स</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap">
+<style>
+:root{
+  --leaf:#14663a; --leaf-d:#0e4d2b; --leaf-l:#e4f0e7; --leaf-line:#c3ddca;
+  --brand:#4b1339; --brand-2:#6a1b4d; --marigold:#e8a92c;
+  --carrot:#b8480a; --carrot-d:#8f3706;
+  --cream:#fdf8ee; --paper:#ffffff; --ink:#1b211c; --muted:#57655a;
+  --line:#e3ddcd; --r:18px;
+  --shadow:0 1px 2px rgba(27,45,32,.06), 0 6px 18px rgba(27,45,32,.06);
+  --tap:52px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Noto Sans Devanagari","Nirmala UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16.5px; line-height:1.62; text-wrap:pretty; padding-bottom:34px;
+}
+html[lang="bn"] body{font-family:"Noto Sans Bengali","Nirmala UI",system-ui,sans-serif}
+html[lang="pa"] body{font-family:"Noto Sans Gurmukhi","Nirmala UI",system-ui,sans-serif}
+html[lang="te"] body{font-family:"Noto Sans Telugu","Nirmala UI",system-ui,sans-serif}
+html[lang="en"] body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{margin:0;line-height:1.3;font-weight:800}
+button,input{font-family:inherit;font-size:inherit}
+a{color:var(--leaf-d);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--carrot)}
+:focus-visible{outline:3px solid var(--leaf-d);outline-offset:2px;border-radius:6px}
+.wrap{max-width:660px;margin:0 auto;padding:0 14px}
+
+/* ---------- shared header treatment ---------- */
+.hdr{background:var(--brand);background-image:linear-gradient(178deg,var(--brand-2),var(--brand));color:#fff;padding:12px 0 26px;position:relative}
+.hdr:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:14px;background:var(--cream);
+  border-radius:16px 16px 0 0;border-top:3px solid var(--marigold)}
+.hdr-top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.shop{min-width:0}
+.shop h1{font-family:"Baloo 2","Noto Sans Devanagari",system-ui,sans-serif;font-size:23px;font-weight:700;letter-spacing:.2px;line-height:1.24}
+.shop .sub{font-size:12.5px;opacity:.82;font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+.lang{position:relative;flex:0 0 auto}
+.lang-btn{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:12px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;cursor:pointer}
+.lang-btn:active{background:rgba(255,255,255,.26)}
+.lang-btn svg{width:17px;height:17px;flex:0 0 auto}
+.lang-btn .cur{font-size:15px}
+.lang-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:60;background:var(--paper);color:var(--ink);
+  border-radius:14px;box-shadow:0 10px 30px rgba(10,30,18,.28);padding:6px;min-width:172px;border:1px solid var(--line)}
+.lang-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;
+  min-height:46px;padding:0 12px;border:0;background:transparent;border-radius:10px;font-weight:600;
+  cursor:pointer;color:var(--ink);text-align:left}
+.lang-menu button:active{background:var(--leaf-l)}
+.lang-menu button[aria-checked="true"]{background:var(--leaf-l);color:var(--leaf-d)}
+.lang-menu .tick{color:var(--leaf);font-weight:800}
+.owner{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px;border-radius:16px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16)}
+.avatar{width:52px;height:52px;flex:0 0 auto;border-radius:50%;background:#f0e2c4;color:#7a4a12;
+  display:grid;place-items:center;font-family:"Baloo 2",sans-serif;font-size:24px;font-weight:700;overflow:hidden;
+  border:2px solid rgba(255,255,255,.5)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-name{font-weight:800;font-size:16.5px;line-height:1.35}
+.owner-flat{font-size:13.5px;opacity:.85}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:13px;font-weight:700;
+  padding:2px 9px 2px 7px;border-radius:999px;background:rgba(255,255,255,.16)}
+.dot{width:8px;height:8px;border-radius:50%;background:#54e08a;box-shadow:0 0 0 3px rgba(84,224,138,.28)}
+.status.shut .dot{background:#ffb35c;box-shadow:0 0 0 3px rgba(255,179,92,.25)}
+.quote{margin:10px 0 0;padding:0 2px;font-size:15.5px;line-height:1.65;opacity:.95}
+.quote b{font-weight:700}
+
+/* ---------- visit card (garments-specific) ---------- */
+.section{margin-top:22px}
+.section h2{font-size:19.5px}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:15px;box-shadow:var(--shadow)}
+.visit{display:grid;gap:12px}
+.visit .addr{font-size:16px;line-height:1.6;margin:0}
+.visit .addr b{font-weight:700}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--leaf-l);border:1px solid var(--leaf-line);
+  color:var(--leaf-d);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:700}
+.pill svg{width:16px;height:16px}
+.row2{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;min-height:var(--tap);padding:0 18px;font-size:16px;font-weight:800;
+  cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn svg{width:19px;height:19px;flex:0 0 auto}
+.btn-ghost{flex:1 1 140px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:active{background:var(--leaf-l)}
+.btn-go{background:var(--carrot);color:#fff;box-shadow:0 3px 0 var(--carrot-d)}
+.btn-go:active{background:var(--carrot-d);box-shadow:0 1px 0 var(--carrot-d);transform:translateY(2px)}
+
+/* ---------- browsing rhythm: tall photo-led cards ---------- */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 14px 12px;margin:0 -14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--paper);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.hint{color:var(--muted);font-size:14px;margin:2px 0 14px}
+
+.rack{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:520px){.rack{grid-template-columns:1fr 1fr;gap:18px}}
+.item{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.shot{position:relative;aspect-ratio:4/5;background:#f6f1e4;display:block;overflow:hidden}
+@media (min-width:520px){.shot{aspect-ratio:3/4}}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center;
+  padding:20px;background:repeating-linear-gradient(135deg,#f7f2e5 0 12px,#f2ecdd 12px 24px);
+  border-bottom:1.5px dashed var(--leaf-line)}
+.slot svg{width:58px;height:58px;opacity:.55}
+.slot b{font-size:14px;font-weight:800;color:var(--muted);line-height:1.4}
+.slot code{font-size:11.5px;font-weight:700;color:#8b7a55;background:#fffdf6;border:1px solid #e6dcc2;
+  border-radius:7px;padding:3px 7px;font-family:ui-monospace,Menlo,monospace;word-break:break-all;max-width:100%}
+.item-body{padding:14px 15px 15px;display:flex;flex-direction:column;gap:10px;flex:1}
+.item-nm{font-size:21px;font-weight:700;line-height:1.3}
+.item-en{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.2px;margin-top:-6px}
+.item-pr{font-size:23px;font-weight:800;color:var(--leaf-d);font-variant-numeric:tabular-nums;line-height:1.2}
+.item-pr small{font-size:12.5px;font-weight:600;color:var(--muted)}
+.sizes{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.sizes .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.sz{min-width:44px;min-height:36px;display:grid;place-items:center;padding:0 10px;border-radius:9px;
+  border:1.5px solid var(--leaf-line);background:var(--leaf-l);color:var(--leaf-d);font-weight:800;font-size:14px;
+  font-variant-numeric:tabular-nums}
+.ask{margin-top:auto}
+.ask .btn{width:100%}
+
+.foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
+.crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
+.crosslink svg{width:16px;height:16px}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .btn-go:active{transform:none}
+}
+@media (max-width:339px){
+  .item-nm{font-size:19px}.item-pr{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.6 8.2c-.5.6-.6 1.6.3 2.9.9 1.3 2.2 2.2 3.4 2.6 1.1.4 1.9.2 2.3-.4l-1.6-1.1-1 .6c-.7-.4-1.5-1.2-1.9-2l.6-.9-1.1-1.7z" fill="currentColor"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l1.6 4-2 1.5c.8 2.6 3.3 5.1 5.9 5.9l1.5-2 4 1.6V18c0 1.4-1.3 2.5-2.7 2.3C11 19.5 4.5 13 3.7 5.7 3.5 4.3 4.6 3 6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5c4.5-5.2 7-8.6 7-11.5a7 7 0 1 0-14 0c0 2.9 2.5 6.3 7 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.2 6-5.5-3-5.5 3 1.2-6L3.2 9.9l6.1-.8L12 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 8.5h18v7H3v-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 8.5v3M12 8.5v4M16.5 8.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4c0 9-5.5 14-13 14 0-8 5-13 13-14z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20c2-5 6-9 11-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-hanger" viewBox="0 0 64 64">
+  <path d="M32 22c-3.3 0-6-2.4-6-5.5S28.7 11 32 11s6 2.4 6 5.5" fill="none" stroke="#8a7a52" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 22v5L8 42c-1.8 1.1-1 4 1.2 4h45.6c2.2 0 3-2.9 1.2-4L32 27z" fill="#efe6d0" stroke="#8a7a52" stroke-width="3" stroke-linejoin="round"/>
+</symbol>
+</defs></svg>
+
+<header class="hdr">
+  <div class="wrap">
+    <div class="hdr-top">
+      <div class="shop">
+        <h1 id="shopName">गुरु आशीष गारमेंट्स</h1>
+        <div class="sub" id="shopSub"></div>
+      </div>
+      <div class="lang">
+        <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <svg aria-hidden="true"><use href="#i-globe"></use></svg>
+          <span class="cur" id="langCur">हिं</span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" hidden></div>
+      </div>
+    </div>
+
+    <div class="owner">
+      <div class="avatar" id="ownerAvatar"></div>
+      <div>
+        <div class="owner-name" id="ownerName"></div>
+        <div class="owner-flat" id="ownerSince"></div>
+        <div class="status" id="statusPill"><span class="dot"></span><span id="statusTxt"></span></div>
+      </div>
+    </div>
+    <p class="quote" id="ownerQuote"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="section">
+    <div class="panel visit">
+      <h2 id="ttlVisit"></h2>
+      <p class="addr" id="addrTxt"></p>
+      <div class="meta" id="metaRow"></div>
+      <div class="row2">
+        <a class="btn btn-ghost" id="mapLink" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"></use></svg><span id="btnMap"></span></a>
+        <a class="btn btn-ghost" id="callLink" href="#"><svg aria-hidden="true"><use href="#i-phone"></use></svg><span id="btnCall"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalogue">
+    <h2 id="ttlRack"></h2>
+    <p class="hint" id="rackHint"></p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="rack" id="rack"></div>
+  </section>
+
+  <footer class="foot">
+    <p id="footTxt"></p>
+    <a class="crosslink" href="storefront.html"><svg aria-hidden="true"><use href="#i-leaf"></use></svg><span id="crossTxt"></span></a>
+  </footer>
+</main>
+
+<script>
+/* ============================================================================
+   Guru Ashish Garments — browse-and-ask page. No cart, no checkout.
+   Every tap opens WhatsApp with a question about that one item.
+
+   EDIT ITEMS, PRICES, PHOTOS AND SHOP DETAILS ONLY INSIDE `DATA` BELOW.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var DATA = {
+    shop: {
+      name: "गुरु आशीष गारमेंट्स",
+      nameEn: "Guru Ashish Garments",
+      whatsapp: "918400357057",          /* WhatsApp number, with 91 */
+      phone1: "8400357057",
+      phone2: "9354001343",
+      address: "धरमपुर मेन रोड, सेक्टर 108, गुरुग्राम",
+      addressEn: "Dharampur Main Road, Sector 108, Gurugram",
+      mapQuery: "Guru Ashish Garments, Dharampur Main Road, Sector 108, Gurugram",
+      openTime: "10:00",
+      closeTime: "21:00",
+      sinceYears: 5,
+      ownerName: "तरुण",
+      ownerNameEn: "Tarun",
+      ownerPhoto: ""                      /* paste an image URL later */
+    },
+
+    categories: [
+      { id:"men",   hi:"पुरुष",  en:"Men",   bn:"পুরুষ",  pa:"ਮਰਦ",     te:"పురుషులు" },
+      { id:"women", hi:"महिला",  en:"Women", bn:"মহিলা",  pa:"ਔਰਤਾਂ",   te:"మహిళలు" },
+      { id:"kids",  hi:"बच्चे",  en:"Kids",  bn:"বাচ্চা", pa:"ਬੱਚੇ",    te:"పిల్లలు" }
+    ],
+
+    /* photo: "" shows a placeholder slot with the filename to drop in.
+       Put photos next to this file, e.g. photos/kurta.jpg
+       sizes: any list — shown as chips. price: ₹, plain number. */
+    items: [
+      { id:"kurta",  cat:"men",   price:649, photo:"", file:"photos/kurta.jpg",
+        hi:"कुर्ता", en:"Kurta", bn:"কুর্তা", pa:"ਕੁੜਤਾ", te:"కుర్తా",
+        sizes:["M","L","XL","XXL"] },
+      { id:"shirt",  cat:"men",   price:499, photo:"", file:"photos/shirt.jpg",
+        hi:"कॉटन शर्ट", en:"Cotton Shirt", bn:"কটন শার্ট", pa:"ਕਾਟਨ ਸ਼ਰਟ", te:"కాటన్ షర్టు",
+        sizes:["M","L","XL","XXL"] },
+      { id:"jeans",  cat:"men",   price:899, photo:"", file:"photos/jeans.jpg",
+        hi:"जीन्स", en:"Jeans", bn:"জিন্স", pa:"ਜੀਨਸ", te:"జీన్స్",
+        sizes:["M","L","XL","XXL"] },
+      { id:"kurti",  cat:"women", price:549, photo:"", file:"photos/kurti.jpg",
+        hi:"कुर्ती", en:"Kurti", bn:"কুর্তি", pa:"ਕੁੜਤੀ", te:"కుర్తీ",
+        sizes:["M","L","XL","XXL"] },
+      { id:"leggings", cat:"women", price:299, photo:"", file:"photos/leggings.jpg",
+        hi:"लेगिंग्स", en:"Leggings", bn:"লেগিংস", pa:"ਲੈਗਿੰਗਸ", te:"లెగ్గింగ్స్",
+        sizes:["M","L","XL","XXL"] },
+      { id:"kidstee", cat:"kids",  price:249, photo:"", file:"photos/kids-tshirt.jpg",
+        hi:"बच्चों की टी-शर्ट", en:"Kids T-Shirt", bn:"বাচ্চাদের টি-শার্ট", pa:"ਬੱਚਿਆਂ ਦੀ ਟੀ-ਸ਼ਰਟ", te:"పిల్లల టీ-షర్ట్",
+        sizes:["M","L","XL","XXL"] }
+    ]
+  };
+
+  /* ====================== TRANSLATIONS (garments page) ==================== */
+  var LANGS = [
+    { code:"hi", label:"हिंदी",   short:"हिं", font:null },
+    { code:"en", label:"English", short:"EN",  font:null },
+    { code:"bn", label:"বাংলা",    short:"বাং", font:"Noto+Sans+Bengali" },
+    { code:"pa", label:"ਪੰਜਾਬੀ",   short:"ਪੰਜ", font:"Noto+Sans+Gurmukhi" },
+    { code:"te", label:"తెలుగు",   short:"తె",  font:"Noto+Sans+Telugu" }
+  ];
+
+  var T = {
+    hi: {
+      sub:"कपड़े की दुकान · सेक्टर 108", chooseLang:"भाषा चुनें",
+      since:"{y} साल से इसी जगह", openNow:"दुकान खुली है", closedNow:"दुकान बंद है",
+      hours:"{a} से {b}", opensAt:"{t} बजे खुलेगी",
+      quote:"मैं <b>तरुण</b> — सब्ज़ी वाला भी मैं ही हूँ। कपड़े की दुकान पाँच साल से चला रहा हूँ। जो पसंद आए, WhatsApp पर पूछ लें या दुकान पर आ जाएं।",
+      ttlVisit:"दुकान पर आइए", btnMap:"नक्शे पर देखें", btnCall:"कॉल करें",
+      ttlRack:"दुकान में क्या है", allCat:"सब",
+      rackHint:"डिलीवरी नहीं है — कपड़े दुकान पर आकर देखें और लें। दाम और साइज़ के बारे में WhatsApp पर पूछ सकते हैं।",
+      sizesLbl:"साइज़", ask:"WhatsApp पर पूछें", from:"से",
+      slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालें:",
+      foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
+      cross:"सब्ज़ी ऑर्डर करें"
+    },
+    en: {
+      sub:"Clothing shop · Sector 108", chooseLang:"Choose language",
+      since:"Same spot for {y} years", openNow:"Shop is open", closedNow:"Shop is closed",
+      hours:"{a} to {b}", opensAt:"Opens at {t}",
+      quote:"I'm <b>Tarun</b> — the vegetable man too. I've run this clothing shop for five years. Ask on WhatsApp about anything you like, or just come by.",
+      ttlVisit:"Come to the shop", btnMap:"Open in maps", btnCall:"Call",
+      ttlRack:"In the shop", allCat:"All",
+      rackHint:"No delivery — clothes are seen and bought at the shop. Ask about price or size on WhatsApp.",
+      sizesLbl:"Sizes", ask:"Ask on WhatsApp", from:"from",
+      slot:"Photo goes here", slotHelp:"Add a photo with this name:",
+      foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
+      cross:"Order vegetables"
+    },
+    bn: {
+      sub:"কাপড়ের দোকান · সেক্টর 108", chooseLang:"ভাষা বাছুন",
+      since:"{y} বছর ধরে একই জায়গায়", openNow:"দোকান খোলা", closedNow:"দোকান বন্ধ",
+      hours:"{a} থেকে {b}", opensAt:"{t}-এ খুলবে",
+      quote:"আমি <b>তরুণ</b> — সবজিও আমিই দিই। এই কাপড়ের দোকান পাঁচ বছর ধরে চালাচ্ছি। যা পছন্দ হয় WhatsApp-এ জিজ্ঞেস করুন, বা দোকানে চলে আসুন।",
+      ttlVisit:"দোকানে আসুন", btnMap:"ম্যাপে দেখুন", btnCall:"ফোন করুন",
+      ttlRack:"দোকানে যা আছে", allCat:"সব",
+      rackHint:"ডেলিভারি নেই — কাপড় দোকানে এসে দেখে নিতে হয়। দাম বা সাইজ WhatsApp-এ জিজ্ঞেস করুন।",
+      sizesLbl:"সাইজ", ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
+      slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
+      foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
+      cross:"সবজি অর্ডার করুন"
+    },
+    pa: {
+      sub:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ · ਸੈਕਟਰ 108", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
+      since:"{y} ਸਾਲ ਤੋਂ ਇਸੇ ਥਾਂ", openNow:"ਦੁਕਾਨ ਖੁੱਲ੍ਹੀ ਹੈ", closedNow:"ਦੁਕਾਨ ਬੰਦ ਹੈ",
+      hours:"{a} ਤੋਂ {b}", opensAt:"{t} ਵਜੇ ਖੁੱਲ੍ਹੇਗੀ",
+      quote:"ਮੈਂ <b>ਤਰੁਣ</b> — ਸਬਜ਼ੀ ਵਾਲਾ ਵੀ ਮੈਂ ਹੀ ਹਾਂ। ਇਹ ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਪੰਜ ਸਾਲ ਤੋਂ ਚਲਾ ਰਿਹਾ ਹਾਂ। ਜੋ ਪਸੰਦ ਆਵੇ WhatsApp 'ਤੇ ਪੁੱਛ ਲਓ, ਜਾਂ ਦੁਕਾਨ 'ਤੇ ਆ ਜਾਓ।",
+      ttlVisit:"ਦੁਕਾਨ 'ਤੇ ਆਓ", btnMap:"ਨਕਸ਼ੇ 'ਤੇ ਵੇਖੋ", btnCall:"ਕਾਲ ਕਰੋ",
+      ttlRack:"ਦੁਕਾਨ ਵਿੱਚ ਕੀ ਹੈ", allCat:"ਸਭ",
+      rackHint:"ਡਿਲੀਵਰੀ ਨਹੀਂ ਹੈ — ਕੱਪੜੇ ਦੁਕਾਨ 'ਤੇ ਆ ਕੇ ਵੇਖੋ ਤੇ ਲਓ। ਭਾਅ ਜਾਂ ਸਾਈਜ਼ WhatsApp 'ਤੇ ਪੁੱਛ ਸਕਦੇ ਹੋ।",
+      sizesLbl:"ਸਾਈਜ਼", ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
+      slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
+      foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
+      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ"
+    },
+    te: {
+      sub:"బట్టల దుకాణం · సెక్టర్ 108", chooseLang:"భాష ఎంచుకోండి",
+      since:"{y} ఏళ్లుగా ఇదే చోట", openNow:"దుకాణం తెరిచి ఉంది", closedNow:"దుకాణం మూసి ఉంది",
+      hours:"{a} నుంచి {b}", opensAt:"{t}కి తెరుస్తారు",
+      quote:"నేను <b>తరుణ్</b> — కూరగాయలు తెచ్చేది నేనే. ఈ బట్టల దుకాణం ఐదేళ్లుగా నడుపుతున్నాను. నచ్చినది WhatsAppలో అడగండి, లేదా దుకాణానికి రండి.",
+      ttlVisit:"దుకాణానికి రండి", btnMap:"మ్యాప్‌లో చూడండి", btnCall:"కాల్ చేయండి",
+      ttlRack:"దుకాణంలో ఏమి ఉంది", allCat:"అన్నీ",
+      rackHint:"డెలివరీ లేదు — బట్టలు దుకాణంలో చూసి తీసుకోవాలి. రేటు లేదా సైజు WhatsAppలో అడగవచ్చు.",
+      sizesLbl:"సైజులు", ask:"WhatsAppలో అడగండి", from:"నుంచి",
+      slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
+      foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
+      cross:"కూరగాయలు ఆర్డర్ చేయండి"
+    }
+  };
+
+  var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
+  var shop = DATA.shop;
+  var items = DATA.items || [];
+  var lang = load(LANG_KEY, null);
+  if (typeof lang !== 'string' || !T[lang]) lang = 'hi';
+  var t = T[lang];
+  var activeCat = 'all';
+
+  var el = {};
+  ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
+   'statusPill','statusTxt','ownerQuote','ttlVisit','addrTxt','metaRow','mapLink','btnMap',
+   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt'
+  ].forEach(function (id) { el[id] = document.getElementById(id); });
+
+  buildLangMenu();
+  applyLang();
+  setInterval(paintStatus, 60000);
+
+  /* ============================ language ================================= */
+  function buildLangMenu() {
+    LANGS.forEach(function (L) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role', 'menuitemradio'); b.dataset.code = L.code;
+      b.innerHTML = '<span>' + L.label + '</span><span class="tick"></span>';
+      b.addEventListener('click', function () { setLang(L.code); closeLangMenu(); });
+      el.langMenu.appendChild(b);
+    });
+    el.langBtn.addEventListener('click', function () {
+      if (el.langMenu.hidden) { el.langMenu.hidden = false; el.langBtn.setAttribute('aria-expanded', 'true'); }
+      else closeLangMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!el.langMenu.hidden && !e.target.closest('.lang')) closeLangMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !el.langMenu.hidden) closeLangMenu();
+    });
+  }
+  function closeLangMenu() { el.langMenu.hidden = true; el.langBtn.setAttribute('aria-expanded', 'false'); }
+  function setLang(code) {
+    if (!T[code]) return;
+    lang = code; t = T[code]; save(LANG_KEY, code);
+    applyLang();
+  }
+  function loadFont(name) {
+    if (!name) return;
+    var href = 'https://fonts.googleapis.com/css2?family=' + name + ':wght@400;500;600;700;800&display=swap';
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href;
+    document.head.appendChild(l);
+  }
+
+  function applyLang() {
+    var L = LANGS.filter(function (x) { return x.code === lang; })[0];
+    loadFont(L.font);
+    document.documentElement.lang = lang;
+    el.langCur.textContent = L.short;
+    el.langBtn.setAttribute('aria-label', t.chooseLang);
+    Array.prototype.forEach.call(el.langMenu.children, function (b) {
+      var on = b.dataset.code === lang;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.querySelector('.tick').textContent = on ? '✓' : '';
+    });
+
+    el.shopName.textContent = lang === 'en' ? shop.nameEn : shop.name;
+    el.shopSub.textContent = t.sub;
+    document.title = lang === 'en' ? shop.nameEn : shop.name;
+
+    el.ownerName.textContent = lang === 'en' ? shop.ownerNameEn : shop.ownerName;
+    el.ownerSince.textContent = fill(t.since, { y: shop.sinceYears });
+    el.ownerAvatar.innerHTML = shop.ownerPhoto
+      ? '<img src="' + shop.ownerPhoto + '" alt="">'
+      : (lang === 'en' ? shop.ownerNameEn : shop.ownerName).charAt(0);
+    el.ownerQuote.innerHTML = t.quote;
+
+    el.ttlVisit.textContent = t.ttlVisit;
+    el.addrTxt.textContent = lang === 'en' ? shop.addressEn : shop.address;
+    el.metaRow.innerHTML =
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-clock"></use></svg>' +
+        esc(fill(t.hours, { a: pretty(shop.openTime), b: pretty(shop.closeTime) })) + '</span>' +
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-star"></use></svg>' +
+        esc(fill(t.since, { y: shop.sinceYears })) + '</span>' +
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-ruler"></use></svg>M – XXL</span>';
+    el.mapLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(shop.mapQuery);
+    el.btnMap.textContent = t.btnMap;
+    el.callLink.href = 'tel:+91' + shop.phone1;
+    el.btnCall.textContent = t.btnCall + ' · ' + shop.phone1;
+
+    el.ttlRack.textContent = t.ttlRack;
+    el.rackHint.textContent = t.rackHint;
+    el.footTxt.textContent = t.foot + ' · ' + shop.phone1 + ' / ' + shop.phone2;
+    el.crossTxt.textContent = t.cross;
+
+    paintStatus();
+    renderTabs();
+    renderRack();
+  }
+
+  /* ============================ open / closed ============================ */
+  function mins(hhmm) {
+    var p = String(hhmm || '').split(':');
+    return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+  }
+  function isOpen() {
+    var now = new Date(), m = now.getHours() * 60 + now.getMinutes();
+    return m >= mins(shop.openTime) && m <= mins(shop.closeTime);
+  }
+  function pretty(hhmm) {
+    var p = String(hhmm || '').split(':'), h = parseInt(p[0], 10) || 0, mm = p[1] || '00';
+    var ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ':' + mm + ' ' + ap;
+  }
+  function paintStatus() {
+    var open = isOpen();
+    el.statusPill.classList.toggle('shut', !open);
+    el.statusTxt.textContent = open
+      ? t.openNow + ' · ' + fill(t.hours, { a: pretty(shop.openTime), b: pretty(shop.closeTime) })
+      : t.closedNow + ' · ' + fill(t.opensAt, { t: pretty(shop.openTime) });
+  }
+
+  /* ============================== catalogue ============================== */
+  function renderTabs() {
+    var cats = DATA.categories || [];
+    el.tabs.innerHTML = '';
+    if (cats.length < 2) { el.tabs.hidden = true; return; }
+    el.tabs.hidden = false;
+    [{ id:'all', label:t.allCat }].concat(cats.map(function (c) {
+      return { id: c.id, label: c[lang] || c.en };
+    })).forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', c.id === activeCat ? 'true' : 'false');
+      b.textContent = c.label;
+      b.addEventListener('click', function () { activeCat = c.id; renderTabs(); renderRack(); });
+      el.tabs.appendChild(b);
+    });
+  }
+
+  function renderRack() {
+    el.rack.innerHTML = '';
+    items.filter(function (it) { return activeCat === 'all' || it.cat === activeCat; })
+      .forEach(function (it) {
+        var card = document.createElement('article');
+        card.className = 'item';
+
+        var shot = it.photo
+          ? '<div class="shot"><img src="' + esc(it.photo) + '" alt="' + esc(name(it)) + '" loading="lazy" decoding="async"></div>'
+          : '<div class="shot"><div class="slot">' +
+              '<svg aria-hidden="true"><use href="#i-hanger"></use></svg>' +
+              '<b>' + esc(t.slot) + '</b>' +
+              '<span style="font-size:12px;color:#8b7a55;font-weight:700">' + esc(t.slotHelp) + '</span>' +
+              '<code>' + esc(it.file || (it.id + '.jpg')) + '</code>' +
+            '</div></div>';
+
+        var sizes = (it.sizes || []).map(function (s) {
+          return '<span class="sz">' + esc(s) + '</span>';
+        }).join('');
+
+        card.innerHTML = shot +
+          '<div class="item-body">' +
+            '<div><div class="item-nm">' + esc(name(it)) + '</div>' +
+            (lang === 'en' ? '' : '<div class="item-en">' + esc(it.en) + '</div>') + '</div>' +
+            '<div class="item-pr">₹' + it.price + ' <small>' + esc(t.from) + '</small></div>' +
+            '<div class="sizes"><span class="lbl">' + esc(t.sizesLbl) + '</span>' + sizes + '</div>' +
+            '<div class="ask"></div>' +
+          '</div>';
+
+        var btn = document.createElement('a');
+        btn.className = 'btn btn-go';
+        btn.target = '_blank'; btn.rel = 'noopener';
+        btn.href = askUrl(it);
+        btn.innerHTML = '<svg aria-hidden="true"><use href="#i-wa"></use></svg>' + esc(t.ask);
+        btn.setAttribute('aria-label', t.ask + ' — ' + name(it));
+        card.querySelector('.ask').appendChild(btn);
+
+        el.rack.appendChild(card);
+      });
+  }
+
+  /* One item, one question. Item name stays English so Tarun reads it fast. */
+  function askUrl(it) {
+    var msg = DATA.shop.nameEn + ' — ' + it.en + ' ke baare mein poochna hai';
+    return 'https://wa.me/' + shop.whatsapp + '?text=' + encodeURIComponent(msg);
+  }
+
+  /* =============================== helpers =============================== */
+  function name(it) { return it[lang] || it.en; }
+  function fill(str, vals) {
+    return String(str).replace(/\{(\w+)\}/g, function (_, k) {
+      return vals[k] === undefined ? '' : vals[k];
+    });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    });
+  }
+  function load(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch (e) { return fallback; }
+  }
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* private mode */ }
+  }
+})();
+</script>
+</body>
+</html>
