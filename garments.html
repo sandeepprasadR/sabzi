@@ -126,8 +126,80 @@ a:hover{color:var(--carrot)}
 .sz{min-width:44px;min-height:36px;display:grid;place-items:center;padding:0 10px;border-radius:9px;
   border:1.5px solid var(--leaf-line);background:var(--leaf-l);color:var(--leaf-d);font-weight:800;font-size:14px;
   font-variant-numeric:tabular-nums}
-.ask{margin-top:auto}
+.ask{margin-top:auto;display:flex;flex-direction:column;gap:9px}
 .ask .btn{width:100%}
+.asklink{align-self:center;background:none;border:0;color:var(--muted);font-family:inherit;
+  font-size:13.5px;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
+
+/* ---------- picking a size and a quantity ---------- */
+.sz{min-width:44px;min-height:40px;padding:0 12px;cursor:pointer;font-family:inherit}
+.sz[aria-pressed="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.sz[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.colors{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.colors .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.colr{min-height:36px;display:inline-grid;place-items:center;padding:0 11px;border-radius:9px;
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:13.5px;
+  font-family:inherit;cursor:pointer}
+.colr[aria-pressed="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.item-note{font-size:13.5px;color:var(--muted);line-height:1.55}
+.item-fab{display:inline-block;font-size:12px;font-weight:800;color:var(--leaf-d);background:var(--leaf-l);
+  border-radius:999px;padding:3px 10px;letter-spacing:.2px}
+.mrp{font-size:15px;font-weight:700;color:var(--muted);text-decoration:line-through;margin-left:7px}
+.qtyrow{display:flex;align-items:center;gap:10px}
+.qtyrow .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.stepper{display:flex;align-items:center;gap:2px;border:1.5px solid var(--line);border-radius:11px;overflow:hidden}
+.stepper button{width:44px;height:42px;border:0;background:#fff;color:var(--leaf-d);font-size:21px;
+  font-weight:800;font-family:inherit;cursor:pointer;line-height:1}
+.stepper button:active{background:var(--leaf-l)}
+.stepper span{min-width:40px;text-align:center;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.item.out{opacity:.62}
+.outbadge{display:inline-block;font-size:13px;font-weight:800;color:#8a3b16;background:#fdecdf;
+  border:1.5px solid #f0c9a8;border-radius:999px;padding:7px 14px;text-align:center}
+
+/* ---------- bag bar + sheet ---------- */
+.bagbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--paper);
+  border-top:1.5px solid var(--line);box-shadow:0 -6px 22px rgba(60,40,10,.13);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.bagbar .in{max-width:660px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.bagbar .sum{flex:1;min-width:0;line-height:1.35}
+.bagbar .sum b{display:block;font-size:15.5px;font-weight:800}
+.bagbar .sum span{display:block;font-size:12.5px;color:var(--muted);font-weight:600}
+.bagbar .btn{flex:0 0 auto;width:auto;padding:0 20px}
+body.hasbag{padding-bottom:96px}
+
+/* .sheet sets display:flex, which outranks the browser's [hidden] rule — without
+   this an invisible sheet still swallows taps meant for the bag bar under it. */
+[hidden]{display:none!important}
+.scrim{position:fixed;inset:0;z-index:79;background:rgba(28,18,4,.45)}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:80;background:var(--paper);
+  border-radius:22px 22px 0 0;max-height:88vh;display:flex;flex-direction:column;
+  box-shadow:0 -14px 40px rgba(30,20,5,.3)}
+.sheet-head{display:flex;align-items:flex-start;gap:10px;padding:16px 16px 10px;border-bottom:1.5px solid var(--line)}
+.sheet-head h3{flex:1;font-size:19px;font-weight:800;margin:0}
+.sheet-head .close{width:44px;height:44px;border:0;background:none;font-size:20px;color:var(--muted);cursor:pointer}
+.sheet-body{overflow:auto;padding:12px 16px;flex:1}
+.sheet-foot{padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1.5px solid var(--line);background:#fff}
+.line{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line img{width:56px;height:70px;object-fit:cover;border-radius:10px;flex:0 0 auto;background:#eee}
+.line .l-nm{flex:1;min-width:0}
+.line .l-nm b{display:block;font-size:15.5px;font-weight:700;line-height:1.35}
+.line .l-nm small{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.line .l-pr{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.line .rm{border:0;background:none;color:var(--carrot);font-family:inherit;font-size:13px;
+  font-weight:700;text-decoration:underline;cursor:pointer;padding:4px 0 0}
+.totrow{display:flex;justify-content:space-between;align-items:baseline;font-size:19px;font-weight:800;margin-bottom:10px}
+.fld{margin-top:12px}
+.fld > span{display:block;font-size:13.5px;font-weight:700;margin-bottom:5px}
+.fld input,.fld textarea{width:100%;font-family:inherit;font-size:16px;padding:12px;border:1.5px solid var(--line);
+  border-radius:12px;background:#fff;color:var(--ink)}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--leaf-d);border-color:transparent}
+.fld .err{display:block;color:var(--carrot-d);font-size:13px;font-weight:700;margin-top:5px}
+.modes{display:flex;gap:9px;margin-top:6px}
+.modes button{flex:1;min-height:52px;border:1.5px solid var(--line);background:#fff;border-radius:13px;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;padding:6px 8px;line-height:1.3}
+.modes button[aria-pressed="true"]{background:var(--leaf-l);border-color:var(--leaf-d);color:var(--leaf-d)}
+.smallnote{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0 0}
 
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
@@ -212,6 +284,48 @@ a:hover{color:var(--carrot)}
   </footer>
 </main>
 
+<div class="bagbar" id="bagbar" hidden><div class="in">
+  <span class="sum"><b id="bagCount"></b><span id="bagHint"></span></span>
+  <button class="btn btn-go" id="bagOpen"><span id="bagOpenTxt"></span></button>
+</div></div>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-head">
+    <h3 id="sheetTitle"></h3>
+    <button class="close" id="sheetClose" aria-label="close">&#10005;</button>
+  </div>
+  <div class="sheet-body">
+    <div id="bagLines"></div>
+
+    <div class="fld">
+      <span id="lblHow"></span>
+      <div class="modes">
+        <button type="button" id="modeShop" aria-pressed="true"></button>
+        <button type="button" id="modeCourier" aria-pressed="false"></button>
+      </div>
+    </div>
+
+    <label class="fld"><span id="lblGName"></span>
+      <input id="gName" type="text" autocomplete="name">
+      <span class="err" id="errGName" hidden></span></label>
+
+    <label class="fld"><span id="lblGPhone"></span>
+      <input id="gPhone" type="tel" inputmode="numeric" autocomplete="tel">
+      <span class="err" id="errGPhone" hidden></span></label>
+
+    <label class="fld" id="addrWrap" hidden><span id="lblGAddr"></span>
+      <textarea id="gAddr" rows="4" autocomplete="street-address"></textarea>
+      <span class="err" id="errGAddr" hidden></span></label>
+
+    <p class="smallnote" id="courierNote" hidden></p>
+  </div>
+  <div class="sheet-foot">
+    <div class="totrow"><span id="totLbl"></span><span>&#8377;<span id="bagTotal">0</span></span></div>
+    <button class="btn btn-go" id="bagSend"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span id="bagSendTxt"></span></button>
+  </div>
+</div>
+
 <script>
 /* ============================================================================
    Guru Ashish Garments — browse-and-ask page. No cart, no checkout.
@@ -271,7 +385,6 @@ a:hover{color:var(--carrot)}
         "cat": "men",
         "price": 649,
         "photo": "garments/kurta.jpg",
-        "file": "photos/kurta.jpg",
         "hi": "कुर्ता",
         "en": "Kurta",
         "bn": "কুর্তা",
@@ -290,7 +403,6 @@ a:hover{color:var(--carrot)}
         "cat": "men",
         "price": 499,
         "photo": "garments/shirt.jpg",
-        "file": "photos/shirt.jpg",
         "hi": "कॉटन शर्ट",
         "en": "Cotton Shirt",
         "bn": "কটন শার্ট",
@@ -309,7 +421,6 @@ a:hover{color:var(--carrot)}
         "cat": "men",
         "price": 899,
         "photo": "garments/jeans.jpg",
-        "file": "photos/jeans.jpg",
         "hi": "जीन्स",
         "en": "Jeans",
         "bn": "জিন্স",
@@ -328,7 +439,6 @@ a:hover{color:var(--carrot)}
         "cat": "women",
         "price": 549,
         "photo": "garments/kurti.jpg",
-        "file": "photos/kurti.jpg",
         "hi": "कुर्ती",
         "en": "Kurti",
         "bn": "কুর্তি",
@@ -347,7 +457,6 @@ a:hover{color:var(--carrot)}
         "cat": "women",
         "price": 299,
         "photo": "garments/leggings.jpg",
-        "file": "photos/leggings.jpg",
         "hi": "लेगिंग्स",
         "en": "Leggings",
         "bn": "লেগিংস",
@@ -366,7 +475,6 @@ a:hover{color:var(--carrot)}
         "cat": "kids",
         "price": 249,
         "photo": "garments/kidstee.jpg",
-        "file": "photos/kids-tshirt.jpg",
         "hi": "बच्चों की टी-शर्ट",
         "en": "Kids T-Shirt",
         "bn": "বাচ্চাদের টি-শার্ট",
@@ -382,24 +490,30 @@ a:hover{color:var(--carrot)}
       },
       {
         "id": "g1788424169736",
-        "hi": "Calvine-Clein\nUnderwear..",
-        "en": "Calvine-Clein\nUnderwear..",
+        "hi": "Calvine-Clein Underwear..",
+        "en": "Calvine-Clein Underwear..",
         "price": 95,
-        "photo": "photos/garments/g1788424169736.jpg"
+        "photo": "photos/garments/g1788424169736.jpg",
+        "cat": "men",
+        "available": true
       },
       {
         "id": "g1788425223736",
         "hi": "calvin Clain",
         "en": "calvin Clain",
         "price": 95,
-        "photo": "photos/garments/g1788425223736.jpg"
+        "photo": "photos/garments/g1788425223736.jpg",
+        "cat": "men",
+        "available": true
       },
       {
         "id": "g1788425910051",
         "hi": "Macho",
         "en": "Macho",
         "price": 99,
-        "photo": "photos/garments/g1788425910051.jpg"
+        "photo": "photos/garments/g1788425910051.jpg",
+        "cat": "men",
+        "available": true
       }
     ]
   }/*</CATALOGUE>*/;
@@ -421,11 +535,21 @@ a:hover{color:var(--carrot)}
       quote:"छूकर देखिए, पहनकर देखिए — तब लीजिए।",
       ttlVisit:"दुकान पर आइए", btnMap:"नक्शे पर देखें", btnCall:"कॉल करें",
       ttlRack:"दुकान में क्या है", allCat:"सब",
-      rackHint:"डिलीवरी नहीं है — कपड़े दुकान पर आकर देखें और लें। दाम और साइज़ के बारे में WhatsApp पर पूछ सकते हैं।",
+      rackHint:"साइज़ चुनें, बैग में डालें और WhatsApp पर ऑर्डर भेज दें। दुकान से ले जाएँ, या कूरियर से मँगवा लें।",
       sizesLbl:"साइज़", ask:"WhatsApp पर पूछें", from:"से",
       slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालें:",
       foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
-      cross:"सब्ज़ी ऑर्डर करें"
+      cross:"सब्ज़ी ऑर्डर करें",
+      bagAdd:"बैग में डालें", bagAdded:"डाल दिया ✓", pickSize:"पहले साइज़ चुनें", pickColor:"रंग चुनें",
+      colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", askMore:"इसके बारे में पूछें",
+      bagOne:"बैग में 1 चीज़", bagMany:"बैग में {n} चीज़ें", bagHint:"कुल ₹{t}", bagView:"बैग देखें",
+      bagTitle:"आपका बैग", bagEmpty:"बैग अभी खाली है", removeLbl:"हटाएँ", totLbl:"कुल",
+      lblHow:"कैसे लेंगे?", modeShop:"दुकान से ले लूँगा", modeCourier:"कूरियर से भेजिए",
+      lblGName:"आपका नाम", lblGPhone:"मोबाइल नंबर", lblGAddr:"पूरा पता — कूरियर के लिए",
+      phAddr:"मकान/फ्लैट, गली, इलाका, शहर, पिन कोड",
+      courierNote:"कूरियर का खर्च वज़न और जगह पर निर्भर है — तरुण WhatsApp पर बता देंगे। पैसे UPI या कैश से।",
+      sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"नाम लिखें।", needPhone:"10 अंकों का मोबाइल नंबर लिखें।",
+      needAddr:"कूरियर के लिए पूरा पता लिखें।", sizeIs:"साइज़"
     },
     en: {
       sub:"Clothing shop · Sector 108", chooseLang:"Choose language",
@@ -434,11 +558,21 @@ a:hover{color:var(--carrot)}
       quote:"See it, feel it, try it on — then buy it.",
       ttlVisit:"Come to the shop", btnMap:"Open in maps", btnCall:"Call",
       ttlRack:"In the shop", allCat:"All",
-      rackHint:"No delivery — clothes are seen and bought at the shop. Ask about price or size on WhatsApp.",
+      rackHint:"Pick a size, add to the bag and send the order on WhatsApp. Collect from the shop, or have it couriered.",
       sizesLbl:"Sizes", ask:"Ask on WhatsApp", from:"from",
       slot:"Photo goes here", slotHelp:"Add a photo with this name:",
       foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
-      cross:"Order vegetables"
+      cross:"Order vegetables",
+      bagAdd:"Add to bag", bagAdded:"Added ✓", pickSize:"Pick a size first", pickColor:"Pick a colour",
+      colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", askMore:"Ask about this",
+      bagOne:"1 item in bag", bagMany:"{n} items in bag", bagHint:"Total ₹{t}", bagView:"View bag",
+      bagTitle:"Your bag", bagEmpty:"Your bag is empty", removeLbl:"Remove", totLbl:"Total",
+      lblHow:"How will you take it?", modeShop:"I\u2019ll collect from the shop", modeCourier:"Send by courier",
+      lblGName:"Your name", lblGPhone:"Mobile number", lblGAddr:"Full address — for courier",
+      phAddr:"House/flat, street, area, city, PIN code",
+      courierNote:"Courier cost depends on weight and distance — Tarun will tell you on WhatsApp. Pay by UPI or cash.",
+      sendOrder:"Send order on WhatsApp", needName:"Please enter your name.", needPhone:"Enter a 10-digit mobile number.",
+      needAddr:"Enter the full address for courier.", sizeIs:"Size"
     },
     bn: {
       sub:"কাপড়ের দোকান · সেক্টর 108", chooseLang:"ভাষা বাছুন",
@@ -447,11 +581,21 @@ a:hover{color:var(--carrot)}
       quote:"ছুঁয়ে দেখুন, পরে দেখুন — তারপর নিন।",
       ttlVisit:"দোকানে আসুন", btnMap:"ম্যাপে দেখুন", btnCall:"ফোন করুন",
       ttlRack:"দোকানে যা আছে", allCat:"সব",
-      rackHint:"ডেলিভারি নেই — কাপড় দোকানে এসে দেখে নিতে হয়। দাম বা সাইজ WhatsApp-এ জিজ্ঞেস করুন।",
+      rackHint:"সাইজ বাছুন, ব্যাগে দিন আর WhatsApp-এ অর্ডার পাঠান। দোকান থেকে নিন, বা কুরিয়ারে আনান।",
       sizesLbl:"সাইজ", ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
       slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
       foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
-      cross:"সবজি অর্ডার করুন"
+      cross:"সবজি অর্ডার করুন",
+      bagAdd:"ব্যাগে দিন", bagAdded:"দেওয়া হয়েছে ✓", pickSize:"আগে সাইজ বাছুন", pickColor:"রং বাছুন",
+      colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
+      bagOne:"ব্যাগে ১টি জিনিস", bagMany:"ব্যাগে {n}টি জিনিস", bagHint:"মোট ₹{t}", bagView:"ব্যাগ দেখুন",
+      bagTitle:"আপনার ব্যাগ", bagEmpty:"ব্যাগ এখন খালি", removeLbl:"সরান", totLbl:"মোট",
+      lblHow:"কীভাবে নেবেন?", modeShop:"দোকান থেকে নেব", modeCourier:"কুরিয়ারে পাঠান",
+      lblGName:"আপনার নাম", lblGPhone:"মোবাইল নম্বর", lblGAddr:"সম্পূর্ণ ঠিকানা — কুরিয়ারের জন্য",
+      phAddr:"বাড়ি/ফ্ল্যাট, রাস্তা, এলাকা, শহর, পিন কোড",
+      courierNote:"কুরিয়ার খরচ ওজন ও দূরত্বের উপর নির্ভর করে — তরুণ WhatsApp-এ জানিয়ে দেবেন। UPI বা নগদে দিন।",
+      sendOrder:"WhatsApp-এ অর্ডার পাঠান", needName:"নাম লিখুন।", needPhone:"১০ সংখ্যার মোবাইল নম্বর লিখুন।",
+      needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ"
     },
     pa: {
       sub:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ · ਸੈਕਟਰ 108", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
@@ -460,11 +604,21 @@ a:hover{color:var(--carrot)}
       quote:"ਛੂਹ ਕੇ ਵੇਖੋ, ਪਾ ਕੇ ਵੇਖੋ — ਫਿਰ ਲਓ।",
       ttlVisit:"ਦੁਕਾਨ 'ਤੇ ਆਓ", btnMap:"ਨਕਸ਼ੇ 'ਤੇ ਵੇਖੋ", btnCall:"ਕਾਲ ਕਰੋ",
       ttlRack:"ਦੁਕਾਨ ਵਿੱਚ ਕੀ ਹੈ", allCat:"ਸਭ",
-      rackHint:"ਡਿਲੀਵਰੀ ਨਹੀਂ ਹੈ — ਕੱਪੜੇ ਦੁਕਾਨ 'ਤੇ ਆ ਕੇ ਵੇਖੋ ਤੇ ਲਓ। ਭਾਅ ਜਾਂ ਸਾਈਜ਼ WhatsApp 'ਤੇ ਪੁੱਛ ਸਕਦੇ ਹੋ।",
+      rackHint:"ਸਾਈਜ਼ ਚੁਣੋ, ਬੈਗ ਵਿੱਚ ਪਾਓ ਤੇ WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ। ਦੁਕਾਨ ਤੋਂ ਲਵੋ, ਜਾਂ ਕੋਰੀਅਰ ਰਾਹੀਂ ਮੰਗਵਾਓ।",
       sizesLbl:"ਸਾਈਜ਼", ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
       slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
       foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
-      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ"
+      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ",
+      bagAdd:"ਬੈਗ ਵਿੱਚ ਪਾਓ", bagAdded:"ਪਾ ਦਿੱਤਾ ✓", pickSize:"ਪਹਿਲਾਂ ਸਾਈਜ਼ ਚੁਣੋ", pickColor:"ਰੰਗ ਚੁਣੋ",
+      colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
+      bagOne:"ਬੈਗ ਵਿੱਚ 1 ਚੀਜ਼", bagMany:"ਬੈਗ ਵਿੱਚ {n} ਚੀਜ਼ਾਂ", bagHint:"ਕੁੱਲ ₹{t}", bagView:"ਬੈਗ ਵੇਖੋ",
+      bagTitle:"ਤੁਹਾਡਾ ਬੈਗ", bagEmpty:"ਬੈਗ ਹਾਲੇ ਖਾਲੀ ਹੈ", removeLbl:"ਹਟਾਓ", totLbl:"ਕੁੱਲ",
+      lblHow:"ਕਿਵੇਂ ਲਵੋਗੇ?", modeShop:"ਦੁਕਾਨ ਤੋਂ ਲੈ ਲਵਾਂਗਾ", modeCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ ਭੇਜੋ",
+      lblGName:"ਤੁਹਾਡਾ ਨਾਮ", lblGPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblGAddr:"ਪੂਰਾ ਪਤਾ — ਕੋਰੀਅਰ ਲਈ",
+      phAddr:"ਘਰ/ਫਲੈਟ, ਗਲੀ, ਇਲਾਕਾ, ਸ਼ਹਿਰ, ਪਿਨ ਕੋਡ",
+      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਭਾਰ ਤੇ ਦੂਰੀ ਉੱਤੇ ਨਿਰਭਰ ਹੈ — ਤਰੁਣ WhatsApp ਉੱਤੇ ਦੱਸ ਦੇਣਗੇ। UPI ਜਾਂ ਨਕਦ।",
+      sendOrder:"WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ", needName:"ਨਾਮ ਲਿਖੋ।", needPhone:"10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਲਿਖੋ।",
+      needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼"
     },
     te: {
       sub:"బట్టల దుకాణం · సెక్టర్ 108", chooseLang:"భాష ఎంచుకోండి",
@@ -473,12 +627,37 @@ a:hover{color:var(--carrot)}
       quote:"ముట్టుకుని చూడండి, వేసుకుని చూడండి — ఆ తర్వాత తీసుకోండి.",
       ttlVisit:"దుకాణానికి రండి", btnMap:"మ్యాప్‌లో చూడండి", btnCall:"కాల్ చేయండి",
       ttlRack:"దుకాణంలో ఏమి ఉంది", allCat:"అన్నీ",
-      rackHint:"డెలివరీ లేదు — బట్టలు దుకాణంలో చూసి తీసుకోవాలి. రేటు లేదా సైజు WhatsAppలో అడగవచ్చు.",
+      rackHint:"సైజు ఎంచుకుని, బ్యాగ్‌లో వేసి WhatsAppలో ఆర్డర్ పంపండి. దుకాణం నుంచి తీసుకోండి, లేదా కొరియర్‌లో తెప్పించుకోండి.",
       sizesLbl:"సైజులు", ask:"WhatsAppలో అడగండి", from:"నుంచి",
       slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
       foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
-      cross:"కూరగాయలు ఆర్డర్ చేయండి"
+      cross:"కూరగాయలు ఆర్డర్ చేయండి",
+      bagAdd:"బ్యాగ్‌లో వేయండి", bagAdded:"వేశాం ✓", pickSize:"ముందు సైజు ఎంచుకోండి", pickColor:"రంగు ఎంచుకోండి",
+      colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", askMore:"దీని గురించి అడగండి",
+      bagOne:"బ్యాగ్‌లో 1 వస్తువు", bagMany:"బ్యాగ్‌లో {n} వస్తువులు", bagHint:"మొత్తం ₹{t}", bagView:"బ్యాగ్ చూడండి",
+      bagTitle:"మీ బ్యాగ్", bagEmpty:"బ్యాగ్ ఖాళీగా ఉంది", removeLbl:"తీసివేయండి", totLbl:"మొత్తం",
+      lblHow:"ఎలా తీసుకుంటారు?", modeShop:"దుకాణం నుంచి తీసుకుంటాను", modeCourier:"కొరియర్‌లో పంపండి",
+      lblGName:"మీ పేరు", lblGPhone:"మొబైల్ నంబర్", lblGAddr:"పూర్తి చిరునామా — కొరియర్ కోసం",
+      phAddr:"ఇల్లు/ఫ్లాట్, వీధి, ప్రాంతం, నగరం, పిన్ కోడ్",
+      courierNote:"కొరియర్ ఖర్చు బరువు, దూరం మీద ఆధారపడి ఉంటుంది — తరుణ్ WhatsAppలో చెబుతారు. UPI లేదా నగదు.",
+      sendOrder:"WhatsAppలో ఆర్డర్ పంపండి", needName:"పేరు రాయండి.", needPhone:"10 అంకెల మొబైల్ నంబర్ రాయండి.",
+      needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు"
     }
+  };
+
+  /* Labels for the WhatsApp order. Item names stay English inside the message
+     so Tarun can read an order quickly whatever language the customer used. */
+  var GMSG = {
+    hi: { order:"ऑर्डर", size:"साइज़", total:"कुल", name:"नाम", phone:"फ़ोन",
+          how:"कैसे चाहिए", atShop:"दुकान से ले लूँगा", byCourier:"कूरियर से भेजिए", addr:"पता" },
+    en: { order:"Order", size:"Size", total:"Total", name:"Name", phone:"Phone",
+          how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address" },
+    bn: { order:"অর্ডার", size:"সাইজ", total:"মোট", name:"নাম", phone:"ফোন",
+          how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা" },
+    pa: { order:"ਆਰਡਰ", size:"ਸਾਈਜ਼", total:"ਕੁੱਲ", name:"ਨਾਮ", phone:"ਫ਼ੋਨ",
+          how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ" },
+    te: { order:"ఆర్డర్", size:"సైజు", total:"మొత్తం", name:"పేరు", phone:"ఫోన్",
+          how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా" }
   };
 
   var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
@@ -489,10 +668,23 @@ a:hover{color:var(--carrot)}
   var t = T[lang];
   var activeCat = 'all';
 
+  /* Per-card selection lives here, not in the DOM, so a re-render (language
+     switch, category tab) doesn't silently lose what the customer picked. */
+  var picked = {};              /* id -> { size, color, qty } */
+
+  var BAG_KEY = 'gavs.bag.v1';
+  var GINFO_KEY = 'gavs.ginfo.v1';
+  var bag = load(BAG_KEY, []);  /* [{ id, size, color, qty }] */
+  var mode = 'shop';            /* 'shop' | 'courier' */
+
   var el = {};
   ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
    'statusPill','statusTxt','ownerQuote','ttlVisit','addrTxt','metaRow','mapLink','btnMap',
-   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt'
+   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt',
+   'bagbar','bagCount','bagHint','bagOpen','bagOpenTxt','scrim','sheet','sheetTitle','sheetClose',
+   'bagLines','lblHow','modeShop','modeCourier','lblGName','gName','errGName',
+   'lblGPhone','gPhone','errGPhone','addrWrap','lblGAddr','gAddr','errGAddr',
+   'courierNote','totLbl','bagTotal','bagSend','bagSendTxt'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
   buildLangMenu();
@@ -577,6 +769,25 @@ a:hover{color:var(--carrot)}
     paintStatus();
     renderTabs();
     renderRack();
+    paintBagChrome();
+    paintBag();
+  }
+
+  /* Static labels inside the bag sheet — separate from paintBag(), which is
+     about contents and runs on every add and remove. */
+  function paintBagChrome() {
+    el.sheetTitle.textContent = t.bagTitle;
+    el.lblHow.textContent = t.lblHow;
+    el.modeShop.textContent = t.modeShop;
+    el.modeCourier.textContent = t.modeCourier;
+    el.lblGName.textContent = t.lblGName;
+    el.lblGPhone.textContent = t.lblGPhone;
+    el.lblGAddr.textContent = t.lblGAddr;
+    el.gAddr.placeholder = t.phAddr;
+    el.courierNote.textContent = t.courierNote;
+    el.totLbl.textContent = t.totLbl;
+    el.bagSendTxt.textContent = t.sendOrder;
+    el.bagOpenTxt.textContent = t.bagView;
   }
 
   /* ============================ open / closed ============================ */
@@ -619,53 +830,353 @@ a:hover{color:var(--carrot)}
     });
   }
 
+  function pickOf(it) {
+    if (!picked[it.id]) {
+      var sizes = it.sizes || [];
+      picked[it.id] = {
+        size: sizes.length === 1 ? sizes[0] : '',
+        color: (it.colors || []).length === 1 ? it.colors[0] : '',
+        qty: 1
+      };
+    }
+    return picked[it.id];
+  }
+
   function renderRack() {
     el.rack.innerHTML = '';
     items.filter(function (it) { return activeCat === 'all' || it.cat === activeCat; })
-      .forEach(function (it) {
-        var card = document.createElement('article');
-        card.className = 'item';
+      .forEach(function (it) { el.rack.appendChild(card(it)); });
+  }
 
-        var shot = it.photo
-          ? '<div class="shot"><img src="' + esc(it.photo) + '" alt="' + esc(name(it)) + '" loading="lazy" decoding="async"></div>'
-          /* No photo yet: show the hanger and the item's own name. The
-             filename and upload instructions belong in the admin page,
-             not on a card a customer is looking at. */
-          : '<div class="shot"><div class="slot">' +
-              '<svg aria-hidden="true"><use href="#i-hanger"></use></svg>' +
-              '<b>' + esc(name(it)) + '</b>' +
-            '</div></div>';
+  function card(it) {
+    var out = it.available === false;
+    var sel = pickOf(it);
 
-        var sizes = (it.sizes || []).map(function (s) {
-          return '<span class="sz">' + esc(s) + '</span>';
-        }).join('');
+    var art = document.createElement('article');
+    art.className = 'item' + (out ? ' out' : '');
 
-        card.innerHTML = shot +
-          '<div class="item-body">' +
-            '<div><div class="item-nm">' + esc(name(it)) + '</div>' +
-            (lang === 'en' ? '' : '<div class="item-en">' + esc(it.en) + '</div>') + '</div>' +
-            '<div class="item-pr">₹' + it.price + ' <small>' + esc(t.from) + '</small></div>' +
-            '<div class="sizes"><span class="lbl">' + esc(t.sizesLbl) + '</span>' + sizes + '</div>' +
-            '<div class="ask"></div>' +
-          '</div>';
+    var shot = document.createElement('div');
+    shot.className = 'shot';
+    if (it.photo) {
+      var im = document.createElement('img');
+      im.src = it.photo; im.alt = name(it); im.loading = 'lazy'; im.decoding = 'async';
+      shot.appendChild(im);
+    } else {
+      shot.innerHTML = '<div class="slot"><svg aria-hidden="true"><use href="#i-hanger"></use></svg>' +
+                       '<b>' + esc(name(it)) + '</b></div>';
+    }
+    art.appendChild(shot);
 
-        var btn = document.createElement('a');
-        btn.className = 'btn btn-go';
-        btn.target = '_blank'; btn.rel = 'noopener';
-        btn.href = askUrl(it);
-        btn.innerHTML = '<svg aria-hidden="true"><use href="#i-wa"></use></svg>' + esc(t.ask);
-        btn.setAttribute('aria-label', t.ask + ' — ' + name(it));
-        card.querySelector('.ask').appendChild(btn);
+    var body = document.createElement('div');
+    body.className = 'item-body';
 
-        el.rack.appendChild(card);
+    var head = document.createElement('div');
+    head.innerHTML = '<div class="item-nm">' + esc(name(it)) + '</div>' +
+      (lang === 'en' ? '' : '<div class="item-en">' + esc(it.en || '') + '</div>');
+    body.appendChild(head);
+
+    var pr = document.createElement('div');
+    pr.className = 'item-pr';
+    pr.innerHTML = '₹' + it.price + ' <small>' + esc(t.from) + '</small>' +
+      (it.mrp && Number(it.mrp) > Number(it.price) ? '<span class="mrp">₹' + it.mrp + '</span>' : '');
+    body.appendChild(pr);
+
+    if (it.fabric) {
+      var fab = document.createElement('div');
+      fab.innerHTML = '<span class="item-fab">' + esc(it.fabric) + '</span>';
+      body.appendChild(fab);
+    }
+    if (it.note) {
+      var nt = document.createElement('p');
+      nt.className = 'item-note'; nt.textContent = it.note;
+      body.appendChild(nt);
+    }
+
+    /* sizes */
+    var sizes = it.sizes || [];
+    if (sizes.length) {
+      var sr = document.createElement('div');
+      sr.className = 'sizes';
+      sr.innerHTML = '<span class="lbl">' + esc(t.sizesLbl) + '</span>';
+      sizes.forEach(function (sz) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'sz';
+        b.setAttribute('aria-pressed', String(sel.size === sz));
+        b.textContent = sz;
+        b.disabled = out;
+        b.addEventListener('click', function () { sel.size = (sel.size === sz ? '' : sz); refresh(it, art); });
+        sr.appendChild(b);
       });
+      body.appendChild(sr);
+    }
+
+    /* colours */
+    var colors = it.colors || [];
+    if (colors.length) {
+      var cr = document.createElement('div');
+      cr.className = 'colors';
+      cr.innerHTML = '<span class="lbl">' + esc(t.colorsLbl) + '</span>';
+      colors.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'colr';
+        b.setAttribute('aria-pressed', String(sel.color === c));
+        b.textContent = c;
+        b.disabled = out;
+        b.addEventListener('click', function () { sel.color = (sel.color === c ? '' : c); refresh(it, art); });
+        cr.appendChild(b);
+      });
+      body.appendChild(cr);
+    }
+
+    var acts = document.createElement('div');
+    acts.className = 'ask';
+
+    if (out) {
+      var ob = document.createElement('span');
+      ob.className = 'outbadge'; ob.textContent = t.soldOut;
+      acts.appendChild(ob);
+    } else {
+      /* quantity */
+      var qr = document.createElement('div');
+      qr.className = 'qtyrow';
+      qr.innerHTML = '<span class="lbl">' + esc(t.qtyLbl) + '</span>';
+      var st = document.createElement('div');
+      st.className = 'stepper';
+      var minus = document.createElement('button');
+      minus.type = 'button'; minus.textContent = '−';
+      minus.setAttribute('aria-label', t.qtyLbl + ' −');
+      minus.addEventListener('click', function () { sel.qty = Math.max(1, sel.qty - 1); refresh(it, art); });
+      var num = document.createElement('span'); num.textContent = sel.qty;
+      var plus = document.createElement('button');
+      plus.type = 'button'; plus.textContent = '+';
+      plus.setAttribute('aria-label', t.qtyLbl + ' +');
+      plus.addEventListener('click', function () { sel.qty = Math.min(20, sel.qty + 1); refresh(it, art); });
+      st.appendChild(minus); st.appendChild(num); st.appendChild(plus);
+      qr.appendChild(st);
+      acts.appendChild(qr);
+
+      var add = document.createElement('button');
+      add.type = 'button'; add.className = 'btn btn-go';
+      add.textContent = sizes.length && !sel.size ? t.pickSize : t.bagAdd;
+      add.addEventListener('click', function () {
+        if (sizes.length && !sel.size) { flashSizes(art); return; }
+        addToBag(it, sel);
+        add.textContent = t.bagAdded;
+        setTimeout(function () { add.textContent = sizes.length && !sel.size ? t.pickSize : t.bagAdd; }, 1400);
+      });
+      acts.appendChild(add);
+    }
+
+    var ask = document.createElement('button');
+    ask.type = 'button'; ask.className = 'asklink';
+    ask.textContent = t.askMore;
+    ask.addEventListener('click', function () { openWA([askLine(it)]); });
+    acts.appendChild(ask);
+
+    body.appendChild(acts);
+    art.appendChild(body);
+    return art;
   }
 
-  /* One item, one question. Item name stays English so Tarun reads it fast. */
-  function askUrl(it) {
-    var msg = DATA.shop.nameEn + ' — ' + it.en + ' ke baare mein poochna hai';
-    return 'https://wa.me/' + shop.whatsapp + '?text=' + encodeURIComponent(msg);
+  /* Redraw one card in place — cheaper than re-rendering the rack and it
+     keeps the customer's scroll position exactly where it was. */
+  function refresh(it, node) {
+    var fresh = card(it);
+    node.replaceWith(fresh);
   }
+
+  function flashSizes(node) {
+    var row = node.querySelector('.sizes');
+    if (!row) return;
+    row.scrollIntoView({ block: 'nearest' });
+    row.animate
+      ? row.animate([{ opacity: 1 }, { opacity: .35 }, { opacity: 1 }], { duration: 480, iterations: 2 })
+      : null;
+  }
+
+  /* ================================= bag ================================= */
+  function itemById(id) {
+    for (var i = 0; i < items.length; i++) if (items[i].id === id) return items[i];
+    return null;
+  }
+
+  function addToBag(it, sel) {
+    var same = bag.filter(function (l) {
+      return l.id === it.id && l.size === sel.size && l.color === sel.color;
+    })[0];
+    if (same) same.qty = Math.min(20, same.qty + sel.qty);
+    else bag.push({ id: it.id, size: sel.size, color: sel.color, qty: sel.qty });
+    save(BAG_KEY, bag);
+    paintBag();
+  }
+
+  function bagTotal() {
+    return bag.reduce(function (sum, l) {
+      var it = itemById(l.id);
+      return sum + (it ? Number(it.price) * l.qty : 0);
+    }, 0);
+  }
+  function bagCount() {
+    return bag.reduce(function (n, l) { return n + l.qty; }, 0);
+  }
+
+  function paintBag() {
+    /* drop anything whose item has since been removed from the catalogue */
+    var before = bag.length;
+    bag = bag.filter(function (l) { return itemById(l.id); });
+    if (bag.length !== before) save(BAG_KEY, bag);
+
+    var n = bagCount();
+    el.bagbar.hidden = n === 0;
+    document.body.classList.toggle('hasbag', n > 0);
+    if (n) {
+      el.bagCount.textContent = n === 1 ? t.bagOne : fill(t.bagMany, { n: n });
+      el.bagHint.textContent = fill(t.bagHint, { t: bagTotal() });
+      el.bagOpenTxt.textContent = t.bagView;
+    }
+    paintLines();
+  }
+
+  function paintLines() {
+    el.bagLines.innerHTML = '';
+    if (!bag.length) {
+      var e = document.createElement('p');
+      e.className = 'smallnote'; e.textContent = t.bagEmpty;
+      el.bagLines.appendChild(e);
+      el.bagTotal.textContent = '0';
+      return;
+    }
+    bag.forEach(function (l, i) {
+      var it = itemById(l.id);
+      var row = document.createElement('div');
+      row.className = 'line';
+
+      if (it.photo) {
+        var im = document.createElement('img');
+        im.src = it.photo; im.alt = ''; im.loading = 'lazy';
+        row.appendChild(im);
+      }
+
+      var bits = [];
+      if (l.size) bits.push(t.sizeIs + ' ' + l.size);
+      if (l.color) bits.push(l.color);
+      bits.push('× ' + l.qty);
+
+      var nm = document.createElement('div');
+      nm.className = 'l-nm';
+      nm.innerHTML = '<b>' + esc(name(it)) + '</b><small>' + esc(bits.join(' · ')) + '</small>';
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'rm'; rm.textContent = t.removeLbl;
+      rm.addEventListener('click', function () {
+        bag.splice(i, 1); save(BAG_KEY, bag); paintBag();
+      });
+      nm.appendChild(rm);
+      row.appendChild(nm);
+
+      var pr = document.createElement('div');
+      pr.className = 'l-pr';
+      pr.textContent = '₹' + (Number(it.price) * l.qty);
+      row.appendChild(pr);
+
+      el.bagLines.appendChild(row);
+    });
+    el.bagTotal.textContent = bagTotal();
+  }
+
+  function openSheet() {
+    paintLines();
+    el.scrim.hidden = false; el.sheet.hidden = false;
+    document.body.style.overflow = 'hidden';
+    el.sheetClose.focus();
+  }
+  function closeSheet() {
+    el.scrim.hidden = true; el.sheet.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function setMode(m) {
+    mode = m;
+    el.modeShop.setAttribute('aria-pressed', String(m === 'shop'));
+    el.modeCourier.setAttribute('aria-pressed', String(m === 'courier'));
+    el.addrWrap.hidden = m !== 'courier';
+    el.courierNote.hidden = m !== 'courier';
+  }
+
+  function need(input, err, ok, msg) {
+    err.hidden = ok; err.textContent = ok ? '' : msg;
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    return ok;
+  }
+
+  function sendOrder() {
+    var nm = el.gName.value.trim();
+    var ph = el.gPhone.value.replace(/\D/g, '');
+    var ad = el.gAddr.value.trim();
+
+    var okN = need(el.gName, el.errGName, !!nm, t.needName);
+    var okP = need(el.gPhone, el.errGPhone, ph.length === 10, t.needPhone);
+    var okA = mode !== 'courier' || need(el.gAddr, el.errGAddr, ad.length >= 12, t.needAddr);
+    if (!okN || !okP || !okA) {
+      (!okN ? el.gName : !okP ? el.gPhone : el.gAddr).focus();
+      return;
+    }
+    if (!bag.length) return;
+
+    try { save(GINFO_KEY, { name: nm, phone: ph, addr: ad, mode: mode }); } catch (e) {}
+
+    var m = GMSG[lang] || GMSG.hi;
+    var lines = ['*' + DATA.shop.nameEn + ' — ' + m.order + '*', ''];
+    bag.forEach(function (l, i) {
+      var it = itemById(l.id);
+      var bits = [it.en || it.hi];
+      if (l.size) bits.push(m.size + ' ' + l.size);
+      if (l.color) bits.push(l.color);
+      lines.push((i + 1) + ') ' + bits.join(' — ') + ' × ' + l.qty +
+                 ' — ₹' + (Number(it.price) * l.qty));
+    });
+    lines.push('', m.total + ': ₹' + bagTotal(), '');
+    lines.push(m.name + ': ' + nm);
+    lines.push(m.phone + ': ' + ph);
+    lines.push(m.how + ': ' + (mode === 'courier' ? m.byCourier : m.atShop));
+    if (mode === 'courier') lines.push(m.addr + ': ' + ad);
+    openWA(lines);
+  }
+
+  /* Same handoff the vegetable page uses: on a touch device a new tab loses
+     the query string when WhatsApp takes over, so navigate directly. */
+  function openWA(lines) {
+    var url = 'https://wa.me/' + shop.whatsapp + '?text=' + encodeURIComponent(lines.join('\n'));
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (touch) { window.location.href = url; return; }
+    var w = null;
+    try { w = window.open(url, '_blank'); } catch (e) { w = null; }
+    if (w) { try { w.opener = null; } catch (e) {} return; }
+    window.location.href = url;
+  }
+
+  function askLine(it) {
+    return DATA.shop.nameEn + ' — ' + (it.en || it.hi) + ' ke baare mein poochna hai';
+  }
+
+  /* ---------------------------- bag wiring ---------------------------- */
+  el.bagOpen.addEventListener('click', openSheet);
+  el.sheetClose.addEventListener('click', closeSheet);
+  el.scrim.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !el.sheet.hidden) closeSheet();
+  });
+  el.modeShop.addEventListener('click', function () { setMode('shop'); });
+  el.modeCourier.addEventListener('click', function () { setMode('courier'); });
+  el.bagSend.addEventListener('click', sendOrder);
+
+  /* Bring back whatever this phone told us last time. */
+  (function restore() {
+    var info = load(GINFO_KEY, {});
+    el.gName.value = info.name || '';
+    el.gPhone.value = info.phone || '';
+    el.gAddr.value = info.addr || '';
+    setMode(info.mode === 'courier' ? 'courier' : 'shop');
+  })();
 
   /* =============================== helpers =============================== */
   function name(it) { return it[lang] || it.en; }

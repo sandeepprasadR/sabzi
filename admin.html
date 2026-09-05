@@ -90,6 +90,18 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
 .item:last-child{border-bottom:0}
 .item.out{opacity:.55}
 
+/* ---------- inline editor ---------- */
+.edit{margin-top:10px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fbfdfc}
+.edit label{margin-top:10px}
+.edit label:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2 label{margin-top:0}
+.picks{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px}
+.pick{min-height:40px;padding:0 13px;border:1.5px solid var(--line);background:#fff;border-radius:10px;
+  font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.pick[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.help{font-size:12.5px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+
 .stars{color:#c78100;font-size:16px;letter-spacing:2px}
 .badge{display:inline-block;background:var(--leaf-l);color:var(--leaf-d);border-radius:999px;
   padding:1px 9px;font-size:12px;font-weight:700;margin-left:8px;vertical-align:2px}
@@ -377,137 +389,262 @@ a{color:var(--leaf-d)}
   }
 
   /* ------------------------------ rendering ------------------------------ */
+  /* ------------------------- shared field builders ----------------------- */
+  function fieldText(labelTxt, value, onInput, opts) {
+    opts = opts || {};
+    var l = document.createElement('label');
+    var sp = document.createElement('span'); sp.textContent = labelTxt;
+    var i = document.createElement(opts.area ? 'textarea' : 'input');
+    if (opts.area) i.rows = opts.rows || 3; else i.type = opts.type || 'text';
+    if (opts.numeric) { i.inputMode = 'numeric'; i.min = '0'; i.step = opts.step || '1'; }
+    if (opts.placeholder) i.placeholder = opts.placeholder;
+    i.value = value == null ? '' : value;
+    i.addEventListener('input', function () { onInput(i.value); markDirty(); });
+    l.appendChild(sp); l.appendChild(i);
+    return l;
+  }
+
+  function fieldSelect(labelTxt, value, options, onChange) {
+    var l = document.createElement('label');
+    var sp = document.createElement('span'); sp.textContent = labelTxt;
+    var sel = document.createElement('select');
+    options.forEach(function (o) {
+      var op = document.createElement('option');
+      op.value = o[0]; op.textContent = o[1];
+      if (String(value) === String(o[0])) op.selected = true;
+      sel.appendChild(op);
+    });
+    sel.addEventListener('change', function () { onChange(sel.value); markDirty(); });
+    l.appendChild(sp); l.appendChild(sel);
+    return l;
+  }
+
+  /* Multi-select chips — used for garment sizes. */
+  function fieldPicks(labelTxt, all, chosen, onToggle) {
+    var wrap = document.createElement('div');
+    var sp = document.createElement('span');
+    sp.style.cssText = 'display:block;font-size:14px;font-weight:600;margin:12px 0 0';
+    sp.textContent = labelTxt;
+    var row = document.createElement('div'); row.className = 'picks';
+    all.forEach(function (v) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick';
+      b.setAttribute('aria-pressed', String(chosen.indexOf(v) !== -1));
+      b.textContent = v;
+      b.addEventListener('click', function () {
+        onToggle(v);
+        b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+        markDirty();
+      });
+      row.appendChild(b);
+    });
+    wrap.appendChild(sp); wrap.appendChild(row);
+    return wrap;
+  }
+
+  function stockChip(obj, redraw) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip';
+    b.setAttribute('aria-pressed', String(obj.available !== false));
+    b.textContent = obj.available === false ? 'आज नहीं है' : 'स्टॉक में है';
+    b.addEventListener('click', function () {
+      obj.available = (obj.available === false);
+      markDirty(); redraw();
+    });
+    return b;
+  }
+
+  function photoChips(obj, path, redraw) {
+    var out = [];
+    var ph = document.createElement('button');
+    ph.type = 'button'; ph.className = 'chip';
+    ph.textContent = obj.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
+    ph.addEventListener('click', function () { attachPhoto(obj, path, redraw); });
+    out.push(ph);
+    if (obj.photo) {
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'chip danger'; rm.textContent = 'फोटो हटाएँ';
+      rm.addEventListener('click', function () {
+        obj.photo = ''; delete obj._preview; markDirty(); redraw();
+      });
+      out.push(rm);
+    }
+    return out;
+  }
+
+  /* One row: thumbnail, name, price, then a बदलें button that opens every
+     other field. Keeping the long form collapsed is what makes a list of
+     thirty items usable on a phone. */
+  function itemRow(obj, opts) {
+    var wrap = document.createElement('div');
+    wrap.className = 'item' + (obj.available === false ? ' out' : '');
+
+    var row = document.createElement('div'); row.className = 'row';
+
+    var th = document.createElement('div'); th.className = 'thumb';
+    var src = obj._preview || obj.photo || '';
+    if (src) { var im = document.createElement('img'); im.src = src; th.appendChild(im); }
+    else th.textContent = opts.fallbackEmoji;
+    row.appendChild(th);
+
+    var nm = document.createElement('div'); nm.className = 'nm';
+    var bb = document.createElement('b'); bb.textContent = obj.hi || obj.en || obj.id;
+    var ss = document.createElement('small'); ss.textContent = opts.sub(obj);
+    nm.appendChild(bb); nm.appendChild(ss); row.appendChild(nm);
+
+    var pr = document.createElement('input');
+    pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
+    pr.inputMode = 'numeric'; pr.value = obj.price;
+    pr.setAttribute('aria-label', (obj.hi || obj.id) + ' दाम');
+    pr.addEventListener('input', function () { obj.price = Number(pr.value) || 0; markDirty(); opts.after && opts.after(); });
+    row.appendChild(pr);
+    wrap.appendChild(row);
+
+    var acts = document.createElement('div'); acts.className = 'rowacts';
+
+    var ed = document.createElement('button');
+    ed.type = 'button'; ed.className = 'chip';
+    ed.setAttribute('aria-expanded', String(!!obj._open));
+    ed.textContent = obj._open ? 'बंद करें' : 'बदलें';
+    ed.addEventListener('click', function () { obj._open = !obj._open; opts.redraw(); });
+    acts.appendChild(ed);
+
+    acts.appendChild(stockChip(obj, opts.redraw));
+    photoChips(obj, opts.photoPath(obj), opts.redraw).forEach(function (c) { acts.appendChild(c); });
+
+    var del = document.createElement('button');
+    del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
+    del.addEventListener('click', function () {
+      if (!confirm((obj.hi || obj.id) + ' को लिस्ट से हटा दें?')) return;
+      opts.remove();
+    });
+    acts.appendChild(del);
+    wrap.appendChild(acts);
+
+    if (obj._open) wrap.appendChild(opts.panel(obj));
+    return wrap;
+  }
+
+  /* ------------------------------ vegetables ----------------------------- */
+  function vegCats() {
+    var d = files['index.html'].data;
+    return (d.categories || []).map(function (c) { return [c.id, c.hi || c.en || c.id]; });
+  }
+
   function drawVeg() {
     var d = files['index.html'].data, host = $('vegList');
     host.innerHTML = '';
     (d.products || []).forEach(function (p, i) {
-      var wrap = document.createElement('div');
-      wrap.className = 'item' + (p.available === false ? ' out' : '');
+      host.appendChild(itemRow(p, {
+        fallbackEmoji: p.emoji || '🥬',
+        sub: function (o) { return (o.en || '') + ' · ' + unitLabel(o.unit); },
+        photoPath: function (o) { return (o.id || 'item' + i) + '.jpg'; },
+        redraw: function () { drawVeg(); paintWaList(); },
+        after: paintWaList,
+        remove: function () { d.products.splice(i, 1); markDirty(); drawVeg(); paintWaList(); },
+        panel: function (o) {
+          var box = document.createElement('div'); box.className = 'edit';
 
-      var row = document.createElement('div'); row.className = 'row';
-      var th = document.createElement('div'); th.className = 'thumb';
-      var src = p._preview || (p.photo ? p.photo : '');
-      if (src) { var im = document.createElement('img'); im.src = src; th.appendChild(im); }
-      else th.textContent = p.emoji || '🥬';
-      row.appendChild(th);
+          var g = document.createElement('div'); g.className = 'grid2';
+          g.appendChild(fieldText('नाम (हिंदी)', o.hi, function (v) { o.hi = v; }));
+          g.appendChild(fieldText('Name (English)', o.en, function (v) { o.en = v; }));
+          box.appendChild(g);
 
-      var nm = document.createElement('div'); nm.className = 'nm';
-      var b = document.createElement('b'); b.textContent = p.hi || p.en || p.id;
-      var s = document.createElement('small'); s.textContent = p.en || '';
-      nm.appendChild(b); nm.appendChild(s); row.appendChild(nm);
+          var g2 = document.createElement('div'); g2.className = 'grid2';
+          g2.style.marginTop = '10px';
+          g2.appendChild(fieldSelect('कैटेगरी', o.cat, vegCats(), function (v) { o.cat = v; }));
+          g2.appendChild(fieldSelect('बिकता है', o.unit, [
+            ['kg','किलो से'], ['250g','250 ग्राम से'], ['pc','नग से'], ['bunch','गड्डी से']
+          ], function (v) { o.unit = v; o.step = (v === 'kg' ? 0.5 : 1); paintWaList(); }));
+          box.appendChild(g2);
 
-      var pr = document.createElement('input');
-      pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
-      pr.inputMode = 'numeric'; pr.value = p.price;
-      pr.setAttribute('aria-label', (p.hi || '') + ' दाम');
-      pr.addEventListener('input', function () { p.price = Number(pr.value) || 0; markDirty(); paintWaList(); });
-      row.appendChild(pr);
+          box.appendChild(fieldText('इमोजी (फोटो न हो तो यही दिखेगा)', o.emoji,
+            function (v) { o.emoji = v.slice(0, 3); }));
 
-      var un = document.createElement('select'); un.className = 'unit';
-      [['kg', 'किलो'], ['250g', '250 ग्राम'], ['pc', 'नग'], ['bunch', 'गड्डी']].forEach(function (u) {
-        var o = document.createElement('option'); o.value = u[0]; o.textContent = u[1];
-        if (p.unit === u[0]) o.selected = true; un.appendChild(o);
-      });
-      un.addEventListener('change', function () {
-        p.unit = un.value;
-        p.step = un.value === 'kg' ? 0.5 : 1;
-        markDirty(); paintWaList();
-      });
-      row.appendChild(un);
-      wrap.appendChild(row);
-
-      var acts = document.createElement('div'); acts.className = 'rowacts';
-
-      var stock = document.createElement('button');
-      stock.type = 'button'; stock.className = 'chip';
-      stock.setAttribute('aria-pressed', String(p.available !== false));
-      stock.textContent = p.available === false ? 'आज नहीं है' : 'स्टॉक में है';
-      stock.addEventListener('click', function () {
-        p.available = (p.available === false);
-        markDirty(); drawVeg(); paintWaList();
-      });
-      acts.appendChild(stock);
-
-      var ph = document.createElement('button');
-      ph.type = 'button'; ph.className = 'chip';
-      ph.textContent = p.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
-      ph.addEventListener('click', function () { attachPhoto(p, (p.id || 'item' + i) + '.jpg', drawVeg); });
-      acts.appendChild(ph);
-
-      if (p.photo) {
-        var rm = document.createElement('button');
-        rm.type = 'button'; rm.className = 'chip danger'; rm.textContent = 'फोटो हटाएँ';
-        rm.addEventListener('click', function () {
-          p.photo = ''; delete p._preview; markDirty(); drawVeg();
-        });
-        acts.appendChild(rm);
-      }
-
-      var del = document.createElement('button');
-      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
-      del.addEventListener('click', function () {
-        if (!confirm((p.hi || '') + ' को लिस्ट से हटा दें?')) return;
-        d.products.splice(i, 1); markDirty(); drawVeg(); paintWaList();
-      });
-      acts.appendChild(del);
-
-      wrap.appendChild(acts);
-      host.appendChild(wrap);
+          var p2 = document.createElement('p'); p2.className = 'help';
+          p2.textContent = 'नाम बदलने पर वेबसाइट और WhatsApp रेट लिस्ट — दोनों में बदल जाएगा।';
+          box.appendChild(p2);
+          return box;
+        }
+      }));
     });
+  }
+
+  /* ------------------------------- garments ------------------------------ */
+  var SIZES = ['XS','S','M','L','XL','XXL','3XL','28','30','32','34','36','38','40'];
+
+  function garCats() {
+    var d = files['garments.html'].data;
+    return (d.categories || []).map(function (c) { return [c.id, c.hi || c.en || c.id]; });
+  }
+  function garList() {
+    var d = files['garments.html'].data;
+    if (!d.items) d.items = d.products || [];
+    return d.items;
   }
 
   function drawGar() {
-    var f = files['garments.html'];
-    var d = f.data, host = $('garList');
-    var list = d.items || d.products || [];
+    var list = garList(), host = $('garList');
     host.innerHTML = '';
     list.forEach(function (p, i) {
-      var wrap = document.createElement('div'); wrap.className = 'item';
-      var row = document.createElement('div'); row.className = 'row';
+      host.appendChild(itemRow(p, {
+        fallbackEmoji: '👕',
+        sub: function (o) {
+          var bits = [];
+          if ((o.sizes || []).length) bits.push((o.sizes || []).join('/'));
+          if ((o.colors || []).length) bits.push((o.colors || []).join(', '));
+          return bits.join(' · ') || 'साइज़ और रंग भरें';
+        },
+        photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
+        redraw: drawGar,
+        remove: function () { list.splice(i, 1); markDirty(); drawGar(); },
+        panel: function (o) {
+          var box = document.createElement('div'); box.className = 'edit';
 
-      var th = document.createElement('div'); th.className = 'thumb';
-      var src = p._preview || (p.photo ? p.photo : '');
-      if (src) { var im = document.createElement('img'); im.src = src; th.appendChild(im); }
-      else th.textContent = '👕';
-      row.appendChild(th);
+          var g = document.createElement('div'); g.className = 'grid2';
+          g.appendChild(fieldText('नाम (हिंदी)', o.hi, function (v) { o.hi = clean1(v); }));
+          g.appendChild(fieldText('Name (English)', o.en, function (v) { o.en = clean1(v); }));
+          box.appendChild(g);
 
-      var nm = document.createElement('div'); nm.className = 'nm';
-      var ni = document.createElement('input');
-      ni.type = 'text'; ni.value = p.hi || p.name || p.en || '';
-      ni.setAttribute('aria-label', 'आइटम का नाम');
-      ni.addEventListener('input', function () {
-        if ('hi' in p) p.hi = ni.value; else if ('name' in p) p.name = ni.value; else p.hi = ni.value;
-        markDirty();
-      });
-      nm.appendChild(ni); row.appendChild(nm);
+          var g2 = document.createElement('div'); g2.className = 'grid2';
+          g2.style.marginTop = '10px';
+          g2.appendChild(fieldSelect('किसके लिए', o.cat, garCats(), function (v) { o.cat = v; }));
+          g2.appendChild(fieldText('पहले का दाम (MRP)', o.mrp, function (v) { o.mrp = Number(v) || 0; },
+            { type: 'number', numeric: true, placeholder: '0 = मत दिखाओ' }));
+          box.appendChild(g2);
 
-      var pr = document.createElement('input');
-      pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
-      pr.inputMode = 'numeric'; pr.value = p.price;
-      pr.setAttribute('aria-label', 'दाम');
-      pr.addEventListener('input', function () { p.price = Number(pr.value) || 0; markDirty(); });
-      row.appendChild(pr);
-      wrap.appendChild(row);
+          if (!o.sizes) o.sizes = [];
+          box.appendChild(fieldPicks('कौन-कौन से साइज़ हैं', SIZES, o.sizes, function (v) {
+            var k = o.sizes.indexOf(v);
+            if (k === -1) o.sizes.push(v); else o.sizes.splice(k, 1);
+            o.sizes.sort(function (a, b) { return SIZES.indexOf(a) - SIZES.indexOf(b); });
+          }));
 
-      var acts = document.createElement('div'); acts.className = 'rowacts';
-      var ph = document.createElement('button');
-      ph.type = 'button'; ph.className = 'chip';
-      ph.textContent = p.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
-      ph.addEventListener('click', function () { attachPhoto(p, 'garments/' + (p.id || 'item' + i) + '.jpg', drawGar); });
-      acts.appendChild(ph);
+          box.appendChild(fieldText('रंग (कॉमा से अलग करें)', (o.colors || []).join(', '),
+            function (v) {
+              o.colors = v.split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+            }, { placeholder: 'काला, नीला, सफ़ेद' }));
 
-      var del = document.createElement('button');
-      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
-      del.addEventListener('click', function () {
-        if (!confirm('इस आइटम को हटा दें?')) return;
-        list.splice(i, 1); markDirty(); drawGar();
-      });
-      acts.appendChild(del);
+          box.appendChild(fieldText('कपड़ा', o.fabric, function (v) { o.fabric = clean1(v); },
+            { placeholder: 'कॉटन / रेयॉन / डेनिम' }));
 
-      wrap.appendChild(acts);
-      host.appendChild(wrap);
+          box.appendChild(fieldText('ग्राहक को क्या बताना है', o.note,
+            function (v) { o.note = v.replace(/\s+/g, ' ').slice(0, 160); },
+            { area: true, rows: 3, placeholder: 'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।' }));
+
+          var p2 = document.createElement('p'); p2.className = 'help';
+          p2.textContent = 'साइज़ चुनेंगे तभी ग्राहक साइज़ चुनकर ऑर्डर कर पाएगा। ' +
+                           'खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।';
+          box.appendChild(p2);
+          return box;
+        }
+      }));
     });
   }
+
+  /* Names go into a WhatsApp message and a one-line card — newlines and
+     double spaces break both, so flatten them on the way in. */
+  function clean1(v) { return String(v).replace(/\s+/g, ' ').trim(); }
 
   function drawSet() {
     var s = files['index.html'].data.store;
@@ -570,7 +707,7 @@ a{color:var(--leaf-d)}
     d.products.push({
       id: 'item' + Date.now(), emoji: '🥬', cat: cat, hi: hi, en: en,
       bn: hi, pa: hi, te: hi,
-      price: 0, unit: 'kg', step: 0.5, available: true, photo: ''
+      price: 0, unit: 'kg', step: 0.5, available: true, photo: '', _open: true
     });
     markDirty(); drawVeg(); paintWaList();
   });
@@ -580,7 +717,13 @@ a{color:var(--leaf-d)}
     var f = files['garments.html'].data;
     var list = f.items || f.products;
     if (!list) { f.items = []; list = f.items; }
-    list.push({ id: 'g' + Date.now(), hi: hi, en: hi, price: 0, photo: '' });
+    var cats = garCats();
+    list.push({
+      id: 'g' + Date.now(), cat: (cats[0] || [''])[0],
+      hi: clean1(hi), en: clean1(hi), price: 0, mrp: 0,
+      sizes: [], colors: [], fabric: '', note: '',
+      available: true, photo: '', _open: true
+    });
     markDirty(); drawGar();
   });
 
@@ -758,6 +901,24 @@ a{color:var(--leaf-d)}
   $('revKey').addEventListener('input', function () { revErr(''); });
   $('revLoad').addEventListener('click', loadRev);
 
+  /* The vegetable page shows a strip of garments, but it cannot read the
+     garment catalogue at runtime — both pages are standalone files. So the
+     admin copies a few photos and names across whenever it saves. */
+  function syncCrossSell() {
+    if (!files['index.html'] || !files['garments.html']) return;
+    var store = files['index.html'].data.store;
+    var cs = store.crossSell || (store.crossSell = { on: true, photos: [], sub: '' });
+    if (cs.on === false) return;
+
+    var pick = garList().filter(function (it) {
+      return it.photo && it.available !== false;
+    }).slice(0, 4);
+
+    cs.photos = pick.map(function (it) { return it.photo; });
+    cs.sub = pick.map(function (it) { return clean1(it.hi || it.en || ''); })
+                 .filter(Boolean).join(' · ');
+  }
+
   /* -------------------------------- tabs --------------------------------- */
   function tab(which) {
     [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabRev', 'paneRev'],
@@ -781,7 +942,7 @@ a{color:var(--leaf-d)}
       chain = chain.then(function () { return savePhoto(ph); });
     });
     chain = chain
-      .then(function () { pendingPhotos = []; return saveFile('index.html'); })
+      .then(function () { pendingPhotos = []; syncCrossSell(); return saveFile('index.html'); })
       .then(function () { return saveFile('garments.html'); })
       .then(function () {
         setStatus('सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा');
