@@ -401,7 +401,7 @@ body.hasbag{padding-bottom:96px}
       {
         "id": "shirt",
         "cat": "men",
-        "price": 499,
+        "price": 500,
         "photo": "garments/shirt.jpg",
         "hi": "कॉटन शर्ट",
         "en": "Cotton Shirt",
@@ -412,14 +412,16 @@ body.hasbag{padding-bottom:96px}
           "M",
           "L",
           "XL",
-          "XXL"
+          "XXL",
+          "3XL"
         ],
-        "available": true
+        "available": true,
+        "mrp": 600
       },
       {
         "id": "jeans",
         "cat": "men",
-        "price": 899,
+        "price": 650,
         "photo": "garments/jeans.jpg",
         "hi": "जीन्स",
         "en": "Jeans",
@@ -427,12 +429,13 @@ body.hasbag{padding-bottom:96px}
         "pa": "ਜੀਨਸ",
         "te": "జీన్స్",
         "sizes": [
-          "M",
-          "L",
-          "XL",
-          "XXL"
+          "38",
+          "40",
+          "42",
+          "44"
         ],
-        "available": true
+        "available": true,
+        "mrp": 750
       },
       {
         "id": "kurti",
@@ -513,6 +516,120 @@ body.hasbag{padding-bottom:96px}
         "price": 99,
         "photo": "photos/garments/g1788425910051.jpg",
         "cat": "men",
+        "available": true
+      },
+      {
+        "id": "tshirt",
+        "cat": "men",
+        "mrp": 525,
+        "price": 450,
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL",
+          "4XL"
+        ],
+        "hi": "टी-शर्ट",
+        "en": "T-Shirt",
+        "bn": "টি-শার্ট",
+        "pa": "ਟੀ-ਸ਼ਰਟ",
+        "te": "టీ-షర్ట్",
+        "photo": "",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true
+      },
+      {
+        "id": "lower",
+        "cat": "men",
+        "mrp": 450,
+        "price": 350,
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL",
+          "4XL",
+          "5XL"
+        ],
+        "hi": "लोअर",
+        "en": "Lower",
+        "bn": "লোয়ার",
+        "pa": "ਲੋਅਰ",
+        "te": "లోయర్",
+        "photo": "",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true
+      },
+      {
+        "id": "trousers",
+        "cat": "men",
+        "mrp": 600,
+        "price": 550,
+        "sizes": [
+          "38",
+          "40",
+          "42"
+        ],
+        "hi": "ट्राउज़र",
+        "en": "Trousers",
+        "bn": "ট্রাউজার",
+        "pa": "ਟਰਾਊਜ਼ਰ",
+        "te": "ట్రౌజర్",
+        "photo": "",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true
+      },
+      {
+        "id": "formalpant",
+        "cat": "men",
+        "mrp": 450,
+        "price": 350,
+        "sizes": [
+          "38",
+          "40",
+          "42"
+        ],
+        "hi": "फॉर्मल पैंट",
+        "en": "Formal Pants",
+        "bn": "ফরমাল প্যান্ট",
+        "pa": "ਫਾਰਮਲ ਪੈਂਟ",
+        "te": "ఫార్మల్ ప్యాంట్",
+        "photo": "",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true
+      },
+      {
+        "id": "capri",
+        "cat": "women",
+        "mrp": 490,
+        "price": 400,
+        "sizes": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "hi": "कैप्री",
+        "en": "Capris",
+        "bn": "ক্যাপ্রি",
+        "pa": "ਕੈਪਰੀ",
+        "te": "కాప్రి",
+        "photo": "",
+        "colors": [],
+        "fabric": "",
+        "note": "",
         "available": true
       }
     ]
@@ -877,8 +994,13 @@ body.hasbag{padding-bottom:96px}
 
     var pr = document.createElement('div');
     pr.className = 'item-pr';
-    pr.innerHTML = '₹' + it.price + ' <small>' + esc(t.from) + '</small>' +
-      (it.mrp && Number(it.mrp) > Number(it.price) ? '<span class="mrp">₹' + it.mrp + '</span>' : '');
+    /* "से" means "from ₹350" — a starting price. Put a struck-through old
+       price after it and it reads as a range, ₹350 to ₹450, which is the
+       opposite of a discount. So it is one or the other, never both. */
+    var cut = it.mrp && Number(it.mrp) > Number(it.price);
+    pr.innerHTML = '₹' + it.price +
+      (cut ? '<span class="mrp">₹' + it.mrp + '</span>'
+           : ' <small>' + esc(t.from) + '</small>');
     body.appendChild(pr);
 
     if (it.fabric) {

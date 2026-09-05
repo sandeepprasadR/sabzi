@@ -761,7 +761,10 @@ a{color:var(--leaf-d)}
   }
 
   /* ------------------------------- garments ------------------------------ */
-  var SIZES = ['XS','S','M','L','XL','XXL','3XL','28','30','32','34','36','38','40'];
+  /* Letter sizes then waist sizes, in the order a shopkeeper reads them.
+     Tarun's own list runs to 5XL and to waist 44, so the range has to cover it. */
+  var SIZES = ['XS','S','M','L','XL','XXL','3XL','4XL','5XL',
+               '28','30','32','34','36','38','40','42','44','46'];
 
   function garCats() {
     var d = files['garments.html'].data;
