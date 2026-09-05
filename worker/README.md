@@ -63,10 +63,12 @@ endpoint and could not be stored if they were sent. The sales tab needs
 none of them, and the surest way never to leak a customer list is never
 to hold one. Orders expire on their own after about thirteen months.
 
-These are orders **started on the website**. Someone who taps send and
-never sends the WhatsApp is counted; a walk-in never is. The sales tab
-says so above the numbers, because a shopkeeper reading them as total
-sales would stock the wrong things.
+Each order also carries where it came from. A `web` order was started on
+the website, so someone who taps send and never sends the WhatsApp is
+counted. A `counter` order is one the shopkeeper rang up himself in the
+admin after selling across the counter. A walk-in he did not record is in
+neither, and the sales tab says so above the numbers, because a shopkeeper
+reading them as total sales would stock the wrong things.
 
 ## Abuse handling
 

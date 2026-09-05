@@ -74,20 +74,36 @@ whether the customer has scrolled or not.
 
 Both bags live in `localStorage` and survive moving between the pages.
 
-## Stock and the sales tab
+## Stock, cost and the sales tab
 
-Every item carries a stock count Tarun keeps by hand. The admin totals it:
-how many pieces are in the shop and what they are worth at his prices. The
-storefront stays quiet about it until three or fewer are left.
+Every item carries a stock count Tarun keeps by hand, and two numbers that
+say what it cost him: what he paid, and how much came for that money. ₹200
+for 25 kilos of potato is ₹8 a kilo, and the editor works that out and
+shows it against the selling price, with the margin, in red when a price
+has slipped below cost.
 
-Nothing decrements it automatically. The page cannot see a walk-in or a
-phone order, which is most of the business, so a number that moved on its
-own would be wrong more often than right.
+Everything is counted in the item's base unit: the kilo for anything sold
+by weight, the नग, the गड्डी, the piece. A 250-gram price is the one place
+the sale unit and the base unit part company, and it is four to the kilo.
 
-The **Sales** tab counts orders started on the website: fastest movers,
-items nobody ordered, sizes, colours and price bands, for both shops. It
-leads with a warning that this is the website's slice and not the whole
-shop, because that is exactly the mistake the numbers invite.
+The tab totals both: what the stock cost him and what it would fetch. The
+first is the honest number for money tied up on the shelf; the second is
+only a hope until it sells. Items with stock but no cost entered are
+counted separately, so the total never quietly pretends to be complete.
+The storefront stays quiet about stock until three or fewer are left.
+
+A website order does not decrement anything: a customer can tap send and
+never send the WhatsApp, so a number that moved on its own would be wrong
+more often than right. A sale over the counter is different, because it
+already happened, and the **बेचा** button on each garment records one:
+quantity, size and colour, the stock comes down, the page saves itself,
+and the sale joins the numbers in the Sales tab.
+
+The **Sales** tab reads website orders and recorded counter sales
+together: fastest movers, items nobody ordered, sizes, colours and price
+bands, for both shops, with the split between the two shown whenever both
+are present. It still leads with what it cannot see, because a walk-in
+nobody recorded and an order taken on the phone remain invisible.
 
 ## Customer ratings
 
