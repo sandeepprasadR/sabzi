@@ -106,6 +106,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
   font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
 .pick[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
 .help{font-size:12.5px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.stocktot{margin:6px 0 2px;padding:10px 12px;border-radius:11px;background:var(--leaf-l);
+  color:var(--leaf-d);font-size:14px;font-weight:700;line-height:1.5}
 
 .stars{color:#c78100;font-size:16px;letter-spacing:2px}
 .badge{display:inline-block;background:var(--leaf-l);color:var(--leaf-d);border-radius:999px;
@@ -189,6 +191,7 @@ a{color:var(--leaf-d)}
       <div class="card">
         <h2 data-tx="vegH"></h2>
         <p class="hint" data-tx="vegHint"></p>
+        <p class="stocktot" id="vegTotal"></p>
         <div id="vegList"></div>
         <button class="btn btn-ghost" id="addVeg" style="margin-top:12px" data-tx="addVeg"></button>
       </div>
@@ -199,6 +202,7 @@ a{color:var(--leaf-d)}
       <div class="card">
         <h2 data-tx="garH"></h2>
         <p class="hint" data-tx="garHint"></p>
+        <p class="stocktot" id="garTotal"></p>
         <div id="garList"></div>
         <button class="btn btn-ghost" id="addGar" style="margin-top:12px" data-tx="addGar"></button>
       </div>
@@ -417,7 +421,12 @@ a{color:var(--leaf-d)}
                  'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।'],
     garEditNote:['Only the sizes you tick can be ordered. Leave them empty and the customer is only asked how many.',
                  'जो साइज़ आप चुनेंगे सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
-    fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें']
+    fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें'],
+    fStock:     ['How many in stock', 'कितने बचे हैं (स्टॉक)'],
+    phStock:    ['count in hand', 'जितने दुकान में हैं'],
+    stockN:     ['{n} in stock', 'स्टॉक: {n}'],
+    stockNone:  ['stock not counted', 'स्टॉक नहीं भरा'],
+    stockWorth: ['{n} pieces in stock · worth ₹{v}', 'कुल {n} चीज़ें · कीमत ₹{v}']
   };
 
   var LANG_KEY = 'gavs.admin.lang.v1';
@@ -727,7 +736,7 @@ a{color:var(--leaf-d)}
     (d.products || []).forEach(function (p, i) {
       host.appendChild(itemRow(p, {
         fallbackEmoji: p.emoji || '🥬',
-        sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit); },
+        sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit) + ' · ' + stockLine(o); },
         photoPath: function (o) { return (o.id || 'item' + i) + '.jpg'; },
         redraw: function () { drawVeg(); paintWaList(); },
         after: paintWaList,
@@ -751,6 +760,10 @@ a{color:var(--leaf-d)}
           box.appendChild(fieldText(tx('fEmoji'), o.emoji,
             function (v) { o.emoji = v.slice(0, 3); }));
 
+          box.appendChild(fieldText(tx('fStock'), o.stock,
+            function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
+            { type: 'number', numeric: true, placeholder: tx('phStock') }));
+
           var p2 = document.createElement('p'); p2.className = 'help';
           p2.textContent = tx('vegEditNote');
           box.appendChild(p2);
@@ -758,6 +771,37 @@ a{color:var(--leaf-d)}
         }
       }));
     });
+  }
+
+  /* A count Tarun keeps by hand. Nothing decrements it automatically: the
+     page cannot see a walk-in sale, so a number that moved on its own would
+     be wrong more often than right. */
+  function stockLine(o) {
+    var n = Number(o.stock) || 0;
+    return n > 0 ? tx('stockN', { n: n }) : tx('stockNone');
+  }
+
+  function stockValue(list) {
+    return list.reduce(function (sum, o) {
+      return sum + (Number(o.stock) || 0) * (Number(o.price) || 0);
+    }, 0);
+  }
+
+  function paintStockTotals() {
+    if (files['index.html']) {
+      var veg = files['index.html'].data.products || [];
+      $('vegTotal').textContent = tx('stockWorth', {
+        n: veg.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
+        v: stockValue(veg).toLocaleString('en-IN')
+      });
+    }
+    if (files['garments.html']) {
+      var gar = garList();
+      $('garTotal').textContent = tx('stockWorth', {
+        n: gar.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
+        v: stockValue(gar).toLocaleString('en-IN')
+      });
+    }
   }
 
   /* ------------------------------- garments ------------------------------ */
@@ -786,7 +830,8 @@ a{color:var(--leaf-d)}
           var bits = [];
           if ((o.sizes || []).length) bits.push((o.sizes || []).join('/'));
           if ((o.colors || []).length) bits.push((o.colors || []).join(', '));
-          return bits.join(' · ') || tx('fillSizes');
+          bits.push(stockLine(o));
+          return bits.join(' · ');
         },
         photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
         redraw: drawGar,
@@ -820,6 +865,10 @@ a{color:var(--leaf-d)}
 
           box.appendChild(fieldText(tx('fFabric'), o.fabric, function (v) { o.fabric = clean1(v); },
             { placeholder: tx('phFabric') }));
+
+          box.appendChild(fieldText(tx('fStock'), o.stock,
+            function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
+            { type: 'number', numeric: true, placeholder: tx('phStock') }));
 
           box.appendChild(fieldText(tx('fNote'), o.note,
             function (v) { o.note = v.replace(/\s+/g, ' ').slice(0, 160); },
@@ -1189,7 +1238,7 @@ a{color:var(--leaf-d)}
         $('login').classList.add('hidden');
         $('editor').classList.remove('hidden');
         $('savebar').classList.remove('hidden');
-        drawVeg(); drawGar(); drawSet(); drawRev();
+        drawVeg(); drawGar(); drawSet(); drawRev(); paintStockTotals();
         setStatus(tx('savedAll'));
         $('save').disabled = true;
       })
