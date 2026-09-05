@@ -142,6 +142,8 @@ a:hover{color:var(--carrot)}
   font-family:inherit;cursor:pointer}
 .colr[aria-pressed="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
 .item-note{font-size:13.5px;color:var(--muted);line-height:1.55}
+.lowstock{font-size:13px;font-weight:800;color:#8a3b16;background:#fdecdf;border-radius:999px;
+  padding:4px 11px;align-self:flex-start}
 .item-fab{display:inline-block;font-size:12px;font-weight:800;color:var(--leaf-d);background:var(--leaf-l);
   border-radius:999px;padding:3px 10px;letter-spacing:.2px}
 .mrp{font-size:15px;font-weight:700;color:var(--muted);text-decoration:line-through;margin-left:7px}
@@ -221,6 +223,9 @@ body.hasbag{padding-bottom:96px}
 .care{margin-top:20px;background:#fffaf0;border-color:#f0dfb8}
 .care h3{font-size:15.5px;font-weight:800;margin:0 0 6px}
 .care p{margin:0;font-size:14px;line-height:1.7;color:#6b5a33}
+.care ul{margin:0;padding-left:18px;font-size:14px;line-height:1.75;color:#6b5a33}
+.care ul li{margin-bottom:5px}
+.care ul li:last-child{margin-bottom:0}
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
 .crosslink svg{width:16px;height:16px}
@@ -300,6 +305,11 @@ body.hasbag{padding-bottom:96px}
     <div class="panel care" id="careBox">
       <h3 id="careTtl"></h3>
       <p id="careTxt"></p>
+    </div>
+
+    <div class="panel care" id="retBox">
+      <h3 id="retTtl"></h3>
+      <ul id="retList"></ul>
     </div>
   </section>
 
@@ -402,7 +412,8 @@ body.hasbag{padding-bottom:96px}
       "ownerNameEn": "Tarun",
       "ownerPhoto": "",
       "upiId": "8400357057@ybl",
-      "upiName": "Tarun Bhatia"
+      "upiName": "Tarun Bhatia",
+      "reviewsApi": ""
     },
     "categories": [
       {
@@ -447,7 +458,8 @@ body.hasbag{padding-bottom:96px}
           "XL",
           "XXL"
         ],
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "shirt",
@@ -467,7 +479,8 @@ body.hasbag{padding-bottom:96px}
           "3XL"
         ],
         "available": true,
-        "mrp": 600
+        "mrp": 600,
+        "stock": 0
       },
       {
         "id": "jeans",
@@ -486,7 +499,8 @@ body.hasbag{padding-bottom:96px}
           "44"
         ],
         "available": true,
-        "mrp": 750
+        "mrp": 750,
+        "stock": 0
       },
       {
         "id": "kurti",
@@ -504,7 +518,8 @@ body.hasbag{padding-bottom:96px}
           "XL",
           "XXL"
         ],
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "leggings",
@@ -522,7 +537,8 @@ body.hasbag{padding-bottom:96px}
           "XL",
           "XXL"
         ],
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "kidstee",
@@ -540,7 +556,8 @@ body.hasbag{padding-bottom:96px}
           "XL",
           "XXL"
         ],
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "g1788424169736",
@@ -556,7 +573,8 @@ body.hasbag{padding-bottom:96px}
         "sizes": [],
         "colors": [],
         "fabric": "",
-        "note": ""
+        "note": "",
+        "stock": 0
       },
       {
         "id": "g1788425910051",
@@ -565,7 +583,8 @@ body.hasbag{padding-bottom:96px}
         "price": 99,
         "photo": "photos/garments/g1788425910051.jpg",
         "cat": "men",
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "tshirt",
@@ -589,7 +608,8 @@ body.hasbag{padding-bottom:96px}
         "colors": [],
         "fabric": "",
         "note": "",
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "lower",
@@ -614,7 +634,8 @@ body.hasbag{padding-bottom:96px}
         "colors": [],
         "fabric": "",
         "note": "",
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "trousers",
@@ -635,7 +656,8 @@ body.hasbag{padding-bottom:96px}
         "colors": [],
         "fabric": "",
         "note": "",
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "formalpant",
@@ -656,7 +678,8 @@ body.hasbag{padding-bottom:96px}
         "colors": [],
         "fabric": "",
         "note": "",
-        "available": true
+        "available": true,
+        "stock": 0
       },
       {
         "id": "capri",
@@ -679,7 +702,8 @@ body.hasbag{padding-bottom:96px}
         "colors": [],
         "fabric": "",
         "note": "",
-        "available": true
+        "available": true,
+        "stock": 0
       }
     ]
   }/*</CATALOGUE>*/;
@@ -705,12 +729,14 @@ body.hasbag{padding-bottom:96px}
       sizesLbl:"साइज़",
       careTtl:"धुलाई का ध्यान रखें",
       careTxt:"हर कपड़े पर धुलाई का लेबल लगा है — उसी के हिसाब से धोएँ। पहली बार अलग से, ठंडे पानी में, उल्टा करके धोएँ। लेबल के तरीके से न धोने पर रंग निकल जाए या कपड़ा खराब हो जाए, तो दुकान इसकी ज़िम्मेदार नहीं होगी।",
-      careShort:"धुलाई लेबल के हिसाब से करें। लेबल के तरीके से न धोने पर रंग निकलने की ज़िम्मेदारी दुकान की नहीं होगी।", ask:"WhatsApp पर पूछें", from:"से",
+      careShort:"धुलाई लेबल के हिसाब से करें। लेबल के तरीके से न धोने पर रंग निकलने की ज़िम्मेदारी दुकान की नहीं होगी।",
+      retTtl:"बदली और वापसी",
+      ret:["साइज़ ठीक न बैठे तो 7 दिन के अंदर बदल सकते हैं।","कपड़ा पहना या धुला न हो, टैग लगा हो, और बिल साथ हो।","अंडरगारमेंट्स और इनरवियर नहीं बदले जाते — सफ़ाई की वजह से।","सेल के सामान पर सिर्फ़ बदली, पैसे वापस नहीं।","कूरियर से मँगाया हो तो वापसी का खर्च आपका। हमारी गलती से गलत सामान गया हो तो खर्च हमारा।","धुलाई लेबल के हिसाब से न धोने से हुआ नुकसान इसमें नहीं आता।"], ask:"WhatsApp पर पूछें", from:"से",
       slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालें:",
       foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
       cross:"सब्ज़ी ऑर्डर करें",
       bagAdd:"बैग में डालें", bagAdded:"डाल दिया ✓", pickSize:"पहले साइज़ चुनें", pickColor:"रंग चुनें",
-      colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", askMore:"इसके बारे में पूछें",
+      colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", onlyLeft:"सिर्फ़ {n} बचे हैं", askMore:"इसके बारे में पूछें",
       bagOne:"बैग में 1 चीज़", bagMany:"बैग में {n} चीज़ें", bagHint:"कुल ₹{t}", bagView:"बैग देखें",
       bagTitle:"आपका बैग", bagEmpty:"बैग अभी खाली है", removeLbl:"हटाएँ", totLbl:"कुल",
       lblHow:"कैसे लेंगे?", modeShop:"दुकान से ले लूँगा", modeCourier:"कूरियर से भेजिए",
@@ -738,12 +764,14 @@ body.hasbag{padding-bottom:96px}
       sizesLbl:"Sizes",
       careTtl:"Please follow the wash care",
       careTxt:"Every garment carries a wash-care label — please wash it the way the label says. For the first wash, wash it separately, in cold water, inside out. If the colour bleeds or the garment is damaged because it was not washed as the label says, the shop cannot take responsibility.",
-      careShort:"Wash as the care label says. If colour bleeds because it was not washed that way, the shop cannot take responsibility.", ask:"Ask on WhatsApp", from:"from",
+      careShort:"Wash as the care label says. If colour bleeds because it was not washed that way, the shop cannot take responsibility.",
+      retTtl:"Exchange and returns",
+      ret:["If the size does not fit, exchange it within 7 days.","Unworn, unwashed, tags on, and bring the bill.","Undergarments and innerwear cannot be exchanged — for hygiene.","Sale items: exchange only, no refund.","Sent by courier? Return postage is yours. If we sent the wrong thing, it is ours.","Damage from not following the wash-care label is not covered."], ask:"Ask on WhatsApp", from:"from",
       slot:"Photo goes here", slotHelp:"Add a photo with this name:",
       foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
       cross:"Order vegetables",
       bagAdd:"Add to bag", bagAdded:"Added ✓", pickSize:"Pick a size first", pickColor:"Pick a colour",
-      colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", askMore:"Ask about this",
+      colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", onlyLeft:"Only {n} left", askMore:"Ask about this",
       bagOne:"1 item in bag", bagMany:"{n} items in bag", bagHint:"Total ₹{t}", bagView:"View bag",
       bagTitle:"Your bag", bagEmpty:"Your bag is empty", removeLbl:"Remove", totLbl:"Total",
       lblHow:"How will you take it?", modeShop:"I\u2019ll collect from the shop", modeCourier:"Send by courier",
@@ -771,12 +799,14 @@ body.hasbag{padding-bottom:96px}
       sizesLbl:"সাইজ",
       careTtl:"ধোয়ার নিয়ম মেনে চলুন",
       careTxt:"প্রতিটি কাপড়ে ধোয়ার লেবেল দেওয়া আছে — সেই অনুযায়ীই ধোবেন। প্রথমবার আলাদা করে, ঠান্ডা জলে, উল্টো করে ধুয়ে নিন। লেবেলের নিয়ম না মেনে ধোয়ার ফলে রং উঠলে বা কাপড় নষ্ট হলে দোকান দায়ী থাকবে না।",
-      careShort:"লেবেল অনুযায়ী ধোবেন। সেভাবে না ধোয়ায় রং উঠলে দোকান দায়ী থাকবে না।", ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
+      careShort:"লেবেল অনুযায়ী ধোবেন। সেভাবে না ধোয়ায় রং উঠলে দোকান দায়ী থাকবে না।",
+      retTtl:"বদল ও ফেরত",
+      ret:["সাইজ না মিললে ৭ দিনের মধ্যে বদলে নিন।","না পরা, না ধোয়া, ট্যাগ লাগানো, বিল সঙ্গে।","অন্তর্বাস বদলানো যায় না — স্বাস্থ্যবিধির কারণে।","সেলের জিনিস: শুধু বদল, টাকা ফেরত নয়।","কুরিয়ারে আনালে ফেরতের খরচ আপনার। আমাদের ভুলে ভুল জিনিস গেলে খরচ আমাদের।","লেবেল না মেনে ধোয়ার ক্ষতি এর মধ্যে পড়ে না।"], ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
       slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
       foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
       cross:"সবজি অর্ডার করুন",
       bagAdd:"ব্যাগে দিন", bagAdded:"দেওয়া হয়েছে ✓", pickSize:"আগে সাইজ বাছুন", pickColor:"রং বাছুন",
-      colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
+      colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", onlyLeft:"মাত্র {n}টি বাকি", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
       bagOne:"ব্যাগে ১টি জিনিস", bagMany:"ব্যাগে {n}টি জিনিস", bagHint:"মোট ₹{t}", bagView:"ব্যাগ দেখুন",
       bagTitle:"আপনার ব্যাগ", bagEmpty:"ব্যাগ এখন খালি", removeLbl:"সরান", totLbl:"মোট",
       lblHow:"কীভাবে নেবেন?", modeShop:"দোকান থেকে নেব", modeCourier:"কুরিয়ারে পাঠান",
@@ -804,12 +834,14 @@ body.hasbag{padding-bottom:96px}
       sizesLbl:"ਸਾਈਜ਼",
       careTtl:"ਧੁਆਈ ਦਾ ਧਿਆਨ ਰੱਖੋ",
       careTxt:"ਹਰ ਕੱਪੜੇ ਉੱਤੇ ਧੁਆਈ ਦਾ ਲੇਬਲ ਲੱਗਾ ਹੈ — ਉਸੇ ਮੁਤਾਬਕ ਧੋਵੋ। ਪਹਿਲੀ ਵਾਰ ਵੱਖਰਾ, ਠੰਢੇ ਪਾਣੀ ਵਿੱਚ, ਪੁੱਠਾ ਕਰਕੇ ਧੋਵੋ। ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲ ਜਾਵੇ ਜਾਂ ਕੱਪੜਾ ਖਰਾਬ ਹੋਵੇ, ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹੋਵੇਗੀ।",
-      careShort:"ਲੇਬਲ ਮੁਤਾਬਕ ਧੋਵੋ। ਉਸ ਤਰ੍ਹਾਂ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲੇ ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ।", ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
+      careShort:"ਲੇਬਲ ਮੁਤਾਬਕ ਧੋਵੋ। ਉਸ ਤਰ੍ਹਾਂ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲੇ ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ।",
+      retTtl:"ਬਦਲੀ ਤੇ ਵਾਪਸੀ",
+      ret:["ਸਾਈਜ਼ ਠੀਕ ਨਾ ਬੈਠੇ ਤਾਂ 7 ਦਿਨਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ।","ਕੱਪੜਾ ਪਾਇਆ ਜਾਂ ਧੋਇਆ ਨਾ ਹੋਵੇ, ਟੈਗ ਲੱਗਾ ਹੋਵੇ, ਬਿੱਲ ਨਾਲ ਹੋਵੇ।","ਅੰਡਰਗਾਰਮੈਂਟਸ ਨਹੀਂ ਬਦਲੇ ਜਾਂਦੇ — ਸਫ਼ਾਈ ਕਰਕੇ।","ਸੇਲ ਦੇ ਸਮਾਨ ਉੱਤੇ ਸਿਰਫ਼ ਬਦਲੀ, ਪੈਸੇ ਵਾਪਸ ਨਹੀਂ।","ਕੋਰੀਅਰ ਨਾਲ ਮੰਗਵਾਇਆ ਹੋਵੇ ਤਾਂ ਵਾਪਸੀ ਦਾ ਖਰਚ ਤੁਹਾਡਾ। ਸਾਡੀ ਗਲਤੀ ਹੋਵੇ ਤਾਂ ਸਾਡਾ।","ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਦਾ ਨੁਕਸਾਨ ਇਸ ਵਿੱਚ ਨਹੀਂ ਆਉਂਦਾ।"], ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
       slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
       foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
       cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ",
       bagAdd:"ਬੈਗ ਵਿੱਚ ਪਾਓ", bagAdded:"ਪਾ ਦਿੱਤਾ ✓", pickSize:"ਪਹਿਲਾਂ ਸਾਈਜ਼ ਚੁਣੋ", pickColor:"ਰੰਗ ਚੁਣੋ",
-      colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
+      colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", onlyLeft:"ਸਿਰਫ਼ {n} ਬਚੇ ਹਨ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
       bagOne:"ਬੈਗ ਵਿੱਚ 1 ਚੀਜ਼", bagMany:"ਬੈਗ ਵਿੱਚ {n} ਚੀਜ਼ਾਂ", bagHint:"ਕੁੱਲ ₹{t}", bagView:"ਬੈਗ ਵੇਖੋ",
       bagTitle:"ਤੁਹਾਡਾ ਬੈਗ", bagEmpty:"ਬੈਗ ਹਾਲੇ ਖਾਲੀ ਹੈ", removeLbl:"ਹਟਾਓ", totLbl:"ਕੁੱਲ",
       lblHow:"ਕਿਵੇਂ ਲਵੋਗੇ?", modeShop:"ਦੁਕਾਨ ਤੋਂ ਲੈ ਲਵਾਂਗਾ", modeCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ ਭੇਜੋ",
@@ -837,12 +869,14 @@ body.hasbag{padding-bottom:96px}
       sizesLbl:"సైజులు",
       careTtl:"ఉతికే విధానం పాటించండి",
       careTxt:"ప్రతి బట్టపై ఉతికే లేబుల్ ఉంటుంది — దాని ప్రకారమే ఉతకండి. మొదటిసారి విడిగా, చల్లని నీటిలో, లోపలివైపు తిప్పి ఉతకండి. లేబుల్ ప్రకారం ఉతకకపోవడం వల్ల రంగు పోయినా, బట్ట పాడైనా దుకాణం బాధ్యత వహించదు.",
-      careShort:"లేబుల్ ప్రకారం ఉతకండి. అలా ఉతకకపోవడం వల్ల రంగు పోతే దుకాణం బాధ్యత వహించదు.", ask:"WhatsAppలో అడగండి", from:"నుంచి",
+      careShort:"లేబుల్ ప్రకారం ఉతకండి. అలా ఉతకకపోవడం వల్ల రంగు పోతే దుకాణం బాధ్యత వహించదు.",
+      retTtl:"మార్పిడి, వాపసు",
+      ret:["సైజు సరిపోకపోతే 7 రోజుల్లో మార్చుకోవచ్చు.","వేసుకోకుండా, ఉతకకుండా, ట్యాగ్‌తో, బిల్లుతో తీసుకురండి.","లోదుస్తులు మార్చబడవు — పరిశుభ్రత కారణంగా.","సేల్ వస్తువులు: మార్పిడి మాత్రమే, డబ్బు వాపసు లేదు.","కొరియర్‌లో తెప్పించుకుంటే వాపసు ఖర్చు మీది. మా తప్పు అయితే మాది.","లేబుల్ పాటించకపోవడం వల్ల జరిగిన నష్టం ఇందులో రాదు."], ask:"WhatsAppలో అడగండి", from:"నుంచి",
       slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
       foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
       cross:"కూరగాయలు ఆర్డర్ చేయండి",
       bagAdd:"బ్యాగ్‌లో వేయండి", bagAdded:"వేశాం ✓", pickSize:"ముందు సైజు ఎంచుకోండి", pickColor:"రంగు ఎంచుకోండి",
-      colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", askMore:"దీని గురించి అడగండి",
+      colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", onlyLeft:"కేవలం {n} మిగిలాయి", askMore:"దీని గురించి అడగండి",
       bagOne:"బ్యాగ్‌లో 1 వస్తువు", bagMany:"బ్యాగ్‌లో {n} వస్తువులు", bagHint:"మొత్తం ₹{t}", bagView:"బ్యాగ్ చూడండి",
       bagTitle:"మీ బ్యాగ్", bagEmpty:"బ్యాగ్ ఖాళీగా ఉంది", removeLbl:"తీసివేయండి", totLbl:"మొత్తం",
       lblHow:"ఎలా తీసుకుంటారు?", modeShop:"దుకాణం నుంచి తీసుకుంటాను", modeCourier:"కొరియర్‌లో పంపండి",
@@ -913,7 +947,7 @@ body.hasbag{padding-bottom:96px}
   ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
    'statusPill','statusTxt','ownerQuote','ttlVisit','addrTxt','metaRow','mapLink','btnMap',
    'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt',
-   'careTtl','careTxt','careShort',
+   'careTtl','careTxt','careShort','retTtl','retList',
    'bagbar','bagCount','bagHint','bagOpen','bagOpenTxt','scrim','sheet','sheetTitle','sheetClose',
    'bagLines','lblHow','modeShop','modeCourier','lblGName','gName','errGName',
    'lblGPhone','gPhone','errGPhone','addrWrap','lblGAddr','gAddr','errGAddr',
@@ -1003,6 +1037,13 @@ body.hasbag{padding-bottom:96px}
     el.careTtl.textContent = t.careTtl;
     el.careTxt.textContent = t.careTxt;
     el.careShort.textContent = t.careShort;
+    el.retTtl.textContent = t.retTtl;
+    el.retList.innerHTML = '';
+    (t.ret || []).forEach(function (line) {
+      var li = document.createElement('li');
+      li.textContent = line;
+      el.retList.appendChild(li);
+    });
 
     paintStatus();
     renderTabs();
@@ -1090,8 +1131,15 @@ body.hasbag{padding-bottom:96px}
       .forEach(function (it) { el.rack.appendChild(card(it)); });
   }
 
+  /* Stock is a number Tarun keeps by hand. Zero means he has said there are
+     none — which is a stronger statement than never having counted, so only
+     an explicit zero closes the item. */
+  function soldOut(it) {
+    return it.available === false || (it.stock !== undefined && Number(it.stock) === 0 && it._counted);
+  }
+
   function card(it) {
-    var out = it.available === false;
+    var out = it.available === false || Number(it.stock) < 0;
     var sel = pickOf(it);
 
     var art = document.createElement('article');
@@ -1127,6 +1175,14 @@ body.hasbag{padding-bottom:96px}
       (cut ? '<span class="mrp">₹' + it.mrp + '</span>'
            : ' <small>' + esc(t.from) + '</small>');
     body.appendChild(pr);
+
+    var left = Number(it.stock) || 0;
+    if (!out && left > 0 && left <= 3) {
+      var lw = document.createElement('div');
+      lw.className = 'lowstock';
+      lw.textContent = fill(t.onlyLeft, { n: left });
+      body.appendChild(lw);
+    }
 
     if (it.fabric) {
       var fab = document.createElement('div');
@@ -1441,6 +1497,8 @@ body.hasbag{padding-bottom:96px}
     /* The page cannot verify a payment — it has no server and never sees the
        bank. So this is the customer's own statement, written in their voice,
        and the screenshot is what Tarun actually checks against PhonePe. */
+    logOrder();
+
     if (mode === 'courier') {
       lines.push(m.pay + ': ' + m.courierPay);
     } else if (payWay === 'upi') {
@@ -1450,6 +1508,32 @@ body.hasbag{padding-bottom:96px}
       lines.push(m.pay + ': ' + m.onDeliv);
     }
     openWA(lines);
+  }
+
+  /* Tell the shop what was ordered — item, size, colour, quantity, price and
+     nothing else. No name, phone or address goes anywhere near this.
+
+     Fire and forget on purpose: the customer is about to be handed to
+     WhatsApp, and an analytics call must never be the thing that delays or
+     breaks an order. If it fails, it fails silently. */
+  function logOrder() {
+    var base = (shop.reviewsApi || '').replace(/\/+$/, '');
+    if (!base || !bag.length) return;
+    try {
+      fetch(base + '/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          shop: 'gar',
+          items: bag.map(function (l) {
+            var it = itemById(l.id) || {};
+            return { id: l.id, name: it.en || it.hi || l.id, size: l.size || '',
+                     color: l.color || '', qty: l.qty, price: Number(it.price) || 0 };
+          })
+        })
+      }).catch(function () {});
+    } catch (e) { /* never block the order */ }
   }
 
   /* Same handoff the vegetable page uses: on a touch device a new tab loses

@@ -49,8 +49,24 @@ nothing looks broken.
 |---|---|---|
 | `GET /reviews` | anyone | average, count, featured quotes, recent quotes |
 | `POST /reviews` | anyone | leave one rating |
+| `POST /orders` | anyone | log one order for the sales tab |
 | `GET /admin?key=…` | shopkeeper | every review, newest first |
 | `POST /admin` | shopkeeper | feature, unfeature, hide, show, delete |
+| `GET /orders?key=…` | shopkeeper | every logged order, newest first |
+
+## What the order log holds, and what it does not
+
+Item id, name, size, colour, quantity and price. A timestamp. Nothing else.
+
+No name, no flat, no phone, no address — they are not accepted by the
+endpoint and could not be stored if they were sent. The sales tab needs
+none of them, and the surest way never to leak a customer list is never
+to hold one. Orders expire on their own after about thirteen months.
+
+These are orders **started on the website**. Someone who taps send and
+never sends the WhatsApp is counted; a walk-in never is. The sales tab
+says so above the numbers, because a shopkeeper reading them as total
+sales would stock the wrong things.
 
 ## Abuse handling
 

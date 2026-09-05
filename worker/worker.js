@@ -8,9 +8,12 @@
  *   GET  /reviews            -> { count, avg, featured[], recent[] }
  *   POST /reviews            -> add one rating   { stars, text, name, flat }
  *
+ *   POST /orders             -> log one order for analytics  { shop, items[] }
+ *
  * Shopkeeper (needs ADMIN_KEY)
  *   POST /admin              -> { key, action: 'feature'|'unfeature'|'delete', id }
  *   GET  /admin?key=...      -> every review, newest first
+ *   GET  /orders?key=...     -> every logged order, newest first
  *
  * Storage: one KV entry per review, key `r:<ts>:<rand>`. Listing a few
  * hundred keys is cheap and avoids the lost-update race a single JSON blob
@@ -21,6 +24,8 @@ const MAX_TEXT = 300;
 const MAX_NAME = 40;
 const MAX_FLAT = 12;
 const RECENT_LIMIT = 40;
+const MAX_LINES = 40;        /* a basket longer than this is not a real basket */
+const ORDER_TTL = 60 * 60 * 24 * 400;   /* orders expire after ~13 months */
 
 export default {
   async fetch(request, env) {
@@ -34,6 +39,8 @@ export default {
       if (path === '/reviews' && request.method === 'POST') return await addReview(request, env);
       if (path === '/admin' && request.method === 'GET') return await listAll(url, env);
       if (path === '/admin' && request.method === 'POST') return await admin(request, env);
+      if (path === '/orders' && request.method === 'POST') return await addOrder(request, env);
+      if (path === '/orders' && request.method === 'GET') return await listOrders(url, env);
       return json({ ok: false, error: 'not_found' }, 404, env);
     } catch (err) {
       return json({ ok: false, error: 'server_error' }, 500, env);
@@ -160,6 +167,65 @@ async function addReview(request, env) {
   await env.REVIEWS.put(rlKey, '1', { expirationTtl: 600 });
 
   return json({ ok: true, id }, 200, env);
+}
+
+/* ------------------------------ orders --------------------------------- */
+/*
+ * What the shop asked for, not who asked for it.
+ *
+ * No name, flat, phone or address is accepted or stored here — the analytics
+ * this feeds needs item, size, colour, quantity and price and nothing else,
+ * and the surest way not to leak a customer list is never to hold one.
+ *
+ * These are orders *started on the website*. A customer who taps send and
+ * never sends the WhatsApp still lands here, and a walk-in never does. The
+ * admin page says so where the numbers are shown.
+ */
+async function addOrder(request, env) {
+  let body;
+  try { body = await request.json(); } catch (e) { body = {}; }
+
+  const shop = body.shop === 'gar' ? 'gar' : 'veg';
+  const raw = Array.isArray(body.items) ? body.items.slice(0, MAX_LINES) : [];
+  const items = raw.map(l => ({
+    id: clean(l.id, 60),
+    name: clean(l.name, MAX_NAME),
+    size: clean(l.size, 12),
+    color: clean(l.color, MAX_NAME),
+    qty: Math.min(999, Math.max(0, Math.round(Number(l.qty) || 0))),
+    price: Math.min(1000000, Math.max(0, Math.round(Number(l.price) || 0)))
+  })).filter(l => l.id && l.qty > 0);
+
+  if (!items.length) return json({ ok: false, error: 'empty' }, 400, env);
+
+  const order = {
+    shop: shop,
+    items: items,
+    total: items.reduce((s, l) => s + l.qty * l.price, 0),
+    ts: Date.now()
+  };
+  const id = 'o:' + order.ts + ':' + Math.random().toString(36).slice(2, 8);
+  await env.REVIEWS.put(id, JSON.stringify(order), { expirationTtl: ORDER_TTL });
+  return json({ ok: true }, 200, env);
+}
+
+async function listOrders(url, env) {
+  if (!keyOk(url.searchParams.get('key'), env.ADMIN_KEY)) {
+    return json({ ok: false, error: 'unauthorised' }, 401, env);
+  }
+  const out = [];
+  let cursor;
+  do {
+    const page = await env.REVIEWS.list({ prefix: 'o:', cursor, limit: 1000 });
+    for (const k of page.keys) {
+      const raw = await env.REVIEWS.get(k.name);
+      if (!raw) continue;
+      try { out.push(JSON.parse(raw)); } catch (e) { /* skip a corrupt entry */ }
+    }
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor);
+  out.sort((a, b) => b.ts - a.ts);
+  return json({ ok: true, orders: out }, 200, env);
 }
 
 /* ---------------------------- shopkeeper ------------------------------ */

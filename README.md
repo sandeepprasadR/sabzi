@@ -70,6 +70,21 @@ standalone files — so the admin copies four photos and their names into
 
 Both bags live in `localStorage` and survive moving between the pages.
 
+## Stock and the sales tab
+
+Every item carries a stock count Tarun keeps by hand. The admin totals it:
+how many pieces are in the shop and what they are worth at his prices. The
+storefront stays quiet about it until three or fewer are left.
+
+Nothing decrements it automatically. The page cannot see a walk-in or a
+phone order, which is most of the business, so a number that moved on its
+own would be wrong more often than right.
+
+The **Sales** tab counts orders started on the website — fastest movers,
+items nobody ordered, sizes, colours and price bands, for both shops. It
+leads with a warning that this is the website's slice and not the whole
+shop, because that is exactly the mistake the numbers invite.
+
 ## Customer ratings
 
 Customers rate the shop out of five stars and can leave a line of text.

@@ -63,10 +63,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
 .note-warn{background:var(--warn-l);color:var(--warn)}
 .note-leaf{background:var(--leaf-l);color:var(--leaf-d)}
 
-.tabs{display:flex;gap:8px;margin-top:14px}
+/* Five tabs no longer fit a 360px phone if they each demand equal width, so
+   the row scrolls sideways instead of pushing the whole page wide. */
+.tabs{display:flex;gap:8px;margin-top:14px;overflow-x:auto;scrollbar-width:none;
+  padding-bottom:2px;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
 .tabs button{
-  flex:1;min-height:46px;padding:0 4px;border:1px solid var(--line);background:#fff;border-radius:12px;
-  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer
+  flex:0 0 auto;min-height:46px;padding:0 15px;border:1px solid var(--line);background:#fff;border-radius:12px;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--muted);cursor:pointer;white-space:nowrap
 }
 .tabs button[aria-selected="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
 
@@ -106,6 +110,20 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
   font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
 .pick[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
 .help{font-size:12.5px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.stocktot{margin:6px 0 2px;padding:10px 12px;border-radius:11px;background:var(--leaf-l);
+  color:var(--leaf-d);font-size:14px;font-weight:700;line-height:1.5}
+.bar{display:flex;align-items:center;gap:9px;padding:7px 0}
+.bar .nm{flex:1;min-width:0;font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .track{flex:0 0 96px;height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+/* display:block matters — an inline span ignores width, so every bar drew empty */
+.bar .fill{display:block;height:100%;background:var(--leaf);border-radius:99px}
+.bar .val{flex:0 0 auto;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--muted)}
+.dead{font-size:14px;line-height:1.7}
+.dead b{font-weight:700}
+.kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.kpi div{background:var(--leaf-l);border-radius:12px;padding:11px 12px}
+.kpi b{display:block;font-size:19px;font-weight:800;color:var(--leaf-d);line-height:1.25}
+.kpi span{font-size:12.5px;color:var(--muted);font-weight:600}
 
 .stars{color:#c78100;font-size:16px;letter-spacing:2px}
 .badge{display:inline-block;background:var(--leaf-l);color:var(--leaf-d);border-radius:999px;
@@ -181,6 +199,7 @@ a{color:var(--leaf-d)}
       <button id="tabVeg" role="tab" aria-selected="true" data-tx="tabVeg"></button>
       <button id="tabGar" role="tab" aria-selected="false" data-tx="tabGar"></button>
       <button id="tabRev" role="tab" aria-selected="false" data-tx="tabRev"></button>
+      <button id="tabAna" role="tab" aria-selected="false" data-tx="tabAna"></button>
       <button id="tabSet" role="tab" aria-selected="false" data-tx="tabSet"></button>
     </div>
 
@@ -189,6 +208,7 @@ a{color:var(--leaf-d)}
       <div class="card">
         <h2 data-tx="vegH"></h2>
         <p class="hint" data-tx="vegHint"></p>
+        <p class="stocktot" id="vegTotal"></p>
         <div id="vegList"></div>
         <button class="btn btn-ghost" id="addVeg" style="margin-top:12px" data-tx="addVeg"></button>
       </div>
@@ -199,6 +219,7 @@ a{color:var(--leaf-d)}
       <div class="card">
         <h2 data-tx="garH"></h2>
         <p class="hint" data-tx="garHint"></p>
+        <p class="stocktot" id="garTotal"></p>
         <div id="garList"></div>
         <button class="btn btn-ghost" id="addGar" style="margin-top:12px" data-tx="addGar"></button>
       </div>
@@ -228,6 +249,18 @@ a{color:var(--leaf-d)}
         <h2><span data-tx="revAll"></span> <span class="hint" id="revCount" style="display:inline;font-weight:400"></span></h2>
         <div id="revList"></div>
       </div>
+    </div>
+
+    <!-- ---- analytics ---- -->
+    <div id="paneAna" class="hidden">
+      <div class="card">
+        <h2 data-tx="anaH"></h2>
+        <p class="note note-amber" data-tx="anaWarn"></p>
+        <div class="picks" id="anaRange"></div>
+        <button class="btn btn-ghost" id="anaLoad" style="margin-top:12px" data-tx="anaLoad"></button>
+        <p class="note note-warn hidden" id="anaErr"></p>
+      </div>
+      <div id="anaOut"></div>
     </div>
 
     <!-- ---- settings ---- -->
@@ -417,7 +450,41 @@ a{color:var(--leaf-d)}
                  'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।'],
     garEditNote:['Only the sizes you tick can be ordered. Leave them empty and the customer is only asked how many.',
                  'जो साइज़ आप चुनेंगे सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
-    fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें']
+    fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें'],
+    fStock:     ['How many in stock', 'कितने बचे हैं (स्टॉक)'],
+    phStock:    ['count in hand', 'जितने दुकान में हैं'],
+    stockN:     ['{n} in stock', 'स्टॉक: {n}'],
+    stockNone:  ['stock not counted', 'स्टॉक नहीं भरा'],
+    stockWorth: ['{n} pieces in stock · worth ₹{v}', 'कुल {n} चीज़ें · कीमत ₹{v}'],
+
+    tabAna:     ['Sales', 'बिक्री'],
+    anaH:       ['What is selling', 'क्या बिक रहा है'],
+    anaWarn:    ['These are orders placed through the website only. Walk-ins, phone orders and WhatsApp group orders are not counted here — so read this as what the website is being asked for, not as your whole shop.',
+                 'ये सिर्फ़ वेबसाइट से आए ऑर्डर हैं। दुकान पर आकर, फ़ोन से या ग्रुप में दिए ऑर्डर इसमें नहीं गिने जाते — इसे "वेबसाइट पर क्या माँगा जा रहा है" समझें, पूरी दुकान का हिसाब नहीं।'],
+    anaLoad:    ['Show the numbers', 'हिसाब देखें'],
+    anaPeriod:  ['In this period', 'इस समय में'],
+    anaAgain:   ['Refresh', 'दोबारा देखें'],
+    anaLoading: ['Fetching…', 'ला रहे हैं…'],
+    anaNone:    ['No website orders yet in this period.', 'इस समय में वेबसाइट से कोई ऑर्डर नहीं आया।'],
+    anaNeed:    ['Set the reviews address and key in the राय tab first — the same server stores this.',
+                 'पहले राय टैब में पता और चाबी भरें — हिसाब भी उसी सर्वर पर रहता है।'],
+    r7:         ['7 days', '7 दिन'],
+    r30:        ['30 days', '30 दिन'],
+    r90:        ['90 days', '90 दिन'],
+    rAll:       ['All', 'सब'],
+    kOrders:    ['orders', 'ऑर्डर'],
+    kPieces:    ['pieces', 'चीज़ें'],
+    kValue:     ['order value', 'ऑर्डर की कीमत'],
+    kAvg:       ['average order', 'औसत ऑर्डर'],
+    secVeg:     ['Vegetables', 'सब्ज़ी'],
+    secGar:     ['Clothes', 'कपड़े'],
+    secFast:    ['Selling fastest', 'सबसे ज़्यादा बिक रहा'],
+    secSlow:    ['Nobody ordered these', 'इनका कोई ऑर्डर नहीं आया'],
+    secSize:    ['Sizes asked for', 'कौन-सा साइज़ माँगा गया'],
+    secColor:   ['Colours asked for', 'कौन-सा रंग माँगा गया'],
+    secPrice:   ['Price ranges', 'किस दाम का सामान'],
+    slowHint:   ['Not necessarily unpopular — an item with no photo, or one that is out of stock, gets ordered less because it is harder to want.',
+                 'ज़रूरी नहीं कि पसंद न हो — जिस चीज़ की फोटो नहीं है, या जो स्टॉक में नहीं है, उसका ऑर्डर कम आता ही है।']
   };
 
   var LANG_KEY = 'gavs.admin.lang.v1';
@@ -727,7 +794,7 @@ a{color:var(--leaf-d)}
     (d.products || []).forEach(function (p, i) {
       host.appendChild(itemRow(p, {
         fallbackEmoji: p.emoji || '🥬',
-        sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit); },
+        sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit) + ' · ' + stockLine(o); },
         photoPath: function (o) { return (o.id || 'item' + i) + '.jpg'; },
         redraw: function () { drawVeg(); paintWaList(); },
         after: paintWaList,
@@ -751,6 +818,10 @@ a{color:var(--leaf-d)}
           box.appendChild(fieldText(tx('fEmoji'), o.emoji,
             function (v) { o.emoji = v.slice(0, 3); }));
 
+          box.appendChild(fieldText(tx('fStock'), o.stock,
+            function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
+            { type: 'number', numeric: true, placeholder: tx('phStock') }));
+
           var p2 = document.createElement('p'); p2.className = 'help';
           p2.textContent = tx('vegEditNote');
           box.appendChild(p2);
@@ -758,6 +829,37 @@ a{color:var(--leaf-d)}
         }
       }));
     });
+  }
+
+  /* A count Tarun keeps by hand. Nothing decrements it automatically: the
+     page cannot see a walk-in sale, so a number that moved on its own would
+     be wrong more often than right. */
+  function stockLine(o) {
+    var n = Number(o.stock) || 0;
+    return n > 0 ? tx('stockN', { n: n }) : tx('stockNone');
+  }
+
+  function stockValue(list) {
+    return list.reduce(function (sum, o) {
+      return sum + (Number(o.stock) || 0) * (Number(o.price) || 0);
+    }, 0);
+  }
+
+  function paintStockTotals() {
+    if (files['index.html']) {
+      var veg = files['index.html'].data.products || [];
+      $('vegTotal').textContent = tx('stockWorth', {
+        n: veg.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
+        v: stockValue(veg).toLocaleString('en-IN')
+      });
+    }
+    if (files['garments.html']) {
+      var gar = garList();
+      $('garTotal').textContent = tx('stockWorth', {
+        n: gar.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
+        v: stockValue(gar).toLocaleString('en-IN')
+      });
+    }
   }
 
   /* ------------------------------- garments ------------------------------ */
@@ -786,7 +888,8 @@ a{color:var(--leaf-d)}
           var bits = [];
           if ((o.sizes || []).length) bits.push((o.sizes || []).join('/'));
           if ((o.colors || []).length) bits.push((o.colors || []).join(', '));
-          return bits.join(' · ') || tx('fillSizes');
+          bits.push(stockLine(o));
+          return bits.join(' · ');
         },
         photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
         redraw: drawGar,
@@ -820,6 +923,10 @@ a{color:var(--leaf-d)}
 
           box.appendChild(fieldText(tx('fFabric'), o.fabric, function (v) { o.fabric = clean1(v); },
             { placeholder: tx('phFabric') }));
+
+          box.appendChild(fieldText(tx('fStock'), o.stock,
+            function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
+            { type: 'number', numeric: true, placeholder: tx('phStock') }));
 
           box.appendChild(fieldText(tx('fNote'), o.note,
             function (v) { o.note = v.replace(/\s+/g, ' ').slice(0, 160); },
@@ -1117,21 +1224,196 @@ a{color:var(--leaf-d)}
                  .filter(Boolean).join(' · ');
   }
 
-  /* One UPI id, two shops. The settings tab edits the vegetable page's copy;
-     this pushes it to the garment page so Tarun never has to remember there
-     are two, or discover later that one of them is stale. */
-  function syncUpi() {
+  /* Values the two pages must agree on. The settings tab edits the vegetable
+     page's copy; this pushes them to the garment page so Tarun never has to
+     remember there are two, or discover later that one of them is stale. */
+  function syncShared() {
     if (!files['index.html'] || !files['garments.html']) return;
     var from = files['index.html'].data.store;
     var to = files['garments.html'].data.shop;
     to.upiId = from.upiId || '';
     to.upiName = from.upiName || to.upiName || '';
+    /* the garment page logs its orders to the same Worker */
+    to.reviewsApi = from.reviewsApi || '';
   }
+
+  /* ------------------------------ analytics ------------------------------
+     Counts orders started on the website. A walk-in never reaches here and a
+     customer who taps send without sending the WhatsApp does — which is why
+     the tab leads with a warning rather than a headline number. */
+  var orders = null;
+  var anaDays = 30;
+
+  function anaErr(msg) {
+    var p = $('anaErr');
+    if (!msg) { p.classList.add('hidden'); p.textContent = ''; return; }
+    p.classList.remove('hidden'); p.textContent = msg;
+  }
+
+  function drawRange() {
+    var host = $('anaRange');
+    host.innerHTML = '';
+    [[7, 'r7'], [30, 'r30'], [90, 'r90'], [0, 'rAll']].forEach(function (r) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick';
+      b.setAttribute('aria-pressed', String(anaDays === r[0]));
+      b.textContent = tx(r[1]);
+      b.addEventListener('click', function () {
+        anaDays = r[0]; drawRange();
+        if (orders) drawAna();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function loadAna() {
+    if (!revBase() || !revSecret()) { anaErr(tx('anaNeed')); return; }
+    anaErr('');
+    $('anaLoad').disabled = true;
+    $('anaLoad').textContent = tx('anaLoading');
+    revFetch(revBase() + '/orders?key=' + encodeURIComponent(revSecret()), { cache: 'no-store' })
+      .then(function (j) { orders = j.orders || []; drawAna(); })
+      .catch(function (e) { anaErr(e.message); })
+      .then(function () {
+        $('anaLoad').disabled = false;
+        $('anaLoad').textContent = tx('anaAgain');
+      });
+  }
+
+  function inRange(o) {
+    if (!anaDays) return true;
+    return o.ts >= Date.now() - anaDays * 86400000;
+  }
+
+  /* one horizontal bar per row, widest value setting the scale */
+  function barList(rows, unit) {
+    var wrap = document.createElement('div');
+    var max = rows.reduce(function (m, r) { return Math.max(m, r.v); }, 0) || 1;
+    rows.forEach(function (r) {
+      var d = document.createElement('div'); d.className = 'bar';
+      var nm = document.createElement('span'); nm.className = 'nm'; nm.textContent = r.k;
+      var tr = document.createElement('span'); tr.className = 'track';
+      var fl = document.createElement('span'); fl.className = 'fill';
+      fl.style.width = Math.round(r.v / max * 100) + '%';
+      tr.appendChild(fl);
+      var vv = document.createElement('span'); vv.className = 'val';
+      vv.textContent = r.v + (unit || '');
+      d.appendChild(nm); d.appendChild(tr); d.appendChild(vv);
+      wrap.appendChild(d);
+    });
+    return wrap;
+  }
+
+  function tally(list, keyFn, addFn) {
+    var map = {};
+    list.forEach(function (x) {
+      var k = keyFn(x);
+      if (!k) return;
+      map[k] = (map[k] || 0) + addFn(x);
+    });
+    return Object.keys(map).map(function (k) { return { k: k, v: map[k] }; })
+      .sort(function (a, b) { return b.v - a.v; });
+  }
+
+  function card(title, node, hint) {
+    var c = document.createElement('div'); c.className = 'card';
+    var h = document.createElement('h2'); h.textContent = title;
+    c.appendChild(h);
+    if (hint) { var p = document.createElement('p'); p.className = 'help'; p.textContent = hint; c.appendChild(p); }
+    c.appendChild(node);
+    return c;
+  }
+
+  function priceBand(n) {
+    if (n < 100) return '₹0–99';
+    if (n < 300) return '₹100–299';
+    if (n < 500) return '₹300–499';
+    if (n < 800) return '₹500–799';
+    return '₹800+';
+  }
+
+  function drawAna() {
+    var host = $('anaOut');
+    host.innerHTML = '';
+    var use = (orders || []).filter(inRange);
+
+    if (!use.length) {
+      var none = document.createElement('div'); none.className = 'card';
+      none.innerHTML = '<p class="help"></p>';
+      none.querySelector('p').textContent = tx('anaNone');
+      host.appendChild(none);
+      return;
+    }
+
+    /* headline numbers */
+    var lines = [];
+    use.forEach(function (o) {
+      (o.items || []).forEach(function (l) { lines.push({ o: o, l: l }); });
+    });
+    var pieces = lines.reduce(function (a, x) { return a + x.l.qty; }, 0);
+    var value = use.reduce(function (a, o) { return a + (o.total || 0); }, 0);
+
+    var kpi = document.createElement('div'); kpi.className = 'kpi';
+    [[use.length, tx('kOrders')], [pieces, tx('kPieces')],
+     ['₹' + value.toLocaleString('en-IN'), tx('kValue')],
+     ['₹' + Math.round(value / use.length).toLocaleString('en-IN'), tx('kAvg')]
+    ].forEach(function (p) {
+      var d = document.createElement('div');
+      var b = document.createElement('b'); b.textContent = p[0];
+      var sp = document.createElement('span'); sp.textContent = p[1];
+      d.appendChild(b); d.appendChild(sp); kpi.appendChild(d);
+    });
+    host.appendChild(card(tx('anaPeriod'), kpi));
+
+    [['veg', 'secVeg', 'index.html', 'products'],
+     ['gar', 'secGar', 'garments.html', 'items']].forEach(function (sh) {
+      var mine = lines.filter(function (x) { return x.o.shop === sh[0]; });
+      if (!mine.length) return;
+
+      var head = document.createElement('div'); head.className = 'card';
+      head.innerHTML = '<h2></h2>';
+      head.querySelector('h2').textContent = tx(sh[1]);
+      host.appendChild(head);
+
+      host.appendChild(card(tx('secFast'),
+        barList(tally(mine, function (x) { return x.l.name; },
+                      function (x) { return x.l.qty; }).slice(0, 10))));
+
+      /* what nobody asked for — needs the catalogue, which this page holds */
+      var cat = files[sh[2]] ? (files[sh[2]].data[sh[3]] || []) : [];
+      var asked = {};
+      mine.forEach(function (x) { asked[x.l.id] = 1; });
+      var dead = cat.filter(function (it) { return !asked[it.id]; });
+      if (dead.length) {
+        var d = document.createElement('div'); d.className = 'dead';
+        dead.forEach(function (it) {
+          var row = document.createElement('div');
+          row.textContent = '• ' + (it.hi || it.en || it.id) +
+            (it.photo ? '' : '  (' + tx('photoAdd') + ')');
+          d.appendChild(row);
+        });
+        host.appendChild(card(tx('secSlow'), d, tx('slowHint')));
+      }
+
+      if (sh[0] === 'gar') {
+        var sizes = tally(mine, function (x) { return x.l.size; }, function (x) { return x.l.qty; });
+        if (sizes.length) host.appendChild(card(tx('secSize'), barList(sizes)));
+        var cols = tally(mine, function (x) { return x.l.color; }, function (x) { return x.l.qty; });
+        if (cols.length) host.appendChild(card(tx('secColor'), barList(cols)));
+      }
+
+      host.appendChild(card(tx('secPrice'),
+        barList(tally(mine, function (x) { return priceBand(x.l.price); },
+                      function (x) { return x.l.qty; }))));
+    });
+  }
+
+  $('anaLoad').addEventListener('click', loadAna);
 
   /* -------------------------------- tabs --------------------------------- */
   function tab(which) {
     [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabRev', 'paneRev'],
-     ['tabSet', 'paneSet']].forEach(function (t) {
+     ['tabAna', 'paneAna'], ['tabSet', 'paneSet']].forEach(function (t) {
       var on = t[0] === which;
       $(t[0]).setAttribute('aria-selected', String(on));
       $(t[1]).classList.toggle('hidden', !on);
@@ -1152,6 +1434,7 @@ a{color:var(--leaf-d)}
   $('tabVeg').addEventListener('click', function () { tab('tabVeg'); });
   $('tabGar').addEventListener('click', function () { tab('tabGar'); });
   $('tabRev').addEventListener('click', function () { tab('tabRev'); });
+  $('tabAna').addEventListener('click', function () { tab('tabAna'); });
   $('tabSet').addEventListener('click', function () { tab('tabSet'); });
 
   /* -------------------------------- save --------------------------------- */
@@ -1163,7 +1446,7 @@ a{color:var(--leaf-d)}
       chain = chain.then(function () { return savePhoto(ph); });
     });
     chain = chain
-      .then(function () { pendingPhotos = []; syncCrossSell(); syncUpi(); return saveFile('index.html'); })
+      .then(function () { pendingPhotos = []; syncCrossSell(); syncShared(); return saveFile('index.html'); })
       .then(function () { return saveFile('garments.html'); })
       .then(function () {
         setStatus(tx('savedOk'));
@@ -1189,7 +1472,7 @@ a{color:var(--leaf-d)}
         $('login').classList.add('hidden');
         $('editor').classList.remove('hidden');
         $('savebar').classList.remove('hidden');
-        drawVeg(); drawGar(); drawSet(); drawRev();
+        drawVeg(); drawGar(); drawSet(); drawRev(); paintStockTotals(); drawRange();
         setStatus(tx('savedAll'));
         $('save').disabled = true;
       })
