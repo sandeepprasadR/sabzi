@@ -227,6 +227,10 @@ body.hasbag{padding-bottom:96px}
 .care ul li{margin-bottom:5px}
 .care ul li:last-child{margin-bottom:0}
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
+.shot{position:relative}
+.newtag{position:absolute;top:9px;left:9px;z-index:2;padding:5px 10px;border-radius:999px;
+  background:var(--carrot,#c2410c);color:#fff;font-size:11.5px;font-weight:800;
+  letter-spacing:.3px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
 .crosslink svg{width:16px;height:16px}
 /* the same way back, at the top of the header, for the customer who came
@@ -782,6 +786,7 @@ body.hasbag{padding-bottom:96px}
       slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालिए:",
       foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
       cross:"सब्ज़ी ऑर्डर करें", backVeg:"सब्ज़ी की दुकान पर वापस",
+      newCat:"नया आया है", newTag:"नया", newNone:"अभी कोई नई चीज़ नहीं आई।",
       bagAdd:"बैग में डालें", bagAdded:"डाल दिया ✓", pickSize:"पहले साइज़ चुनें", pickColor:"रंग चुनें",
       colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", onlyLeft:"सिर्फ़ {n} बचे हैं", askMore:"इसके बारे में पूछें",
       bagOne:"बैग में 1 चीज़", bagMany:"बैग में {n} चीज़ें", bagHint:"कुल ₹{t}", bagView:"बैग देखें",
@@ -817,6 +822,7 @@ body.hasbag{padding-bottom:96px}
       slot:"Photo goes here", slotHelp:"Add a photo with this name:",
       foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
       cross:"Order vegetables", backVeg:"Back to the vegetable shop",
+      newCat:"New in", newTag:"NEW", newNone:"Nothing new has come in just now.",
       bagAdd:"Add to bag", bagAdded:"Added ✓", pickSize:"Pick a size first", pickColor:"Pick a colour",
       colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", onlyLeft:"Only {n} left", askMore:"Ask about this",
       bagOne:"1 item in bag", bagMany:"{n} items in bag", bagHint:"Total ₹{t}", bagView:"View bag",
@@ -852,6 +858,7 @@ body.hasbag{padding-bottom:96px}
       slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
       foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
       cross:"সবজি অর্ডার করুন", backVeg:"সবজির দোকানে ফিরুন",
+      newCat:"নতুন এসেছে", newTag:"নতুন", newNone:"এখন নতুন কিছু আসেনি।",
       bagAdd:"ব্যাগে দিন", bagAdded:"দেওয়া হয়েছে ✓", pickSize:"আগে সাইজ বাছুন", pickColor:"রং বাছুন",
       colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", onlyLeft:"মাত্র {n}টি বাকি", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
       bagOne:"ব্যাগে ১টি জিনিস", bagMany:"ব্যাগে {n}টি জিনিস", bagHint:"মোট ₹{t}", bagView:"ব্যাগ দেখুন",
@@ -887,6 +894,7 @@ body.hasbag{padding-bottom:96px}
       slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
       foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
       cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ", backVeg:"ਸਬਜ਼ੀ ਦੀ ਦੁਕਾਨ 'ਤੇ ਵਾਪਸ",
+      newCat:"ਨਵਾਂ ਆਇਆ ਹੈ", newTag:"ਨਵਾਂ", newNone:"ਹਾਲੇ ਕੁਝ ਨਵਾਂ ਨਹੀਂ ਆਇਆ।",
       bagAdd:"ਬੈਗ ਵਿੱਚ ਪਾਓ", bagAdded:"ਪਾ ਦਿੱਤਾ ✓", pickSize:"ਪਹਿਲਾਂ ਸਾਈਜ਼ ਚੁਣੋ", pickColor:"ਰੰਗ ਚੁਣੋ",
       colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", onlyLeft:"ਸਿਰਫ਼ {n} ਬਚੇ ਹਨ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
       bagOne:"ਬੈਗ ਵਿੱਚ 1 ਚੀਜ਼", bagMany:"ਬੈਗ ਵਿੱਚ {n} ਚੀਜ਼ਾਂ", bagHint:"ਕੁੱਲ ₹{t}", bagView:"ਬੈਗ ਵੇਖੋ",
@@ -922,6 +930,7 @@ body.hasbag{padding-bottom:96px}
       slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
       foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
       cross:"కూరగాయలు ఆర్డర్ చేయండి", backVeg:"కూరగాయల దుకాణానికి తిరిగి",
+      newCat:"కొత్తగా వచ్చినవి", newTag:"కొత్త", newNone:"ఇప్పుడే కొత్తగా ఏమీ రాలేదు.",
       bagAdd:"బ్యాగ్‌లో వేయండి", bagAdded:"వేశాం ✓", pickSize:"ముందు సైజు ఎంచుకోండి", pickColor:"రంగు ఎంచుకోండి",
       colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", onlyLeft:"కేవలం {n} మిగిలాయి", askMore:"దీని గురించి అడగండి",
       bagOne:"బ్యాగ్‌లో 1 వస్తువు", bagMany:"బ్యాగ్‌లో {n} వస్తువులు", bagHint:"మొత్తం ₹{t}", bagView:"బ్యాగ్ చూడండి",
@@ -975,6 +984,7 @@ body.hasbag{padding-bottom:96px}
   var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
   var shop = DATA.shop;
   var items = DATA.items || [];
+  var NEW_DAYS = 30;          /* how long a 'नया' label lives */
   var lang = load(LANG_KEY, null);
   if (typeof lang !== 'string' || !T[lang]) lang = 'hi';
   var t = T[lang];
@@ -1143,13 +1153,31 @@ body.hasbag{padding-bottom:96px}
       : t.closedNow + ' · ' + fill(t.opensAt, { t: pretty(shop.openTime) });
   }
 
-  /* ============================== catalogue ============================== */
+  /* ============================== catalogue ==============================
+     What is new. Tarun marks an item in the admin and it stamps the date;
+     the label lives for thirty days and then lets go by itself, because a
+     kurta still flagged new in March is worse than no flag at all.
+
+     NEW_DAYS is declared up with the other state, not here: the first render
+     happens before this line would run, and a hoisted `var` is undefined at
+     that point, which quietly made every comparison false. */
+  function isNew(it) {
+    if (!it.newSince) return false;
+    var d = new Date(it.newSince + 'T00:00:00');
+    if (isNaN(d.getTime())) return false;
+    return (Date.now() - d.getTime()) / 86400000 <= NEW_DAYS;
+  }
+  function anyNew() { return items.some(isNew); }
+
   function renderTabs() {
     var cats = DATA.categories || [];
     el.tabs.innerHTML = '';
-    if (cats.length < 2) { el.tabs.hidden = true; return; }
+    if (cats.length < 2 && !anyNew()) { el.tabs.hidden = true; return; }
     el.tabs.hidden = false;
-    [{ id:'all', label:t.allCat }].concat(cats.map(function (c) {
+    /* new first: it is the reason a regular customer opens the page again */
+    (anyNew() ? [{ id:'new', label:t.newCat }] : [])
+      .concat([{ id:'all', label:t.allCat }])
+      .concat(cats.map(function (c) {
       return { id: c.id, label: c[lang] || c.en };
     })).forEach(function (c) {
       var b = document.createElement('button');
@@ -1175,8 +1203,10 @@ body.hasbag{padding-bottom:96px}
 
   function renderRack() {
     el.rack.innerHTML = '';
-    items.filter(function (it) { return activeCat === 'all' || it.cat === activeCat; })
-      .forEach(function (it) { el.rack.appendChild(card(it)); });
+    items.filter(function (it) {
+      if (activeCat === 'new') return isNew(it);
+      return activeCat === 'all' || it.cat === activeCat;
+    }).forEach(function (it) { el.rack.appendChild(card(it)); });
   }
 
   /* Stock is a number Tarun keeps by hand. Zero means he has said there are
@@ -1202,6 +1232,11 @@ body.hasbag{padding-bottom:96px}
     } else {
       shot.innerHTML = '<div class="slot"><svg aria-hidden="true"><use href="#i-hanger"></use></svg>' +
                        '<b>' + esc(name(it)) + '</b></div>';
+    }
+    if (isNew(it)) {
+      var tag = document.createElement('span');
+      tag.className = 'newtag'; tag.textContent = t.newTag;
+      shot.appendChild(tag);
     }
     art.appendChild(shot);
 

@@ -284,6 +284,13 @@ a{color:var(--leaf-d)}
         <p class="hint" data-tx="waHint"></p>
         <textarea id="waList" rows="12" readonly style="margin-top:10px;font-size:14px"></textarea>
         <button class="btn btn-ghost" id="copyWa" style="margin-top:10px" data-tx="copyWa"></button>
+        <button class="btn btn-ghost" id="waPic" style="margin-top:8px" data-tx="waPic"></button>
+        <p class="help" data-tx="waPicHint"></p>
+        <div id="waPicOut" class="hidden" style="margin-top:10px">
+          <img id="waPicImg" alt="" style="width:100%;border-radius:12px;border:1.5px solid var(--line)">
+          <a id="waPicDl" class="btn btn-ghost" style="margin-top:8px;text-align:center;text-decoration:none"
+             download="rate-list.png" data-tx="waPicSave"></a>
+        </div>
       </div>
       <div class="card">
         <h2 data-tx="outH"></h2>
@@ -479,6 +486,17 @@ a{color:var(--leaf-d)}
     costLoss:   ['₹{c} a {u} · you sell at ₹{p} · that is ₹{m} below cost',
                  '₹{c} प्रति {u} · आप बेचते हैं ₹{p} · यह लागत से ₹{m} कम है'],
 
+    isNew:      ['New', 'नया'],
+    newFor:     ['New for {n} more days', '{n} दिन और "नया" दिखेगा'],
+    newOff:     ['Not marked new', 'नया नहीं लगा'],
+    newHint:    ['Marked items sit under नया आया है on the shop page and go into the WhatsApp list. The label drops off by itself after 30 days.',
+                 'जिन पर लगाएँगे वे कपड़ों के पेज पर "नया आया है" में दिखेंगे और WhatsApp लिस्ट में भी जाएँगे। 30 दिन बाद यह लेबल अपने आप हट जाएगा।'],
+    fPick:      ['Or pick one', 'या इनमें से चुनिए'],
+    waPic:      ['Make a picture of the rate list', 'रेट लिस्ट की फोटो बनाएँ'],
+    waPicWait:  ['Drawing…', 'बन रही है…'],
+    waPicSave:  ['Save the picture', 'फोटो सेव करें'],
+    waPicHint:  ['WhatsApp cannot show photos inside a typed message. Send this picture first, then paste the list under it.',
+                 'WhatsApp के लिखे हुए मैसेज में फोटो नहीं आ सकती। पहले यह फोटो भेजिए, फिर उसके नीचे लिस्ट पेस्ट कर दीजिए।'],
     sold:       ['Sold', 'बेचा'],
     soldTtl:    ['Sold across the counter', 'दुकान पर बिका'],
     soldQty:    ['How many', 'कितने'],
@@ -740,6 +758,33 @@ a{color:var(--leaf-d)}
     return b;
   }
 
+  /* What is new. A date rather than a flag: a flag stays on until somebody
+     remembers to take it off, and nobody ever does. Thirty days after he
+     marks it, the label lets go by itself. */
+  var NEW_DAYS = 30;
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function newDaysLeft(o) {
+    if (!o.newSince) return 0;
+    var d = new Date(o.newSince + 'T00:00:00');
+    if (isNaN(d.getTime())) return 0;
+    return Math.max(0, Math.ceil(NEW_DAYS - (Date.now() - d.getTime()) / 86400000));
+  }
+  function isNewItem(o) { return newDaysLeft(o) > 0; }
+
+  function newChip(obj, redraw) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip';
+    var on = isNewItem(obj);
+    b.setAttribute('aria-pressed', String(on));
+    b.textContent = tx('isNew');
+    b.title = on ? tx('newFor', { n: newDaysLeft(obj) }) : tx('newOff');
+    b.addEventListener('click', function () {
+      obj.newSince = on ? '' : today();
+      markDirty(); paintWaList(); redraw();
+    });
+    return b;
+  }
+
   function photoChips(obj, path, redraw) {
     var out = [];
     var ph = document.createElement('button');
@@ -756,6 +801,43 @@ a{color:var(--leaf-d)}
       out.push(rm);
     }
     return out;
+  }
+
+  /* Every item added through this page used to inherit the same leaf, so a
+     bottle of milk went into the WhatsApp list as 🥬. The field still takes
+     anything typed; these are just the ones a vegetable shop needs. */
+  var EMOJI = ['🥔','🧅','🍅','🥒','🧄','🫑','🌶️','🥕','🥬','🥦','🍆','🎃',
+               '🌽','🫚','🍠','🍋','🍌','🍎','🥛','🌿'];
+
+  function emojiField(o) {
+    var wrap = document.createElement('div');
+    var fld = fieldText(tx('fEmoji'), o.emoji, function (v) { o.emoji = v.slice(0, 3); });
+    var input = fld.querySelector('input');
+    wrap.appendChild(fld);
+
+    var sp = document.createElement('span');
+    sp.style.cssText = 'display:block;font-size:14px;font-weight:600;margin:12px 0 0';
+    sp.textContent = tx('fPick');
+    var row = document.createElement('div'); row.className = 'picks';
+    EMOJI.forEach(function (e) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick';
+      b.style.fontSize = '19px';
+      b.textContent = e;
+      b.setAttribute('aria-label', e);
+      b.setAttribute('aria-pressed', String(o.emoji === e));
+      b.addEventListener('click', function () {
+        o.emoji = e; input.value = e;
+        Array.prototype.forEach.call(row.children, function (c) {
+          c.setAttribute('aria-pressed', 'false');
+        });
+        b.setAttribute('aria-pressed', 'true');
+        markDirty(); paintWaList();
+      });
+      row.appendChild(b);
+    });
+    wrap.appendChild(sp); wrap.appendChild(row);
+    return wrap;
   }
 
   /* One row: thumbnail, name, price, then a बदलें button that opens every
@@ -796,6 +878,7 @@ a{color:var(--leaf-d)}
     acts.appendChild(ed);
 
     acts.appendChild(stockChip(obj, opts.redraw));
+    if (opts.newChip) acts.appendChild(newChip(obj, opts.redraw));
     if (opts.sellPanel) acts.appendChild(sellChip(obj, opts.redraw));
     photoChips(obj, opts.photoPath(obj), opts.redraw).forEach(function (c) { acts.appendChild(c); });
 
@@ -955,8 +1038,7 @@ a{color:var(--leaf-d)}
           ], function (v) { o.unit = v; o.step = (v === 'kg' ? 0.5 : 1); paintWaList(); }));
           box.appendChild(g2);
 
-          box.appendChild(fieldText(tx('fEmoji'), o.emoji,
-            function (v) { o.emoji = v.slice(0, 3); }));
+          box.appendChild(emojiField(o));
 
           box.appendChild(fieldText(tx('fStock', { u: baseLabel(o, 'veg') }), o.stock,
             function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
@@ -1113,6 +1195,7 @@ a{color:var(--leaf-d)}
         photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
         redraw: drawGar,
         sellPanel: function (o) { return sellPanel(o, 'gar', drawGar); },
+        newChip: true,
         remove: function () { list.splice(i, 1); markDirty(); drawGar(); },
         panel: function (o) {
           var box = document.createElement('div'); box.className = 'edit';
@@ -1157,6 +1240,11 @@ a{color:var(--leaf-d)}
           var p2 = document.createElement('p'); p2.className = 'help';
           p2.textContent = tx('garEditNote');
           box.appendChild(p2);
+
+          var p3 = document.createElement('p'); p3.className = 'help';
+          p3.textContent = isNewItem(o) ? tx('newFor', { n: newDaysLeft(o) }) + '. ' + tx('newHint')
+                                        : tx('newHint');
+          box.appendChild(p3);
           return box;
         }
       }));
@@ -1199,6 +1287,8 @@ a{color:var(--leaf-d)}
   function unitShort(u) {
     return u === 'kg' ? tx('uKg') : u === '250g' ? tx('u250') : u === 'bunch' ? tx('uBunch') : tx('uPc');
   }
+  var SITE = 'https://guru-ashish.in';
+
   function paintWaList() {
     if (!files['index.html']) return;
     var d = files['index.html'].data, s = d.store;
@@ -1209,10 +1299,149 @@ a{color:var(--leaf-d)}
     });
     out.push('', '✨ 100% ताज़ा, रोज़ सुबह मंडी से ✨',
       '🚚 फ्री होम डिलीवरी, ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
-      '🛒 ऑर्डर: https://guru-ashish.in',
-      '📞 ' + (s.phone || ''), '📍 ' + (s.address || ''));
+      '🛒 ऑर्डर: ' + SITE);
+
+    /* The same message carries the other shop. Most of the society knows
+       Tarun for vegetables and has never heard about the clothes. */
+    if (files['garments.html']) {
+      var fresh = garList().filter(function (it) {
+        return it.available !== false && isNewItem(it);
+      }).map(function (it) { return it.hi || it.en; }).filter(Boolean);
+      out.push('');
+      if (fresh.length) {
+        out.push('✨ *नया आया है*: ' + fresh.slice(0, 6).join(', '));
+      }
+      out.push('👕 कपड़े भी देखिए: ' + SITE + '/garments.html');
+    }
+
+    out.push('', '📞 ' + (s.phone || ''), '📍 ' + (s.address || ''));
     $('waList').value = out.join('\n');
   }
+
+  /* ---------------------- the rate list as a picture ---------------------
+     WhatsApp will not put a photograph inside a typed message, and the
+     photographs are the whole reason a rate list is worth reading. So draw
+     one: the same list, with the real pictures, as a single image Tarun
+     sends to the group and pastes the text under.
+
+     Every photo here is same-origin, either a file next to this page or a
+     data: URI he has just picked, so the canvas stays clean and can be
+     exported. */
+  var PIC = { W: 1000, ROW: 132, HEAD: 212, FOOT: 196 };
+
+  function loadImg(src) {
+    return new Promise(function (done) {
+      if (!src) return done(null);
+      var im = new Image();
+      im.onload = function () { done(im); };
+      im.onerror = function () { done(null); };   /* a missing photo is not fatal */
+      im.src = src;
+    });
+  }
+
+  function roundRect(c, x, y, w, h, r) {
+    c.beginPath();
+    c.moveTo(x + r, y);
+    c.arcTo(x + w, y, x + w, y + h, r);
+    c.arcTo(x + w, y + h, x, y + h, r);
+    c.arcTo(x, y + h, x, y, r);
+    c.arcTo(x, y, x + w, y, r);
+    c.closePath();
+  }
+
+  function drawRateCard() {
+    var d = files['index.html'].data, st = d.store;
+    var list = (d.products || []).filter(function (p) { return p.available !== false; });
+    var H = PIC.HEAD + list.length * PIC.ROW + PIC.FOOT;
+    var cv = document.createElement('canvas');
+    cv.width = PIC.W; cv.height = H;
+    var c = cv.getContext('2d');
+    var F = '"Noto Sans Devanagari", system-ui, sans-serif';
+
+    c.fillStyle = '#fdfaf3'; c.fillRect(0, 0, PIC.W, H);
+
+    /* header */
+    c.fillStyle = '#5b1839'; c.fillRect(0, 0, PIC.W, PIC.HEAD - 26);
+    c.fillStyle = '#fff';
+    c.font = '700 46px ' + F;
+    c.fillText(st.name || 'गुरु आशीष', 44, 84);
+    c.font = '700 34px ' + F;
+    c.fillStyle = '#f3d9a4';
+    c.fillText('आज की रेट लिस्ट', 44, 136);
+    c.font = '500 26px ' + F;
+    c.fillStyle = 'rgba(255,255,255,.82)';
+    var dt = new Date().toLocaleDateString('hi-IN', { day: 'numeric', month: 'long' });
+    c.textAlign = 'right'; c.fillText(dt, PIC.W - 44, 136); c.textAlign = 'left';
+
+    return Promise.all(list.map(function (p) {
+      return loadImg(p._preview || p.photo || '');
+    })).then(function (shots) {
+      list.forEach(function (p, i) {
+        var y = PIC.HEAD + i * PIC.ROW;
+        if (i % 2 === 0) {
+          c.fillStyle = '#f6efe1';
+          roundRect(c, 30, y - 8, PIC.W - 60, PIC.ROW - 14, 18); c.fill();
+        }
+
+        var box = 96, bx = 50, by = y + 4;
+        c.save();
+        roundRect(c, bx, by, box, box, 18); c.clip();
+        if (shots[i]) {
+          var im = shots[i];
+          var sc = Math.max(box / im.width, box / im.height);
+          var w = im.width * sc, h = im.height * sc;
+          c.drawImage(im, bx + (box - w) / 2, by + (box - h) / 2, w, h);
+        } else {
+          c.fillStyle = '#e8dcc2'; c.fillRect(bx, by, box, box);
+          c.font = '54px ' + F; c.textAlign = 'center';
+          c.fillStyle = '#5b1839';
+          c.fillText(p.emoji || '•', bx + box / 2, by + box / 2 + 20);
+          c.textAlign = 'left';
+        }
+        c.restore();
+
+        c.fillStyle = '#2a1a10';
+        c.font = '700 38px ' + F;
+        c.fillText(p.hi || p.en || '', bx + box + 26, y + 46);
+        c.fillStyle = '#7a6a58';
+        c.font = '500 26px ' + F;
+        c.fillText(unitLabel(p.unit), bx + box + 26, y + 84);
+
+        c.textAlign = 'right';
+        c.fillStyle = '#1b7a3e';
+        c.font = '800 44px ' + F;
+        c.fillText('₹' + p.price, PIC.W - 50, y + 66);
+        c.textAlign = 'left';
+      });
+
+      var fy = PIC.HEAD + list.length * PIC.ROW + 30;
+      c.fillStyle = '#5b1839';
+      roundRect(c, 30, fy, PIC.W - 60, PIC.FOOT - 66, 20); c.fill();
+      c.fillStyle = '#fff';
+      c.font = '700 30px ' + F;
+      c.fillText('🚚 फ्री होम डिलीवरी · ' + (st.deliveryMinutes || '15-20') + ' मिनट', 60, fy + 52);
+      c.font = '500 27px ' + F;
+      c.fillStyle = 'rgba(255,255,255,.9)';
+      c.fillText('📞 ' + (st.phone || '') + '   ·   ' + SITE.replace(/^https:\/\//, ''), 60, fy + 98);
+      return cv;
+    });
+  }
+
+  $('waPic').addEventListener('click', function () {
+    var b = $('waPic'), old = tx('waPic');
+    b.disabled = true; b.textContent = tx('waPicWait');
+    var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    ready.then(drawRateCard).then(function (cv) {
+      var url = cv.toDataURL('image/png');
+      $('waPicImg').src = url;
+      $('waPicDl').href = url;
+      $('waPicOut').classList.remove('hidden');
+      b.disabled = false; b.textContent = old;
+    }).catch(function () {
+      b.disabled = false; b.textContent = old;
+      setStatus(tx('saveFail') + 'picture');
+    });
+  });
 
   $('copyWa').addEventListener('click', function () {
     var a = $('waList'); a.select(); a.setSelectionRange(0, 999999);
@@ -1249,6 +1478,8 @@ a{color:var(--leaf-d)}
       id: 'g' + Date.now(), cat: (cats[0] || [''])[0],
       hi: clean1(hi), en: clean1(hi), price: 0, mrp: 0,
       sizes: [], colors: [], fabric: '', note: '',
+      /* it is new by definition on the day it is added */
+      newSince: today(),
       available: true, photo: '', _open: true
     });
     markDirty(); drawGar();

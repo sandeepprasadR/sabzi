@@ -105,6 +105,30 @@ bands, for both shops, with the split between the two shown whenever both
 are present. It still leads with what it cannot see, because a walk-in
 nobody recorded and an order taken on the phone remain invisible.
 
+## What is new
+
+Tarun marks a garment with the **नया** button and it stamps that day's
+date. The clothing page then shows it under **नया आया है**, the first tab
+in the rack, with a small ribbon on the card, and the WhatsApp rate list
+names it. Thirty days later the label lets go by itself: a flag stays on
+until somebody remembers to take it off, and nobody ever does. Anything
+added through the admin is marked new on the day it arrives.
+
+## The WhatsApp rate list
+
+The **Settings** tab builds the message Tarun pastes into the society
+group. It carries the vegetables with their prices, whatever is new in
+the clothing shop, and a link to each of the two pages, because most of
+the society knows him for vegetables and has never heard about the
+clothes.
+
+WhatsApp will not put a photograph inside a typed message, and the
+photographs are the whole reason a rate list is worth reading. So the
+same tab draws one: a single picture of the list, with the real product
+photos, that he sends to the group and pastes the text under. It is
+drawn in the browser from the photos already next to the page, so it
+needs no server and no upload.
+
 ## Customer ratings
 
 Customers rate the shop out of five stars and can leave a line of text.
