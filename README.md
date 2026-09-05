@@ -1,4 +1,4 @@
-# गुरु आशीष वेजिटेबल स्टोर — guru-ashish.in
+# गुरु आशीष वेजिटेबल स्टोर, guru-ashish.in
 
 A free, no-backend ordering page for a neighbourhood vegetable seller in
 Signature Global Solera, Gurgaon, plus a catalogue page for the same
@@ -14,10 +14,10 @@ door. No app, no signup, no payment gateway, no server bills.
 
 | File | What it is |
 |---|---|
-| `index.html` | The storefront. Self-contained — catalogue, copy and logic all inside |
-| `garments.html` | The clothing shop — size, colour, quantity, bag, courier or collection |
+| `index.html` | The storefront. Self-contained: catalogue, copy and logic all inside |
+| `garments.html` | The clothing shop: size, colour, quantity, bag, courier or collection |
 | `admin.html` | Private editor the shopkeeper opens on his phone |
-| `worker/` | Cloudflare Worker holding customer ratings — the one moving part |
+| `worker/` | Cloudflare Worker holding customer ratings, the one moving part |
 | `CNAME` | The custom domain |
 
 ## Updating prices, stock and photos
@@ -27,7 +27,7 @@ token once (the page explains how to make one) and it stays on that
 phone.
 
 The page is in **English by default**, with a Hindi toggle in the header
-that remembers the choice. It translates the admin only — product names
+that remembers the choice. It translates the admin only. Product names
 stay as they are, and the WhatsApp rate list stays Hindi because it goes
 to the society group.
 
@@ -37,7 +37,7 @@ From there:
 - for clothes: which sizes are in stock, colours, fabric, a line of
   sales copy, and an old price to show struck through
 - change any price, and the unit it is sold by
-- mark something out of stock — it greys out on the site instead of
+- mark something out of stock, and it greys out on the site instead of
   vanishing, so customers know it is coming back
 - take or pick a photo; it is shrunk to 640px JPEG and committed
 - add or remove items, on either shop
@@ -59,14 +59,18 @@ removes it.
 ## Two shops, one site
 
 `index.html` sells vegetables for delivery. `garments.html` sells clothes,
-either collected from the shop or sent by courier — the customer picks a
+either collected from the shop or sent by courier. The customer picks a
 size and quantity, and gives a full address only when they choose courier.
 
 The vegetable page carries a strip of garment photos in its header, above
 the fold, because most people arrive for vegetables and never learn about
-the clothes. It cannot read the other catalogue at runtime — both pages are
-standalone files — so the admin copies four photos and their names into
+the clothes. It cannot read the other catalogue at runtime, because both pages are
+standalone files, so the admin copies four photos and their names into
 `store.crossSell` every time it saves.
+
+The clothing page links back to the vegetables in two places: a pill at the
+top of its header and the line in its footer, so the way back is there
+whether the customer has scrolled or not.
 
 Both bags live in `localStorage` and survive moving between the pages.
 
@@ -80,7 +84,7 @@ Nothing decrements it automatically. The page cannot see a walk-in or a
 phone order, which is most of the business, so a number that moved on its
 own would be wrong more often than right.
 
-The **Sales** tab counts orders started on the website — fastest movers,
+The **Sales** tab counts orders started on the website: fastest movers,
 items nobody ordered, sizes, colours and price bands, for both shops. It
 leads with a warning that this is the website's slice and not the whole
 shop, because that is exactly the mistake the numbers invite.
@@ -93,7 +97,7 @@ above them the handful the shopkeeper has picked out. Both halves are
 real: he chooses what to highlight, he cannot change the average.
 
 Ratings are the only thing here that needs a server, so it is the
-smallest one that exists — a Cloudflare Worker with a KV namespace, both
+smallest one that exists, a Cloudflare Worker with a KV namespace, both
 free at this volume. `worker/README.md` has the deploy steps. Afterwards,
 put the Worker's URL and admin key into the **राय** tab of `admin.html`;
 until the URL is set, the whole ratings section stays hidden and the rest
@@ -110,7 +114,7 @@ Both pages keep their catalogue as plain JSON between markers:
 var DATA = /*<CATALOGUE>*/{ ... }/*</CATALOGUE>*/;
 ```
 
-Edit the JSON and push. Keep the markers — `admin.html` finds the block
+Edit the JSON and push. Keep the markers, because `admin.html` finds the block
 by them.
 
 ## Deliberately left out

@@ -83,7 +83,7 @@ a:hover{color:var(--carrot)}
 .quote b{font-weight:700}
 
 .perks{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0 0;padding:0}
-/* clearance for the 14px cream lip on .hdr:after — on the container, so it
+/* clearance for the 14px cream lip on .hdr:after, set on the container so it
    holds whether or not the cross-sell strip is showing */
 .hdr .wrap{padding-bottom:20px}
 .perks li{background:rgba(255,255,255,.12);border-radius:12px;padding:9px 7px;font-size:11.5px;
@@ -602,7 +602,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
 <script>
 /* ============================================================================
-   Guru Ashish Vegetable Store — single-file order page.
+   Guru Ashish Vegetable Store, single-file order page.
    No backend, no build step. The cart becomes a WhatsApp message.
 
    EDIT PRICES AND SHOP DETAILS ONLY INSIDE THE `DATA` OBJECT BELOW.
@@ -831,7 +831,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   }/*</CATALOGUE>*/;
 
   /* ==========================================================================
-     TRANSLATIONS — add a language by copying a whole block and translating it,
+     TRANSLATIONS. Add a language by copying a whole block and translating it,
      then adding its code to LANGS below and a name field to every product.
      ======================================================================== */
   var LANGS = [
@@ -845,106 +845,106 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   var T = {
     hi: {
       ttlReviews:"ग्राहकों की राय",
-      revCount:"{n} ग्राहकों ने राय दी",
+      revCount:"{n} ग्राहकों ने राय दी है",
       fbTtl:"कितने स्टार देंगे?",
-      fbLead:"आपकी राय साइट पर दिखेगी — बाकी पड़ोसियों की मदद होगी।",
+      fbLead:"आपकी राय साइट पर दिखेगी, इससे बाकी पड़ोसियों को मदद मिलेगी।",
       fbSend:"राय भेजें",
       fbPh:"दो शब्द लिखिए (optional)",
       fbThanks:"धन्यवाद! आपकी राय दर्ज हो गई।",
-      fbTellT:"तरुण को भी बताएं",
+      fbTellT:"तरुण को भी बताएँ",
       fbNeedStar:"पहले स्टार चुनिए।",
-      fbFail:"भेज नहीं पाए — थोड़ी देर बाद कोशिश कीजिए।",
-      fbTooSoon:"अभी-अभी राय दी है। थोड़ी देर बाद।",
+      fbFail:"राय भेजी नहीं जा सकी। थोड़ी देर बाद कोशिश कीजिए।",
+      fbTooSoon:"आपने अभी-अभी राय दी है। थोड़ी देर बाद फिर कोशिश कीजिए।",
       revNone:"अभी तक कोई राय नहीं",
       copyHint:"WhatsApp में मैसेज नहीं आया? नीचे से कॉपी करके चैट में पेस्ट कर दें।", copyBtn:"ऑर्डर कॉपी करें", copyDone:"कॉपी हो गया ✓",
-      soldOut:"आज उपलब्ध नहीं", onlyLeft:"सिर्फ़ {n} बचे",
+      soldOut:"आज उपलब्ध नहीं", onlyLeft:"सिर्फ़ {n} बचे हैं",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiCopy:"UPI ID कॉपी करें",
       upiCopied:"कॉपी हो गया ✓", lblPay:"पैसे कैसे देंगे?", payUpiBtnL:"अभी UPI से", payLaterL:"डिलीवरी पर",
-      payNow:"UPI से ₹{a} भेजें", paidLbl:"मैंने पैसे भेज दिए — स्क्रीनशॉट भी भेजूँगा",
-      shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
-      ttlHelp:"कोई दिक्कत? बताइए", helpLead:"सीधे तरुण को WhatsApp पर — कोई फ़ॉर्म नहीं, कोई इंतज़ार नहीं।",
+      payNow:"UPI से ₹{a} भेजें", paidLbl:"मैंने पैसे भेज दिए हैं, स्क्रीनशॉट भी भेजूँगा",
+      shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।", upiNote:"पैसे डिलीवरी के समय दें, नकद या UPI, जैसा आपको ठीक लगे।",
+      ttlHelp:"कोई दिक्कत? बताइए", helpLead:"सीधे तरुण को WhatsApp पर लिखिए। कोई फ़ॉर्म नहीं, कोई इंतज़ार नहीं।",
       btnFeedback:"सुझाव भेजें", btnComplaint:"शिकायत करें",
       fbTtl:"आपका अनुभव कैसा रहा?", fbGood:"अच्छा रहा", fbOk:"ठीक-ठाक", fbBad:"खराब रहा",
       fbSend:"WhatsApp पर भेजें", fbPh:"कुछ और कहना चाहें तो लिखिए (optional)",
       cmpTtl:"क्या दिक्कत हुई?",
       cmp1:"सब्ज़ी खराब निकली", cmp2:"गलत सामान आया", cmp3:"सामान कम निकला",
       cmp4:"देर से आया", cmp5:"पैसों में गड़बड़ी", cmp6:"कुछ और",
-      cmpPh:"थोड़ा बताइए — कौन सी सब्ज़ी, क्या हुआ (optional)",
+      cmpPh:"थोड़ा बताइए: कौन सी सब्ज़ी, क्या हुआ (optional)",
       cmpSend:"WhatsApp पर शिकायत भेजें",
-      polTtl:"हमारा वादा", pol1:"सब्ज़ी खराब निकले तो {h} घंटे के अंदर बता दीजिए — फोटो भेज दें तो और आसान।",
-      pol2:"बदल कर देंगे या पूरे पैसे वापस — जो आप कहें।",
-      pol3:"वापसी अगली डिलीवरी में एडजस्ट या तुरंत UPI से।", pol4:"बहस नहीं करेंगे।",
+      polTtl:"हमारा वादा", pol1:"सब्ज़ी खराब निकले तो {h} घंटे के अंदर बता दीजिए। फोटो भेज देंगे तो और आसान होगा।",
+      pol2:"बदल कर देंगे या पूरे पैसे वापस करेंगे, जो आप कहें।",
+      pol3:"पैसे अगली डिलीवरी में एडजस्ट कर देंगे या तुरंत UPI से भेज देंगे।", pol4:"बहस नहीं करेंगे।",
       mFb:"सुझाव", mCmp:"शिकायत", mRating:"अनुभव", mIssue:"दिक्कत", mDetail:"जानकारी", mFrom:"फ्लैट",
-      sub:"खेतों की ताज़ी सब्ज़ियां — सीधे आपके दरवाज़े तक", chooseLang:"भाषा चुनें",
+      sub:"खेतों की ताज़ी सब्ज़ियां, सीधे आपके दरवाज़े तक", chooseLang:"भाषा चुनें",
       ownerFlatLbl:"फ्लैट", quote:"",
-      openNow:"अभी डिलीवरी चालू", closedNow:"अभी बंद", opensAt:"सुबह {t} बजे खुलेगा",
+      openNow:"अभी डिलीवरी चालू", closedNow:"अभी बंद", opensAt:"सुबह {t} बजे खुलेगी",
       lastOrder:"आखिरी ऑर्डर {t} तक",
       perk1b:"{m} मिनट", perk1a:"में घर पर", perk2b:"किफ़ायती", perk2a:"बाज़ार से कम दाम",
       perk3b:"फ्री", perk3a:"होम डिलीवरी",
       ttlRates:"आज की रेट लिस्ट", updated:"अपडेट: {d}",
-      ratesHint:"दाम रोज़ मंडी के हिसाब से बदलते हैं। पैसे डिलीवरी के समय — नकद या UPI।",
+      ratesHint:"दाम रोज़ मंडी के हिसाब से बदलते हैं। पैसे डिलीवरी के समय दें, नकद या UPI।",
       allCat:"सब", add:"जोड़ें", per:"/", kg:"किलो", g:"ग्राम", gram250:"250 ग्राम",
-      more:"बढ़ाएं", less:"कम करें",
+      more:"बढ़ाएँ", less:"कम करें",
       ttlYou:"आपकी जानकारी", lblName:"आपका नाम", lblFlat:"टावर / फ्लैट नंबर",
       lblPhone:"मोबाइल नंबर", lblNote:"कोई और सामान या सूचना?",
       phName:"जैसे: रमेश शर्मा", phFlat:"जैसे: B4-1102", phPhone:"10 अंकों का नंबर",
       phNote:"जैसे: 1 गड्डी धनिया भी चाहिए",
-      errName:"ऑर्डर भेजने के लिए अपना नाम लिखें।", errFlat:"टावर और फ्लैट नंबर लिखें, वरना सब्ज़ी पहुँचाना मुश्किल है।",
+      errName:"ऑर्डर भेजने के लिए अपना नाम लिखिए।", errFlat:"टावर और फ्लैट नंबर लिखिए, वरना सब्ज़ी पहुँचाने में दिक्कत होगी।",
       ttlContact:"संपर्क करें", btnCall:"कॉल करें", btnWa:"WhatsApp",
       cartEmpty:"टोकरी अभी खाली है", cartLead:"कुल", send:"ऑर्डर भेजें", sendLong:"WhatsApp पर ऑर्डर भेजें",
       review:"टोकरी देखें", yourOrder:"आपका ऑर्डर", sheetSub:"{n} चीज़ें · भेजने से पहले जाँच लें",
       grandTotal:"कुल राशि", close:"बंद करें",
-      sheetNote:"{m} मिनट में डिलीवरी · पैसे दरवाज़े पर — नकद या UPI",
-      warnClosed:"दुकान अभी बंद है। ऑर्डर भेज सकते हैं — तरुण कल सुबह {t} बजे के बाद पहुँचाएंगे।",
-      minLeft:"₹{n} और जोड़ें", minOk:"मिनिमम ऑर्डर पूरा हुआ",
-      minBlock:"मिनिमम ऑर्डर ₹{n} है। थोड़ा और जोड़ें।",
-      emptyTitle:"अभी कुछ नहीं चुना", emptyBody:"ऊपर की लिस्ट से सब्ज़ी जोड़ें — आलू, प्याज, टमाटर। एक तरफ़ से बढ़ाना-घटाना यहीं हो जाएगा।",
+      sheetNote:"{m} मिनट में डिलीवरी · पैसे दरवाज़े पर, नकद या UPI",
+      warnClosed:"दुकान अभी बंद है। ऑर्डर अब भी भेज सकते हैं, तरुण कल सुबह {t} बजे के बाद पहुँचा देंगे।",
+      minLeft:"₹{n} और जोड़ें", minOk:"मिनिमम ऑर्डर पूरा हो गया",
+      minBlock:"मिनिमम ऑर्डर ₹{n} का है। थोड़ा और जोड़िए।",
+      emptyTitle:"अभी कुछ नहीं चुना", emptyBody:"ऊपर की लिस्ट से सब्ज़ी जोड़िए: आलू, प्याज़, टमाटर। मात्रा यहीं घटा या बढ़ा सकते हैं।",
       emptyCta:"रेट लिस्ट देखें",
       foot:"तरुण द्वारा, सोसाइटी के लिए · A3-203", cross:"कपड़े की दुकान देखें",
-      xsellTtl:"कपड़े की दुकान भी", xsellSub:"कुर्ता, जीन्स, कुर्ती और बहुत कुछ — यहीं तरुण की दुकान से",
-      photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएं", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएं", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनें। फोटो छोटी कर दी जाएगी और इसी फोन में सेव होगी — सिर्फ आपको दिखेगी। सबको दिखाने के लिए फोटो फाइल के साथ रखें और DATA में photo लिखें।", photoBig:"यह फोटो सेव नहीं हुई — फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश करें।"
+      xsellTtl:"कपड़े की दुकान भी", xsellSub:"कुर्ता, जीन्स, कुर्ती और बहुत कुछ, तरुण की अपनी दुकान से",
+      photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएँ", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएँ", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनिए। फोटो छोटी करके इसी फोन में सेव होगी और सिर्फ़ आपको दिखेगी। सबको दिखानी है तो फोटो फाइल पेज के साथ रखिए और DATA में photo लिखिए।", photoBig:"यह फोटो सेव नहीं हुई, फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश कीजिए।"
     },
     en: {
       ttlReviews:"What neighbours say",
       revCount:"{n} customers rated",
       fbTtl:"How many stars?",
-      fbLead:"Your rating shows on the site — it helps other neighbours decide.",
+      fbLead:"Your rating shows on the site, and it helps other neighbours decide.",
       fbSend:"Send rating",
       fbPh:"A line about it (optional)",
       fbThanks:"Thank you! Your rating has been saved.",
       fbTellT:"Also message Tarun",
       fbNeedStar:"Please pick a star rating first.",
-      fbFail:"Couldn't send — please try again shortly.",
+      fbFail:"Couldn't send. Please try again shortly.",
       fbTooSoon:"You just rated. Please try again later.",
       revNone:"No ratings yet",
       copyHint:"Message box empty in WhatsApp? Copy the order below and paste it into the chat.", copyBtn:"Copy the order", copyDone:"Copied ✓",
       soldOut:"Not available today", onlyLeft:"Only {n} left",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiCopy:"Copy UPI ID",
       upiCopied:"Copied ✓", lblPay:"How will you pay?", payUpiBtnL:"By UPI now", payLaterL:"On delivery",
-      payNow:"Pay ₹{a} by UPI", paidLbl:"I have sent the money — I will send the screenshot too",
-      shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
-      ttlHelp:"Something wrong? Tell us", helpLead:"Straight to Tarun on WhatsApp — no forms, no waiting.",
+      payNow:"Pay ₹{a} by UPI", paidLbl:"I have sent the money, and I will send the screenshot too",
+      shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.", upiNote:"Pay at delivery, cash or UPI, whichever suits you.",
+      ttlHelp:"Something wrong? Tell us", helpLead:"Straight to Tarun on WhatsApp. No forms, no waiting.",
       btnFeedback:"Send feedback", btnComplaint:"Report a problem",
       fbTtl:"How was it?", fbGood:"Good", fbOk:"Okay", fbBad:"Poor",
       fbSend:"Send on WhatsApp", fbPh:"Anything else you'd like to say (optional)",
       cmpTtl:"What went wrong?",
       cmp1:"Vegetables were not fresh", cmp2:"Wrong item delivered", cmp3:"Quantity was short",
       cmp4:"Delivered late", cmp5:"Problem with the amount", cmp6:"Something else",
-      cmpPh:"Tell us a little — which item, what happened (optional)",
+      cmpPh:"Tell us a little: which item, what happened (optional)",
       cmpSend:"Send complaint on WhatsApp",
-      polTtl:"Our promise", pol1:"If anything is not fresh, tell us within {h} hours — a photo makes it quicker.",
-      pol2:"We replace it or refund in full — your choice.",
+      polTtl:"Our promise", pol1:"If anything is not fresh, tell us within {h} hours. A photo makes it quicker.",
+      pol2:"We replace it or refund in full, whichever you prefer.",
       pol3:"Refunds are adjusted on your next delivery, or sent by UPI straight away.",
       pol4:"We will not argue about it.",
       mFb:"Feedback", mCmp:"Complaint", mRating:"Experience", mIssue:"Issue", mDetail:"Details", mFrom:"Flat",
-      sub:"Fresh from the fields — straight to your door", chooseLang:"Choose language",
+      sub:"Fresh from the fields, straight to your door", chooseLang:"Choose language",
       ownerFlatLbl:"Flat", quote:"",
       openNow:"Delivering now", closedNow:"Closed right now", opensAt:"Opens at {t}",
       lastOrder:"Last order by {t}",
       perk1b:"{m} min", perk1a:"to your door", perk2b:"Cheaper", perk2a:"than the market",
       perk3b:"Free", perk3a:"home delivery",
       ttlRates:"Today's rate list", updated:"Updated {d}",
-      ratesHint:"Prices follow the morning mandi. Pay at the door — cash or UPI.",
+      ratesHint:"Prices follow the morning mandi. Pay at the door, cash or UPI.",
       allCat:"All", add:"Add", per:"/", kg:"kg", g:"g", gram250:"250 g",
       more:"increase", less:"decrease",
       ttlYou:"Your details", lblName:"Your name", lblFlat:"Tower / flat number",
@@ -957,55 +957,55 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       review:"View basket", yourOrder:"Your order", sheetSub:"{n} items · check before sending",
       grandTotal:"Total", close:"Close",
       sheetNote:"Delivery in {m} min · pay at the door, cash or UPI",
-      warnClosed:"The shop is closed now. You can still send — Tarun will deliver after {t} tomorrow morning.",
+      warnClosed:"The shop is closed now. You can still send your order, and Tarun will deliver after {t} tomorrow morning.",
       minLeft:"₹{n} more to go", minOk:"Minimum order reached",
       minBlock:"Minimum order is ₹{n}. Please add a little more.",
-      emptyTitle:"Nothing chosen yet", emptyBody:"Add vegetables from the list above — potato, onion, tomato. You can change quantities right here.",
+      emptyTitle:"Nothing chosen yet", emptyBody:"Add vegetables from the list above: potato, onion, tomato. You can change quantities right here.",
       emptyCta:"See the rate list",
       foot:"By Tarun, for the society · A3-203", cross:"See the clothing shop",
-      xsellTtl:"He also runs a clothing shop", xsellSub:"Kurta, jeans, kurti and more — same shopkeeper",
-      photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only — customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved — storage is full. Remove one or two photos and try again."
+      xsellTtl:"He also runs a clothing shop", xsellSub:"Kurta, jeans, kurti and more, from the same shopkeeper",
+      photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only, so customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved because storage is full. Remove one or two photos and try again."
     },
     bn: {
       ttlReviews:"প্রতিবেশীরা যা বলছেন",
       revCount:"{n} জন গ্রাহক রেটিং দিয়েছেন",
       fbTtl:"কত স্টার দেবেন?",
-      fbLead:"আপনার রেটিং সাইটে দেখা যাবে — অন্যদের সিদ্ধান্ত নিতে সুবিধা হবে।",
+      fbLead:"আপনার রেটিং সাইটে দেখা যাবে, এতে অন্যদের সিদ্ধান্ত নিতে সুবিধা হবে।",
       fbSend:"রেটিং পাঠান",
       fbPh:"দু-এক কথা লিখুন (optional)",
       fbThanks:"ধন্যবাদ! আপনার রেটিং জমা হয়েছে।",
       fbTellT:"তরুণকেও জানান",
       fbNeedStar:"আগে স্টার বেছে নিন।",
-      fbFail:"পাঠানো গেল না — একটু পরে চেষ্টা করুন।",
+      fbFail:"পাঠানো গেল না। একটু পরে চেষ্টা করুন।",
       fbTooSoon:"এইমাত্র রেটিং দিয়েছেন। একটু পরে।",
       revNone:"এখনো কোনো রেটিং নেই",
       copyHint:"WhatsApp-এ মেসেজ আসেনি? নিচ থেকে কপি করে চ্যাটে পেস্ট করুন।", copyBtn:"অর্ডার কপি করুন", copyDone:"কপি হয়েছে ✓",
       soldOut:"আজ পাওয়া যাচ্ছে না", onlyLeft:"মাত্র {n} বাকি",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiCopy:"UPI ID কপি করুন",
       upiCopied:"কপি হয়েছে ✓", lblPay:"কীভাবে দেবেন?", payUpiBtnL:"এখনই UPI-তে", payLaterL:"ডেলিভারিতে",
-      payNow:"UPI-তে ₹{a} পাঠান", paidLbl:"আমি টাকা পাঠিয়েছি — স্ক্রিনশটও পাঠাব",
-      shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
-      ttlHelp:"কোনো সমস্যা? জানান", helpLead:"সরাসরি তরুণকে WhatsApp-এ — কোনো ফর্ম নেই।",
+      payNow:"UPI-তে ₹{a} পাঠান", paidLbl:"আমি টাকা পাঠিয়েছি, স্ক্রিনশটও পাঠাব",
+      shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।", upiNote:"ডেলিভারির সময় দিন, নগদ বা UPI, যেটা সুবিধা।",
+      ttlHelp:"কোনো সমস্যা? জানান", helpLead:"সরাসরি তরুণকে WhatsApp-এ পাঠান। কোনো ফর্ম নেই।",
       btnFeedback:"মতামত পাঠান", btnComplaint:"অভিযোগ জানান",
       fbTtl:"অভিজ্ঞতা কেমন ছিল?", fbGood:"ভালো", fbOk:"মোটামুটি", fbBad:"খারাপ",
       fbSend:"WhatsApp-এ পাঠান", fbPh:"আর কিছু বলতে চাইলে লিখুন (optional)",
       cmpTtl:"কী সমস্যা হয়েছে?",
       cmp1:"সবজি টাটকা ছিল না", cmp2:"ভুল জিনিস এসেছে", cmp3:"পরিমাণ কম ছিল",
       cmp4:"দেরিতে এসেছে", cmp5:"টাকার হিসাবে গড়বড়", cmp6:"অন্য কিছু",
-      cmpPh:"একটু জানান — কোন জিনিস, কী হয়েছে (optional)",
+      cmpPh:"একটু জানান: কোন জিনিস, কী হয়েছে (optional)",
       cmpSend:"WhatsApp-এ অভিযোগ পাঠান",
-      polTtl:"আমাদের প্রতিশ্রুতি", pol1:"টাটকা না হলে {h} ঘণ্টার মধ্যে জানান — ছবি পাঠালে আরও সহজ।",
-      pol2:"বদলে দেব বা পুরো টাকা ফেরত — আপনার ইচ্ছা।",
+      polTtl:"আমাদের প্রতিশ্রুতি", pol1:"টাটকা না হলে {h} ঘণ্টার মধ্যে জানান। ছবি পাঠালে আরও সহজ হয়।",
+      pol2:"বদলে দেব বা পুরো টাকা ফেরত দেব, যেটা আপনি চান।",
       pol3:"ফেরত পরের ডেলিভারিতে সমন্বয় বা সঙ্গে সঙ্গে UPI-তে।", pol4:"তর্ক করব না।",
       mFb:"মতামত", mCmp:"অভিযোগ", mRating:"অভিজ্ঞতা", mIssue:"সমস্যা", mDetail:"বিবরণ", mFrom:"ফ্ল্যাট",
-      sub:"খেতের টাটকা সবজি — সোজা আপনার দরজায়", chooseLang:"ভাষা বাছুন",
+      sub:"খেতের টাটকা সবজি, সোজা আপনার দরজায়", chooseLang:"ভাষা বাছুন",
       ownerFlatLbl:"ফ্ল্যাট", quote:"",
       openNow:"এখন ডেলিভারি চালু", closedNow:"এখন বন্ধ", opensAt:"সকাল {t}-এ খুলবে",
       lastOrder:"শেষ অর্ডার {t} পর্যন্ত",
       perk1b:"{m} মিনিট", perk1a:"বাড়িতে", perk2b:"সস্তা", perk2a:"বাজারের চেয়ে কম",
       perk3b:"ফ্রি", perk3a:"হোম ডেলিভারি",
       ttlRates:"আজকের দাম", updated:"আপডেট {d}",
-      ratesHint:"দাম রোজ মান্ডি অনুযায়ী বদলায়। টাকা দরজায় — নগদ বা UPI।",
+      ratesHint:"দাম রোজ মান্ডি অনুযায়ী বদলায়। টাকা দরজায় দিন, নগদ বা UPI।",
       allCat:"সব", add:"যোগ করুন", per:"/", kg:"কেজি", g:"গ্রাম", gram250:"250 গ্রাম",
       more:"বাড়ান", less:"কমান",
       ttlYou:"আপনার তথ্য", lblName:"আপনার নাম", lblFlat:"টাওয়ার / ফ্ল্যাট নম্বর",
@@ -1018,55 +1018,55 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       review:"ঝুড়ি দেখুন", yourOrder:"আপনার অর্ডার", sheetSub:"{n}টি জিনিস · পাঠানোর আগে দেখে নিন",
       grandTotal:"মোট টাকা", close:"বন্ধ করুন",
       sheetNote:"{m} মিনিটে ডেলিভারি · টাকা দরজায়, নগদ বা UPI",
-      warnClosed:"দোকান এখন বন্ধ। পাঠাতে পারেন — তরুণ কাল সকাল {t}-এর পরে পৌঁছে দেবেন।",
+      warnClosed:"দোকান এখন বন্ধ। অর্ডার এখনই পাঠাতে পারেন, তরুণ কাল সকাল {t}-এর পরে পৌঁছে দেবেন।",
       minLeft:"আরও ₹{n} যোগ করুন", minOk:"সর্বনিম্ন অর্ডার হয়ে গেছে",
       minBlock:"সর্বনিম্ন অর্ডার ₹{n}। আরেকটু যোগ করুন।",
-      emptyTitle:"এখনও কিছু বাছা হয়নি", emptyBody:"উপরের তালিকা থেকে সবজি যোগ করুন — আলু, পেঁয়াজ, টমেটো। পরিমাণ এখানেই বদলাতে পারবেন।",
+      emptyTitle:"এখনও কিছু বাছা হয়নি", emptyBody:"উপরের তালিকা থেকে সবজি যোগ করুন: আলু, পেঁয়াজ, টমেটো। পরিমাণ এখানেই বদলাতে পারবেন।",
       emptyCta:"দামের তালিকা দেখুন",
       foot:"তরুণের তরফে, সোসাইটির জন্য · A3-203", cross:"কাপড়ের দোকান দেখুন",
       xsellTtl:"কাপড়ের দোকানও আছে", xsellSub:"কুর্তা, জিন্স, কুর্তি আরও অনেক কিছু",
-      photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে — খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি — জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
+      photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে, খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি, ফোনে জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
     },
     pa: {
       ttlReviews:"ਗੁਆਂਢੀ ਕੀ ਕਹਿੰਦੇ ਹਨ",
       revCount:"{n} ਗਾਹਕਾਂ ਨੇ ਰੇਟਿੰਗ ਦਿੱਤੀ",
       fbTtl:"ਕਿੰਨੇ ਸਟਾਰ ਦਿਓਗੇ?",
-      fbLead:"ਤੁਹਾਡੀ ਰਾਏ ਸਾਈਟ ਤੇ ਦਿਖੇਗੀ — ਬਾਕੀ ਗੁਆਂਢੀਆਂ ਨੂੰ ਮਦਦ ਮਿਲੇਗੀ।",
+      fbLead:"ਤੁਹਾਡੀ ਰਾਏ ਸਾਈਟ ਤੇ ਦਿਖੇਗੀ, ਇਸ ਨਾਲ ਬਾਕੀ ਗੁਆਂਢੀਆਂ ਨੂੰ ਮਦਦ ਮਿਲੇਗੀ।",
       fbSend:"ਰਾਏ ਭੇਜੋ",
       fbPh:"ਦੋ ਸ਼ਬਦ ਲਿਖੋ (optional)",
       fbThanks:"ਧੰਨਵਾਦ! ਤੁਹਾਡੀ ਰਾਏ ਦਰਜ ਹੋ ਗਈ।",
       fbTellT:"ਤਰੁਣ ਨੂੰ ਵੀ ਦੱਸੋ",
       fbNeedStar:"ਪਹਿਲਾਂ ਸਟਾਰ ਚੁਣੋ।",
-      fbFail:"ਭੇਜ ਨਹੀਂ ਸਕੇ — ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+      fbFail:"ਭੇਜ ਨਹੀਂ ਸਕੇ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
       fbTooSoon:"ਹੁਣੇ ਰਾਏ ਦਿੱਤੀ ਹੈ। ਥੋੜ੍ਹੀ ਦੇਰ ਬਾਅਦ।",
       revNone:"ਹਾਲੇ ਕੋਈ ਰਾਏ ਨਹੀਂ",
       copyHint:"WhatsApp ਵਿੱਚ ਮੈਸੇਜ ਨਹੀਂ ਆਇਆ? ਹੇਠੋਂ ਕਾਪੀ ਕਰਕੇ ਚੈਟ ਵਿੱਚ ਪੇਸਟ ਕਰੋ।", copyBtn:"ਆਰਡਰ ਕਾਪੀ ਕਰੋ", copyDone:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
       soldOut:"ਅੱਜ ਉਪਲਬਧ ਨਹੀਂ", onlyLeft:"ਸਿਰਫ਼ {n} ਬਚੇ",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ",
       upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", lblPay:"ਪੈਸੇ ਕਿਵੇਂ ਦਿਓਗੇ?", payUpiBtnL:"ਹੁਣੇ UPI ਨਾਲ", payLaterL:"ਡਿਲੀਵਰੀ ਉੱਤੇ",
-      payNow:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ — ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
-      shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
-      ttlHelp:"ਕੋਈ ਦਿੱਕਤ? ਦੱਸੋ", helpLead:"ਸਿੱਧਾ ਤਰੁਣ ਨੂੰ WhatsApp ਤੇ — ਕੋਈ ਫਾਰਮ ਨਹੀਂ।",
+      payNow:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ ਹਨ, ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
+      shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ ਦਿਓ, ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
+      ttlHelp:"ਕੋਈ ਦਿੱਕਤ? ਦੱਸੋ", helpLead:"ਸਿੱਧਾ ਤਰੁਣ ਨੂੰ WhatsApp ਤੇ ਭੇਜੋ। ਕੋਈ ਫਾਰਮ ਨਹੀਂ।",
       btnFeedback:"ਸੁਝਾਅ ਭੇਜੋ", btnComplaint:"ਸ਼ਿਕਾਇਤ ਕਰੋ",
       fbTtl:"ਤਜਰਬਾ ਕਿਵੇਂ ਰਿਹਾ?", fbGood:"ਵਧੀਆ", fbOk:"ਠੀਕ-ਠਾਕ", fbBad:"ਮਾੜਾ",
       fbSend:"WhatsApp ਤੇ ਭੇਜੋ", fbPh:"ਹੋਰ ਕੁਝ ਕਹਿਣਾ ਹੋਵੇ ਤਾਂ ਲਿਖੋ (optional)",
       cmpTtl:"ਕੀ ਦਿੱਕਤ ਆਈ?",
       cmp1:"ਸਬਜ਼ੀ ਤਾਜ਼ੀ ਨਹੀਂ ਸੀ", cmp2:"ਗਲਤ ਸਮਾਨ ਆਇਆ", cmp3:"ਮਾਤਰਾ ਘੱਟ ਸੀ",
       cmp4:"ਦੇਰ ਨਾਲ ਆਇਆ", cmp5:"ਪੈਸਿਆਂ ਵਿੱਚ ਗੜਬੜ", cmp6:"ਕੁਝ ਹੋਰ",
-      cmpPh:"ਥੋੜ੍ਹਾ ਦੱਸੋ — ਕਿਹੜੀ ਸਬਜ਼ੀ, ਕੀ ਹੋਇਆ (optional)",
+      cmpPh:"ਥੋੜ੍ਹਾ ਦੱਸੋ: ਕਿਹੜੀ ਸਬਜ਼ੀ, ਕੀ ਹੋਇਆ (optional)",
       cmpSend:"WhatsApp ਤੇ ਸ਼ਿਕਾਇਤ ਭੇਜੋ",
-      polTtl:"ਸਾਡਾ ਵਾਅਦਾ", pol1:"ਤਾਜ਼ੀ ਨਾ ਨਿਕਲੇ ਤਾਂ {h} ਘੰਟੇ ਵਿੱਚ ਦੱਸੋ — ਫੋਟੋ ਭੇਜੋ ਤਾਂ ਹੋਰ ਸੌਖਾ।",
-      pol2:"ਬਦਲ ਕੇ ਦੇਵਾਂਗੇ ਜਾਂ ਪੂਰੇ ਪੈਸੇ ਵਾਪਸ — ਜੋ ਤੁਸੀਂ ਕਹੋ।",
+      polTtl:"ਸਾਡਾ ਵਾਅਦਾ", pol1:"ਤਾਜ਼ੀ ਨਾ ਨਿਕਲੇ ਤਾਂ {h} ਘੰਟੇ ਵਿੱਚ ਦੱਸੋ। ਫੋਟੋ ਭੇਜ ਦਿਓ ਤਾਂ ਹੋਰ ਸੌਖਾ ਹੋ ਜਾਵੇਗਾ।",
+      pol2:"ਬਦਲ ਕੇ ਦੇਵਾਂਗੇ ਜਾਂ ਪੂਰੇ ਪੈਸੇ ਵਾਪਸ ਕਰਾਂਗੇ, ਜੋ ਤੁਸੀਂ ਕਹੋ।",
       pol3:"ਵਾਪਸੀ ਅਗਲੀ ਡਿਲੀਵਰੀ ਵਿੱਚ ਜਾਂ ਤੁਰੰਤ UPI ਨਾਲ।", pol4:"ਬਹਿਸ ਨਹੀਂ ਕਰਾਂਗੇ।",
       mFb:"ਸੁਝਾਅ", mCmp:"ਸ਼ਿਕਾਇਤ", mRating:"ਤਜਰਬਾ", mIssue:"ਦਿੱਕਤ", mDetail:"ਜਾਣਕਾਰੀ", mFrom:"ਫਲੈਟ",
-      sub:"ਖੇਤਾਂ ਦੀਆਂ ਤਾਜ਼ੀਆਂ ਸਬਜ਼ੀਆਂ — ਸਿੱਧਾ ਤੁਹਾਡੇ ਦਰਵਾਜ਼ੇ ਤੱਕ", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
+      sub:"ਖੇਤਾਂ ਦੀਆਂ ਤਾਜ਼ੀਆਂ ਸਬਜ਼ੀਆਂ, ਸਿੱਧਾ ਤੁਹਾਡੇ ਦਰਵਾਜ਼ੇ ਤੱਕ", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
       ownerFlatLbl:"ਫਲੈਟ", quote:"",
       openNow:"ਹੁਣ ਡਿਲੀਵਰੀ ਚਾਲੂ", closedNow:"ਹੁਣ ਬੰਦ", opensAt:"ਸਵੇਰੇ {t} ਵਜੇ ਖੁੱਲ੍ਹੇਗੀ",
       lastOrder:"ਆਖਰੀ ਆਰਡਰ {t} ਤੱਕ",
       perk1b:"{m} ਮਿੰਟ", perk1a:"ਘਰ ਤੱਕ", perk2b:"ਸਸਤਾ", perk2a:"ਬਾਜ਼ਾਰ ਤੋਂ ਘੱਟ",
       perk3b:"ਮੁਫ਼ਤ", perk3a:"ਹੋਮ ਡਿਲੀਵਰੀ",
       ttlRates:"ਅੱਜ ਦੇ ਭਾਅ", updated:"ਅਪਡੇਟ {d}",
-      ratesHint:"ਭਾਅ ਰੋਜ਼ ਮੰਡੀ ਮੁਤਾਬਕ ਬਦਲਦੇ ਹਨ। ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ — ਨਕਦ ਜਾਂ UPI।",
+      ratesHint:"ਭਾਅ ਰੋਜ਼ ਮੰਡੀ ਮੁਤਾਬਕ ਬਦਲਦੇ ਹਨ। ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ ਦਿਓ, ਨਕਦ ਜਾਂ UPI।",
       allCat:"ਸਭ", add:"ਪਾਓ", per:"/", kg:"ਕਿਲੋ", g:"ਗ੍ਰਾਮ", gram250:"250 ਗ੍ਰਾਮ",
       more:"ਵਧਾਓ", less:"ਘਟਾਓ",
       ttlYou:"ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ", lblName:"ਤੁਹਾਡਾ ਨਾਮ", lblFlat:"ਟਾਵਰ / ਫਲੈਟ ਨੰਬਰ",
@@ -1079,55 +1079,55 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       review:"ਟੋਕਰੀ ਵੇਖੋ", yourOrder:"ਤੁਹਾਡਾ ਆਰਡਰ", sheetSub:"{n} ਚੀਜ਼ਾਂ · ਭੇਜਣ ਤੋਂ ਪਹਿਲਾਂ ਵੇਖੋ",
       grandTotal:"ਕੁੱਲ ਰਕਮ", close:"ਬੰਦ ਕਰੋ",
       sheetNote:"{m} ਮਿੰਟ ਵਿੱਚ ਡਿਲੀਵਰੀ · ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ, ਨਕਦ ਜਾਂ UPI",
-      warnClosed:"ਦੁਕਾਨ ਹੁਣ ਬੰਦ ਹੈ। ਭੇਜ ਸਕਦੇ ਹੋ — ਤਰੁਣ ਕੱਲ੍ਹ ਸਵੇਰੇ {t} ਤੋਂ ਬਾਅਦ ਪਹੁੰਚਾਉਣਗੇ।",
+      warnClosed:"ਦੁਕਾਨ ਹੁਣ ਬੰਦ ਹੈ। ਆਰਡਰ ਹੁਣ ਵੀ ਭੇਜ ਸਕਦੇ ਹੋ, ਤਰੁਣ ਕੱਲ੍ਹ ਸਵੇਰੇ {t} ਤੋਂ ਬਾਅਦ ਪਹੁੰਚਾ ਦੇਣਗੇ।",
       minLeft:"₹{n} ਹੋਰ ਪਾਓ", minOk:"ਘੱਟੋ-ਘੱਟ ਆਰਡਰ ਪੂਰਾ",
       minBlock:"ਘੱਟੋ-ਘੱਟ ਆਰਡਰ ₹{n} ਹੈ। ਥੋੜ੍ਹਾ ਹੋਰ ਪਾਓ।",
-      emptyTitle:"ਹਾਲੇ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ", emptyBody:"ਉੱਪਰ ਦੀ ਲਿਸਟ ਤੋਂ ਸਬਜ਼ੀ ਪਾਓ — ਆਲੂ, ਪਿਆਜ਼, ਟਮਾਟਰ। ਮਾਤਰਾ ਇੱਥੇ ਹੀ ਬਦਲ ਸਕਦੇ ਹੋ।",
+      emptyTitle:"ਹਾਲੇ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ", emptyBody:"ਉੱਪਰ ਦੀ ਲਿਸਟ ਤੋਂ ਸਬਜ਼ੀ ਪਾਓ: ਆਲੂ, ਪਿਆਜ਼, ਟਮਾਟਰ। ਮਾਤਰਾ ਇੱਥੇ ਹੀ ਬਦਲ ਸਕਦੇ ਹੋ।",
       emptyCta:"ਭਾਅ ਦੀ ਲਿਸਟ ਵੇਖੋ",
       foot:"ਤਰੁਣ ਵੱਲੋਂ, ਸੋਸਾਇਟੀ ਲਈ · A3-203", cross:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਵੇਖੋ",
       xsellTtl:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਵੀ", xsellSub:"ਕੁੜਤਾ, ਜੀਨਸ, ਕੁੜਤੀ ਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ",
-      photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ — ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ — ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
+      photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ ਅਤੇ ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ, ਫੋਨ ਵਿੱਚ ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
     te: {
       ttlReviews:"పొరుగువారి అభిప్రాయం",
       revCount:"{n} మంది కస్టమర్లు రేటింగ్ ఇచ్చారు",
       fbTtl:"ఎన్ని స్టార్లు ఇస్తారు?",
-      fbLead:"మీ రేటింగ్ సైట్‌లో కనిపిస్తుంది — ఇతరులకు సాయపడుతుంది.",
+      fbLead:"మీ రేటింగ్ సైట్‌లో కనిపిస్తుంది, ఇది ఇతరులకు సాయపడుతుంది.",
       fbSend:"రేటింగ్ పంపండి",
       fbPh:"రెండు మాటలు రాయండి (optional)",
       fbThanks:"ధన్యవాదాలు! మీ రేటింగ్ నమోదైంది.",
       fbTellT:"తరుణ్‌కు కూడా చెప్పండి",
       fbNeedStar:"ముందు స్టార్ ఎంచుకోండి.",
-      fbFail:"పంపలేకపోయాం — కొద్దిసేపటి తర్వాత ప్రయత్నించండి.",
+      fbFail:"పంపలేకపోయాం. కొద్దిసేపటి తర్వాత ప్రయత్నించండి.",
       fbTooSoon:"ఇప్పుడే రేటింగ్ ఇచ్చారు. కొద్దిసేపటి తర్వాత.",
       revNone:"ఇంకా రేటింగ్‌లు లేవు",
       copyHint:"WhatsApp‌లో మెసేజ్ రాలేదా? కింద నుంచి కాపీ చేసి చాట్‌లో పేస్ట్ చేయండి.", copyBtn:"ఆర్డర్ కాపీ చేయండి", copyDone:"కాపీ అయ్యింది ✓",
       soldOut:"ఈరోజు అందుబాటులో లేదు", onlyLeft:"కేవలం {n} మిగిలాయి",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiCopy:"UPI ID కాపీ చేయండి",
       upiCopied:"కాపీ అయ్యింది ✓", lblPay:"ఎలా చెల్లిస్తారు?", payUpiBtnL:"ఇప్పుడే UPI ద్వారా", payLaterL:"డెలివరీలో",
-      payNow:"UPI ద్వారా ₹{a} చెల్లించండి", paidLbl:"నేను డబ్బు పంపాను — స్క్రీన్‌షాట్ కూడా పంపుతాను",
-      shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
-      ttlHelp:"ఏదైనా సమస్యా? చెప్పండి", helpLead:"నేరుగా తరుణ్‌కు WhatsApp‌లో — ఫారమ్‌లు లేవు.",
+      payNow:"UPI ద్వారా ₹{a} చెల్లించండి", paidLbl:"నేను డబ్బు పంపాను, స్క్రీన్‌షాట్ కూడా పంపుతాను",
+      shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.", upiNote:"డెలివరీ సమయంలో చెల్లించండి, నగదు లేదా UPI.",
+      ttlHelp:"ఏదైనా సమస్యా? చెప్పండి", helpLead:"నేరుగా తరుణ్‌కు WhatsApp‌లో పంపండి. ఫారమ్‌లు లేవు.",
       btnFeedback:"సలహా పంపండి", btnComplaint:"ఫిర్యాదు చేయండి",
       fbTtl:"అనుభవం ఎలా ఉంది?", fbGood:"బాగుంది", fbOk:"ఫర్వాలేదు", fbBad:"బాగోలేదు",
       fbSend:"WhatsApp‌లో పంపండి", fbPh:"ఇంకేమైనా చెప్పాలంటే రాయండి (optional)",
       cmpTtl:"ఏమి సమస్య వచ్చింది?",
       cmp1:"కూరగాయలు తాజాగా లేవు", cmp2:"తప్పు వస్తువు వచ్చింది", cmp3:"పరిమాణం తక్కువ",
       cmp4:"ఆలస్యంగా వచ్చింది", cmp5:"డబ్బు లెక్కలో తేడా", cmp6:"ఇంకేదైనా",
-      cmpPh:"కొంచెం చెప్పండి — ఏ వస్తువు, ఏమి జరిగింది (optional)",
+      cmpPh:"కొంచెం చెప్పండి: ఏ వస్తువు, ఏమి జరిగింది (optional)",
       cmpSend:"WhatsApp‌లో ఫిర్యాదు పంపండి",
-      polTtl:"మా వాగ్దానం", pol1:"తాజాగా లేకపోతే {h} గంటల్లో చెప్పండి — ఫోటో పంపితే ఇంకా సులభం.",
-      pol2:"మార్చి ఇస్తాం లేదా పూర్తి డబ్బు వాపసు — మీ ఇష్టం.",
+      polTtl:"మా వాగ్దానం", pol1:"తాజాగా లేకపోతే {h} గంటల్లో చెప్పండి. ఫోటో పంపితే ఇంకా సులభం.",
+      pol2:"మార్చి ఇస్తాం లేదా పూర్తి డబ్బు వాపసు ఇస్తాం, మీ ఇష్టం.",
       pol3:"వాపసు తదుపరి డెలివరీలో సర్దుబాటు లేదా వెంటనే UPI ద్వారా.", pol4:"వాదన ఉండదు.",
       mFb:"సలహా", mCmp:"ఫిర్యాదు", mRating:"అనుభవం", mIssue:"సమస్య", mDetail:"వివరాలు", mFrom:"ఫ్లాట్",
-      sub:"పొలాల నుంచి తాజా కూరగాయలు — నేరుగా మీ ఇంటికి", chooseLang:"భాష ఎంచుకోండి",
+      sub:"పొలాల నుంచి తాజా కూరగాయలు, నేరుగా మీ ఇంటికి", chooseLang:"భాష ఎంచుకోండి",
       ownerFlatLbl:"ఫ్లాట్", quote:"",
       openNow:"ఇప్పుడు డెలివరీ ఉంది", closedNow:"ఇప్పుడు మూసివేసి ఉంది", opensAt:"ఉదయం {t}కి తెరుస్తారు",
       lastOrder:"చివరి ఆర్డర్ {t} వరకు",
       perk1b:"{m} నిమిషాల్లో", perk1a:"ఇంటికి", perk2b:"చౌక", perk2a:"మార్కెట్ కంటే తక్కువ",
       perk3b:"ఉచితం", perk3a:"హోమ్ డెలివరీ",
       ttlRates:"నేటి రేట్లు", updated:"అప్‌డేట్ {d}",
-      ratesHint:"రేట్లు రోజూ మండీ ప్రకారం మారుతాయి. డబ్బు ఇంటి వద్ద — నగదు లేదా UPI.",
+      ratesHint:"రేట్లు రోజూ మండీ ప్రకారం మారుతాయి. డబ్బు ఇంటి వద్ద చెల్లించండి, నగదు లేదా UPI.",
       allCat:"అన్నీ", add:"చేర్చండి", per:"/", kg:"కిలో", g:"గ్రా", gram250:"250 గ్రా",
       more:"పెంచు", less:"తగ్గించు",
       ttlYou:"మీ వివరాలు", lblName:"మీ పేరు", lblFlat:"టవర్ / ఫ్లాట్ నంబర్",
@@ -1140,14 +1140,14 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       review:"బుట్ట చూడండి", yourOrder:"మీ ఆర్డర్", sheetSub:"{n} వస్తువులు · పంపే ముందు చూడండి",
       grandTotal:"మొత్తం", close:"మూసివేయి",
       sheetNote:"{m} నిమిషాల్లో డెలివరీ · డబ్బు ఇంటి వద్ద, నగదు లేదా UPI",
-      warnClosed:"దుకాణం ఇప్పుడు మూసివేసి ఉంది. పంపవచ్చు — తరుణ్ రేపు ఉదయం {t} తర్వాత తెస్తారు.",
+      warnClosed:"దుకాణం ఇప్పుడు మూసి ఉంది. ఆర్డర్ ఇప్పుడే పంపవచ్చు, తరుణ్ రేపు ఉదయం {t} తర్వాత తెస్తారు.",
       minLeft:"₹{n} ఇంకా చేర్చండి", minOk:"కనీస ఆర్డర్ పూర్తయింది",
       minBlock:"కనీస ఆర్డర్ ₹{n}. కొంచెం ఇంకా చేర్చండి.",
-      emptyTitle:"ఇంకా ఏమీ ఎంచుకోలేదు", emptyBody:"పైన ఉన్న జాబితా నుంచి కూరగాయలు చేర్చండి — బంగాళాదుంప, ఉల్లిపాయ, టొమాటో. పరిమాణం ఇక్కడే మార్చుకోవచ్చు.",
+      emptyTitle:"ఇంకా ఏమీ ఎంచుకోలేదు", emptyBody:"పైన ఉన్న జాబితా నుంచి కూరగాయలు చేర్చండి: బంగాళాదుంప, ఉల్లిపాయ, టొమాటో. పరిమాణం ఇక్కడే మార్చుకోవచ్చు.",
       emptyCta:"రేట్ల జాబితా చూడండి",
       foot:"తరుణ్ నుంచి, సొసైటీ కోసం · A3-203", cross:"బట్టల దుకాణం చూడండి",
       xsellTtl:"బట్టల దుకాణం కూడా", xsellSub:"కుర్తా, జీన్స్, కుర్తీ మరెన్నో",
-      photoOn:"ఫోటోలు చేర్చండి", photoOff:"ఫోటోలు చేర్చడం పూర్తి", photoAdd:"ఫోటో పెట్టండి", photoChange:"ఫోటో మార్చండి", photoRm:"ఫోటో తీసేయండి", photoNote:"ఈ ఫోన్ నుంచి కూరగాయ ఫోటో ఎంచుకోండి. ఫోటో చిన్నదిగా మారి ఈ ఫోన్‌లోనే సేవ్ అవుతుంది — కస్టమర్లకు కనిపించదు. అందరికీ కనిపించాలంటే ఫైల్‌ను పేజీ పక్కన ఉంచి DATAలో photo రాయండి.", photoBig:"ఫోటో సేవ్ కాలేదు — స్థలం లేదు. ఒకటి రెండు ఫోటోలు తీసేసి మళ్లీ ప్రయత్నించండి."
+      photoOn:"ఫోటోలు చేర్చండి", photoOff:"ఫోటోలు చేర్చడం పూర్తి", photoAdd:"ఫోటో పెట్టండి", photoChange:"ఫోటో మార్చండి", photoRm:"ఫోటో తీసేయండి", photoNote:"ఈ ఫోన్ నుంచి కూరగాయ ఫోటో ఎంచుకోండి. ఫోటో చిన్నదిగా మారి ఈ ఫోన్‌లోనే సేవ్ అవుతుంది, కస్టమర్లకు కనిపించదు. అందరికీ కనిపించాలంటే ఫైల్‌ను పేజీ పక్కన ఉంచి DATAలో photo రాయండి.", photoBig:"ఫోటో సేవ్ కాలేదు, ఫోన్‌లో స్థలం లేదు. ఒకటి రెండు ఫోటోలు తీసేసి మళ్లీ ప్రయత్నించండి."
     }
   };
 
@@ -1422,7 +1422,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       var add = document.createElement('button');
       add.className = 'add'; add.type = 'button';
       add.innerHTML = '<svg aria-hidden="true" style="width:17px;height:17px"><use href="#i-plus"></use></svg>' + esc(t.add);
-      add.setAttribute('aria-label', t.add + ' — ' + name(p));
+      add.setAttribute('aria-label', t.add + ': ' + name(p));
       add.addEventListener('click', function () { change(p, p.step); });
       slot.appendChild(add);
       return;
@@ -1449,7 +1449,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     return box;
   }
 
-  /* cart logic — unchanged from the original */
+  /* cart logic, unchanged from the original */
   function change(p, delta) {
     var qty = round2((cart[p.id] || 0) + delta);
     if (qty <= 0) delete cart[p.id];
@@ -1549,7 +1549,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
      Opening WhatsApp.
 
      window.open(url, '_blank', 'noopener') asks for a *popup window*, and
-     mobile Safari and Chrome block that by default — the tap appeared to
+     mobile Safari and Chrome block that by default, so the tap appeared to
      do nothing at all on a phone. Open a plain tab instead, and if the
      browser still refuses, navigate this tab; the cart is in localStorage,
      so coming back loses nothing.
@@ -1570,7 +1570,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         redirect hands off to the app, and on Android that hand-off loses
         the query string when it starts from a freshly-opened tab.
 
-     So on a touch device navigate this tab directly — a top-level
+     So on a touch device navigate this tab directly, because a top-level
      navigation carries the whole URL into the app. Desktop keeps the new
      tab, since there WhatsApp Web opens fine and we would rather not throw
      away the shop page.
@@ -1652,13 +1652,13 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
     saveInfo();
 
-    /* WhatsApp message — same shape as before; only the labels follow the
+    /* WhatsApp message, same shape as before; only the labels follow the
        chosen language. Quantities, flat and totals stay Hindi/English with
        Western numerals so Tarun can read any order at a glance. */
     var m = MSG[lang] || MSG.hi;
-    var msg = ['*' + store.name + '* — ' + m.neworder, ''];
+    var msg = ['*' + store.name + '* · ' + m.neworder, ''];
     lines.forEach(function (l, i) {
-      msg.push((i + 1) + '. ' + l.p.emoji + ' ' + l.p.hi + ' — ' +
+      msg.push((i + 1) + '. ' + l.p.emoji + ' ' + l.p.hi + ' · ' +
         qtyLabelHi(l.p, l.qty) + ' = ₹' + fmt(l.amount));
     });
     msg.push('', '*' + m.total + ': ₹' + fmt(total) + '*', '');
@@ -1671,7 +1671,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     logOrder(lines);
 
     if (payWay === 'upi') {
-      msg.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' — ₹' + fmt(total));
+      msg.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' · ₹' + fmt(total));
       if (el.paidChk.checked) msg.push(m.shot);
     } else {
       msg.push(m.pay + ': ' + m.onDeliv);
@@ -1761,7 +1761,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     });
   }
 
-  /* Shrunk on the device and kept in localStorage — nothing is uploaded anywhere. */
+  /* Shrunk on the device and kept in localStorage. Nothing is uploaded anywhere. */
   function takePhoto(p, file) {
     var fr = new FileReader();
     fr.onload = function () {
@@ -2046,7 +2046,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
   el.cmpSend.addEventListener('click', function () {
     var t = T[lang] || T.hi;
-    var msg = ['*' + store.name + '* — ' + t.mCmp, ''];
+    var msg = ['*' + store.name + '* · ' + t.mCmp, ''];
     if (CMP_KEY) msg.push(t.mIssue + ': ' + CMP_KEY);
     var extra = (el.cmpText.value || '').trim();
     if (extra) msg.push(t.mDetail + ': ' + extra);
@@ -2056,7 +2056,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   });
 
 
-  /* copy the last order text — the safety net when WhatsApp drops it */
+  /* copy the last order text, the safety net when WhatsApp drops it */
   el.copyBtn.addEventListener('click', function () {
     var done = function () {
       var old = el.copyBtn.textContent;
@@ -2182,7 +2182,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     };
 
     var toWhatsApp = function () {
-      var msg = ['*' + store.name + '* — ' + t.mFb, '', t.mRating + ': ' + myStars + '/5'];
+      var msg = ['*' + store.name + '* · ' + t.mFb, '', t.mRating + ': ' + myStars + '/5'];
       if (payload.text) msg.push(t.mDetail + ': ' + payload.text);
       var who = whoLine(); if (who) msg.push(who);
       openWA(msg);

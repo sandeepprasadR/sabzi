@@ -173,7 +173,7 @@ async function addReview(request, env) {
 /*
  * What the shop asked for, not who asked for it.
  *
- * No name, flat, phone or address is accepted or stored here — the analytics
+ * No name, flat, phone or address is accepted or stored here. The analytics
  * this feeds needs item, size, colour, quantity and price and nothing else,
  * and the surest way not to leak a customer list is never to hold one.
  *

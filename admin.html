@@ -115,7 +115,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
 .bar{display:flex;align-items:center;gap:9px;padding:7px 0}
 .bar .nm{flex:1;min-width:0;font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar .track{flex:0 0 96px;height:9px;border-radius:99px;background:var(--line);overflow:hidden}
-/* display:block matters — an inline span ignores width, so every bar drew empty */
+/* display:block matters, because an inline span ignores width and every bar drew empty */
 .bar .fill{display:block;height:100%;background:var(--leaf);border-radius:99px}
 .bar .val{flex:0 0 auto;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--muted)}
 .dead{font-size:14px;line-height:1.7}
@@ -306,12 +306,12 @@ a{color:var(--leaf-d)}
      different thing from typing in it.
 
      This translates the ADMIN only. Product names, and the WhatsApp rate
-     list that goes to the society group, stay exactly as they are — those
+     list that goes to the society group, stay exactly as they are. Those
      are the shop's words, not this page's.
      ------------------------------------------------------------------- */
   var TX = {
     title:      ['Update the shop', 'दुकान अपडेट करें'],
-    subtitle:   ['Prices, stock and photos — straight from here', 'दाम, स्टॉक और फोटो — सीधे यहीं से'],
+    subtitle:   ['Prices, stock and photos, straight from here', 'दाम, स्टॉक और फोटो, सीधे यहीं से'],
     langName:   ['हिंदी', 'English'],
 
     loginH:     ['First time? One quick setup', 'पहली बार? एक बार सेट करना होगा'],
@@ -370,10 +370,10 @@ a{color:var(--leaf-d)}
     revNeedKey: ['Enter the reviews key.', 'राय की चाबी डालें।'],
     revBadKey:  ['That key is wrong.', 'चाबी गलत है।'],
     revNoAns:   ['No answer from the server.', 'सर्वर से जवाब नहीं मिला।'],
-    revNoNet:   ['Internet down, or the address is wrong.', 'इंटरनेट या पता गलत है।'],
-    revNone:    ['No customer has left a review yet.', 'अभी तक किसी ग्राहक ने राय नहीं दी।'],
-    revNoneShort:['— no reviews yet', '— अभी कोई राय नहीं'],
-    revStat:    ['— {n} reviews, average {a} ★', '— {n} राय, औसत {a} ★'],
+    revNoNet:   ['Internet down, or the address is wrong.', 'इंटरनेट नहीं चल रहा, या पता गलत है।'],
+    revNone:    ['No customer has left a review yet.', 'अभी तक किसी ग्राहक ने कोई राय नहीं दी।'],
+    revNoneShort:['· no reviews yet', '· अभी कोई राय नहीं'],
+    revStat:    ['· {n} reviews, average {a} ★', '· {n} राय, औसत {a} ★'],
     revOnTop:   ['on the website', 'वेबसाइट पर ऊपर'],
     revNoName:  ['No name', 'बिना नाम'],
     revFeature: ['Show at top', 'ऊपर दिखाएँ'],
@@ -387,13 +387,13 @@ a{color:var(--leaf-d)}
     setOpenL:   ['Opening time', 'दुकान खुलने का समय'],
     setCloseL:  ['Closing time', 'बंद होने का समय'],
     setLastL:   ['Last order time', 'आखिरी ऑर्डर का समय'],
-    setMinL:    ['Minimum order (₹) — 0 means no minimum', 'कम से कम ऑर्डर (₹) — 0 = कोई शर्त नहीं'],
+    setMinL:    ['Minimum order (₹), 0 means no minimum', 'कम से कम ऑर्डर (₹), 0 = कोई शर्त नहीं'],
     setHoursL:  ['Complaints accepted for how many hours', 'शिकायत कितने घंटे तक ले सकते हैं'],
     setNote:    ['Change the times and the website’s "open now / closed" updates by itself.',
                  'समय बदलने पर वेबसाइट पर "अभी खुला / अभी बंद" अपने आप बदल जाएगा।'],
     waH:        ['WhatsApp rate list', 'WhatsApp रेट लिस्ट'],
-    waHint:     ['For posting in the group — copy and paste it. The list itself stays in Hindi.',
-                 'ग्रुप में डालने के लिए — कॉपी करके पेस्ट कर दें।'],
+    waHint:     ['For posting in the group: copy and paste it. The list itself stays in Hindi.',
+                 'ग्रुप में डालने के लिए: कॉपी करके पेस्ट कर दें। लिस्ट हिंदी में ही रहेगी।'],
     copyWa:     ['Copy the rate list', 'रेट लिस्ट कॉपी करें'],
     copied:     ['Copied ✓', 'कॉपी हो गया ✓'],
     outH:       ['Log out', 'बाहर निकलें'],
@@ -405,11 +405,11 @@ a{color:var(--leaf-d)}
     saving:     ['Saving…', 'सेव हो रहा है…'],
     savedAll:   ['Everything is saved', 'सब सेव है'],
     unsaved:    ['Not saved yet', 'सेव नहीं हुआ'],
-    savedOk:    ['Saved ✓ — it will show on the website within a minute',
-                 'सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा'],
-    saveAuth:   ['The token stopped working — log in again', 'टोकन काम नहीं कर रहा — दोबारा लॉगिन करें'],
-    saveClash:  ['Someone else changed it too — refresh the page and try again',
-                 'किसी और ने भी बदला है — पेज रिफ्रेश करके दोबारा करें'],
+    savedOk:    ['Saved ✓, it will show on the website within a minute',
+                 'सेव हो गया ✓, 1 मिनट में वेबसाइट पर दिख जाएगा'],
+    saveAuth:   ['The token stopped working. Log in again', 'टोकन काम नहीं कर रहा, दोबारा लॉगिन करें'],
+    saveClash:  ['Someone else changed it too. Refresh the page and try again',
+                 'किसी और ने भी बदलाव किया है, पेज रिफ्रेश करके दोबारा करें'],
     saveFail:   ['Could not save: ', 'सेव नहीं हो पाया: '],
     noMarker:   [' has no CATALOGUE marker', ' में CATALOGUE मार्कर नहीं मिला'],
     badPhoto:   ['That photo would not open.', 'यह फोटो नहीं खुल पाई।'],
@@ -435,11 +435,11 @@ a{color:var(--leaf-d)}
     uBunch:     ['the bunch', 'गड्डी से'],
     fEmoji:     ['Emoji (shown when there is no photo)', 'इमोजी (फोटो न हो तो यही दिखेगा)'],
     vegEditNote:['Changing a name changes it on the website and in the WhatsApp rate list.',
-                 'नाम बदलने पर वेबसाइट और WhatsApp रेट लिस्ट — दोनों में बदल जाएगा।'],
+                 'नाम बदलने पर वह वेबसाइट और WhatsApp रेट लिस्ट, दोनों जगह बदल जाएगा।'],
 
     fFor:       ['Who it is for', 'किसके लिए'],
     fMrp:       ['Old price (MRP)', 'पहले का दाम (MRP)'],
-    phMrp:      ['0 = hide it', '0 = मत दिखाओ'],
+    phMrp:      ['0 = hide it', '0 = मत दिखाएँ'],
     fSizes:     ['Which sizes are in stock', 'कौन-कौन से साइज़ हैं'],
     fColors:    ['Colours (separate with commas)', 'रंग (कॉमा से अलग करें)'],
     phColors:   ['black, blue, white', 'काला, नीला, सफ़ेद'],
@@ -449,7 +449,7 @@ a{color:var(--leaf-d)}
     phNote:     ['Everyday wear, colour does not run in the wash.',
                  'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।'],
     garEditNote:['Only the sizes you tick can be ordered. Leave them empty and the customer is only asked how many.',
-                 'जो साइज़ आप चुनेंगे सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
+                 'आप जो साइज़ चुनेंगे, सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
     fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें'],
     fStock:     ['How many in stock', 'कितने बचे हैं (स्टॉक)'],
     phStock:    ['count in hand', 'जितने दुकान में हैं'],
@@ -459,15 +459,15 @@ a{color:var(--leaf-d)}
 
     tabAna:     ['Sales', 'बिक्री'],
     anaH:       ['What is selling', 'क्या बिक रहा है'],
-    anaWarn:    ['These are orders placed through the website only. Walk-ins, phone orders and WhatsApp group orders are not counted here — so read this as what the website is being asked for, not as your whole shop.',
-                 'ये सिर्फ़ वेबसाइट से आए ऑर्डर हैं। दुकान पर आकर, फ़ोन से या ग्रुप में दिए ऑर्डर इसमें नहीं गिने जाते — इसे "वेबसाइट पर क्या माँगा जा रहा है" समझें, पूरी दुकान का हिसाब नहीं।'],
+    anaWarn:    ['These are orders placed through the website only. Walk-ins, phone orders and WhatsApp group orders are not counted here, so read this as what the website is being asked for, not as your whole shop.',
+                 'ये सिर्फ़ वेबसाइट से आए ऑर्डर हैं। दुकान पर आकर, फ़ोन से या ग्रुप में दिए गए ऑर्डर इसमें नहीं गिने जाते। इसे "वेबसाइट पर क्या माँगा जा रहा है" समझें, पूरी दुकान का हिसाब नहीं।'],
     anaLoad:    ['Show the numbers', 'हिसाब देखें'],
     anaPeriod:  ['In this period', 'इस समय में'],
     anaAgain:   ['Refresh', 'दोबारा देखें'],
     anaLoading: ['Fetching…', 'ला रहे हैं…'],
     anaNone:    ['No website orders yet in this period.', 'इस समय में वेबसाइट से कोई ऑर्डर नहीं आया।'],
-    anaNeed:    ['Set the reviews address and key in the राय tab first — the same server stores this.',
-                 'पहले राय टैब में पता और चाबी भरें — हिसाब भी उसी सर्वर पर रहता है।'],
+    anaNeed:    ['Set the reviews address and key in the राय tab first. The same server stores this.',
+                 'पहले राय टैब में पता और चाबी भरें। हिसाब भी उसी सर्वर पर रहता है।'],
     r7:         ['7 days', '7 दिन'],
     r30:        ['30 days', '30 दिन'],
     r90:        ['90 days', '90 दिन'],
@@ -483,8 +483,8 @@ a{color:var(--leaf-d)}
     secSize:    ['Sizes asked for', 'कौन-सा साइज़ माँगा गया'],
     secColor:   ['Colours asked for', 'कौन-सा रंग माँगा गया'],
     secPrice:   ['Price ranges', 'किस दाम का सामान'],
-    slowHint:   ['Not necessarily unpopular — an item with no photo, or one that is out of stock, gets ordered less because it is harder to want.',
-                 'ज़रूरी नहीं कि पसंद न हो — जिस चीज़ की फोटो नहीं है, या जो स्टॉक में नहीं है, उसका ऑर्डर कम आता ही है।']
+    slowHint:   ['Not necessarily unpopular. An item with no photo, or one that is out of stock, gets ordered less because it is harder to want.',
+                 'ज़रूरी नहीं कि पसंद न हो। जिस चीज़ की फोटो नहीं है, या जो स्टॉक में नहीं है, उसका ऑर्डर कम आता ही है।']
   };
 
   var LANG_KEY = 'gavs.admin.lang.v1';
@@ -671,7 +671,7 @@ a{color:var(--leaf-d)}
     return l;
   }
 
-  /* Multi-select chips — used for garment sizes. */
+  /* Multi-select chips, used for garment sizes. */
   function fieldPicks(labelTxt, all, chosen, onToggle) {
     var wrap = document.createElement('div');
     var sp = document.createElement('span');
@@ -941,7 +941,7 @@ a{color:var(--leaf-d)}
     });
   }
 
-  /* Names go into a WhatsApp message and a one-line card — newlines and
+  /* Names go into a WhatsApp message and a one-line card, so newlines and
      double spaces break both, so flatten them on the way in. */
   function clean1(v) { return String(v).replace(/\s+/g, ' ').trim(); }
 
@@ -968,7 +968,7 @@ a{color:var(--leaf-d)}
     });
   });
 
-  /* Goes into the WhatsApp rate list, which is read by the society group —
+  /* Goes into the WhatsApp rate list, which is read by the society group, so
      always Hindi, whatever language this page is showing. */
   function unitLabel(u) {
     return u === 'kg' ? '1 किलो' : u === '250g' ? '250 ग्राम' : u === 'bunch' ? '1 गड्डी' : '1 नग';
@@ -983,10 +983,10 @@ a{color:var(--leaf-d)}
     var out = ['🛒 *आज की रेट लिस्ट* 🛒', ''];
     (d.products || []).forEach(function (p) {
       if (p.available === false) return;
-      out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' — ₹' + p.price);
+      out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' · ₹' + p.price);
     });
-    out.push('', '✨ 100% ताज़ा — रोज़ सुबह मंडी से ✨',
-      '🚚 फ्री होम डिलीवरी — ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
+    out.push('', '✨ 100% ताज़ा, रोज़ सुबह मंडी से ✨',
+      '🚚 फ्री होम डिलीवरी, ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
       '🛒 ऑर्डर: https://guru-ashish.in',
       '📞 ' + (s.phone || ''), '📍 ' + (s.address || ''));
     $('waList').value = out.join('\n');
@@ -1089,7 +1089,7 @@ a{color:var(--leaf-d)}
       });
   }
 
-  /* moderation goes straight to the reviews server — nothing to save in git */
+  /* moderation goes straight to the reviews server, nothing to save in git */
   function revAction(r, action, btn) {
     btn.disabled = true;
     revFetch(revBase() + '/admin', {
@@ -1207,7 +1207,7 @@ a{color:var(--leaf-d)}
   $('revLoad').addEventListener('click', loadRev);
 
   /* The vegetable page shows a strip of garments, but it cannot read the
-     garment catalogue at runtime — both pages are standalone files. So the
+     garment catalogue at runtime, because both pages are standalone files. So the
      admin copies a few photos and names across whenever it saves. */
   function syncCrossSell() {
     if (!files['index.html'] || !files['garments.html']) return;
@@ -1239,7 +1239,7 @@ a{color:var(--leaf-d)}
 
   /* ------------------------------ analytics ------------------------------
      Counts orders started on the website. A walk-in never reaches here and a
-     customer who taps send without sending the WhatsApp does — which is why
+     customer who taps send without sending the WhatsApp does, which is why
      the tab leads with a warning rather than a headline number. */
   var orders = null;
   var anaDays = 30;
@@ -1325,10 +1325,10 @@ a{color:var(--leaf-d)}
   }
 
   function priceBand(n) {
-    if (n < 100) return '₹0–99';
-    if (n < 300) return '₹100–299';
-    if (n < 500) return '₹300–499';
-    if (n < 800) return '₹500–799';
+    if (n < 100) return '₹0 to 99';
+    if (n < 300) return '₹100 to 299';
+    if (n < 500) return '₹300 to 499';
+    if (n < 800) return '₹500 to 799';
     return '₹800+';
   }
 
@@ -1379,7 +1379,7 @@ a{color:var(--leaf-d)}
         barList(tally(mine, function (x) { return x.l.name; },
                       function (x) { return x.l.qty; }).slice(0, 10))));
 
-      /* what nobody asked for — needs the catalogue, which this page holds */
+      /* what nobody asked for, which needs the catalogue this page holds */
       var cat = files[sh[2]] ? (files[sh[2]].data[sh[3]] || []) : [];
       var asked = {};
       mine.forEach(function (x) { asked[x.l.id] = 1; });

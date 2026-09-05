@@ -169,7 +169,7 @@ a:hover{color:var(--carrot)}
 .bagbar .btn{flex:0 0 auto;width:auto;padding:0 20px}
 body.hasbag{padding-bottom:96px}
 
-/* .sheet sets display:flex, which outranks the browser's [hidden] rule — without
+/* .sheet sets display:flex, which outranks the browser's [hidden] rule, and without
    this an invisible sheet still swallows taps meant for the bag bar under it. */
 [hidden]{display:none!important}
 .scrim{position:fixed;inset:0;z-index:79;background:rgba(28,18,4,.45)}
@@ -229,6 +229,14 @@ body.hasbag{padding-bottom:96px}
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
 .crosslink svg{width:16px;height:16px}
+/* the same way back, at the top of the header, for the customer who came
+   from the vegetable page and does not want to scroll to the bottom */
+.backveg{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;padding:9px 13px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;line-height:1}
+.backveg:active{background:rgba(255,255,255,.24)}
+.backveg svg{width:15px;height:15px;flex:0 0 auto}
+.backveg .bk{font-size:18px;font-weight:800;opacity:.8;margin:-2px 1px 0 -2px}
 @media (prefers-reduced-motion:reduce){
   *,*:before,*:after{animation-duration:.001ms !important;transition-duration:.001ms !important}
   .btn-go:active{transform:none}
@@ -257,6 +265,11 @@ body.hasbag{padding-bottom:96px}
 
 <header class="hdr">
   <div class="wrap">
+    <a class="backveg" href="index.html">
+      <span class="bk" aria-hidden="true">&lsaquo;</span>
+      <svg aria-hidden="true"><use href="#i-leaf"></use></svg>
+      <span id="backTxt"></span>
+    </a>
     <div class="hdr-top">
       <div class="shop">
         <h1 id="shopName">गुरु आशीष गारमेंट्स</h1>
@@ -387,7 +400,7 @@ body.hasbag{padding-bottom:96px}
 
 <script>
 /* ============================================================================
-   Guru Ashish Garments — browse-and-ask page. No cart, no checkout.
+   Guru Ashish Garments, browse-and-ask page. No cart, no checkout.
    Every tap opens WhatsApp with a question about that one item.
 
    EDIT ITEMS, PRICES, PHOTOS AND SHOP DETAILS ONLY INSIDE `DATA` BELOW.
@@ -757,176 +770,176 @@ body.hasbag{padding-bottom:96px}
       sub:"कपड़े की दुकान · सेक्टर 108", chooseLang:"भाषा चुनें",
       since:"{y} साल से इसी जगह", openNow:"दुकान खुली है", closedNow:"दुकान बंद है",
       hours:"{a} से {b}", opensAt:"{t} बजे खुलेगी",
-      quote:"छूकर देखिए, पहनकर देखिए — तब लीजिए।",
+      quote:"छूकर देखिए, पहनकर देखिए, फिर लीजिए।",
       ttlVisit:"दुकान पर आइए", btnMap:"नक्शे पर देखें", btnCall:"कॉल करें",
       ttlRack:"दुकान में क्या है", allCat:"सब",
-      rackHint:"साइज़ चुनें, बैग में डालें और WhatsApp पर ऑर्डर भेज दें। दुकान से ले जाएँ, या कूरियर से मँगवा लें।",
+      rackHint:"साइज़ चुनिए, बैग में डालिए और WhatsApp पर ऑर्डर भेज दीजिए। सामान दुकान से ले जाइए या कूरियर से मँगवा लीजिए।",
       sizesLbl:"साइज़",
       careTtl:"धुलाई का ध्यान रखें",
-      careTxt:"हर कपड़े पर धुलाई का लेबल लगा है — उसी के हिसाब से धोएँ। पहली बार अलग से, ठंडे पानी में, उल्टा करके धोएँ। लेबल के तरीके से न धोने पर रंग निकल जाए या कपड़ा खराब हो जाए, तो दुकान इसकी ज़िम्मेदार नहीं होगी।",
-      careShort:"धुलाई लेबल के हिसाब से करें। लेबल के तरीके से न धोने पर रंग निकलने की ज़िम्मेदारी दुकान की नहीं होगी।",
+      careTxt:"हर कपड़े पर धुलाई का लेबल लगा है, उसी के हिसाब से धोइए। पहली बार कपड़े को अलग से, ठंडे पानी में, उल्टा करके धोइए। लेबल के तरीके से न धोने पर रंग निकल जाए या कपड़ा खराब हो जाए, तो इसकी ज़िम्मेदारी दुकान की नहीं होगी।",
+      careShort:"धुलाई लेबल के हिसाब से कीजिए। लेबल के तरीके से न धोने पर रंग निकलने की ज़िम्मेदारी दुकान की नहीं होगी।",
       retTtl:"बदली और वापसी",
-      ret:["साइज़ ठीक न बैठे तो 7 दिन के अंदर बदल सकते हैं।","कपड़ा पहना या धुला न हो, टैग लगा हो, और बिल साथ हो।","अंडरगारमेंट्स और इनरवियर नहीं बदले जाते — सफ़ाई की वजह से।","सेल के सामान पर सिर्फ़ बदली, पैसे वापस नहीं।","कूरियर से मँगाया हो तो वापसी का खर्च आपका। हमारी गलती से गलत सामान गया हो तो खर्च हमारा।","धुलाई लेबल के हिसाब से न धोने से हुआ नुकसान इसमें नहीं आता।"], ask:"WhatsApp पर पूछें", from:"से",
-      slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालें:",
+      ret:["साइज़ ठीक न बैठे तो 7 दिन के अंदर बदल सकते हैं।","कपड़ा पहना या धुला हुआ न हो, टैग लगा हो और बिल साथ हो।","सफ़ाई की वजह से अंडरगारमेंट्स और इनरवियर नहीं बदले जाते।","सेल के सामान पर सिर्फ़ बदली, पैसे वापस नहीं।","कूरियर से मँगाया हो तो वापसी का खर्च आपका। हमारी गलती से गलत सामान गया हो तो खर्च हमारा।","धुलाई लेबल के हिसाब से न धोने से हुआ नुकसान इसमें नहीं आता।"], ask:"WhatsApp पर पूछें", from:"से",
+      slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालिए:",
       foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
-      cross:"सब्ज़ी ऑर्डर करें",
+      cross:"सब्ज़ी ऑर्डर करें", backVeg:"सब्ज़ी की दुकान पर वापस",
       bagAdd:"बैग में डालें", bagAdded:"डाल दिया ✓", pickSize:"पहले साइज़ चुनें", pickColor:"रंग चुनें",
       colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", onlyLeft:"सिर्फ़ {n} बचे हैं", askMore:"इसके बारे में पूछें",
       bagOne:"बैग में 1 चीज़", bagMany:"बैग में {n} चीज़ें", bagHint:"कुल ₹{t}", bagView:"बैग देखें",
       bagTitle:"आपका बैग", bagEmpty:"बैग अभी खाली है", removeLbl:"हटाएँ", totLbl:"कुल",
-      lblHow:"कैसे लेंगे?", modeShop:"दुकान से ले लूँगा", modeCourier:"कूरियर से भेजिए",
-      lblGName:"आपका नाम", lblGPhone:"मोबाइल नंबर", lblGAddr:"पूरा पता — कूरियर के लिए",
+      lblHow:"कैसे लेंगे?", modeShop:"दुकान से लेना है", modeCourier:"कूरियर से भेजिए",
+      lblGName:"आपका नाम", lblGPhone:"मोबाइल नंबर", lblGAddr:"पूरा पता (कूरियर के लिए)",
       phAddr:"मकान/फ्लैट, गली, इलाका, शहर, पिन कोड",
-      courierNote:"कूरियर का खर्च अलग से जुड़ेगा — जितना असल में लगेगा, उतना ही, ऊपर से कुछ नहीं। तरुण WhatsApp पर सामान + कूरियर की कुल रकम बताएँगे। पूरा पैसा पहले UPI से आने पर ही सामान भेजा जाएगा।",
-      sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"नाम लिखें।", needPhone:"10 अंकों का मोबाइल नंबर लिखें।",
-      needAddr:"कूरियर के लिए पूरा पता लिखें।", sizeIs:"साइज़",
+      courierNote:"कूरियर का खर्च अलग से जुड़ेगा, जितना असल में लगेगा उतना ही, ऊपर से कुछ नहीं। तरुण WhatsApp पर सामान और कूरियर की कुल रकम बता देंगे। पूरा पैसा पहले UPI से आने पर ही सामान भेजा जाएगा।",
+      sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"अपना नाम लिखिए।", needPhone:"10 अंकों का मोबाइल नंबर लिखिए।",
+      needAddr:"कूरियर के लिए पूरा पता लिखिए।", sizeIs:"साइज़",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiPayAny:"UPI ऐप खोलें",
       upiCopy:"UPI ID कॉपी करें", upiCopied:"कॉपी हो गया ✓",
       lblPay:"पैसे कैसे देंगे?", payUpi:"अभी UPI से", payLater:"सामान मिलने पर",
-      paidLbl:"मैंने पैसे भेज दिए — स्क्रीनशॉट भी भेजूँगा",
+      paidLbl:"मैंने पैसे भेज दिए हैं, स्क्रीनशॉट भी भेजूँगा",
       shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।",
-      upiNoteShop:"पहले नीचे से ऑर्डर भेजें, फिर चाहें तो UPI से पैसे — या दुकान पर लेते समय दें।",
-      upiNoteCourier:"पहले नीचे से ऑर्डर भेजें। कूरियर का खर्च अभी जुड़ा नहीं है — तरुण WhatsApp पर कुल रकम बता देंगे, तब पैसे भेजिए।"
+      upiNoteShop:"पहले नीचे से ऑर्डर भेजिए। फिर चाहें तो UPI से पैसे भेजिए, या दुकान पर सामान लेते समय दीजिए।",
+      upiNoteCourier:"पहले नीचे से ऑर्डर भेजिए। कूरियर का खर्च अभी जुड़ा नहीं है। तरुण WhatsApp पर कुल रकम बता देंगे, तब पैसे भेजिए।"
     },
     en: {
       sub:"Clothing shop · Sector 108", chooseLang:"Choose language",
       since:"Same spot for {y} years", openNow:"Shop is open", closedNow:"Shop is closed",
       hours:"{a} to {b}", opensAt:"Opens at {t}",
-      quote:"See it, feel it, try it on — then buy it.",
+      quote:"See it, feel it, try it on, then buy it.",
       ttlVisit:"Come to the shop", btnMap:"Open in maps", btnCall:"Call",
       ttlRack:"In the shop", allCat:"All",
       rackHint:"Pick a size, add to the bag and send the order on WhatsApp. Collect from the shop, or have it couriered.",
       sizesLbl:"Sizes",
       careTtl:"Please follow the wash care",
-      careTxt:"Every garment carries a wash-care label — please wash it the way the label says. For the first wash, wash it separately, in cold water, inside out. If the colour bleeds or the garment is damaged because it was not washed as the label says, the shop cannot take responsibility.",
+      careTxt:"Every garment carries a wash-care label, so please wash it the way the label says. For the first wash, wash it separately, in cold water, inside out. If the colour bleeds or the garment is damaged because it was not washed as the label says, the shop cannot take responsibility.",
       careShort:"Wash as the care label says. If colour bleeds because it was not washed that way, the shop cannot take responsibility.",
       retTtl:"Exchange and returns",
-      ret:["If the size does not fit, exchange it within 7 days.","Unworn, unwashed, tags on, and bring the bill.","Undergarments and innerwear cannot be exchanged — for hygiene.","Sale items: exchange only, no refund.","Sent by courier? Return postage is yours. If we sent the wrong thing, it is ours.","Damage from not following the wash-care label is not covered."], ask:"Ask on WhatsApp", from:"from",
+      ret:["If the size does not fit, exchange it within 7 days.","Unworn, unwashed, tags on, and bring the bill.","Undergarments and innerwear cannot be exchanged, for hygiene.","Sale items: exchange only, no refund.","Sent by courier? Return postage is yours. If we sent the wrong thing, it is ours.","Damage from not following the wash-care label is not covered."], ask:"Ask on WhatsApp", from:"from",
       slot:"Photo goes here", slotHelp:"Add a photo with this name:",
       foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
-      cross:"Order vegetables",
+      cross:"Order vegetables", backVeg:"Back to the vegetable shop",
       bagAdd:"Add to bag", bagAdded:"Added ✓", pickSize:"Pick a size first", pickColor:"Pick a colour",
       colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", onlyLeft:"Only {n} left", askMore:"Ask about this",
       bagOne:"1 item in bag", bagMany:"{n} items in bag", bagHint:"Total ₹{t}", bagView:"View bag",
       bagTitle:"Your bag", bagEmpty:"Your bag is empty", removeLbl:"Remove", totLbl:"Total",
       lblHow:"How will you take it?", modeShop:"I\u2019ll collect from the shop", modeCourier:"Send by courier",
-      lblGName:"Your name", lblGPhone:"Mobile number", lblGAddr:"Full address — for courier",
+      lblGName:"Your name", lblGPhone:"Mobile number", lblGAddr:"Full address (for courier)",
       phAddr:"House/flat, street, area, city, PIN code",
-      courierNote:"Courier is charged on top, at exactly what it actually costs — nothing added. Tarun will tell you the total for goods plus courier on WhatsApp. The parcel is sent once the full amount is paid by UPI.",
+      courierNote:"Courier is charged on top, at exactly what it actually costs, with nothing added. Tarun will tell you the total for goods plus courier on WhatsApp. The parcel is sent once the full amount is paid by UPI.",
       sendOrder:"Send order on WhatsApp", needName:"Please enter your name.", needPhone:"Enter a 10-digit mobile number.",
       needAddr:"Enter the full address for courier.", sizeIs:"Size",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiPayAny:"Open UPI app",
       upiCopy:"Copy UPI ID", upiCopied:"Copied ✓",
       lblPay:"How will you pay?", payUpi:"By UPI now", payLater:"When I get it",
-      paidLbl:"I have sent the money — I will send the screenshot too",
+      paidLbl:"I have sent the money, and I will send the screenshot too",
       shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.",
-      upiNoteShop:"Send the order below first, then pay by UPI if you like — or pay at the shop when you collect.",
-      upiNoteCourier:"Send the order below first. Courier cost is not included yet — Tarun will tell you the final amount on WhatsApp, and you pay then."
+      upiNoteShop:"Send the order below first, then pay by UPI if you like, or pay at the shop when you collect.",
+      upiNoteCourier:"Send the order below first. Courier cost is not included yet. Tarun will tell you the final amount on WhatsApp, and you pay then."
     },
     bn: {
       sub:"কাপড়ের দোকান · সেক্টর 108", chooseLang:"ভাষা বাছুন",
       since:"{y} বছর ধরে একই জায়গায়", openNow:"দোকান খোলা", closedNow:"দোকান বন্ধ",
       hours:"{a} থেকে {b}", opensAt:"{t}-এ খুলবে",
-      quote:"ছুঁয়ে দেখুন, পরে দেখুন — তারপর নিন।",
+      quote:"ছুঁয়ে দেখুন, পরে দেখুন, তারপর নিন।",
       ttlVisit:"দোকানে আসুন", btnMap:"ম্যাপে দেখুন", btnCall:"ফোন করুন",
       ttlRack:"দোকানে যা আছে", allCat:"সব",
       rackHint:"সাইজ বাছুন, ব্যাগে দিন আর WhatsApp-এ অর্ডার পাঠান। দোকান থেকে নিন, বা কুরিয়ারে আনান।",
       sizesLbl:"সাইজ",
       careTtl:"ধোয়ার নিয়ম মেনে চলুন",
-      careTxt:"প্রতিটি কাপড়ে ধোয়ার লেবেল দেওয়া আছে — সেই অনুযায়ীই ধোবেন। প্রথমবার আলাদা করে, ঠান্ডা জলে, উল্টো করে ধুয়ে নিন। লেবেলের নিয়ম না মেনে ধোয়ার ফলে রং উঠলে বা কাপড় নষ্ট হলে দোকান দায়ী থাকবে না।",
+      careTxt:"প্রতিটি কাপড়ে ধোয়ার লেবেল দেওয়া আছে, সেই অনুযায়ীই ধোবেন। প্রথমবার আলাদা করে, ঠান্ডা জলে, উল্টো করে ধুয়ে নিন। লেবেলের নিয়ম না মেনে ধোয়ার ফলে রং উঠলে বা কাপড় নষ্ট হলে দোকান দায়ী থাকবে না।",
       careShort:"লেবেল অনুযায়ী ধোবেন। সেভাবে না ধোয়ায় রং উঠলে দোকান দায়ী থাকবে না।",
       retTtl:"বদল ও ফেরত",
-      ret:["সাইজ না মিললে ৭ দিনের মধ্যে বদলে নিন।","না পরা, না ধোয়া, ট্যাগ লাগানো, বিল সঙ্গে।","অন্তর্বাস বদলানো যায় না — স্বাস্থ্যবিধির কারণে।","সেলের জিনিস: শুধু বদল, টাকা ফেরত নয়।","কুরিয়ারে আনালে ফেরতের খরচ আপনার। আমাদের ভুলে ভুল জিনিস গেলে খরচ আমাদের।","লেবেল না মেনে ধোয়ার ক্ষতি এর মধ্যে পড়ে না।"], ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
+      ret:["সাইজ না মিললে ৭ দিনের মধ্যে বদলে নিন।","না পরা, না ধোয়া, ট্যাগ লাগানো, বিল সঙ্গে।","স্বাস্থ্যবিধির কারণে অন্তর্বাস বদলানো যায় না।","সেলের জিনিস: শুধু বদল, টাকা ফেরত নয়।","কুরিয়ারে আনালে ফেরতের খরচ আপনার। আমাদের ভুলে ভুল জিনিস গেলে খরচ আমাদের।","লেবেল না মেনে ধোয়ার ক্ষতি এর মধ্যে পড়ে না।"], ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
       slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
       foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
-      cross:"সবজি অর্ডার করুন",
+      cross:"সবজি অর্ডার করুন", backVeg:"সবজির দোকানে ফিরুন",
       bagAdd:"ব্যাগে দিন", bagAdded:"দেওয়া হয়েছে ✓", pickSize:"আগে সাইজ বাছুন", pickColor:"রং বাছুন",
       colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", onlyLeft:"মাত্র {n}টি বাকি", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
       bagOne:"ব্যাগে ১টি জিনিস", bagMany:"ব্যাগে {n}টি জিনিস", bagHint:"মোট ₹{t}", bagView:"ব্যাগ দেখুন",
       bagTitle:"আপনার ব্যাগ", bagEmpty:"ব্যাগ এখন খালি", removeLbl:"সরান", totLbl:"মোট",
       lblHow:"কীভাবে নেবেন?", modeShop:"দোকান থেকে নেব", modeCourier:"কুরিয়ারে পাঠান",
-      lblGName:"আপনার নাম", lblGPhone:"মোবাইল নম্বর", lblGAddr:"সম্পূর্ণ ঠিকানা — কুরিয়ারের জন্য",
+      lblGName:"আপনার নাম", lblGPhone:"মোবাইল নম্বর", lblGAddr:"সম্পূর্ণ ঠিকানা (কুরিয়ারের জন্য)",
       phAddr:"বাড়ি/ফ্ল্যাট, রাস্তা, এলাকা, শহর, পিন কোড",
-      courierNote:"কুরিয়ার খরচ আলাদা করে যোগ হবে — যা সত্যিই লাগে, ঠিক তাই, বাড়তি কিছু নয়। তরুণ WhatsApp-এ জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানাবেন। পুরো টাকা UPI-তে পাওয়ার পরেই পার্সেল পাঠানো হবে।",
+      courierNote:"কুরিয়ার খরচ আলাদা করে যোগ হবে, যা সত্যিই লাগে ঠিক তাই, বাড়তি কিছু নয়। তরুণ WhatsApp-এ জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানাবেন। পুরো টাকা UPI-তে পাওয়ার পরেই পার্সেল পাঠানো হবে।",
       sendOrder:"WhatsApp-এ অর্ডার পাঠান", needName:"নাম লিখুন।", needPhone:"১০ সংখ্যার মোবাইল নম্বর লিখুন।",
       needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiPayAny:"UPI অ্যাপ খুলুন",
       upiCopy:"UPI ID কপি করুন", upiCopied:"কপি হয়েছে ✓",
       lblPay:"কীভাবে দেবেন?", payUpi:"এখনই UPI-তে", payLater:"জিনিস পাওয়ার সময়",
-      paidLbl:"আমি টাকা পাঠিয়েছি — স্ক্রিনশটও পাঠাব",
+      paidLbl:"আমি টাকা পাঠিয়েছি, স্ক্রিনশটও পাঠাব",
       shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।",
-      upiNoteShop:"আগে নিচে থেকে অর্ডার পাঠান, তারপর চাইলে UPI-তে টাকা — বা দোকান থেকে নেওয়ার সময় দিন।",
-      upiNoteCourier:"আগে নিচে থেকে অর্ডার পাঠান। কুরিয়ার খরচ এখনও যোগ হয়নি — তরুণ WhatsApp-এ মোট টাকা জানাবেন, তখন পাঠাবেন।"
+      upiNoteShop:"আগে নিচে থেকে অর্ডার পাঠান, তারপর চাইলে UPI-তে টাকা দিন, বা দোকান থেকে নেওয়ার সময় দিন।",
+      upiNoteCourier:"আগে নিচে থেকে অর্ডার পাঠান। কুরিয়ার খরচ এখনও যোগ হয়নি। তরুণ WhatsApp-এ মোট টাকা জানাবেন, তখন পাঠাবেন।"
     },
     pa: {
       sub:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ · ਸੈਕਟਰ 108", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
       since:"{y} ਸਾਲ ਤੋਂ ਇਸੇ ਥਾਂ", openNow:"ਦੁਕਾਨ ਖੁੱਲ੍ਹੀ ਹੈ", closedNow:"ਦੁਕਾਨ ਬੰਦ ਹੈ",
       hours:"{a} ਤੋਂ {b}", opensAt:"{t} ਵਜੇ ਖੁੱਲ੍ਹੇਗੀ",
-      quote:"ਛੂਹ ਕੇ ਵੇਖੋ, ਪਾ ਕੇ ਵੇਖੋ — ਫਿਰ ਲਓ।",
+      quote:"ਛੂਹ ਕੇ ਵੇਖੋ, ਪਾ ਕੇ ਵੇਖੋ, ਫਿਰ ਲਓ।",
       ttlVisit:"ਦੁਕਾਨ 'ਤੇ ਆਓ", btnMap:"ਨਕਸ਼ੇ 'ਤੇ ਵੇਖੋ", btnCall:"ਕਾਲ ਕਰੋ",
       ttlRack:"ਦੁਕਾਨ ਵਿੱਚ ਕੀ ਹੈ", allCat:"ਸਭ",
       rackHint:"ਸਾਈਜ਼ ਚੁਣੋ, ਬੈਗ ਵਿੱਚ ਪਾਓ ਤੇ WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ। ਦੁਕਾਨ ਤੋਂ ਲਵੋ, ਜਾਂ ਕੋਰੀਅਰ ਰਾਹੀਂ ਮੰਗਵਾਓ।",
       sizesLbl:"ਸਾਈਜ਼",
       careTtl:"ਧੁਆਈ ਦਾ ਧਿਆਨ ਰੱਖੋ",
-      careTxt:"ਹਰ ਕੱਪੜੇ ਉੱਤੇ ਧੁਆਈ ਦਾ ਲੇਬਲ ਲੱਗਾ ਹੈ — ਉਸੇ ਮੁਤਾਬਕ ਧੋਵੋ। ਪਹਿਲੀ ਵਾਰ ਵੱਖਰਾ, ਠੰਢੇ ਪਾਣੀ ਵਿੱਚ, ਪੁੱਠਾ ਕਰਕੇ ਧੋਵੋ। ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲ ਜਾਵੇ ਜਾਂ ਕੱਪੜਾ ਖਰਾਬ ਹੋਵੇ, ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹੋਵੇਗੀ।",
+      careTxt:"ਹਰ ਕੱਪੜੇ ਉੱਤੇ ਧੁਆਈ ਦਾ ਲੇਬਲ ਲੱਗਾ ਹੈ, ਉਸੇ ਮੁਤਾਬਕ ਧੋਵੋ। ਪਹਿਲੀ ਵਾਰ ਵੱਖਰਾ, ਠੰਢੇ ਪਾਣੀ ਵਿੱਚ, ਪੁੱਠਾ ਕਰਕੇ ਧੋਵੋ। ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲ ਜਾਵੇ ਜਾਂ ਕੱਪੜਾ ਖਰਾਬ ਹੋਵੇ, ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹੋਵੇਗੀ।",
       careShort:"ਲੇਬਲ ਮੁਤਾਬਕ ਧੋਵੋ। ਉਸ ਤਰ੍ਹਾਂ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲੇ ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ।",
       retTtl:"ਬਦਲੀ ਤੇ ਵਾਪਸੀ",
-      ret:["ਸਾਈਜ਼ ਠੀਕ ਨਾ ਬੈਠੇ ਤਾਂ 7 ਦਿਨਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ।","ਕੱਪੜਾ ਪਾਇਆ ਜਾਂ ਧੋਇਆ ਨਾ ਹੋਵੇ, ਟੈਗ ਲੱਗਾ ਹੋਵੇ, ਬਿੱਲ ਨਾਲ ਹੋਵੇ।","ਅੰਡਰਗਾਰਮੈਂਟਸ ਨਹੀਂ ਬਦਲੇ ਜਾਂਦੇ — ਸਫ਼ਾਈ ਕਰਕੇ।","ਸੇਲ ਦੇ ਸਮਾਨ ਉੱਤੇ ਸਿਰਫ਼ ਬਦਲੀ, ਪੈਸੇ ਵਾਪਸ ਨਹੀਂ।","ਕੋਰੀਅਰ ਨਾਲ ਮੰਗਵਾਇਆ ਹੋਵੇ ਤਾਂ ਵਾਪਸੀ ਦਾ ਖਰਚ ਤੁਹਾਡਾ। ਸਾਡੀ ਗਲਤੀ ਹੋਵੇ ਤਾਂ ਸਾਡਾ।","ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਦਾ ਨੁਕਸਾਨ ਇਸ ਵਿੱਚ ਨਹੀਂ ਆਉਂਦਾ।"], ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
+      ret:["ਸਾਈਜ਼ ਠੀਕ ਨਾ ਬੈਠੇ ਤਾਂ 7 ਦਿਨਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ।","ਕੱਪੜਾ ਪਾਇਆ ਜਾਂ ਧੋਇਆ ਨਾ ਹੋਵੇ, ਟੈਗ ਲੱਗਾ ਹੋਵੇ, ਬਿੱਲ ਨਾਲ ਹੋਵੇ।","ਸਫ਼ਾਈ ਕਰਕੇ ਅੰਡਰਗਾਰਮੈਂਟਸ ਨਹੀਂ ਬਦਲੇ ਜਾਂਦੇ।","ਸੇਲ ਦੇ ਸਮਾਨ ਉੱਤੇ ਸਿਰਫ਼ ਬਦਲੀ, ਪੈਸੇ ਵਾਪਸ ਨਹੀਂ।","ਕੋਰੀਅਰ ਨਾਲ ਮੰਗਵਾਇਆ ਹੋਵੇ ਤਾਂ ਵਾਪਸੀ ਦਾ ਖਰਚ ਤੁਹਾਡਾ। ਸਾਡੀ ਗਲਤੀ ਹੋਵੇ ਤਾਂ ਸਾਡਾ।","ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਦਾ ਨੁਕਸਾਨ ਇਸ ਵਿੱਚ ਨਹੀਂ ਆਉਂਦਾ।"], ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
       slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
       foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
-      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ",
+      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ", backVeg:"ਸਬਜ਼ੀ ਦੀ ਦੁਕਾਨ 'ਤੇ ਵਾਪਸ",
       bagAdd:"ਬੈਗ ਵਿੱਚ ਪਾਓ", bagAdded:"ਪਾ ਦਿੱਤਾ ✓", pickSize:"ਪਹਿਲਾਂ ਸਾਈਜ਼ ਚੁਣੋ", pickColor:"ਰੰਗ ਚੁਣੋ",
       colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", onlyLeft:"ਸਿਰਫ਼ {n} ਬਚੇ ਹਨ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
       bagOne:"ਬੈਗ ਵਿੱਚ 1 ਚੀਜ਼", bagMany:"ਬੈਗ ਵਿੱਚ {n} ਚੀਜ਼ਾਂ", bagHint:"ਕੁੱਲ ₹{t}", bagView:"ਬੈਗ ਵੇਖੋ",
       bagTitle:"ਤੁਹਾਡਾ ਬੈਗ", bagEmpty:"ਬੈਗ ਹਾਲੇ ਖਾਲੀ ਹੈ", removeLbl:"ਹਟਾਓ", totLbl:"ਕੁੱਲ",
       lblHow:"ਕਿਵੇਂ ਲਵੋਗੇ?", modeShop:"ਦੁਕਾਨ ਤੋਂ ਲੈ ਲਵਾਂਗਾ", modeCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ ਭੇਜੋ",
-      lblGName:"ਤੁਹਾਡਾ ਨਾਮ", lblGPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblGAddr:"ਪੂਰਾ ਪਤਾ — ਕੋਰੀਅਰ ਲਈ",
+      lblGName:"ਤੁਹਾਡਾ ਨਾਮ", lblGPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblGAddr:"ਪੂਰਾ ਪਤਾ (ਕੋਰੀਅਰ ਲਈ)",
       phAddr:"ਘਰ/ਫਲੈਟ, ਗਲੀ, ਇਲਾਕਾ, ਸ਼ਹਿਰ, ਪਿਨ ਕੋਡ",
-      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਵੱਖਰਾ ਜੁੜੇਗਾ — ਜਿੰਨਾ ਅਸਲ ਵਿੱਚ ਲੱਗੇਗਾ, ਓਨਾ ਹੀ, ਉੱਤੋਂ ਕੁਝ ਨਹੀਂ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ। ਪੂਰੇ ਪੈਸੇ UPI ਨਾਲ ਆਉਣ ਉੱਤੇ ਹੀ ਸਮਾਨ ਭੇਜਿਆ ਜਾਵੇਗਾ।",
+      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਵੱਖਰਾ ਜੁੜੇਗਾ, ਜਿੰਨਾ ਅਸਲ ਵਿੱਚ ਲੱਗੇਗਾ ਓਨਾ ਹੀ, ਉੱਤੋਂ ਕੁਝ ਨਹੀਂ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ। ਪੂਰੇ ਪੈਸੇ UPI ਨਾਲ ਆਉਣ ਉੱਤੇ ਹੀ ਸਮਾਨ ਭੇਜਿਆ ਜਾਵੇਗਾ।",
       sendOrder:"WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ", needName:"ਨਾਮ ਲਿਖੋ।", needPhone:"10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਲਿਖੋ।",
       needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiPayAny:"UPI ਐਪ ਖੋਲ੍ਹੋ",
       upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ", upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
       lblPay:"ਪੈਸੇ ਕਿਵੇਂ ਦਿਓਗੇ?", payUpi:"ਹੁਣੇ UPI ਨਾਲ", payLater:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ",
-      paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ — ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
+      paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ ਹਨ, ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
       shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।",
-      upiNoteShop:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ, ਫਿਰ ਚਾਹੋ ਤਾਂ UPI ਨਾਲ ਪੈਸੇ — ਜਾਂ ਦੁਕਾਨ ਤੋਂ ਲੈਂਦੇ ਵੇਲੇ।",
-      upiNoteCourier:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ। ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਹਾਲੇ ਨਹੀਂ ਜੁੜਿਆ — ਤਰੁਣ WhatsApp ਉੱਤੇ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ, ਫਿਰ ਭੇਜਿਓ।"
+      upiNoteShop:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ, ਫਿਰ ਚਾਹੋ ਤਾਂ UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ, ਜਾਂ ਦੁਕਾਨ ਤੋਂ ਸਮਾਨ ਲੈਂਦੇ ਵੇਲੇ ਦਿਓ।",
+      upiNoteCourier:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ। ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਹਾਲੇ ਨਹੀਂ ਜੁੜਿਆ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ, ਫਿਰ ਭੇਜਿਓ।"
     },
     te: {
       sub:"బట్టల దుకాణం · సెక్టర్ 108", chooseLang:"భాష ఎంచుకోండి",
       since:"{y} ఏళ్లుగా ఇదే చోట", openNow:"దుకాణం తెరిచి ఉంది", closedNow:"దుకాణం మూసి ఉంది",
       hours:"{a} నుంచి {b}", opensAt:"{t}కి తెరుస్తారు",
-      quote:"ముట్టుకుని చూడండి, వేసుకుని చూడండి — ఆ తర్వాత తీసుకోండి.",
+      quote:"ముట్టుకుని చూడండి, వేసుకుని చూడండి, ఆ తర్వాత తీసుకోండి.",
       ttlVisit:"దుకాణానికి రండి", btnMap:"మ్యాప్‌లో చూడండి", btnCall:"కాల్ చేయండి",
       ttlRack:"దుకాణంలో ఏమి ఉంది", allCat:"అన్నీ",
       rackHint:"సైజు ఎంచుకుని, బ్యాగ్‌లో వేసి WhatsAppలో ఆర్డర్ పంపండి. దుకాణం నుంచి తీసుకోండి, లేదా కొరియర్‌లో తెప్పించుకోండి.",
       sizesLbl:"సైజులు",
       careTtl:"ఉతికే విధానం పాటించండి",
-      careTxt:"ప్రతి బట్టపై ఉతికే లేబుల్ ఉంటుంది — దాని ప్రకారమే ఉతకండి. మొదటిసారి విడిగా, చల్లని నీటిలో, లోపలివైపు తిప్పి ఉతకండి. లేబుల్ ప్రకారం ఉతకకపోవడం వల్ల రంగు పోయినా, బట్ట పాడైనా దుకాణం బాధ్యత వహించదు.",
+      careTxt:"ప్రతి బట్టపై ఉతికే లేబుల్ ఉంటుంది, దాని ప్రకారమే ఉతకండి. మొదటిసారి విడిగా, చల్లని నీటిలో, లోపలివైపు తిప్పి ఉతకండి. లేబుల్ ప్రకారం ఉతకకపోవడం వల్ల రంగు పోయినా, బట్ట పాడైనా దుకాణం బాధ్యత వహించదు.",
       careShort:"లేబుల్ ప్రకారం ఉతకండి. అలా ఉతకకపోవడం వల్ల రంగు పోతే దుకాణం బాధ్యత వహించదు.",
       retTtl:"మార్పిడి, వాపసు",
-      ret:["సైజు సరిపోకపోతే 7 రోజుల్లో మార్చుకోవచ్చు.","వేసుకోకుండా, ఉతకకుండా, ట్యాగ్‌తో, బిల్లుతో తీసుకురండి.","లోదుస్తులు మార్చబడవు — పరిశుభ్రత కారణంగా.","సేల్ వస్తువులు: మార్పిడి మాత్రమే, డబ్బు వాపసు లేదు.","కొరియర్‌లో తెప్పించుకుంటే వాపసు ఖర్చు మీది. మా తప్పు అయితే మాది.","లేబుల్ పాటించకపోవడం వల్ల జరిగిన నష్టం ఇందులో రాదు."], ask:"WhatsAppలో అడగండి", from:"నుంచి",
+      ret:["సైజు సరిపోకపోతే 7 రోజుల్లో మార్చుకోవచ్చు.","వేసుకోకుండా, ఉతకకుండా, ట్యాగ్‌తో, బిల్లుతో తీసుకురండి.","పరిశుభ్రత కారణంగా లోదుస్తులు మార్చబడవు.","సేల్ వస్తువులు: మార్పిడి మాత్రమే, డబ్బు వాపసు లేదు.","కొరియర్‌లో తెప్పించుకుంటే వాపసు ఖర్చు మీది. మా తప్పు అయితే మాది.","లేబుల్ పాటించకపోవడం వల్ల జరిగిన నష్టం ఇందులో రాదు."], ask:"WhatsAppలో అడగండి", from:"నుంచి",
       slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
       foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
-      cross:"కూరగాయలు ఆర్డర్ చేయండి",
+      cross:"కూరగాయలు ఆర్డర్ చేయండి", backVeg:"కూరగాయల దుకాణానికి తిరిగి",
       bagAdd:"బ్యాగ్‌లో వేయండి", bagAdded:"వేశాం ✓", pickSize:"ముందు సైజు ఎంచుకోండి", pickColor:"రంగు ఎంచుకోండి",
       colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", onlyLeft:"కేవలం {n} మిగిలాయి", askMore:"దీని గురించి అడగండి",
       bagOne:"బ్యాగ్‌లో 1 వస్తువు", bagMany:"బ్యాగ్‌లో {n} వస్తువులు", bagHint:"మొత్తం ₹{t}", bagView:"బ్యాగ్ చూడండి",
       bagTitle:"మీ బ్యాగ్", bagEmpty:"బ్యాగ్ ఖాళీగా ఉంది", removeLbl:"తీసివేయండి", totLbl:"మొత్తం",
       lblHow:"ఎలా తీసుకుంటారు?", modeShop:"దుకాణం నుంచి తీసుకుంటాను", modeCourier:"కొరియర్‌లో పంపండి",
-      lblGName:"మీ పేరు", lblGPhone:"మొబైల్ నంబర్", lblGAddr:"పూర్తి చిరునామా — కొరియర్ కోసం",
+      lblGName:"మీ పేరు", lblGPhone:"మొబైల్ నంబర్", lblGAddr:"పూర్తి చిరునామా (కొరియర్ కోసం)",
       phAddr:"ఇల్లు/ఫ్లాట్, వీధి, ప్రాంతం, నగరం, పిన్ కోడ్",
-      courierNote:"కొరియర్ ఖర్చు విడిగా కలుస్తుంది — నిజంగా ఎంత అవుతుందో అంతే, పైన ఏమీ లేదు. వస్తువులు, కొరియర్ కలిపి మొత్తం ఎంతో తరుణ్ WhatsAppలో చెబుతారు. పూర్తి డబ్బు UPI ద్వారా అందిన తర్వాతే పార్సెల్ పంపబడుతుంది.",
+      courierNote:"కొరియర్ ఖర్చు విడిగా కలుస్తుంది, నిజంగా ఎంత అవుతుందో అంతే, పైన ఏమీ లేదు. వస్తువులు, కొరియర్ కలిపి మొత్తం ఎంతో తరుణ్ WhatsAppలో చెబుతారు. పూర్తి డబ్బు UPI ద్వారా అందిన తర్వాతే పార్సెల్ పంపబడుతుంది.",
       sendOrder:"WhatsAppలో ఆర్డర్ పంపండి", needName:"పేరు రాయండి.", needPhone:"10 అంకెల మొబైల్ నంబర్ రాయండి.",
       needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiPayAny:"UPI యాప్ తెరవండి",
       upiCopy:"UPI ID కాపీ చేయండి", upiCopied:"కాపీ అయ్యింది ✓",
       lblPay:"ఎలా చెల్లిస్తారు?", payUpi:"ఇప్పుడే UPI ద్వారా", payLater:"వస్తువు అందినప్పుడు",
-      paidLbl:"నేను డబ్బు పంపాను — స్క్రీన్‌షాట్ కూడా పంపుతాను",
+      paidLbl:"నేను డబ్బు పంపాను, స్క్రీన్‌షాట్ కూడా పంపుతాను",
       shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.",
-      upiNoteShop:"ముందు కింద నుంచి ఆర్డర్ పంపండి, తర్వాత కావాలంటే UPI ద్వారా — లేదా దుకాణంలో తీసుకునేటప్పుడు.",
-      upiNoteCourier:"ముందు కింద నుంచి ఆర్డర్ పంపండి. కొరియర్ ఖర్చు ఇంకా కలపలేదు — తరుణ్ WhatsAppలో మొత్తం చెబుతారు, అప్పుడు పంపండి."
+      upiNoteShop:"ముందు కింద నుంచి ఆర్డర్ పంపండి, తర్వాత కావాలంటే UPI ద్వారా చెల్లించండి, లేదా దుకాణంలో తీసుకునేటప్పుడు ఇవ్వండి.",
+      upiNoteCourier:"ముందు కింద నుంచి ఆర్డర్ పంపండి. కొరియర్ ఖర్చు ఇంకా కలపలేదు. తరుణ్ WhatsAppలో మొత్తం చెబుతారు, అప్పుడు పంపండి."
     }
   };
 
@@ -934,30 +947,30 @@ body.hasbag{padding-bottom:96px}
      so Tarun can read an order quickly whatever language the customer used. */
   var GMSG = {
     hi: { order:"ऑर्डर", size:"साइज़", total:"कुल", name:"नाम", phone:"फ़ोन",
-          how:"कैसे चाहिए", atShop:"दुकान से ले लूँगा", byCourier:"कूरियर से भेजिए", addr:"पता",
+          how:"कैसे चाहिए", atShop:"दुकान से खुद ले लूँगा/लूँगी", byCourier:"कूरियर से भेजिए", addr:"पता",
           pay:"पैसे", paidUpi:"UPI से भेज दिए", willUpi:"UPI से भेज रहा/रही हूँ",
           onDeliv:"सामान मिलने पर दूँगा/दूँगी",
-          courierPay:"सामान + कूरियर की कुल रकम बताइए — एडवांस UPI से भेज दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
+          courierPay:"सामान और कूरियर की कुल रकम बताइए, एडवांस UPI से भेज दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
     en: { order:"Order", size:"Size", total:"Total", name:"Name", phone:"Phone",
           how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address",
           pay:"Payment", paidUpi:"Sent by UPI", willUpi:"Sending by UPI",
           onDeliv:"Will pay on receiving",
-          courierPay:"Tell me the total for goods plus courier — I will send it by UPI in advance", shot:"Sending the payment screenshot in this chat" },
+          courierPay:"Tell me the total for goods plus courier, and I will send it by UPI in advance", shot:"Sending the payment screenshot in this chat" },
     bn: { order:"অর্ডার", size:"সাইজ", total:"মোট", name:"নাম", phone:"ফোন",
           how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা",
           pay:"টাকা", paidUpi:"UPI-তে পাঠিয়েছি", willUpi:"UPI-তে পাঠাচ্ছি",
           onDeliv:"জিনিস পাওয়ার সময় দেব",
-          courierPay:"জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানান — অগ্রিম UPI-তে পাঠিয়ে দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
+          courierPay:"জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানান, অগ্রিম UPI-তে পাঠিয়ে দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
     pa: { order:"ਆਰਡਰ", size:"ਸਾਈਜ਼", total:"ਕੁੱਲ", name:"ਨਾਮ", phone:"ਫ਼ੋਨ",
           how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ",
           pay:"ਪੈਸੇ", paidUpi:"UPI ਨਾਲ ਭੇਜ ਦਿੱਤੇ", willUpi:"UPI ਨਾਲ ਭੇਜ ਰਿਹਾ ਹਾਂ",
           onDeliv:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ ਦਿਆਂਗਾ",
-          courierPay:"ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸੋ — ਐਡਵਾਂਸ UPI ਨਾਲ ਭੇਜ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
+          courierPay:"ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸੋ, ਐਡਵਾਂਸ UPI ਨਾਲ ਭੇਜ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
     te: { order:"ఆర్డర్", size:"సైజు", total:"మొత్తం", name:"పేరు", phone:"ఫోన్",
           how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా",
           pay:"చెల్లింపు", paidUpi:"UPI ద్వారా పంపాను", willUpi:"UPI ద్వారా పంపుతున్నాను",
           onDeliv:"వస్తువు అందినప్పుడు ఇస్తాను",
-          courierPay:"వస్తువులు, కొరియర్ కలిపి మొత్తం చెప్పండి — ముందుగానే UPI ద్వారా పంపుతాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
+          courierPay:"వస్తువులు, కొరియర్ కలిపి మొత్తం చెప్పండి, ముందుగానే UPI ద్వారా పంపుతాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
   };
 
   var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
@@ -981,7 +994,7 @@ body.hasbag{padding-bottom:96px}
   var el = {};
   ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
    'statusPill','statusTxt','ownerQuote','ttlVisit','addrTxt','metaRow','mapLink','btnMap',
-   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt',
+   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt','backTxt',
    'careTtl','careTxt','careShort','retTtl','retList',
    'bagbar','bagCount','bagHint','bagOpen','bagOpenTxt','scrim','sheet','sheetTitle','sheetClose',
    'bagLines','lblHow','modeShop','modeCourier','lblGName','gName','errGName',
@@ -1059,7 +1072,7 @@ body.hasbag{padding-bottom:96px}
         esc(fill(t.hours, { a: pretty(shop.openTime), b: pretty(shop.closeTime) })) + '</span>' +
       '<span class="pill"><svg aria-hidden="true"><use href="#i-star"></use></svg>' +
         esc(fill(t.since, { y: shop.sinceYears })) + '</span>' +
-      '<span class="pill"><svg aria-hidden="true"><use href="#i-ruler"></use></svg>M – XXL</span>';
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-ruler"></use></svg>M to XXL</span>';
     el.mapLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(shop.mapQuery);
     el.btnMap.textContent = t.btnMap;
     el.callLink.href = 'tel:+91' + shop.phone1;
@@ -1069,6 +1082,7 @@ body.hasbag{padding-bottom:96px}
     el.rackHint.textContent = t.rackHint;
     el.footTxt.textContent = t.foot + ' · ' + shop.phone1 + ' / ' + shop.phone2;
     el.crossTxt.textContent = t.cross;
+    el.backTxt.textContent = t.backVeg;
     el.careTtl.textContent = t.careTtl;
     el.careTxt.textContent = t.careTxt;
     el.careShort.textContent = t.careShort;
@@ -1087,7 +1101,7 @@ body.hasbag{padding-bottom:96px}
     paintBag();
   }
 
-  /* Static labels inside the bag sheet — separate from paintBag(), which is
+  /* Static labels inside the bag sheet, separate from paintBag(), which is
      about contents and runs on every add and remove. */
   function paintBagChrome() {
     el.sheetTitle.textContent = t.bagTitle;
@@ -1167,7 +1181,7 @@ body.hasbag{padding-bottom:96px}
   }
 
   /* Stock is a number Tarun keeps by hand. Zero means he has said there are
-     none — which is a stronger statement than never having counted, so only
+     none, which is a stronger statement than never having counted, so only
      an explicit zero closes the item. */
   function soldOut(it) {
     return it.available === false || (it.stock !== undefined && Number(it.stock) === 0 && it._counted);
@@ -1202,7 +1216,7 @@ body.hasbag{padding-bottom:96px}
 
     var pr = document.createElement('div');
     pr.className = 'item-pr';
-    /* "से" means "from ₹350" — a starting price. Put a struck-through old
+    /* "से" means "from ₹350", a starting price. Put a struck-through old
        price after it and it reads as a range, ₹350 to ₹450, which is the
        opposite of a discount. So it is one or the other, never both. */
     var cut = it.mrp && Number(it.mrp) > Number(it.price);
@@ -1316,7 +1330,7 @@ body.hasbag{padding-bottom:96px}
     return art;
   }
 
-  /* Redraw one card in place — cheaper than re-rendering the rack and it
+  /* Redraw one card in place, cheaper than re-rendering the rack and it
      keeps the customer's scroll position exactly where it was. */
   function refresh(it, node) {
     var fresh = card(it);
@@ -1477,7 +1491,7 @@ body.hasbag{padding-bottom:96px}
     el.addrWrap.hidden = m !== 'courier';
     el.courierNote.hidden = m !== 'courier';
     /* Courier is paid in advance, and the amount is not known until Tarun has
-       weighed the parcel — so there is nothing to choose between yet. The
+       weighed the parcel, so there is nothing to choose between yet. The
        courier note above explains what happens instead. */
     el.payChoice.hidden = m === 'courier';
     if (m === 'courier') setPayWayQuiet('later');
@@ -1514,14 +1528,14 @@ body.hasbag{padding-bottom:96px}
     try { save(GINFO_KEY, { name: nm, phone: ph, addr: ad, mode: mode }); } catch (e) {}
 
     var m = GMSG[lang] || GMSG.hi;
-    var lines = ['*' + DATA.shop.nameEn + ' — ' + m.order + '*', ''];
+    var lines = ['*' + DATA.shop.nameEn + ' · ' + m.order + '*', ''];
     bag.forEach(function (l, i) {
       var it = itemById(l.id);
       var bits = [it.en || it.hi];
       if (l.size) bits.push(m.size + ' ' + l.size);
       if (l.color) bits.push(l.color);
-      lines.push((i + 1) + ') ' + bits.join(' — ') + ' × ' + l.qty +
-                 ' — ₹' + (Number(it.price) * l.qty));
+      lines.push((i + 1) + ') ' + bits.join(', ') + ' × ' + l.qty +
+                 ' = ₹' + (Number(it.price) * l.qty));
     });
     lines.push('', m.total + ': ₹' + bagTotal(), '');
     lines.push(m.name + ': ' + nm);
@@ -1529,7 +1543,7 @@ body.hasbag{padding-bottom:96px}
     lines.push(m.how + ': ' + (mode === 'courier' ? m.byCourier : m.atShop));
     if (mode === 'courier') lines.push(m.addr + ': ' + ad);
 
-    /* The page cannot verify a payment — it has no server and never sees the
+    /* The page cannot verify a payment, because it has no server and never sees the
        bank. So this is the customer's own statement, written in their voice,
        and the screenshot is what Tarun actually checks against PhonePe. */
     logOrder();
@@ -1537,7 +1551,7 @@ body.hasbag{padding-bottom:96px}
     if (mode === 'courier') {
       lines.push(m.pay + ': ' + m.courierPay);
     } else if (payWay === 'upi') {
-      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' — ₹' + bagTotal());
+      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' · ₹' + bagTotal());
       if (el.paidChk.checked) lines.push(m.shot);
     } else {
       lines.push(m.pay + ': ' + m.onDeliv);
@@ -1545,7 +1559,7 @@ body.hasbag{padding-bottom:96px}
     openWA(lines);
   }
 
-  /* Tell the shop what was ordered — item, size, colour, quantity, price and
+  /* Tell the shop what was ordered: item, size, colour, quantity, price and
      nothing else. No name, phone or address goes anywhere near this.
 
      Fire and forget on purpose: the customer is about to be handed to
@@ -1584,7 +1598,7 @@ body.hasbag{padding-bottom:96px}
   }
 
   function askLine(it) {
-    return DATA.shop.nameEn + ' — ' + (it.en || it.hi) + ' ke baare mein poochna hai';
+    return DATA.shop.nameEn + ': ' + (it.en || it.hi) + ' ke baare mein poochna hai';
   }
 
   /* ---------------------------- bag wiring ---------------------------- */
@@ -1597,8 +1611,8 @@ body.hasbag{padding-bottom:96px}
   el.payUpi.addEventListener('click', function () { setPayWay('upi'); });
   el.payLater.addEventListener('click', function () { setPayWay('later'); });
   el.paidChk.addEventListener('change', paintUpi);
-  /* Tapping the pay button hands off to a UPI app, so tick the box for them —
-     they are unlikely to come back and find it. They can still untick it. */
+  /* Tapping the pay button hands off to a UPI app, so tick the box for them,
+     because they are unlikely to come back and find it. They can still untick it. */
   el.upiPayBtn.addEventListener('click', function () {
     el.paidChk.checked = true;
     paintUpi();   /* setting .checked in code fires no change event */
