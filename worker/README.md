@@ -1,7 +1,7 @@
 # Reviews API
 
 A Cloudflare Worker that stores customer ratings for guru-ashish.in.
-Free tier covers this many times over — a shop doing 50 orders a day would
+Free tier covers this many times over. A shop doing 50 orders a day would
 use well under 1% of the daily request allowance.
 
 ## Deploy (once, about five minutes)
@@ -14,7 +14,7 @@ cd worker
 wrangler deploy
 ```
 
-To rebuild from nothing — a new account, or the namespace deleted:
+To rebuild from nothing (a new account, or the namespace deleted):
 
 ```bash
 npm install -g wrangler      # if you don't have it
@@ -29,7 +29,7 @@ wrangler secret put ADMIN_KEY          # any long random string
 Wrangler prints a URL like
 `https://guru-ashish-reviews.<your-subdomain>.workers.dev`.
 
-The KV id in `wrangler.toml` is not a secret — it names the storage, it does
+The KV id in `wrangler.toml` is not a secret. It names the storage, it does
 not open it. `ADMIN_KEY` is the secret, and it lives only in Cloudflare and
 on the shopkeeper's phone. To change it, run `wrangler secret put ADMIN_KEY`
 again and update the **राय** tab.
@@ -58,20 +58,22 @@ nothing looks broken.
 
 Item id, name, size, colour, quantity and price. A timestamp. Nothing else.
 
-No name, no flat, no phone, no address — they are not accepted by the
+No name, no flat, no phone, no address. They are not accepted by the
 endpoint and could not be stored if they were sent. The sales tab needs
 none of them, and the surest way never to leak a customer list is never
 to hold one. Orders expire on their own after about thirteen months.
 
-These are orders **started on the website**. Someone who taps send and
-never sends the WhatsApp is counted; a walk-in never is. The sales tab
-says so above the numbers, because a shopkeeper reading them as total
-sales would stock the wrong things.
+Each order also carries where it came from. A `web` order was started on
+the website, so someone who taps send and never sends the WhatsApp is
+counted. A `counter` order is one the shopkeeper rang up himself in the
+admin after selling across the counter. A walk-in he did not record is in
+neither, and the sales tab says so above the numbers, because a shopkeeper
+reading them as total sales would stock the wrong things.
 
 ## Abuse handling
 
 - One rating per IP address per 10 minutes
-- Stars must be 1–5; text capped at 300 characters
+- Stars must be 1 to 5; text capped at 300 characters
 - `<` and `>` stripped, so nothing can inject markup
 - A hidden honeypot field silently swallows bots
 - CORS limited to `https://guru-ashish.in`

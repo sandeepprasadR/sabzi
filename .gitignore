@@ -1,0 +1,6 @@
+# wrangler's local cache, written on every deploy
+.wrangler/
+worker/.wrangler/
+
+# macOS
+.DS_Store

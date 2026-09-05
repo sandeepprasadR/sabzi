@@ -173,19 +173,24 @@ async function addReview(request, env) {
 /*
  * What the shop asked for, not who asked for it.
  *
- * No name, flat, phone or address is accepted or stored here — the analytics
+ * No name, flat, phone or address is accepted or stored here. The analytics
  * this feeds needs item, size, colour, quantity and price and nothing else,
  * and the surest way not to leak a customer list is never to hold one.
  *
- * These are orders *started on the website*. A customer who taps send and
- * never sends the WhatsApp still lands here, and a walk-in never does. The
- * admin page says so where the numbers are shown.
+ * Two kinds of order arrive here. A web order is one started on the website:
+ * a customer who taps send and never sends the WhatsApp still lands here. A
+ * counter order is one the shopkeeper recorded himself after selling across
+ * the counter. The admin page shows the split and says what each one means.
  */
 async function addOrder(request, env) {
   let body;
   try { body = await request.json(); } catch (e) { body = {}; }
 
   const shop = body.shop === 'gar' ? 'gar' : 'veg';
+  /* 'counter' is a sale the shopkeeper rang up himself in the admin. Without
+     it these numbers only ever describe the website, which is the smaller
+     half of the shop. */
+  const src = body.src === 'counter' ? 'counter' : 'web';
   const raw = Array.isArray(body.items) ? body.items.slice(0, MAX_LINES) : [];
   const items = raw.map(l => ({
     id: clean(l.id, 60),
@@ -200,6 +205,7 @@ async function addOrder(request, env) {
 
   const order = {
     shop: shop,
+    src: src,
     items: items,
     total: items.reduce((s, l) => s + l.qty * l.price, 0),
     ts: Date.now()

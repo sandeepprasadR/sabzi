@@ -7,7 +7,7 @@ compatibility_date = "2026-01-01"
 ALLOW_ORIGIN = "https://guru-ashish.in"
 
 # Created by: wrangler kv namespace create REVIEWS
-# Not a secret — it only names the storage; reading it still needs the account.
+# Not a secret: it only names the storage; reading it still needs the account.
 [[kv_namespaces]]
 binding = "REVIEWS"
 id = "c1ebed889cea40eab429909068b6017e"

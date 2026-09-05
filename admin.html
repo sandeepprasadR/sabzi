@@ -110,12 +110,16 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--leaf);border-col
   font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
 .pick[aria-pressed="true"]{background:var(--leaf);border-color:var(--leaf);color:#fff}
 .help{font-size:12.5px;color:var(--muted);margin:5px 0 0;line-height:1.5}
+.help.bad{color:#a4302a;font-weight:700}
+.nocost{display:block;margin-top:3px;font-weight:600;opacity:.75}
+.sellttl{font-size:14.5px;font-weight:800;margin-bottom:4px}
+.srcline{margin:8px 0 0;font-size:12.5px;color:var(--muted);font-weight:600}
 .stocktot{margin:6px 0 2px;padding:10px 12px;border-radius:11px;background:var(--leaf-l);
   color:var(--leaf-d);font-size:14px;font-weight:700;line-height:1.5}
 .bar{display:flex;align-items:center;gap:9px;padding:7px 0}
 .bar .nm{flex:1;min-width:0;font-size:14.5px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar .track{flex:0 0 96px;height:9px;border-radius:99px;background:var(--line);overflow:hidden}
-/* display:block matters — an inline span ignores width, so every bar drew empty */
+/* display:block matters, because an inline span ignores width and every bar drew empty */
 .bar .fill{display:block;height:100%;background:var(--leaf);border-radius:99px}
 .bar .val{flex:0 0 auto;font-size:13.5px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--muted)}
 .dead{font-size:14px;line-height:1.7}
@@ -306,12 +310,12 @@ a{color:var(--leaf-d)}
      different thing from typing in it.
 
      This translates the ADMIN only. Product names, and the WhatsApp rate
-     list that goes to the society group, stay exactly as they are — those
+     list that goes to the society group, stay exactly as they are. Those
      are the shop's words, not this page's.
      ------------------------------------------------------------------- */
   var TX = {
     title:      ['Update the shop', 'दुकान अपडेट करें'],
-    subtitle:   ['Prices, stock and photos — straight from here', 'दाम, स्टॉक और फोटो — सीधे यहीं से'],
+    subtitle:   ['Prices, stock and photos, straight from here', 'दाम, स्टॉक और फोटो, सीधे यहीं से'],
     langName:   ['हिंदी', 'English'],
 
     loginH:     ['First time? One quick setup', 'पहली बार? एक बार सेट करना होगा'],
@@ -370,10 +374,10 @@ a{color:var(--leaf-d)}
     revNeedKey: ['Enter the reviews key.', 'राय की चाबी डालें।'],
     revBadKey:  ['That key is wrong.', 'चाबी गलत है।'],
     revNoAns:   ['No answer from the server.', 'सर्वर से जवाब नहीं मिला।'],
-    revNoNet:   ['Internet down, or the address is wrong.', 'इंटरनेट या पता गलत है।'],
-    revNone:    ['No customer has left a review yet.', 'अभी तक किसी ग्राहक ने राय नहीं दी।'],
-    revNoneShort:['— no reviews yet', '— अभी कोई राय नहीं'],
-    revStat:    ['— {n} reviews, average {a} ★', '— {n} राय, औसत {a} ★'],
+    revNoNet:   ['Internet down, or the address is wrong.', 'इंटरनेट नहीं चल रहा, या पता गलत है।'],
+    revNone:    ['No customer has left a review yet.', 'अभी तक किसी ग्राहक ने कोई राय नहीं दी।'],
+    revNoneShort:['· no reviews yet', '· अभी कोई राय नहीं'],
+    revStat:    ['· {n} reviews, average {a} ★', '· {n} राय, औसत {a} ★'],
     revOnTop:   ['on the website', 'वेबसाइट पर ऊपर'],
     revNoName:  ['No name', 'बिना नाम'],
     revFeature: ['Show at top', 'ऊपर दिखाएँ'],
@@ -387,13 +391,13 @@ a{color:var(--leaf-d)}
     setOpenL:   ['Opening time', 'दुकान खुलने का समय'],
     setCloseL:  ['Closing time', 'बंद होने का समय'],
     setLastL:   ['Last order time', 'आखिरी ऑर्डर का समय'],
-    setMinL:    ['Minimum order (₹) — 0 means no minimum', 'कम से कम ऑर्डर (₹) — 0 = कोई शर्त नहीं'],
+    setMinL:    ['Minimum order (₹), 0 means no minimum', 'कम से कम ऑर्डर (₹), 0 = कोई शर्त नहीं'],
     setHoursL:  ['Complaints accepted for how many hours', 'शिकायत कितने घंटे तक ले सकते हैं'],
     setNote:    ['Change the times and the website’s "open now / closed" updates by itself.',
                  'समय बदलने पर वेबसाइट पर "अभी खुला / अभी बंद" अपने आप बदल जाएगा।'],
     waH:        ['WhatsApp rate list', 'WhatsApp रेट लिस्ट'],
-    waHint:     ['For posting in the group — copy and paste it. The list itself stays in Hindi.',
-                 'ग्रुप में डालने के लिए — कॉपी करके पेस्ट कर दें।'],
+    waHint:     ['For posting in the group: copy and paste it. The list itself stays in Hindi.',
+                 'ग्रुप में डालने के लिए: कॉपी करके पेस्ट कर दें। लिस्ट हिंदी में ही रहेगी।'],
     copyWa:     ['Copy the rate list', 'रेट लिस्ट कॉपी करें'],
     copied:     ['Copied ✓', 'कॉपी हो गया ✓'],
     outH:       ['Log out', 'बाहर निकलें'],
@@ -405,11 +409,11 @@ a{color:var(--leaf-d)}
     saving:     ['Saving…', 'सेव हो रहा है…'],
     savedAll:   ['Everything is saved', 'सब सेव है'],
     unsaved:    ['Not saved yet', 'सेव नहीं हुआ'],
-    savedOk:    ['Saved ✓ — it will show on the website within a minute',
-                 'सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा'],
-    saveAuth:   ['The token stopped working — log in again', 'टोकन काम नहीं कर रहा — दोबारा लॉगिन करें'],
-    saveClash:  ['Someone else changed it too — refresh the page and try again',
-                 'किसी और ने भी बदला है — पेज रिफ्रेश करके दोबारा करें'],
+    savedOk:    ['Saved ✓, it will show on the website within a minute',
+                 'सेव हो गया ✓, 1 मिनट में वेबसाइट पर दिख जाएगा'],
+    saveAuth:   ['The token stopped working. Log in again', 'टोकन काम नहीं कर रहा, दोबारा लॉगिन करें'],
+    saveClash:  ['Someone else changed it too. Refresh the page and try again',
+                 'किसी और ने भी बदलाव किया है, पेज रिफ्रेश करके दोबारा करें'],
     saveFail:   ['Could not save: ', 'सेव नहीं हो पाया: '],
     noMarker:   [' has no CATALOGUE marker', ' में CATALOGUE मार्कर नहीं मिला'],
     badPhoto:   ['That photo would not open.', 'यह फोटो नहीं खुल पाई।'],
@@ -435,11 +439,11 @@ a{color:var(--leaf-d)}
     uBunch:     ['the bunch', 'गड्डी से'],
     fEmoji:     ['Emoji (shown when there is no photo)', 'इमोजी (फोटो न हो तो यही दिखेगा)'],
     vegEditNote:['Changing a name changes it on the website and in the WhatsApp rate list.',
-                 'नाम बदलने पर वेबसाइट और WhatsApp रेट लिस्ट — दोनों में बदल जाएगा।'],
+                 'नाम बदलने पर वह वेबसाइट और WhatsApp रेट लिस्ट, दोनों जगह बदल जाएगा।'],
 
     fFor:       ['Who it is for', 'किसके लिए'],
     fMrp:       ['Old price (MRP)', 'पहले का दाम (MRP)'],
-    phMrp:      ['0 = hide it', '0 = मत दिखाओ'],
+    phMrp:      ['0 = hide it', '0 = मत दिखाएँ'],
     fSizes:     ['Which sizes are in stock', 'कौन-कौन से साइज़ हैं'],
     fColors:    ['Colours (separate with commas)', 'रंग (कॉमा से अलग करें)'],
     phColors:   ['black, blue, white', 'काला, नीला, सफ़ेद'],
@@ -449,25 +453,55 @@ a{color:var(--leaf-d)}
     phNote:     ['Everyday wear, colour does not run in the wash.',
                  'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।'],
     garEditNote:['Only the sizes you tick can be ordered. Leave them empty and the customer is only asked how many.',
-                 'जो साइज़ आप चुनेंगे सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
+                 'आप जो साइज़ चुनेंगे, सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
     fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें'],
-    fStock:     ['How many in stock', 'कितने बचे हैं (स्टॉक)'],
-    phStock:    ['count in hand', 'जितने दुकान में हैं'],
+    fStock:     ['In stock now ({u})', 'अभी कितना है ({u})'],
+    phStock:    ['what is in the shop', 'जितना दुकान में है'],
     stockN:     ['{n} in stock', 'स्टॉक: {n}'],
     stockNone:  ['stock not counted', 'स्टॉक नहीं भरा'],
-    stockWorth: ['{n} pieces in stock · worth ₹{v}', 'कुल {n} चीज़ें · कीमत ₹{v}'],
+    stockWorth: ['{n} in stock · cost ₹{c} · sells for ₹{v}',
+                 'स्टॉक में {n} · लागत ₹{c} · बिक्री पर ₹{v}'],
+    stockNoCost:['{n} of them have no cost price yet', 'इनमें से {n} की लागत नहीं भरी'],
+
+    bKg:        ['kilo', 'किलो'],
+    bPc:        ['piece', 'नग'],
+    bBunch:     ['bunch', 'गड्डी'],
+    bPiece:     ['piece', 'पीस'],
+    costH:      ['What it cost you', 'आपको क्या पड़ा'],
+    fBuyPrice:  ['Bought for (₹)', 'कितने में खरीदा (₹)'],
+    fBuyQty:    ['How much came ({u})', 'उतने में कितना आया ({u})'],
+    phBuyPrice: ['what you paid', 'जो आपने दिया'],
+    phBuyQty:   ['how much came', 'जितना सामान आया'],
+    costLine:   ['₹{c} a {u} · you sell at ₹{p} · you make ₹{m} ({pc}%)',
+                 '₹{c} प्रति {u} · आप बेचते हैं ₹{p} · बचता है ₹{m} ({pc}%)'],
+    costNone:   ['Fill both and the cost per {u} works itself out.',
+                 'दोनों भर दीजिए, प्रति {u} लागत अपने आप निकल आएगी।'],
+    costLoss:   ['₹{c} a {u} · you sell at ₹{p} · that is ₹{m} below cost',
+                 '₹{c} प्रति {u} · आप बेचते हैं ₹{p} · यह लागत से ₹{m} कम है'],
+
+    sold:       ['Sold', 'बेचा'],
+    soldTtl:    ['Sold across the counter', 'दुकान पर बिका'],
+    soldQty:    ['How many', 'कितने'],
+    soldSize:   ['Which size', 'कौन सा साइज़'],
+    soldColor:  ['Which colour', 'कौन सा रंग'],
+    soldRec:    ['Record the sale', 'बिक्री दर्ज करें'],
+    soldHint:   ['The stock comes down by this much and the Sales tab counts it.',
+                 'इतना स्टॉक कम हो जाएगा और बिक्री टैब में गिना जाएगा।'],
+    soldSaving: ['Recording…', 'दर्ज हो रहा है…'],
+    anaSrc:     ['{w} from the website · {c} rung up at the counter',
+                 'वेबसाइट से {w} · दुकान पर {c}'],
 
     tabAna:     ['Sales', 'बिक्री'],
     anaH:       ['What is selling', 'क्या बिक रहा है'],
-    anaWarn:    ['These are orders placed through the website only. Walk-ins, phone orders and WhatsApp group orders are not counted here — so read this as what the website is being asked for, not as your whole shop.',
-                 'ये सिर्फ़ वेबसाइट से आए ऑर्डर हैं। दुकान पर आकर, फ़ोन से या ग्रुप में दिए ऑर्डर इसमें नहीं गिने जाते — इसे "वेबसाइट पर क्या माँगा जा रहा है" समझें, पूरी दुकान का हिसाब नहीं।'],
+    anaWarn:    ['This counts orders from the website, plus the counter sales you record yourself with the बेचा button. A walk-in you did not record, a phone order and a WhatsApp group order are still invisible here.',
+                 'इसमें वेबसाइट से आए ऑर्डर हैं, और वे बिक्री भी जो आप "बेचा" बटन से खुद दर्ज करते हैं। जो बिक्री आपने दर्ज नहीं की, या जो ऑर्डर फ़ोन पर या ग्रुप में आया, वह इसमें नहीं दिखेगा।'],
     anaLoad:    ['Show the numbers', 'हिसाब देखें'],
     anaPeriod:  ['In this period', 'इस समय में'],
     anaAgain:   ['Refresh', 'दोबारा देखें'],
     anaLoading: ['Fetching…', 'ला रहे हैं…'],
     anaNone:    ['No website orders yet in this period.', 'इस समय में वेबसाइट से कोई ऑर्डर नहीं आया।'],
-    anaNeed:    ['Set the reviews address and key in the राय tab first — the same server stores this.',
-                 'पहले राय टैब में पता और चाबी भरें — हिसाब भी उसी सर्वर पर रहता है।'],
+    anaNeed:    ['Set the reviews address and key in the राय tab first. The same server stores this.',
+                 'पहले राय टैब में पता और चाबी भरें। हिसाब भी उसी सर्वर पर रहता है।'],
     r7:         ['7 days', '7 दिन'],
     r30:        ['30 days', '30 दिन'],
     r90:        ['90 days', '90 दिन'],
@@ -483,8 +517,8 @@ a{color:var(--leaf-d)}
     secSize:    ['Sizes asked for', 'कौन-सा साइज़ माँगा गया'],
     secColor:   ['Colours asked for', 'कौन-सा रंग माँगा गया'],
     secPrice:   ['Price ranges', 'किस दाम का सामान'],
-    slowHint:   ['Not necessarily unpopular — an item with no photo, or one that is out of stock, gets ordered less because it is harder to want.',
-                 'ज़रूरी नहीं कि पसंद न हो — जिस चीज़ की फोटो नहीं है, या जो स्टॉक में नहीं है, उसका ऑर्डर कम आता ही है।']
+    slowHint:   ['Not necessarily unpopular. An item with no photo, or one that is out of stock, gets ordered less because it is harder to want.',
+                 'ज़रूरी नहीं कि पसंद न हो। जिस चीज़ की फोटो नहीं है, या जो स्टॉक में नहीं है, उसका ऑर्डर कम आता ही है।']
   };
 
   var LANG_KEY = 'gavs.admin.lang.v1';
@@ -671,7 +705,7 @@ a{color:var(--leaf-d)}
     return l;
   }
 
-  /* Multi-select chips — used for garment sizes. */
+  /* Multi-select chips, used for garment sizes. */
   function fieldPicks(labelTxt, all, chosen, onToggle) {
     var wrap = document.createElement('div');
     var sp = document.createElement('span');
@@ -762,6 +796,7 @@ a{color:var(--leaf-d)}
     acts.appendChild(ed);
 
     acts.appendChild(stockChip(obj, opts.redraw));
+    if (opts.sellPanel) acts.appendChild(sellChip(obj, opts.redraw));
     photoChips(obj, opts.photoPath(obj), opts.redraw).forEach(function (c) { acts.appendChild(c); });
 
     var del = document.createElement('button');
@@ -774,7 +809,112 @@ a{color:var(--leaf-d)}
     wrap.appendChild(acts);
 
     if (obj._open) wrap.appendChild(opts.panel(obj));
+    if (obj._sell && opts.sellPanel) wrap.appendChild(opts.sellPanel(obj));
     return wrap;
+  }
+
+  /* ------------------------- a sale over the counter ---------------------
+     The one sale this site cannot see for itself. Recording it here does two
+     things at once: the stock comes down by what actually left the shop, and
+     the Sales tab stops being a picture of the website alone. */
+  function sellChip(o, redraw) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip';
+    b.setAttribute('aria-expanded', String(!!o._sell));
+    b.textContent = tx('sold');
+    b.addEventListener('click', function () { o._sell = !o._sell; redraw(); });
+    return b;
+  }
+
+  /* one choice out of a short list, unlike fieldPicks which takes many */
+  function oneOf(labelTxt, all, chosen, onPick) {
+    var wrap = document.createElement('div');
+    var sp = document.createElement('span');
+    sp.style.cssText = 'display:block;font-size:14px;font-weight:600;margin:12px 0 0';
+    sp.textContent = labelTxt;
+    var row = document.createElement('div'); row.className = 'picks';
+    all.forEach(function (v) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick';
+      b.setAttribute('aria-pressed', String(v === chosen));
+      b.textContent = v;
+      b.addEventListener('click', function () {
+        onPick(v);
+        Array.prototype.forEach.call(row.children, function (c) {
+          c.setAttribute('aria-pressed', 'false');
+        });
+        b.setAttribute('aria-pressed', 'true');
+      });
+      row.appendChild(b);
+    });
+    wrap.appendChild(sp); wrap.appendChild(row);
+    return wrap;
+  }
+
+  function sellPanel(o, shop, redraw) {
+    var box = document.createElement('div'); box.className = 'edit';
+    var size = (o.sizes || [])[0] || '';
+    var color = (o.colors || [])[0] || '';
+    var qty = 1;
+
+    var ttl = document.createElement('div'); ttl.className = 'sellttl';
+    ttl.textContent = tx('soldTtl'); box.appendChild(ttl);
+
+    /* a plain field, not fieldText: typing a quantity is not an edit to the
+       catalogue and must not put the page into an unsaved state by itself */
+    var lab = document.createElement('label');
+    var sp = document.createElement('span'); sp.textContent = tx('soldQty');
+    var inp = document.createElement('input');
+    inp.type = 'number'; inp.min = '1'; inp.step = '1';
+    inp.inputMode = 'numeric'; inp.value = '1';
+    inp.addEventListener('input', function () {
+      qty = Math.max(1, Math.round(Number(inp.value) || 1));
+    });
+    lab.appendChild(sp); lab.appendChild(inp); box.appendChild(lab);
+
+    if ((o.sizes || []).length) {
+      box.appendChild(oneOf(tx('soldSize'), o.sizes, size, function (v) { size = v; }));
+    }
+    if ((o.colors || []).length) {
+      box.appendChild(oneOf(tx('soldColor'), o.colors, color, function (v) { color = v; }));
+    }
+
+    var go = document.createElement('button');
+    go.type = 'button'; go.className = 'btn btn-go';
+    go.style.marginTop = '14px'; go.textContent = tx('soldRec');
+    go.addEventListener('click', function () {
+      go.disabled = true; go.textContent = tx('soldSaving');
+      o.stock = Math.max(0, (Number(o.stock) || 0) - qty);
+      o._sell = false;
+      logCounterSale(o, shop, qty, size, color);
+      markDirty(); paintStockTotals(); redraw();
+      doSave();
+    });
+    box.appendChild(go);
+
+    var hint = document.createElement('p'); hint.className = 'help';
+    hint.textContent = tx('soldHint'); box.appendChild(hint);
+    return box;
+  }
+
+  /* Fire and forget, exactly as the two shop pages do it. A counter sale is
+     recorded whether or not the server answers; the stock change is saved to
+     git either way, and that is the number Tarun actually reads. */
+  function logCounterSale(o, shop, qty, size, color) {
+    var base = revBase();
+    if (!base) return;
+    try {
+      fetch(base + '/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          shop: shop, src: 'counter',
+          items: [{ id: o.id, name: o.en || o.hi || o.id, size: size || '',
+                    color: color || '', qty: qty, price: Number(o.price) || 0 }]
+        })
+      }).catch(function () {});
+    } catch (e) { /* never block the stock update */ }
   }
 
   /* ------------------------------ vegetables ----------------------------- */
@@ -818,9 +958,11 @@ a{color:var(--leaf-d)}
           box.appendChild(fieldText(tx('fEmoji'), o.emoji,
             function (v) { o.emoji = v.slice(0, 3); }));
 
-          box.appendChild(fieldText(tx('fStock'), o.stock,
+          box.appendChild(fieldText(tx('fStock', { u: baseLabel(o, 'veg') }), o.stock,
             function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
-            { type: 'number', numeric: true, placeholder: tx('phStock') }));
+            { type: 'number', numeric: true, step: '0.01', placeholder: tx('phStock') }));
+
+          box.appendChild(costBlock(o, 'veg', paintStockTotals));
 
           var p2 = document.createElement('p'); p2.className = 'help';
           p2.textContent = tx('vegEditNote');
@@ -839,26 +981,103 @@ a{color:var(--leaf-d)}
     return n > 0 ? tx('stockN', { n: n }) : tx('stockNone');
   }
 
-  function stockValue(list) {
-    return list.reduce(function (sum, o) {
-      return sum + (Number(o.stock) || 0) * (Number(o.price) || 0);
-    }, 0);
+  /* -------------------------- cost, not shelf price ----------------------
+     What the stock in the shop is worth to Tarun is what he paid for it, not
+     what he hopes to get. ₹200 for 25 kilos of potato is ₹8 a kilo whatever
+     the rate list says that morning.
+
+     Everything is counted in the item's base unit: the kilo for anything
+     sold by weight, the नग, the गड्डी, the piece. A 250-gram price is the
+     one place the sale unit and the base unit part company, and it is four
+     to the kilo. */
+  function baseUnit(o, shop) {
+    if (shop === 'gar') return 'piece';
+    return o.unit === 'pc' ? 'pc' : (o.unit === 'bunch' ? 'bunch' : 'kg');
+  }
+  function baseLabel(o, shop) {
+    var u = baseUnit(o, shop);
+    return tx(u === 'kg' ? 'bKg' : u === 'pc' ? 'bPc' : u === 'bunch' ? 'bBunch' : 'bPiece');
+  }
+  function sellPerBase(o, shop) {
+    var p = Number(o.price) || 0;
+    return (shop !== 'gar' && o.unit === '250g') ? p * 4 : p;
+  }
+  function costPerBase(o) {
+    var paid = Number(o.buyPrice) || 0, came = Number(o.buyQty) || 0;
+    if (paid <= 0 || came <= 0) return null;      /* not entered yet */
+    return paid / came;
+  }
+  function money(n) {
+    return Number(n || 0).toLocaleString('en-IN', { maximumFractionDigits: 2 });
+  }
+
+  /* The two purchase fields plus the line that does the arithmetic for him.
+     Shown live, so the sum is visible before he has finished typing. */
+  function costBlock(o, shop, after) {
+    var wrap = document.createElement('div');
+    var unit = baseLabel(o, shop);
+
+    var h = document.createElement('div'); h.className = 'sellttl';
+    h.style.marginTop = '12px'; h.textContent = tx('costH');
+    wrap.appendChild(h);
+
+    var g = document.createElement('div'); g.className = 'grid2';
+    g.appendChild(fieldText(tx('fBuyPrice'), o.buyPrice || '',
+      function (v) { o.buyPrice = Math.max(0, Number(v) || 0); paint(); after && after(); },
+      { type: 'number', numeric: true, placeholder: tx('phBuyPrice') }));
+    g.appendChild(fieldText(tx('fBuyQty', { u: unit }), o.buyQty || '',
+      function (v) { o.buyQty = Math.max(0, Number(v) || 0); paint(); after && after(); },
+      { type: 'number', numeric: true, step: '0.01', placeholder: tx('phBuyQty') }));
+    wrap.appendChild(g);
+
+    var line = document.createElement('p');
+    wrap.appendChild(line);
+    paint();
+    return wrap;
+
+    function paint() {
+      var c = costPerBase(o), sell = sellPerBase(o, shop);
+      if (c == null) {
+        line.className = 'help';
+        line.textContent = tx('costNone', { u: unit });
+        return;
+      }
+      var made = sell - c;
+      /* a negative profit reads as a typo, so say the loss in its own words */
+      line.className = made < 0 ? 'help bad' : 'help';
+      line.textContent = made < 0
+        ? tx('costLoss', { c: money(c), u: unit, p: money(sell), m: money(-made) })
+        : tx('costLine', { c: money(c), u: unit, p: money(sell), m: money(made),
+                           pc: Math.round(made / c * 100) });
+    }
+  }
+
+  function stockTotals(list, shop) {
+    var t = { n: 0, cost: 0, retail: 0, missing: 0 };
+    list.forEach(function (o) {
+      var have = Number(o.stock) || 0;
+      t.n += have;
+      t.retail += have * sellPerBase(o, shop);
+      var c = costPerBase(o);
+      if (c == null) { if (have > 0) t.missing++; }
+      else t.cost += have * c;
+    });
+    return t;
   }
 
   function paintStockTotals() {
-    if (files['index.html']) {
-      var veg = files['index.html'].data.products || [];
-      $('vegTotal').textContent = tx('stockWorth', {
-        n: veg.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
-        v: stockValue(veg).toLocaleString('en-IN')
-      });
-    }
-    if (files['garments.html']) {
-      var gar = garList();
-      $('garTotal').textContent = tx('stockWorth', {
-        n: gar.reduce(function (a, o) { return a + (Number(o.stock) || 0); }, 0),
-        v: stockValue(gar).toLocaleString('en-IN')
-      });
+    if (files['index.html']) one('vegTotal', files['index.html'].data.products || [], 'veg');
+    if (files['garments.html']) one('garTotal', garList(), 'gar');
+
+    function one(id, list, shop) {
+      var t = stockTotals(list, shop), node = $(id);
+      node.textContent = tx('stockWorth', { n: money(t.n), c: money(t.cost), v: money(t.retail) });
+      if (t.missing) {
+        var s = document.createElement('span');
+        s.className = 'nocost';
+        s.textContent = tx('stockNoCost', { n: t.missing });
+        node.appendChild(s);
+      }
     }
   }
 
@@ -893,6 +1112,7 @@ a{color:var(--leaf-d)}
         },
         photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
         redraw: drawGar,
+        sellPanel: function (o) { return sellPanel(o, 'gar', drawGar); },
         remove: function () { list.splice(i, 1); markDirty(); drawGar(); },
         panel: function (o) {
           var box = document.createElement('div'); box.className = 'edit';
@@ -924,9 +1144,11 @@ a{color:var(--leaf-d)}
           box.appendChild(fieldText(tx('fFabric'), o.fabric, function (v) { o.fabric = clean1(v); },
             { placeholder: tx('phFabric') }));
 
-          box.appendChild(fieldText(tx('fStock'), o.stock,
+          box.appendChild(fieldText(tx('fStock', { u: baseLabel(o, 'gar') }), o.stock,
             function (v) { o.stock = Math.max(0, Number(v) || 0); paintStockTotals(); },
             { type: 'number', numeric: true, placeholder: tx('phStock') }));
+
+          box.appendChild(costBlock(o, 'gar', paintStockTotals));
 
           box.appendChild(fieldText(tx('fNote'), o.note,
             function (v) { o.note = v.replace(/\s+/g, ' ').slice(0, 160); },
@@ -941,7 +1163,7 @@ a{color:var(--leaf-d)}
     });
   }
 
-  /* Names go into a WhatsApp message and a one-line card — newlines and
+  /* Names go into a WhatsApp message and a one-line card, so newlines and
      double spaces break both, so flatten them on the way in. */
   function clean1(v) { return String(v).replace(/\s+/g, ' ').trim(); }
 
@@ -968,7 +1190,7 @@ a{color:var(--leaf-d)}
     });
   });
 
-  /* Goes into the WhatsApp rate list, which is read by the society group —
+  /* Goes into the WhatsApp rate list, which is read by the society group, so
      always Hindi, whatever language this page is showing. */
   function unitLabel(u) {
     return u === 'kg' ? '1 किलो' : u === '250g' ? '250 ग्राम' : u === 'bunch' ? '1 गड्डी' : '1 नग';
@@ -983,10 +1205,10 @@ a{color:var(--leaf-d)}
     var out = ['🛒 *आज की रेट लिस्ट* 🛒', ''];
     (d.products || []).forEach(function (p) {
       if (p.available === false) return;
-      out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' — ₹' + p.price);
+      out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' · ₹' + p.price);
     });
-    out.push('', '✨ 100% ताज़ा — रोज़ सुबह मंडी से ✨',
-      '🚚 फ्री होम डिलीवरी — ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
+    out.push('', '✨ 100% ताज़ा, रोज़ सुबह मंडी से ✨',
+      '🚚 फ्री होम डिलीवरी, ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
       '🛒 ऑर्डर: https://guru-ashish.in',
       '📞 ' + (s.phone || ''), '📍 ' + (s.address || ''));
     $('waList').value = out.join('\n');
@@ -1089,7 +1311,7 @@ a{color:var(--leaf-d)}
       });
   }
 
-  /* moderation goes straight to the reviews server — nothing to save in git */
+  /* moderation goes straight to the reviews server, nothing to save in git */
   function revAction(r, action, btn) {
     btn.disabled = true;
     revFetch(revBase() + '/admin', {
@@ -1207,7 +1429,7 @@ a{color:var(--leaf-d)}
   $('revLoad').addEventListener('click', loadRev);
 
   /* The vegetable page shows a strip of garments, but it cannot read the
-     garment catalogue at runtime — both pages are standalone files. So the
+     garment catalogue at runtime, because both pages are standalone files. So the
      admin copies a few photos and names across whenever it saves. */
   function syncCrossSell() {
     if (!files['index.html'] || !files['garments.html']) return;
@@ -1239,7 +1461,7 @@ a{color:var(--leaf-d)}
 
   /* ------------------------------ analytics ------------------------------
      Counts orders started on the website. A walk-in never reaches here and a
-     customer who taps send without sending the WhatsApp does — which is why
+     customer who taps send without sending the WhatsApp does, which is why
      the tab leads with a warning rather than a headline number. */
   var orders = null;
   var anaDays = 30;
@@ -1325,10 +1547,10 @@ a{color:var(--leaf-d)}
   }
 
   function priceBand(n) {
-    if (n < 100) return '₹0–99';
-    if (n < 300) return '₹100–299';
-    if (n < 500) return '₹300–499';
-    if (n < 800) return '₹500–799';
+    if (n < 100) return '₹0 to 99';
+    if (n < 300) return '₹100 to 299';
+    if (n < 500) return '₹300 to 499';
+    if (n < 800) return '₹500 to 799';
     return '₹800+';
   }
 
@@ -1363,7 +1585,17 @@ a{color:var(--leaf-d)}
       var sp = document.createElement('span'); sp.textContent = p[1];
       d.appendChild(b); d.appendChild(sp); kpi.appendChild(d);
     });
-    host.appendChild(card(tx('anaPeriod'), kpi));
+    /* Two very different numbers under one heading would mislead, so say
+       which is which whenever both are present. */
+    var counter = use.filter(function (o) { return o.src === 'counter'; }).length;
+    var box = document.createElement('div');
+    box.appendChild(kpi);
+    if (counter) {
+      var sl = document.createElement('p'); sl.className = 'srcline';
+      sl.textContent = tx('anaSrc', { w: use.length - counter, c: counter });
+      box.appendChild(sl);
+    }
+    host.appendChild(card(tx('anaPeriod'), box));
 
     [['veg', 'secVeg', 'index.html', 'products'],
      ['gar', 'secGar', 'garments.html', 'items']].forEach(function (sh) {
@@ -1379,7 +1611,7 @@ a{color:var(--leaf-d)}
         barList(tally(mine, function (x) { return x.l.name; },
                       function (x) { return x.l.qty; }).slice(0, 10))));
 
-      /* what nobody asked for — needs the catalogue, which this page holds */
+      /* what nobody asked for, which needs the catalogue this page holds */
       var cat = files[sh[2]] ? (files[sh[2]].data[sh[3]] || []) : [];
       var asked = {};
       mine.forEach(function (x) { asked[x.l.id] = 1; });
@@ -1437,15 +1669,19 @@ a{color:var(--leaf-d)}
   $('tabAna').addEventListener('click', function () { tab('tabAna'); });
   $('tabSet').addEventListener('click', function () { tab('tabSet'); });
 
-  /* -------------------------------- save --------------------------------- */
-  $('save').addEventListener('click', function () {
+  /* -------------------------------- save ---------------------------------
+     A function rather than only a click handler: recording a counter sale
+     changes the stock, and a stock number that is right on the phone and
+     wrong in the repository is worse than not having it. So that button
+     saves for him. */
+  function doSave() {
     $('save').disabled = true;
     setStatus(tx('saving'), true);
     var chain = Promise.resolve();
     pendingPhotos.forEach(function (ph) {
       chain = chain.then(function () { return savePhoto(ph); });
     });
-    chain = chain
+    return chain
       .then(function () { pendingPhotos = []; syncCrossSell(); syncShared(); return saveFile('index.html'); })
       .then(function () { return saveFile('garments.html'); })
       .then(function () {
@@ -1458,7 +1694,8 @@ a{color:var(--leaf-d)}
         else if (/409/.test(e.message)) setStatus(tx('saveClash'));
         else setStatus(tx('saveFail') + e.message);
       });
-  });
+  }
+  $('save').addEventListener('click', doSave);
 
   /* -------------------------------- login -------------------------------- */
   function boot(t) {
