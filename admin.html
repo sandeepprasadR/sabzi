@@ -1117,6 +1117,17 @@ a{color:var(--leaf-d)}
                  .filter(Boolean).join(' · ');
   }
 
+  /* One UPI id, two shops. The settings tab edits the vegetable page's copy;
+     this pushes it to the garment page so Tarun never has to remember there
+     are two, or discover later that one of them is stale. */
+  function syncUpi() {
+    if (!files['index.html'] || !files['garments.html']) return;
+    var from = files['index.html'].data.store;
+    var to = files['garments.html'].data.shop;
+    to.upiId = from.upiId || '';
+    to.upiName = from.upiName || to.upiName || '';
+  }
+
   /* -------------------------------- tabs --------------------------------- */
   function tab(which) {
     [['tabVeg', 'paneVeg'], ['tabGar', 'paneGar'], ['tabRev', 'paneRev'],
@@ -1152,7 +1163,7 @@ a{color:var(--leaf-d)}
       chain = chain.then(function () { return savePhoto(ph); });
     });
     chain = chain
-      .then(function () { pendingPhotos = []; syncCrossSell(); return saveFile('index.html'); })
+      .then(function () { pendingPhotos = []; syncCrossSell(); syncUpi(); return saveFile('index.html'); })
       .then(function () { return saveFile('garments.html'); })
       .then(function () {
         setStatus(tx('savedOk'));

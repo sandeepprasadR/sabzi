@@ -197,6 +197,16 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   min-height:52px;padding:10px 14px;text-align:center;text-decoration:none;
   font-family:inherit;font-size:16px;font-weight:700;line-height:1.3;cursor:pointer}
 .btn-upi:active{background:#4d1e80}
+.payblock{margin:12px 0 4px;padding-top:12px;border-top:1px dashed var(--line)}
+.paylbl{display:block;font-size:14px;font-weight:700;margin-bottom:7px}
+.paymodes{display:flex;gap:9px}
+.paymodes button{flex:1;min-height:50px;border:1.5px solid var(--line);background:#fff;border-radius:13px;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;padding:6px 8px;line-height:1.3}
+.paymodes button[aria-pressed="true"]{background:var(--leaf-l);border-color:var(--leaf);color:var(--leaf-d)}
+.paidrow{display:flex;align-items:flex-start;gap:10px;margin-top:11px;padding:11px 12px;
+  border:1.5px solid var(--leaf-line);background:var(--leaf-l);border-radius:12px;cursor:pointer}
+.paidrow input{width:22px;height:22px;flex:0 0 auto;accent-color:var(--leaf);margin:0}
+.paidrow span{font-size:14.5px;font-weight:700;color:var(--leaf-d);line-height:1.45}
 .helprow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
 .helprow .btn{width:100%}
 .promise{margin:14px 0 0;padding:12px 14px;background:var(--leaf-l);border-radius:12px}
@@ -562,6 +572,23 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   <div class="sheet-ft">
     <div class="warn" id="sheetWarn" hidden></div>
     <div class="totrow"><span class="k" id="sheetTotLbl"></span><span class="v">₹<span id="sheetTotal">0</span></span></div>
+    <div class="payblock">
+      <span class="paylbl" id="lblPay"></span>
+      <div class="paymodes">
+        <button type="button" id="payUpi" aria-pressed="false"></button>
+        <button type="button" id="payLater" aria-pressed="true"></button>
+      </div>
+      <div id="payUpiBox" hidden>
+        <div class="upi-id" style="margin-top:10px">
+          <code id="payUpiId"></code>
+          <button class="upi-copy" id="payUpiCopy" type="button"></button>
+        </div>
+        <a class="btn-upi" id="payUpiBtn" href="#" role="button"></a>
+        <label class="paidrow"><input type="checkbox" id="paidChk"><span id="paidLbl"></span></label>
+        <p class="upi-note" id="shotHint" hidden></p>
+      </div>
+    </div>
+
     <p class="note" id="sheetNote"><svg aria-hidden="true"><use href="#i-clock"></use></svg><span></span></p>
     <button class="btn btn-go" id="sheetSend"><span></span></button>
     <div class="copyrow" id="copyRow" hidden>
@@ -820,7 +847,9 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       copyHint:"WhatsApp में मैसेज नहीं आया? नीचे से कॉपी करके चैट में पेस्ट कर दें।", copyBtn:"ऑर्डर कॉपी करें", copyDone:"कॉपी हो गया ✓",
       soldOut:"आज उपलब्ध नहीं",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiCopy:"UPI ID कॉपी करें",
-      upiCopied:"कॉपी हो गया ✓", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
+      upiCopied:"कॉपी हो गया ✓", lblPay:"पैसे कैसे देंगे?", payUpiBtnL:"अभी UPI से", payLaterL:"डिलीवरी पर",
+      payNow:"UPI से ₹{a} भेजें", paidLbl:"मैंने पैसे भेज दिए — स्क्रीनशॉट भी भेजूँगा",
+      shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।", upiNote:"पैसे डिलीवरी के समय दें — नकद या UPI, जैसा आपको ठीक लगे।",
       ttlHelp:"कोई दिक्कत? बताइए", helpLead:"सीधे तरुण को WhatsApp पर — कोई फ़ॉर्म नहीं, कोई इंतज़ार नहीं।",
       btnFeedback:"सुझाव भेजें", btnComplaint:"शिकायत करें",
       fbTtl:"आपका अनुभव कैसा रहा?", fbGood:"अच्छा रहा", fbOk:"ठीक-ठाक", fbBad:"खराब रहा",
@@ -879,7 +908,9 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       copyHint:"Message box empty in WhatsApp? Copy the order below and paste it into the chat.", copyBtn:"Copy the order", copyDone:"Copied ✓",
       soldOut:"Not available today",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiCopy:"Copy UPI ID",
-      upiCopied:"Copied ✓", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
+      upiCopied:"Copied ✓", lblPay:"How will you pay?", payUpiBtnL:"By UPI now", payLaterL:"On delivery",
+      payNow:"Pay ₹{a} by UPI", paidLbl:"I have sent the money — I will send the screenshot too",
+      shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.", upiNote:"Pay at delivery — cash or UPI, whichever suits you.",
       ttlHelp:"Something wrong? Tell us", helpLead:"Straight to Tarun on WhatsApp — no forms, no waiting.",
       btnFeedback:"Send feedback", btnComplaint:"Report a problem",
       fbTtl:"How was it?", fbGood:"Good", fbOk:"Okay", fbBad:"Poor",
@@ -939,7 +970,9 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       copyHint:"WhatsApp-এ মেসেজ আসেনি? নিচ থেকে কপি করে চ্যাটে পেস্ট করুন।", copyBtn:"অর্ডার কপি করুন", copyDone:"কপি হয়েছে ✓",
       soldOut:"আজ পাওয়া যাচ্ছে না",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiCopy:"UPI ID কপি করুন",
-      upiCopied:"কপি হয়েছে ✓", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
+      upiCopied:"কপি হয়েছে ✓", lblPay:"কীভাবে দেবেন?", payUpiBtnL:"এখনই UPI-তে", payLaterL:"ডেলিভারিতে",
+      payNow:"UPI-তে ₹{a} পাঠান", paidLbl:"আমি টাকা পাঠিয়েছি — স্ক্রিনশটও পাঠাব",
+      shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।", upiNote:"ডেলিভারির সময় দিন — নগদ বা UPI, যেটা সুবিধা।",
       ttlHelp:"কোনো সমস্যা? জানান", helpLead:"সরাসরি তরুণকে WhatsApp-এ — কোনো ফর্ম নেই।",
       btnFeedback:"মতামত পাঠান", btnComplaint:"অভিযোগ জানান",
       fbTtl:"অভিজ্ঞতা কেমন ছিল?", fbGood:"ভালো", fbOk:"মোটামুটি", fbBad:"খারাপ",
@@ -998,7 +1031,9 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       copyHint:"WhatsApp ਵਿੱਚ ਮੈਸੇਜ ਨਹੀਂ ਆਇਆ? ਹੇਠੋਂ ਕਾਪੀ ਕਰਕੇ ਚੈਟ ਵਿੱਚ ਪੇਸਟ ਕਰੋ।", copyBtn:"ਆਰਡਰ ਕਾਪੀ ਕਰੋ", copyDone:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
       soldOut:"ਅੱਜ ਉਪਲਬਧ ਨਹੀਂ",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ",
-      upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
+      upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓", lblPay:"ਪੈਸੇ ਕਿਵੇਂ ਦਿਓਗੇ?", payUpiBtnL:"ਹੁਣੇ UPI ਨਾਲ", payLaterL:"ਡਿਲੀਵਰੀ ਉੱਤੇ",
+      payNow:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ — ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
+      shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।", upiNote:"ਪੈਸੇ ਡਿਲੀਵਰੀ ਵੇਲੇ — ਨਕਦ ਜਾਂ UPI, ਜੋ ਠੀਕ ਲੱਗੇ।",
       ttlHelp:"ਕੋਈ ਦਿੱਕਤ? ਦੱਸੋ", helpLead:"ਸਿੱਧਾ ਤਰੁਣ ਨੂੰ WhatsApp ਤੇ — ਕੋਈ ਫਾਰਮ ਨਹੀਂ।",
       btnFeedback:"ਸੁਝਾਅ ਭੇਜੋ", btnComplaint:"ਸ਼ਿਕਾਇਤ ਕਰੋ",
       fbTtl:"ਤਜਰਬਾ ਕਿਵੇਂ ਰਿਹਾ?", fbGood:"ਵਧੀਆ", fbOk:"ਠੀਕ-ਠਾਕ", fbBad:"ਮਾੜਾ",
@@ -1057,7 +1092,9 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       copyHint:"WhatsApp‌లో మెసేజ్ రాలేదా? కింద నుంచి కాపీ చేసి చాట్‌లో పేస్ట్ చేయండి.", copyBtn:"ఆర్డర్ కాపీ చేయండి", copyDone:"కాపీ అయ్యింది ✓",
       soldOut:"ఈరోజు అందుబాటులో లేదు",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiCopy:"UPI ID కాపీ చేయండి",
-      upiCopied:"కాపీ అయ్యింది ✓", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
+      upiCopied:"కాపీ అయ్యింది ✓", lblPay:"ఎలా చెల్లిస్తారు?", payUpiBtnL:"ఇప్పుడే UPI ద్వారా", payLaterL:"డెలివరీలో",
+      payNow:"UPI ద్వారా ₹{a} చెల్లించండి", paidLbl:"నేను డబ్బు పంపాను — స్క్రీన్‌షాట్ కూడా పంపుతాను",
+      shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.", upiNote:"డెలివరీ సమయంలో చెల్లించండి — నగదు లేదా UPI.",
       ttlHelp:"ఏదైనా సమస్యా? చెప్పండి", helpLead:"నేరుగా తరుణ్‌కు WhatsApp‌లో — ఫారమ్‌లు లేవు.",
       btnFeedback:"సలహా పంపండి", btnComplaint:"ఫిర్యాదు చేయండి",
       fbTtl:"అనుభవం ఎలా ఉంది?", fbGood:"బాగుంది", fbOk:"ఫర్వాలేదు", fbBad:"బాగోలేదు",
@@ -1105,11 +1142,21 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   /* WhatsApp message labels. Hindi is the original wording, unchanged.
      Non-Hindi labels carry the Hindi word alongside so Tarun can always read it. */
   var MSG = {
-    hi: { neworder:"नया ऑर्डर", total:"कुल", name:"नाम", flat:"टावर/फ्लैट", mobile:"मोबाइल", note:"सूचना" },
-    en: { neworder:"New order", total:"Total", name:"Name", flat:"Tower/Flat", mobile:"Mobile", note:"Note" },
-    bn: { neworder:"নতুন অর্ডার / नया ऑर्डर", total:"মোট / कुल", name:"নাম / नाम", flat:"টাওয়ার/ফ্ল্যাট / टावर/फ्लैट", mobile:"মোবাইল / मोबाइल", note:"নোট / सूचना" },
-    pa: { neworder:"ਨਵਾਂ ਆਰਡਰ / नया ऑर्डर", total:"ਕੁੱਲ / कुल", name:"ਨਾਮ / नाम", flat:"ਟਾਵਰ/ਫਲੈਟ / टावर/फ्लैट", mobile:"ਮੋਬਾਈਲ / मोबाइल", note:"ਨੋਟ / सूचना" },
-    te: { neworder:"కొత్త ఆర్డర్ / नया ऑर्डर", total:"మొత్తం / कुल", name:"పేరు / नाम", flat:"టవర్/ఫ్లాట్ / टावर/फ्लैट", mobile:"మొబైల్ / मोबाइल", note:"నోట్ / सूचना" }
+    hi: { neworder:"नया ऑर्डर", total:"कुल", name:"नाम", flat:"टावर/फ्लैट", mobile:"मोबाइल", note:"सूचना",
+          pay:"पैसे", paidUpi:"UPI से भेज दिए", willUpi:"UPI से भेज रहा/रही हूँ",
+          onDeliv:"डिलीवरी पर दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
+    en: { neworder:"New order", total:"Total", name:"Name", flat:"Tower/Flat", mobile:"Mobile", note:"Note",
+          pay:"पैसे / Payment", paidUpi:"UPI से भेज दिए / Sent by UPI", willUpi:"UPI से भेज रहा हूँ / Sending by UPI",
+          onDeliv:"डिलीवरी पर / On delivery", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा हूँ" },
+    bn: { neworder:"নতুন অর্ডার / नया ऑर्डर", total:"মোট / कुल", name:"নাম / नाम", flat:"টাওয়ার/ফ্ল্যাট / टावर/फ्लैट", mobile:"মোবাইল / मोबाइल", note:"নোট / सूचना",
+          pay:"পেমেন্ট / पैसे", paidUpi:"UPI-তে পাঠিয়েছি / UPI से भेज दिए", willUpi:"UPI-তে পাঠাচ্ছি / UPI से भेज रहा हूँ",
+          onDeliv:"ডেলিভারিতে / डिलीवरी पर", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি / स्क्रीनशॉट इसी चैट में" },
+    pa: { neworder:"ਨਵਾਂ ਆਰਡਰ / नया ऑर्डर", total:"ਕੁੱਲ / कुल", name:"ਨਾਮ / नाम", flat:"ਟਾਵਰ/ਫਲੈਟ / टावर/फ्लैट", mobile:"ਮੋਬਾਈਲ / मोबाइल", note:"ਨੋਟ / सूचना",
+          pay:"ਪੈਸੇ / पैसे", paidUpi:"UPI ਨਾਲ ਭੇਜ ਦਿੱਤੇ / UPI से भेज दिए", willUpi:"UPI ਨਾਲ ਭੇਜ ਰਿਹਾ ਹਾਂ / UPI से भेज रहा हूँ",
+          onDeliv:"ਡਿਲੀਵਰੀ ਉੱਤੇ / डिलीवरी पर", shot:"ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ / स्क्रीनशॉट इसी चैट में" },
+    te: { neworder:"కొత్త ఆర్డర్ / नया ऑर्डर", total:"మొత్తం / कुल", name:"పేరు / नाम", flat:"టవర్/ఫ్లాట్ / टावर/फ्लैट", mobile:"మొబైల్ / मोबाइल", note:"నోట్ / सूचना",
+          pay:"చెల్లింపు / पैसे", paidUpi:"UPI ద్వారా పంపాను / UPI से भेज दिए", willUpi:"UPI ద్వారా పంపుతున్నాను / UPI से भेज रहा हूँ",
+          onDeliv:"డెలివరీలో / डिलीवरी पर", shot:"స్క్రీన్‌షాట్ ఈ చాట్‌లో / स्क्रीनशॉट इसी चैट में" }
   };
 
   /* ======================== state (unchanged keys) ======================== */
@@ -1137,6 +1184,8 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
    'langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerFlat',
    'statusPill','statusTxt','ownerQuote','updatedOn','storeAddress','callLink','waLink','footTxt','crossTxt',
    'xsell','xsellPics','xsellTtl','xsellSub',
+   'lblPay','payUpi','payLater','payUpiBox','payUpiId','payUpiCopy','payUpiBtn',
+   'paidChk','paidLbl','shotHint',
    'photoToggle','photoBar',
    'upiBox','upiTtl','upiIdTxt','upiCopy','upiNote','upiPayBtn','ttlHelp','helpLead','btnFeedback','btnComplaint',
    'polTtl','pol1','pol2','pol3','pol4','openFb','openCmp',
@@ -1397,6 +1446,10 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       });
   }
 
+  function cartTotal() {
+    return cartLines().reduce(function (sum, l) { return sum + l.amount; }, 0);
+  }
+
   function renderCart() {
     var lines = cartLines();
     var total = lines.reduce(function (s, l) { return s + l.amount; }, 0);
@@ -1409,6 +1462,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     el.cartEmptyTxt.textContent = t.cartEmpty;
     el.cartCount.textContent = String(count);
     el.cartLead.textContent = t.cartLead;
+    paintPay();
     el.cartTotal.textContent = fmt(total);
     el.sheetTotal.textContent = fmt(total);
     el.btnSend.textContent = empty ? t.review : t.send;
@@ -1570,6 +1624,13 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     if (phone) msg.push(m.mobile + ': ' + phone);
     var note = el.fNote.value.trim();
     if (note) msg.push(m.note + ': ' + note);
+
+    if (payWay === 'upi') {
+      msg.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' — ₹' + fmt(total));
+      if (el.paidChk.checked) msg.push(m.shot);
+    } else {
+      msg.push(m.pay + ': ' + m.onDeliv);
+    }
 
     openWA(msg);
   }
@@ -1832,6 +1893,41 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   });
 
   /* UPI deep link, added into the order sheet when a total exists */
+  /* -------------------------- paying for the order -----------------------
+     The page has no server and never sees the bank, so it cannot confirm a
+     payment. What it can do is carry the customer's own statement into the
+     order, and ask them for the screenshot Tarun will actually check. */
+  var payWay = 'later';   /* 'upi' | 'later' */
+
+  function setPayWay(w) {
+    payWay = w;
+    el.payUpi.setAttribute('aria-pressed', String(w === 'upi'));
+    el.payLater.setAttribute('aria-pressed', String(w === 'later'));
+    if (w !== 'upi') el.paidChk.checked = false;
+    paintPay();
+  }
+
+  function paintPay() {
+    var t = T[lang] || T.hi;
+    var upi = (store.upiId || '').trim();
+    el.lblPay.textContent = t.lblPay;
+    el.payUpi.textContent = t.payUpiBtnL;
+    el.payLater.textContent = t.payLaterL;
+    el.paidLbl.textContent = t.paidLbl;
+    el.payUpiCopy.textContent = t.upiCopy;
+
+    var show = !!upi && payWay === 'upi';
+    el.payUpiBox.hidden = !show;
+    if (!show) { el.shotHint.hidden = true; return; }
+
+    var amount = cartTotal();
+    el.payUpiId.textContent = upi;
+    el.payUpiBtn.textContent = fill(t.payNow, { a: fmt(amount) });
+    el.payUpiBtn.setAttribute('href', upiLink(amount));
+    el.shotHint.textContent = t.shotHint;
+    el.shotHint.hidden = !el.paidChk.checked;
+  }
+
   function upiLink(amount) {
     var q = 'pa=' + encodeURIComponent(store.upiId) +
             '&pn=' + encodeURIComponent(store.upiName || store.name) +
@@ -1843,6 +1939,25 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   /* dialogs */
   function openDlg(d) { d.hidden = false; el.scrim.hidden = false; }
   function closeDlg(d) { d.hidden = true; if (el.sheet.hidden) el.scrim.hidden = true; }
+  el.payUpi.addEventListener('click', function () { setPayWay('upi'); });
+  el.payLater.addEventListener('click', function () { setPayWay('later'); });
+  el.paidChk.addEventListener('change', paintPay);
+  /* Tapping the button hands off to a UPI app; tick it for them, since they
+     are unlikely to come back and find the box. They can still untick it. */
+  el.payUpiBtn.addEventListener('click', function () {
+    el.paidChk.checked = true;
+    paintPay();
+  });
+  el.payUpiCopy.addEventListener('click', function () {
+    var id = (store.upiId || '').trim(), done = function () {
+      var was = el.payUpiCopy.textContent;
+      el.payUpiCopy.textContent = (T[lang] || T.hi).upiCopied;
+      setTimeout(function () { el.payUpiCopy.textContent = was; }, 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, done);
+    else done();
+  });
+
   el.openFb.addEventListener('click', function () { resetFb(); openDlg(el.fbDlg); });
 
   /* Put the dialog back to its asking state. Without this, reopening after a

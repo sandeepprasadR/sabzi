@@ -200,6 +200,23 @@ body.hasbag{padding-bottom:96px}
   font-family:inherit;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;padding:6px 8px;line-height:1.3}
 .modes button[aria-pressed="true"]{background:var(--leaf-l);border-color:var(--leaf-d);color:var(--leaf-d)}
 .smallnote{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0 0}
+.upi{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.upi h3{font-size:15px;margin:0 0 8px}
+.upi-id{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.upi-id code{font:600 15px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--leaf-l);
+  color:var(--leaf-d);padding:7px 10px;border-radius:9px}
+.upi-copy{min-height:44px;padding:0 12px;border:1.5px solid var(--line);background:#fff;border-radius:10px;
+  font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.upi-note{font-size:13.5px;color:var(--muted);margin:8px 0 0;line-height:1.6}
+.btn-upi{display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+  margin-top:10px;width:100%;background:#5f259f;color:#fff;border:0;border-radius:14px;
+  min-height:52px;padding:10px 14px;text-align:center;text-decoration:none;
+  font-family:inherit;font-size:16px;font-weight:700;line-height:1.3;cursor:pointer}
+.btn-upi:active{background:#4d1e80}
+.paidrow{display:flex;align-items:flex-start;gap:10px;margin-top:12px;padding:11px 12px;
+  border:1.5px solid var(--leaf-line);background:var(--leaf-l);border-radius:12px;cursor:pointer}
+.paidrow input{width:22px;height:22px;flex:0 0 auto;accent-color:var(--leaf-d);margin:0}
+.paidrow span{font-size:14.5px;font-weight:700;color:var(--leaf-d);line-height:1.45}
 
 .foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
 .crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
@@ -319,10 +336,33 @@ body.hasbag{padding-bottom:96px}
       <span class="err" id="errGAddr" hidden></span></label>
 
     <p class="smallnote" id="courierNote" hidden></p>
+
+    <div class="fld">
+      <span id="lblPay"></span>
+      <div class="modes">
+        <button type="button" id="payUpi" aria-pressed="false"></button>
+        <button type="button" id="payLater" aria-pressed="true"></button>
+      </div>
+    </div>
+
+    <div class="upi" id="upiBox" hidden>
+      <h3 id="upiTtl"></h3>
+      <div class="upi-id">
+        <code id="upiIdTxt"></code>
+        <button class="upi-copy" id="upiCopy" type="button"></button>
+      </div>
+      <a class="btn-upi" id="upiPayBtn" href="#" role="button"></a>
+      <label class="paidrow" id="paidRow">
+        <input type="checkbox" id="paidChk">
+        <span id="paidLbl"></span>
+      </label>
+      <p class="upi-note" id="upiNote"></p>
+    </div>
   </div>
   <div class="sheet-foot">
     <div class="totrow"><span id="totLbl"></span><span>&#8377;<span id="bagTotal">0</span></span></div>
     <button class="btn btn-go" id="bagSend"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span id="bagSendTxt"></span></button>
+    <p class="upi-note" id="shotHint" hidden style="text-align:center"></p>
   </div>
 </div>
 
@@ -351,7 +391,9 @@ body.hasbag{padding-bottom:96px}
       "sinceYears": 5,
       "ownerName": "तरुण",
       "ownerNameEn": "Tarun",
-      "ownerPhoto": ""
+      "ownerPhoto": "",
+      "upiId": "8400357057@ybl",
+      "upiName": "Tarun Bhatia"
     },
     "categories": [
       {
@@ -666,7 +708,14 @@ body.hasbag{padding-bottom:96px}
       phAddr:"मकान/फ्लैट, गली, इलाका, शहर, पिन कोड",
       courierNote:"कूरियर का खर्च वज़न और जगह पर निर्भर है — तरुण WhatsApp पर बता देंगे। पैसे UPI या कैश से।",
       sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"नाम लिखें।", needPhone:"10 अंकों का मोबाइल नंबर लिखें।",
-      needAddr:"कूरियर के लिए पूरा पता लिखें।", sizeIs:"साइज़"
+      needAddr:"कूरियर के लिए पूरा पता लिखें।", sizeIs:"साइज़",
+      upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiPayAny:"UPI ऐप खोलें",
+      upiCopy:"UPI ID कॉपी करें", upiCopied:"कॉपी हो गया ✓",
+      lblPay:"पैसे कैसे देंगे?", payUpi:"अभी UPI से", payLater:"सामान मिलने पर",
+      paidLbl:"मैंने पैसे भेज दिए — स्क्रीनशॉट भी भेजूँगा",
+      shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।",
+      upiNoteShop:"पहले नीचे से ऑर्डर भेजें, फिर चाहें तो UPI से पैसे — या दुकान पर लेते समय दें।",
+      upiNoteCourier:"पहले नीचे से ऑर्डर भेजें। कूरियर का खर्च अभी जुड़ा नहीं है — तरुण WhatsApp पर कुल रकम बता देंगे, तब पैसे भेजिए।"
     },
     en: {
       sub:"Clothing shop · Sector 108", chooseLang:"Choose language",
@@ -689,7 +738,14 @@ body.hasbag{padding-bottom:96px}
       phAddr:"House/flat, street, area, city, PIN code",
       courierNote:"Courier cost depends on weight and distance — Tarun will tell you on WhatsApp. Pay by UPI or cash.",
       sendOrder:"Send order on WhatsApp", needName:"Please enter your name.", needPhone:"Enter a 10-digit mobile number.",
-      needAddr:"Enter the full address for courier.", sizeIs:"Size"
+      needAddr:"Enter the full address for courier.", sizeIs:"Size",
+      upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiPayAny:"Open UPI app",
+      upiCopy:"Copy UPI ID", upiCopied:"Copied ✓",
+      lblPay:"How will you pay?", payUpi:"By UPI now", payLater:"When I get it",
+      paidLbl:"I have sent the money — I will send the screenshot too",
+      shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.",
+      upiNoteShop:"Send the order below first, then pay by UPI if you like — or pay at the shop when you collect.",
+      upiNoteCourier:"Send the order below first. Courier cost is not included yet — Tarun will tell you the final amount on WhatsApp, and you pay then."
     },
     bn: {
       sub:"কাপড়ের দোকান · সেক্টর 108", chooseLang:"ভাষা বাছুন",
@@ -712,7 +768,14 @@ body.hasbag{padding-bottom:96px}
       phAddr:"বাড়ি/ফ্ল্যাট, রাস্তা, এলাকা, শহর, পিন কোড",
       courierNote:"কুরিয়ার খরচ ওজন ও দূরত্বের উপর নির্ভর করে — তরুণ WhatsApp-এ জানিয়ে দেবেন। UPI বা নগদে দিন।",
       sendOrder:"WhatsApp-এ অর্ডার পাঠান", needName:"নাম লিখুন।", needPhone:"১০ সংখ্যার মোবাইল নম্বর লিখুন।",
-      needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ"
+      needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ",
+      upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiPayAny:"UPI অ্যাপ খুলুন",
+      upiCopy:"UPI ID কপি করুন", upiCopied:"কপি হয়েছে ✓",
+      lblPay:"কীভাবে দেবেন?", payUpi:"এখনই UPI-তে", payLater:"জিনিস পাওয়ার সময়",
+      paidLbl:"আমি টাকা পাঠিয়েছি — স্ক্রিনশটও পাঠাব",
+      shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।",
+      upiNoteShop:"আগে নিচে থেকে অর্ডার পাঠান, তারপর চাইলে UPI-তে টাকা — বা দোকান থেকে নেওয়ার সময় দিন।",
+      upiNoteCourier:"আগে নিচে থেকে অর্ডার পাঠান। কুরিয়ার খরচ এখনও যোগ হয়নি — তরুণ WhatsApp-এ মোট টাকা জানাবেন, তখন পাঠাবেন।"
     },
     pa: {
       sub:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ · ਸੈਕਟਰ 108", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
@@ -735,7 +798,14 @@ body.hasbag{padding-bottom:96px}
       phAddr:"ਘਰ/ਫਲੈਟ, ਗਲੀ, ਇਲਾਕਾ, ਸ਼ਹਿਰ, ਪਿਨ ਕੋਡ",
       courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਭਾਰ ਤੇ ਦੂਰੀ ਉੱਤੇ ਨਿਰਭਰ ਹੈ — ਤਰੁਣ WhatsApp ਉੱਤੇ ਦੱਸ ਦੇਣਗੇ। UPI ਜਾਂ ਨਕਦ।",
       sendOrder:"WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ", needName:"ਨਾਮ ਲਿਖੋ।", needPhone:"10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਲਿਖੋ।",
-      needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼"
+      needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼",
+      upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiPayAny:"UPI ਐਪ ਖੋਲ੍ਹੋ",
+      upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ", upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
+      lblPay:"ਪੈਸੇ ਕਿਵੇਂ ਦਿਓਗੇ?", payUpi:"ਹੁਣੇ UPI ਨਾਲ", payLater:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ",
+      paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ — ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
+      shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।",
+      upiNoteShop:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ, ਫਿਰ ਚਾਹੋ ਤਾਂ UPI ਨਾਲ ਪੈਸੇ — ਜਾਂ ਦੁਕਾਨ ਤੋਂ ਲੈਂਦੇ ਵੇਲੇ।",
+      upiNoteCourier:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ। ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਹਾਲੇ ਨਹੀਂ ਜੁੜਿਆ — ਤਰੁਣ WhatsApp ਉੱਤੇ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ, ਫਿਰ ਭੇਜਿਓ।"
     },
     te: {
       sub:"బట్టల దుకాణం · సెక్టర్ 108", chooseLang:"భాష ఎంచుకోండి",
@@ -758,7 +828,14 @@ body.hasbag{padding-bottom:96px}
       phAddr:"ఇల్లు/ఫ్లాట్, వీధి, ప్రాంతం, నగరం, పిన్ కోడ్",
       courierNote:"కొరియర్ ఖర్చు బరువు, దూరం మీద ఆధారపడి ఉంటుంది — తరుణ్ WhatsAppలో చెబుతారు. UPI లేదా నగదు.",
       sendOrder:"WhatsAppలో ఆర్డర్ పంపండి", needName:"పేరు రాయండి.", needPhone:"10 అంకెల మొబైల్ నంబర్ రాయండి.",
-      needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు"
+      needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు",
+      upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiPayAny:"UPI యాప్ తెరవండి",
+      upiCopy:"UPI ID కాపీ చేయండి", upiCopied:"కాపీ అయ్యింది ✓",
+      lblPay:"ఎలా చెల్లిస్తారు?", payUpi:"ఇప్పుడే UPI ద్వారా", payLater:"వస్తువు అందినప్పుడు",
+      paidLbl:"నేను డబ్బు పంపాను — స్క్రీన్‌షాట్ కూడా పంపుతాను",
+      shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.",
+      upiNoteShop:"ముందు కింద నుంచి ఆర్డర్ పంపండి, తర్వాత కావాలంటే UPI ద్వారా — లేదా దుకాణంలో తీసుకునేటప్పుడు.",
+      upiNoteCourier:"ముందు కింద నుంచి ఆర్డర్ పంపండి. కొరియర్ ఖర్చు ఇంకా కలపలేదు — తరుణ్ WhatsAppలో మొత్తం చెబుతారు, అప్పుడు పంపండి."
     }
   };
 
@@ -766,15 +843,25 @@ body.hasbag{padding-bottom:96px}
      so Tarun can read an order quickly whatever language the customer used. */
   var GMSG = {
     hi: { order:"ऑर्डर", size:"साइज़", total:"कुल", name:"नाम", phone:"फ़ोन",
-          how:"कैसे चाहिए", atShop:"दुकान से ले लूँगा", byCourier:"कूरियर से भेजिए", addr:"पता" },
+          how:"कैसे चाहिए", atShop:"दुकान से ले लूँगा", byCourier:"कूरियर से भेजिए", addr:"पता",
+          pay:"पैसे", paidUpi:"UPI से भेज दिए", willUpi:"UPI से भेज रहा/रही हूँ",
+          onDeliv:"सामान मिलने पर दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
     en: { order:"Order", size:"Size", total:"Total", name:"Name", phone:"Phone",
-          how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address" },
+          how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address",
+          pay:"Payment", paidUpi:"Sent by UPI", willUpi:"Sending by UPI",
+          onDeliv:"Will pay on receiving", shot:"Sending the payment screenshot in this chat" },
     bn: { order:"অর্ডার", size:"সাইজ", total:"মোট", name:"নাম", phone:"ফোন",
-          how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা" },
+          how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা",
+          pay:"টাকা", paidUpi:"UPI-তে পাঠিয়েছি", willUpi:"UPI-তে পাঠাচ্ছি",
+          onDeliv:"জিনিস পাওয়ার সময় দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
     pa: { order:"ਆਰਡਰ", size:"ਸਾਈਜ਼", total:"ਕੁੱਲ", name:"ਨਾਮ", phone:"ਫ਼ੋਨ",
-          how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ" },
+          how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ",
+          pay:"ਪੈਸੇ", paidUpi:"UPI ਨਾਲ ਭੇਜ ਦਿੱਤੇ", willUpi:"UPI ਨਾਲ ਭੇਜ ਰਿਹਾ ਹਾਂ",
+          onDeliv:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
     te: { order:"ఆర్డర్", size:"సైజు", total:"మొత్తం", name:"పేరు", phone:"ఫోన్",
-          how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా" }
+          how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా",
+          pay:"చెల్లింపు", paidUpi:"UPI ద్వారా పంపాను", willUpi:"UPI ద్వారా పంపుతున్నాను",
+          onDeliv:"వస్తువు అందినప్పుడు ఇస్తాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
   };
 
   var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
@@ -793,6 +880,7 @@ body.hasbag{padding-bottom:96px}
   var GINFO_KEY = 'gavs.ginfo.v1';
   var bag = load(BAG_KEY, []);  /* [{ id, size, color, qty }] */
   var mode = 'shop';            /* 'shop' | 'courier' */
+  var payWay = 'later';         /* 'upi' | 'later' */
 
   var el = {};
   ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
@@ -801,7 +889,9 @@ body.hasbag{padding-bottom:96px}
    'bagbar','bagCount','bagHint','bagOpen','bagOpenTxt','scrim','sheet','sheetTitle','sheetClose',
    'bagLines','lblHow','modeShop','modeCourier','lblGName','gName','errGName',
    'lblGPhone','gPhone','errGPhone','addrWrap','lblGAddr','gAddr','errGAddr',
-   'courierNote','totLbl','bagTotal','bagSend','bagSendTxt'
+   'courierNote','totLbl','bagTotal','bagSend','bagSendTxt',
+   'upiBox','upiTtl','upiIdTxt','upiCopy','upiPayBtn','upiNote',
+   'lblPay','payUpi','payLater','paidRow','paidChk','paidLbl','shotHint'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
   buildLangMenu();
@@ -905,6 +995,10 @@ body.hasbag{padding-bottom:96px}
     el.totLbl.textContent = t.totLbl;
     el.bagSendTxt.textContent = t.sendOrder;
     el.bagOpenTxt.textContent = t.bagView;
+    el.lblPay.textContent = t.lblPay;
+    el.payUpi.textContent = t.payUpi;
+    el.payLater.textContent = t.payLater;
+    el.paidLbl.textContent = t.paidLbl;
   }
 
   /* ============================ open / closed ============================ */
@@ -1203,6 +1297,44 @@ body.hasbag{padding-bottom:96px}
       el.bagLines.appendChild(row);
     });
     el.bagTotal.textContent = bagTotal();
+    paintUpi();
+  }
+
+  /* Same UPI id as the vegetable page. The amount is pre-filled only when the
+     customer is collecting, because then the bag total is the whole bill. For
+     courier the carriage is not known yet, so pre-filling would name a figure
+     that is about to change. */
+  function setPayWay(w) {
+    payWay = w;
+    el.payUpi.setAttribute('aria-pressed', String(w === 'upi'));
+    el.payLater.setAttribute('aria-pressed', String(w === 'later'));
+    if (w !== 'upi') el.paidChk.checked = false;
+    paintUpi();
+  }
+
+  function paintUpi() {
+    var upi = (shop.upiId || '').trim();
+    el.upiBox.hidden = !upi || !bag.length || payWay !== 'upi';
+    if (el.upiBox.hidden) { el.shotHint.hidden = true; return; }
+
+    el.upiTtl.textContent   = t.upiTtl;
+    el.upiIdTxt.textContent = upi;
+    el.upiCopy.textContent  = t.upiCopy;
+
+    var pay = mode === 'shop' ? bagTotal() : 0;
+    el.upiPayBtn.textContent = pay ? fill(t.upiPay, { a: pay }) : t.upiPayAny;
+    el.upiPayBtn.setAttribute('href', upiLink(pay));
+    el.shotHint.hidden = !el.paidChk.checked;
+    el.shotHint.textContent = t.shotHint;
+    el.upiNote.textContent = mode === 'courier' ? t.upiNoteCourier : t.upiNoteShop;
+  }
+
+  function upiLink(amount) {
+    var q = 'pa=' + encodeURIComponent(shop.upiId) +
+            '&pn=' + encodeURIComponent(shop.upiName || shop.nameEn) +
+            '&cu=INR';
+    if (amount > 0) q += '&am=' + encodeURIComponent(amount);
+    return 'upi://pay?' + q;
   }
 
   function openSheet() {
@@ -1222,6 +1354,7 @@ body.hasbag{padding-bottom:96px}
     el.modeCourier.setAttribute('aria-pressed', String(m === 'courier'));
     el.addrWrap.hidden = m !== 'courier';
     el.courierNote.hidden = m !== 'courier';
+    paintUpi();
   }
 
   function need(input, err, ok, msg) {
@@ -1261,6 +1394,17 @@ body.hasbag{padding-bottom:96px}
     lines.push(m.phone + ': ' + ph);
     lines.push(m.how + ': ' + (mode === 'courier' ? m.byCourier : m.atShop));
     if (mode === 'courier') lines.push(m.addr + ': ' + ad);
+
+    /* The page cannot verify a payment — it has no server and never sees the
+       bank. So this is the customer's own statement, written in their voice,
+       and the screenshot is what Tarun actually checks against PhonePe. */
+    if (payWay === 'upi') {
+      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) +
+                 (mode === 'shop' ? ' — ₹' + bagTotal() : ''));
+      if (el.paidChk.checked) lines.push(m.shot);
+    } else {
+      lines.push(m.pay + ': ' + m.onDeliv);
+    }
     openWA(lines);
   }
 
@@ -1287,9 +1431,28 @@ body.hasbag{padding-bottom:96px}
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !el.sheet.hidden) closeSheet();
   });
+  el.payUpi.addEventListener('click', function () { setPayWay('upi'); });
+  el.payLater.addEventListener('click', function () { setPayWay('later'); });
+  el.paidChk.addEventListener('change', paintUpi);
+  /* Tapping the pay button hands off to a UPI app, so tick the box for them —
+     they are unlikely to come back and find it. They can still untick it. */
+  el.upiPayBtn.addEventListener('click', function () {
+    el.paidChk.checked = true;
+    paintUpi();   /* setting .checked in code fires no change event */
+  });
+
   el.modeShop.addEventListener('click', function () { setMode('shop'); });
   el.modeCourier.addEventListener('click', function () { setMode('courier'); });
   el.bagSend.addEventListener('click', sendOrder);
+  el.upiCopy.addEventListener('click', function () {
+    var id = (shop.upiId || '').trim(), done = function () {
+      var old = el.upiCopy.textContent;
+      el.upiCopy.textContent = t.upiCopied;
+      setTimeout(function () { el.upiCopy.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, done);
+    else done();
+  });
 
   /* Bring back whatever this phone told us last time. */
   (function restore() {
@@ -1298,6 +1461,7 @@ body.hasbag{padding-bottom:96px}
     el.gPhone.value = info.phone || '';
     el.gAddr.value = info.addr || '';
     setMode(info.mode === 'courier' ? 'courier' : 'shop');
+    setPayWay('later');
   })();
 
   /* =============================== helpers =============================== */
