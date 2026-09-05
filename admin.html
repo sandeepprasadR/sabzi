@@ -27,6 +27,11 @@ h1,h2,h3{margin:0;line-height:1.25}
 
 header{background:var(--plum);color:#fff;padding:18px 14px}
 header .in{max-width:640px;margin:0 auto}
+.hdr-row{display:flex;align-items:flex-start;gap:12px;justify-content:space-between}
+.langbtn{flex:0 0 auto;min-height:40px;padding:0 14px;border-radius:11px;cursor:pointer;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);color:#fff;
+  font-family:inherit;font-size:14px;font-weight:700}
+.langbtn:active{background:rgba(255,255,255,.28)}
 header h1{font-size:21px;font-weight:800}
 header p{margin:4px 0 0;opacity:.85;font-size:13.5px}
 
@@ -131,8 +136,13 @@ a{color:var(--leaf-d)}
 <body>
 
 <header><div class="in">
-  <h1>दुकान अपडेट करें</h1>
-  <p>दाम, स्टॉक और फोटो — सीधे यहीं से</p>
+  <div class="hdr-row">
+    <div>
+      <h1 data-tx="title"></h1>
+      <p data-tx="subtitle"></p>
+    </div>
+    <button class="langbtn" id="langBtn" type="button"></button>
+  </div>
 </div></header>
 
 <div class="wrap">
@@ -140,26 +150,26 @@ a{color:var(--leaf-d)}
   <!-- ============================ LOGIN ============================ -->
   <section id="login">
     <div class="card">
-      <h2>पहली बार? एक बार सेट करना होगा</h2>
-      <p class="hint">यह टोकन सिर्फ़ इसी फ़ोन में सेव रहेगा। किसी को न भेजें।</p>
+      <h2 data-tx="loginH"></h2>
+      <p class="hint" data-tx="loginHint"></p>
 
       <label>
-        <span>GitHub टोकन</span>
+        <span data-tx="tokLbl"></span>
         <input id="tok" type="password" autocomplete="off" placeholder="github_pat_...">
       </label>
-      <button class="btn btn-go" id="doLogin" style="margin-top:14px">खोलें</button>
+      <button class="btn btn-go" id="doLogin" style="margin-top:14px" data-tx="open"></button>
       <p class="note note-warn hidden" id="loginErr"></p>
 
       <details style="margin-top:16px">
-        <summary style="font-weight:700;cursor:pointer">टोकन कैसे बनाएँ?</summary>
+        <summary style="font-weight:700;cursor:pointer" data-tx="howTok"></summary>
         <ol class="steps">
-          <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> खोलें</li>
-          <li>Repository access → <b>Only select repositories</b> → <code>sabzi</code> चुनें</li>
-          <li>Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b></li>
-          <li>Expiration में <b>No expiration</b> या 1 साल चुनें</li>
-          <li><b>Generate token</b> दबाएँ, टोकन कॉपी करके ऊपर डालें</li>
+          <li data-txhtml="step1"></li>
+          <li data-txhtml="step2"></li>
+          <li data-txhtml="step3"></li>
+          <li data-txhtml="step4"></li>
+          <li data-txhtml="step5"></li>
         </ol>
-        <p class="note note-amber">यह टोकन सिर्फ़ इसी एक repository को बदल सकता है, और कुछ नहीं।</p>
+        <p class="note note-amber" data-tx="tokNote"></p>
       </details>
     </div>
   </section>
@@ -168,54 +178,54 @@ a{color:var(--leaf-d)}
   <section id="editor" class="hidden">
 
     <div class="tabs" role="tablist">
-      <button id="tabVeg" role="tab" aria-selected="true">सब्ज़ी</button>
-      <button id="tabGar" role="tab" aria-selected="false">कपड़े</button>
-      <button id="tabRev" role="tab" aria-selected="false">राय</button>
-      <button id="tabSet" role="tab" aria-selected="false">सेटिंग</button>
+      <button id="tabVeg" role="tab" aria-selected="true" data-tx="tabVeg"></button>
+      <button id="tabGar" role="tab" aria-selected="false" data-tx="tabGar"></button>
+      <button id="tabRev" role="tab" aria-selected="false" data-tx="tabRev"></button>
+      <button id="tabSet" role="tab" aria-selected="false" data-tx="tabSet"></button>
     </div>
 
     <!-- ---- vegetables ---- -->
     <div id="paneVeg">
       <div class="card">
-        <h2>आज के दाम</h2>
-        <p class="hint">दाम बदलें, स्टॉक खत्म हो तो बंद करें, फोटो लगाएँ।</p>
+        <h2 data-tx="vegH"></h2>
+        <p class="hint" data-tx="vegHint"></p>
         <div id="vegList"></div>
-        <button class="btn btn-ghost" id="addVeg" style="margin-top:12px">+ नई सब्ज़ी जोड़ें</button>
+        <button class="btn btn-ghost" id="addVeg" style="margin-top:12px" data-tx="addVeg"></button>
       </div>
     </div>
 
     <!-- ---- garments ---- -->
     <div id="paneGar" class="hidden">
       <div class="card">
-        <h2>कपड़े की दुकान</h2>
-        <p class="hint">नाम, दाम, साइज़ और फोटो।</p>
+        <h2 data-tx="garH"></h2>
+        <p class="hint" data-tx="garHint"></p>
         <div id="garList"></div>
-        <button class="btn btn-ghost" id="addGar" style="margin-top:12px">+ नया आइटम जोड़ें</button>
+        <button class="btn btn-ghost" id="addGar" style="margin-top:12px" data-tx="addGar"></button>
       </div>
     </div>
 
     <!-- ---- reviews ---- -->
     <div id="paneRev" class="hidden">
       <div class="card">
-        <h2>ग्राहकों की राय</h2>
-        <p class="hint">जो राय सबसे अच्छी लगे उसे वेबसाइट पर ऊपर दिखाएँ। गलत या गंदी राय छुपा दें।</p>
+        <h2 data-tx="revH"></h2>
+        <p class="hint" data-tx="revHint"></p>
 
         <label>
-          <span>राय का पता (Reviews API)</span>
+          <span data-tx="revUrlLbl"></span>
           <input id="revUrl" type="url" autocomplete="off" inputmode="url" placeholder="https://reviews.xxxx.workers.dev">
         </label>
         <label>
-          <span>राय की चाबी (Admin key)</span>
-          <input id="revKey" type="password" autocomplete="off" placeholder="••••••••">
+          <span data-tx="revKeyLbl"></span>
+          <input id="revKey" type="password" autocomplete="off" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
         </label>
-        <p class="hint">चाबी सिर्फ़ इसी फ़ोन में रहती है, वेबसाइट पर कभी नहीं जाती। पता बदलें तो नीचे <b>सेव करें</b> दबाना न भूलें।</p>
+        <p class="hint" data-txhtml="revNote"></p>
 
-        <button class="btn btn-ghost" id="revLoad" style="margin-top:12px">राय देखें</button>
+        <button class="btn btn-ghost" id="revLoad" style="margin-top:12px" data-tx="revLoad"></button>
         <p class="note note-warn hidden" id="revErr"></p>
       </div>
 
       <div class="card hidden" id="revCard">
-        <h2>सब राय <span class="hint" id="revCount" style="display:inline;font-weight:400"></span></h2>
+        <h2><span data-tx="revAll"></span> <span class="hint" id="revCount" style="display:inline;font-weight:400"></span></h2>
         <div id="revList"></div>
       </div>
     </div>
@@ -223,25 +233,25 @@ a{color:var(--leaf-d)}
     <!-- ---- settings ---- -->
     <div id="paneSet" class="hidden">
       <div class="card">
-        <h2>दुकान की सेटिंग</h2>
-        <label><span>दुकान खुलने का समय</span><input id="setOpen" type="time"></label>
-        <label><span>बंद होने का समय</span><input id="setClose" type="time"></label>
-        <label><span>आखिरी ऑर्डर का समय</span><input id="setLast" type="time"></label>
-        <label><span>कम से कम ऑर्डर (₹) — 0 = कोई शर्त नहीं</span><input id="setMin" type="number" min="0" step="10" inputmode="numeric"></label>
-        <label><span>शिकायत कितने घंटे तक ले सकते हैं</span><input id="setHours" type="number" min="1" step="1" inputmode="numeric"></label>
+        <h2 data-tx="setH"></h2>
+        <label><span data-tx="setOpenL"></span><input id="setOpen" type="time"></label>
+        <label><span data-tx="setCloseL"></span><input id="setClose" type="time"></label>
+        <label><span data-tx="setLastL"></span><input id="setLast" type="time"></label>
+        <label><span data-tx="setMinL"></span><input id="setMin" type="number" min="0" step="10" inputmode="numeric"></label>
+        <label><span data-tx="setHoursL"></span><input id="setHours" type="number" min="1" step="1" inputmode="numeric"></label>
         <label><span>UPI ID</span><input id="setUpi" type="text" autocomplete="off"></label>
-        <p class="note note-amber">समय बदलने पर वेबसाइट पर "अभी खुला / अभी बंद" अपने आप बदल जाएगा।</p>
+        <p class="note note-amber" data-tx="setNote"></p>
       </div>
       <div class="card">
-        <h2>WhatsApp रेट लिस्ट</h2>
-        <p class="hint">ग्रुप में डालने के लिए — कॉपी करके पेस्ट कर दें।</p>
+        <h2 data-tx="waH"></h2>
+        <p class="hint" data-tx="waHint"></p>
         <textarea id="waList" rows="12" readonly style="margin-top:10px;font-size:14px"></textarea>
-        <button class="btn btn-ghost" id="copyWa" style="margin-top:10px">रेट लिस्ट कॉपी करें</button>
+        <button class="btn btn-ghost" id="copyWa" style="margin-top:10px" data-tx="copyWa"></button>
       </div>
       <div class="card">
-        <h2>बाहर निकलें</h2>
-        <p class="hint">इस फ़ोन से टोकन हटा दें।</p>
-        <button class="btn btn-ghost" id="logout" style="margin-top:10px;color:var(--warn)">लॉग आउट</button>
+        <h2 data-tx="outH"></h2>
+        <p class="hint" data-tx="outHint"></p>
+        <button class="btn btn-ghost" id="logout" style="margin-top:10px;color:var(--warn)" data-tx="logout"></button>
       </div>
     </div>
 
@@ -250,12 +260,187 @@ a{color:var(--leaf-d)}
 
 <div class="savebar hidden" id="savebar"><div class="in">
   <span class="status" id="status"></span>
-  <button class="btn btn-go" id="save">सेव करें</button>
+  <button class="btn btn-go" id="save" data-tx="save"></button>
 </div></div>
 
 <script>
 (function () {
   'use strict';
+
+  /* ---------------------------------------------------------------------
+     Two languages, English first. Tarun types faster in English, but the
+     Hindi is here because reading a form in your own language is a
+     different thing from typing in it.
+
+     This translates the ADMIN only. Product names, and the WhatsApp rate
+     list that goes to the society group, stay exactly as they are — those
+     are the shop's words, not this page's.
+     ------------------------------------------------------------------- */
+  var TX = {
+    title:      ['Update the shop', 'दुकान अपडेट करें'],
+    subtitle:   ['Prices, stock and photos — straight from here', 'दाम, स्टॉक और फोटो — सीधे यहीं से'],
+    langName:   ['हिंदी', 'English'],
+
+    loginH:     ['First time? One quick setup', 'पहली बार? एक बार सेट करना होगा'],
+    loginHint:  ['This token is saved only on this phone. Do not send it to anyone.',
+                 'यह टोकन सिर्फ़ इसी फ़ोन में सेव रहेगा। किसी को न भेजें।'],
+    tokLbl:     ['GitHub token', 'GitHub टोकन'],
+    open:       ['Open', 'खोलें'],
+    opening:    ['Opening…', 'खुल रहा है…'],
+    howTok:     ['How do I make a token?', 'टोकन कैसे बनाएँ?'],
+    step1:      ['Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>',
+                 '<a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a> खोलें'],
+    step2:      ['Repository access → <b>Only select repositories</b> → pick <code>sabzi</code>',
+                 'Repository access → <b>Only select repositories</b> → <code>sabzi</code> चुनें'],
+    step3:      ['Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b>',
+                 'Permissions → Repository permissions → <b>Contents</b> → <b>Read and write</b>'],
+    step4:      ['Expiration → <b>No expiration</b>, or one year',
+                 'Expiration में <b>No expiration</b> या 1 साल चुनें'],
+    step5:      ['Press <b>Generate token</b>, copy it, paste it above',
+                 '<b>Generate token</b> दबाएँ, टोकन कॉपी करके ऊपर डालें'],
+    tokNote:    ['This token can change this one repository and nothing else.',
+                 'यह टोकन सिर्फ़ इसी एक repository को बदल सकता है, और कुछ नहीं।'],
+    needTok:    ['Enter the token.', 'टोकन डालें।'],
+    badTok:     ['This token is not working. Make a new one the way described above.',
+                 'यह टोकन काम नहीं कर रहा। ऊपर बताए तरीके से नया बनाएँ।'],
+    somethingUp:['Something went wrong: ', 'कुछ गड़बड़: '],
+
+    tabVeg:     ['Vegetables', 'सब्ज़ी'],
+    tabGar:     ['Clothes', 'कपड़े'],
+    tabRev:     ['Reviews', 'राय'],
+    tabSet:     ['Settings', 'सेटिंग'],
+
+    vegH:       ['Today’s prices', 'आज के दाम'],
+    vegHint:    ['Change a price, switch something off when it runs out, add a photo.',
+                 'दाम बदलें, स्टॉक खत्म हो तो बंद करें, फोटो लगाएँ।'],
+    addVeg:     ['+ Add a vegetable', '+ नई सब्ज़ी जोड़ें'],
+    askVeg:     ['Name of the vegetable:', 'सब्ज़ी का नाम:'],
+    askVegEn:   ['Name in English:', 'English में नाम:'],
+
+    garH:       ['The clothing shop', 'कपड़े की दुकान'],
+    garHint:    ['Name, price, sizes, colours and photo.', 'नाम, दाम, साइज़, रंग और फोटो।'],
+    addGar:     ['+ Add an item', '+ नया आइटम जोड़ें'],
+    askGar:     ['Name of the item:', 'आइटम का नाम:'],
+
+    revH:       ['What customers said', 'ग्राहकों की राय'],
+    revHint:    ['Put the best reviews at the top of the website. Hide anything wrong or rude.',
+                 'जो राय सबसे अच्छी लगे उसे वेबसाइट पर ऊपर दिखाएँ। गलत या गंदी राय छुपा दें।'],
+    revUrlLbl:  ['Reviews address (Reviews API)', 'राय का पता (Reviews API)'],
+    revKeyLbl:  ['Reviews key (Admin key)', 'राय की चाबी (Admin key)'],
+    revNote:    ['The key stays on this phone only and never reaches the website. If you change the address, remember to press <b>Save</b> below.',
+                 'चाबी सिर्फ़ इसी फ़ोन में रहती है, वेबसाइट पर कभी नहीं जाती। पता बदलें तो नीचे <b>सेव करें</b> दबाना न भूलें।'],
+    revLoad:    ['See the reviews', 'राय देखें'],
+    revAgain:   ['See the reviews again', 'राय दोबारा देखें'],
+    revLoading: ['Fetching…', 'ला रहे हैं…'],
+    revAll:     ['All reviews', 'सब राय'],
+    revNeedUrl: ['Enter the reviews address first.', 'पहले राय का पता डालें।'],
+    revNeedKey: ['Enter the reviews key.', 'राय की चाबी डालें।'],
+    revBadKey:  ['That key is wrong.', 'चाबी गलत है।'],
+    revNoAns:   ['No answer from the server.', 'सर्वर से जवाब नहीं मिला।'],
+    revNoNet:   ['Internet down, or the address is wrong.', 'इंटरनेट या पता गलत है।'],
+    revNone:    ['No customer has left a review yet.', 'अभी तक किसी ग्राहक ने राय नहीं दी।'],
+    revNoneShort:['— no reviews yet', '— अभी कोई राय नहीं'],
+    revStat:    ['— {n} reviews, average {a} ★', '— {n} राय, औसत {a} ★'],
+    revOnTop:   ['on the website', 'वेबसाइट पर ऊपर'],
+    revNoName:  ['No name', 'बिना नाम'],
+    revFeature: ['Show at top', 'ऊपर दिखाएँ'],
+    revUnfeat:  ['Remove from top', 'ऊपर से हटाएँ'],
+    revHide:    ['Hide', 'छुपाएँ'],
+    revShow:    ['Show again', 'फिर दिखाएँ'],
+    revDelete:  ['Delete', 'मिटाएँ'],
+    revDelAsk:  ['This review will be gone for good. Delete it?', 'यह राय हमेशा के लिए मिट जाएगी। मिटा दें?'],
+
+    setH:       ['Shop settings', 'दुकान की सेटिंग'],
+    setOpenL:   ['Opening time', 'दुकान खुलने का समय'],
+    setCloseL:  ['Closing time', 'बंद होने का समय'],
+    setLastL:   ['Last order time', 'आखिरी ऑर्डर का समय'],
+    setMinL:    ['Minimum order (₹) — 0 means no minimum', 'कम से कम ऑर्डर (₹) — 0 = कोई शर्त नहीं'],
+    setHoursL:  ['Complaints accepted for how many hours', 'शिकायत कितने घंटे तक ले सकते हैं'],
+    setNote:    ['Change the times and the website’s "open now / closed" updates by itself.',
+                 'समय बदलने पर वेबसाइट पर "अभी खुला / अभी बंद" अपने आप बदल जाएगा।'],
+    waH:        ['WhatsApp rate list', 'WhatsApp रेट लिस्ट'],
+    waHint:     ['For posting in the group — copy and paste it. The list itself stays in Hindi.',
+                 'ग्रुप में डालने के लिए — कॉपी करके पेस्ट कर दें।'],
+    copyWa:     ['Copy the rate list', 'रेट लिस्ट कॉपी करें'],
+    copied:     ['Copied ✓', 'कॉपी हो गया ✓'],
+    outH:       ['Log out', 'बाहर निकलें'],
+    outHint:    ['Remove the token from this phone.', 'इस फ़ोन से टोकन हटा दें।'],
+    logout:     ['Log out', 'लॉग आउट'],
+    logoutAsk:  ['Remove the token from this phone?', 'इस फ़ोन से टोकन हटा दें?'],
+
+    save:       ['Save', 'सेव करें'],
+    saving:     ['Saving…', 'सेव हो रहा है…'],
+    savedAll:   ['Everything is saved', 'सब सेव है'],
+    unsaved:    ['Not saved yet', 'सेव नहीं हुआ'],
+    savedOk:    ['Saved ✓ — it will show on the website within a minute',
+                 'सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा'],
+    saveAuth:   ['The token stopped working — log in again', 'टोकन काम नहीं कर रहा — दोबारा लॉगिन करें'],
+    saveClash:  ['Someone else changed it too — refresh the page and try again',
+                 'किसी और ने भी बदला है — पेज रिफ्रेश करके दोबारा करें'],
+    saveFail:   ['Could not save: ', 'सेव नहीं हो पाया: '],
+    noMarker:   [' has no CATALOGUE marker', ' में CATALOGUE मार्कर नहीं मिला'],
+    badPhoto:   ['That photo would not open.', 'यह फोटो नहीं खुल पाई।'],
+
+    edit:       ['Edit', 'बदलें'],
+    editClose:  ['Close', 'बंद करें'],
+    inStock:    ['In stock', 'स्टॉक में है'],
+    outStock:   ['Not today', 'आज नहीं है'],
+    photoAdd:   ['Add photo', 'फोटो लगाएँ'],
+    photoChange:['Change photo', 'फोटो बदलें'],
+    photoRemove:['Remove photo', 'फोटो हटाएँ'],
+    del:        ['Delete', 'हटाएँ'],
+    delAsk:     ['Remove {n} from the list?', '{n} को लिस्ट से हटा दें?'],
+    priceAria:  ['{n} price', '{n} दाम'],
+
+    fName:      ['Name (Hindi)', 'नाम (हिंदी)'],
+    fNameEn:    ['Name (English)', 'Name (English)'],
+    fCat:       ['Category', 'कैटेगरी'],
+    fSoldBy:    ['Sold by', 'बिकता है'],
+    uKg:        ['the kilo', 'किलो से'],
+    u250:       ['250 grams', '250 ग्राम से'],
+    uPc:        ['the piece', 'नग से'],
+    uBunch:     ['the bunch', 'गड्डी से'],
+    fEmoji:     ['Emoji (shown when there is no photo)', 'इमोजी (फोटो न हो तो यही दिखेगा)'],
+    vegEditNote:['Changing a name changes it on the website and in the WhatsApp rate list.',
+                 'नाम बदलने पर वेबसाइट और WhatsApp रेट लिस्ट — दोनों में बदल जाएगा।'],
+
+    fFor:       ['Who it is for', 'किसके लिए'],
+    fMrp:       ['Old price (MRP)', 'पहले का दाम (MRP)'],
+    phMrp:      ['0 = hide it', '0 = मत दिखाओ'],
+    fSizes:     ['Which sizes are in stock', 'कौन-कौन से साइज़ हैं'],
+    fColors:    ['Colours (separate with commas)', 'रंग (कॉमा से अलग करें)'],
+    phColors:   ['black, blue, white', 'काला, नीला, सफ़ेद'],
+    fFabric:    ['Fabric', 'कपड़ा'],
+    phFabric:   ['cotton / rayon / denim', 'कॉटन / रेयॉन / डेनिम'],
+    fNote:      ['What to tell the customer', 'ग्राहक को क्या बताना है'],
+    phNote:     ['Everyday wear, colour does not run in the wash.',
+                 'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।'],
+    garEditNote:['Only the sizes you tick can be ordered. Leave them empty and the customer is only asked how many.',
+                 'जो साइज़ आप चुनेंगे सिर्फ़ वही ऑर्डर हो पाएँगे। खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।'],
+    fillSizes:  ['add sizes and colours', 'साइज़ और रंग भरें']
+  };
+
+  var LANG_KEY = 'gavs.admin.lang.v1';
+  var alang = 0;                       /* 0 = English (default), 1 = Hindi */
+  try { alang = localStorage.getItem(LANG_KEY) === 'hi' ? 1 : 0; } catch (e) {}
+
+  function tx(key, vars) {
+    var row = TX[key];
+    var out = row ? (row[alang] || row[0]) : key;
+    return vars ? out.replace(/\{(\w+)\}/g, function (_, k) {
+      return vars[k] === undefined ? '' : vars[k];
+    }) : out;
+  }
+
+  function paintUI() {
+    document.documentElement.lang = alang ? 'hi' : 'en';
+    var n;
+    n = document.querySelectorAll('[data-tx]');
+    for (var i = 0; i < n.length; i++) n[i].textContent = tx(n[i].getAttribute('data-tx'));
+    n = document.querySelectorAll('[data-txhtml]');
+    for (var j = 0; j < n.length; j++) n[j].innerHTML = tx(n[j].getAttribute('data-txhtml'));
+    $('langBtn').textContent = tx('langName');
+  }
 
   var OWNER = 'sandeepprasadR';
   var REPO  = 'sabzi';
@@ -304,7 +489,7 @@ a{color:var(--leaf-d)}
       .then(function (j) {
         var text = b64decode(j.content);
         var m = text.match(/\/\*<CATALOGUE>\*\/([\s\S]*?)\/\*<\/CATALOGUE>\*\//);
-        if (!m) throw new Error(path + ' में CATALOGUE मार्कर नहीं मिला');
+        if (!m) throw new Error(path + tx('noMarker'));
         files[path] = { sha: j.sha, text: text, data: JSON.parse(m[1]), dirty: false };
       });
   }
@@ -361,7 +546,7 @@ a{color:var(--leaf-d)}
         URL.revokeObjectURL(url);
         cb(cv.toDataURL('image/jpeg', 0.75).split(',')[1]);
       };
-      img.onerror = function () { URL.revokeObjectURL(url); alert('यह फोटो नहीं खुल पाई।'); };
+      img.onerror = function () { URL.revokeObjectURL(url); alert(tx('badPhoto')); };
       img.src = url;
     });
     inp.click();
@@ -381,7 +566,7 @@ a{color:var(--leaf-d)}
   /* ------------------------------- state --------------------------------- */
   function markDirty() {
     Object.keys(files).forEach(function (k) { files[k].dirty = true; });
-    setStatus('सेव नहीं हुआ');
+    setStatus(tx('unsaved'));
     $('save').disabled = false;
   }
   function setStatus(msg, spin) {
@@ -446,7 +631,7 @@ a{color:var(--leaf-d)}
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'chip';
     b.setAttribute('aria-pressed', String(obj.available !== false));
-    b.textContent = obj.available === false ? 'आज नहीं है' : 'स्टॉक में है';
+    b.textContent = obj.available === false ? tx('outStock') : tx('inStock');
     b.addEventListener('click', function () {
       obj.available = (obj.available === false);
       markDirty(); redraw();
@@ -458,12 +643,12 @@ a{color:var(--leaf-d)}
     var out = [];
     var ph = document.createElement('button');
     ph.type = 'button'; ph.className = 'chip';
-    ph.textContent = obj.photo ? 'फोटो बदलें' : 'फोटो लगाएँ';
+    ph.textContent = obj.photo ? tx('photoChange') : tx('photoAdd');
     ph.addEventListener('click', function () { attachPhoto(obj, path, redraw); });
     out.push(ph);
     if (obj.photo) {
       var rm = document.createElement('button');
-      rm.type = 'button'; rm.className = 'chip danger'; rm.textContent = 'फोटो हटाएँ';
+      rm.type = 'button'; rm.className = 'chip danger'; rm.textContent = tx('photoRemove');
       rm.addEventListener('click', function () {
         obj.photo = ''; delete obj._preview; markDirty(); redraw();
       });
@@ -495,7 +680,7 @@ a{color:var(--leaf-d)}
     var pr = document.createElement('input');
     pr.className = 'price'; pr.type = 'number'; pr.min = '0'; pr.step = '1';
     pr.inputMode = 'numeric'; pr.value = obj.price;
-    pr.setAttribute('aria-label', (obj.hi || obj.id) + ' दाम');
+    pr.setAttribute('aria-label', tx('priceAria', { n: obj.hi || obj.id }));
     pr.addEventListener('input', function () { obj.price = Number(pr.value) || 0; markDirty(); opts.after && opts.after(); });
     row.appendChild(pr);
     wrap.appendChild(row);
@@ -505,7 +690,7 @@ a{color:var(--leaf-d)}
     var ed = document.createElement('button');
     ed.type = 'button'; ed.className = 'chip';
     ed.setAttribute('aria-expanded', String(!!obj._open));
-    ed.textContent = obj._open ? 'बंद करें' : 'बदलें';
+    ed.textContent = obj._open ? tx('editClose') : tx('edit');
     ed.addEventListener('click', function () { obj._open = !obj._open; opts.redraw(); });
     acts.appendChild(ed);
 
@@ -513,9 +698,9 @@ a{color:var(--leaf-d)}
     photoChips(obj, opts.photoPath(obj), opts.redraw).forEach(function (c) { acts.appendChild(c); });
 
     var del = document.createElement('button');
-    del.type = 'button'; del.className = 'chip danger'; del.textContent = 'हटाएँ';
+    del.type = 'button'; del.className = 'chip danger'; del.textContent = tx('del');
     del.addEventListener('click', function () {
-      if (!confirm((obj.hi || obj.id) + ' को लिस्ट से हटा दें?')) return;
+      if (!confirm(tx('delAsk', { n: obj.hi || obj.id }))) return;
       opts.remove();
     });
     acts.appendChild(del);
@@ -526,9 +711,14 @@ a{color:var(--leaf-d)}
   }
 
   /* ------------------------------ vegetables ----------------------------- */
+  /* Category names come from the catalogue, so show whichever of the two the
+     shopkeeper is reading right now. */
+  function catLabel(c) {
+    return (alang ? (c.hi || c.en) : (c.en || c.hi)) || c.id;
+  }
   function vegCats() {
     var d = files['index.html'].data;
-    return (d.categories || []).map(function (c) { return [c.id, c.hi || c.en || c.id]; });
+    return (d.categories || []).map(function (c) { return [c.id, catLabel(c)]; });
   }
 
   function drawVeg() {
@@ -537,7 +727,7 @@ a{color:var(--leaf-d)}
     (d.products || []).forEach(function (p, i) {
       host.appendChild(itemRow(p, {
         fallbackEmoji: p.emoji || '🥬',
-        sub: function (o) { return (o.en || '') + ' · ' + unitLabel(o.unit); },
+        sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit); },
         photoPath: function (o) { return (o.id || 'item' + i) + '.jpg'; },
         redraw: function () { drawVeg(); paintWaList(); },
         after: paintWaList,
@@ -546,23 +736,23 @@ a{color:var(--leaf-d)}
           var box = document.createElement('div'); box.className = 'edit';
 
           var g = document.createElement('div'); g.className = 'grid2';
-          g.appendChild(fieldText('नाम (हिंदी)', o.hi, function (v) { o.hi = v; }));
-          g.appendChild(fieldText('Name (English)', o.en, function (v) { o.en = v; }));
+          g.appendChild(fieldText(tx('fName'), o.hi, function (v) { o.hi = v; }));
+          g.appendChild(fieldText(tx('fNameEn'), o.en, function (v) { o.en = v; }));
           box.appendChild(g);
 
           var g2 = document.createElement('div'); g2.className = 'grid2';
           g2.style.marginTop = '10px';
-          g2.appendChild(fieldSelect('कैटेगरी', o.cat, vegCats(), function (v) { o.cat = v; }));
-          g2.appendChild(fieldSelect('बिकता है', o.unit, [
-            ['kg','किलो से'], ['250g','250 ग्राम से'], ['pc','नग से'], ['bunch','गड्डी से']
+          g2.appendChild(fieldSelect(tx('fCat'), o.cat, vegCats(), function (v) { o.cat = v; }));
+          g2.appendChild(fieldSelect(tx('fSoldBy'), o.unit, [
+            ['kg', tx('uKg')], ['250g', tx('u250')], ['pc', tx('uPc')], ['bunch', tx('uBunch')]
           ], function (v) { o.unit = v; o.step = (v === 'kg' ? 0.5 : 1); paintWaList(); }));
           box.appendChild(g2);
 
-          box.appendChild(fieldText('इमोजी (फोटो न हो तो यही दिखेगा)', o.emoji,
+          box.appendChild(fieldText(tx('fEmoji'), o.emoji,
             function (v) { o.emoji = v.slice(0, 3); }));
 
           var p2 = document.createElement('p'); p2.className = 'help';
-          p2.textContent = 'नाम बदलने पर वेबसाइट और WhatsApp रेट लिस्ट — दोनों में बदल जाएगा।';
+          p2.textContent = tx('vegEditNote');
           box.appendChild(p2);
           return box;
         }
@@ -575,7 +765,7 @@ a{color:var(--leaf-d)}
 
   function garCats() {
     var d = files['garments.html'].data;
-    return (d.categories || []).map(function (c) { return [c.id, c.hi || c.en || c.id]; });
+    return (d.categories || []).map(function (c) { return [c.id, catLabel(c)]; });
   }
   function garList() {
     var d = files['garments.html'].data;
@@ -593,7 +783,7 @@ a{color:var(--leaf-d)}
           var bits = [];
           if ((o.sizes || []).length) bits.push((o.sizes || []).join('/'));
           if ((o.colors || []).length) bits.push((o.colors || []).join(', '));
-          return bits.join(' · ') || 'साइज़ और रंग भरें';
+          return bits.join(' · ') || tx('fillSizes');
         },
         photoPath: function (o) { return 'garments/' + (o.id || 'item' + i) + '.jpg'; },
         redraw: drawGar,
@@ -602,39 +792,38 @@ a{color:var(--leaf-d)}
           var box = document.createElement('div'); box.className = 'edit';
 
           var g = document.createElement('div'); g.className = 'grid2';
-          g.appendChild(fieldText('नाम (हिंदी)', o.hi, function (v) { o.hi = clean1(v); }));
-          g.appendChild(fieldText('Name (English)', o.en, function (v) { o.en = clean1(v); }));
+          g.appendChild(fieldText(tx('fName'), o.hi, function (v) { o.hi = clean1(v); }));
+          g.appendChild(fieldText(tx('fNameEn'), o.en, function (v) { o.en = clean1(v); }));
           box.appendChild(g);
 
           var g2 = document.createElement('div'); g2.className = 'grid2';
           g2.style.marginTop = '10px';
-          g2.appendChild(fieldSelect('किसके लिए', o.cat, garCats(), function (v) { o.cat = v; }));
-          g2.appendChild(fieldText('पहले का दाम (MRP)', o.mrp, function (v) { o.mrp = Number(v) || 0; },
-            { type: 'number', numeric: true, placeholder: '0 = मत दिखाओ' }));
+          g2.appendChild(fieldSelect(tx('fFor'), o.cat, garCats(), function (v) { o.cat = v; }));
+          g2.appendChild(fieldText(tx('fMrp'), o.mrp, function (v) { o.mrp = Number(v) || 0; },
+            { type: 'number', numeric: true, placeholder: tx('phMrp') }));
           box.appendChild(g2);
 
           if (!o.sizes) o.sizes = [];
-          box.appendChild(fieldPicks('कौन-कौन से साइज़ हैं', SIZES, o.sizes, function (v) {
+          box.appendChild(fieldPicks(tx('fSizes'), SIZES, o.sizes, function (v) {
             var k = o.sizes.indexOf(v);
             if (k === -1) o.sizes.push(v); else o.sizes.splice(k, 1);
             o.sizes.sort(function (a, b) { return SIZES.indexOf(a) - SIZES.indexOf(b); });
           }));
 
-          box.appendChild(fieldText('रंग (कॉमा से अलग करें)', (o.colors || []).join(', '),
+          box.appendChild(fieldText(tx('fColors'), (o.colors || []).join(', '),
             function (v) {
               o.colors = v.split(',').map(function (x) { return x.trim(); }).filter(Boolean);
-            }, { placeholder: 'काला, नीला, सफ़ेद' }));
+            }, { placeholder: tx('phColors') }));
 
-          box.appendChild(fieldText('कपड़ा', o.fabric, function (v) { o.fabric = clean1(v); },
-            { placeholder: 'कॉटन / रेयॉन / डेनिम' }));
+          box.appendChild(fieldText(tx('fFabric'), o.fabric, function (v) { o.fabric = clean1(v); },
+            { placeholder: tx('phFabric') }));
 
-          box.appendChild(fieldText('ग्राहक को क्या बताना है', o.note,
+          box.appendChild(fieldText(tx('fNote'), o.note,
             function (v) { o.note = v.replace(/\s+/g, ' ').slice(0, 160); },
-            { area: true, rows: 3, placeholder: 'रोज़ पहनने वाला, धोने पर रंग नहीं जाता।' }));
+            { area: true, rows: 3, placeholder: tx('phNote') }));
 
           var p2 = document.createElement('p'); p2.className = 'help';
-          p2.textContent = 'साइज़ चुनेंगे तभी ग्राहक साइज़ चुनकर ऑर्डर कर पाएगा। ' +
-                           'खाली छोड़ेंगे तो सिर्फ़ गिनती पूछी जाएगी।';
+          p2.textContent = tx('garEditNote');
           box.appendChild(p2);
           return box;
         }
@@ -669,8 +858,14 @@ a{color:var(--leaf-d)}
     });
   });
 
+  /* Goes into the WhatsApp rate list, which is read by the society group —
+     always Hindi, whatever language this page is showing. */
   function unitLabel(u) {
     return u === 'kg' ? '1 किलो' : u === '250g' ? '250 ग्राम' : u === 'bunch' ? '1 गड्डी' : '1 नग';
+  }
+  /* The same unit, in whichever language the shopkeeper is using here. */
+  function unitShort(u) {
+    return u === 'kg' ? tx('uKg') : u === '250g' ? tx('u250') : u === 'bunch' ? tx('uBunch') : tx('uPc');
   }
   function paintWaList() {
     if (!files['index.html']) return;
@@ -691,7 +886,7 @@ a{color:var(--leaf-d)}
     var a = $('waList'); a.select(); a.setSelectionRange(0, 999999);
     var done = function () {
       var b = $('copyWa'), old = b.textContent;
-      b.textContent = 'कॉपी हो गया ✓';
+      b.textContent = tx('copied');
       setTimeout(function () { b.textContent = old; }, 1600);
     };
     if (navigator.clipboard) navigator.clipboard.writeText(a.value).then(done, done);
@@ -700,8 +895,8 @@ a{color:var(--leaf-d)}
 
   /* ------------------------------- add rows ------------------------------ */
   $('addVeg').addEventListener('click', function () {
-    var hi = prompt('सब्ज़ी का नाम (हिंदी में):'); if (!hi) return;
-    var en = prompt('Name in English:') || hi;
+    var hi = prompt(tx('askVeg')); if (!hi) return;
+    var en = prompt(tx('askVegEn')) || hi;
     var d = files['index.html'].data;
     var cat = (d.categories && d.categories[0] && d.categories[0].id) || '';
     d.products.push({
@@ -713,7 +908,7 @@ a{color:var(--leaf-d)}
   });
 
   $('addGar').addEventListener('click', function () {
-    var hi = prompt('आइटम का नाम:'); if (!hi) return;
+    var hi = prompt(tx('askGar')); if (!hi) return;
     var f = files['garments.html'].data;
     var list = f.items || f.products;
     if (!list) { f.items = []; list = f.items; }
@@ -757,20 +952,20 @@ a{color:var(--leaf-d)}
     return fetch(url, opts).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
         if (!r.ok || !j.ok) {
-          throw new Error(j.error === 'unauthorised' ? 'चाबी गलत है।' : 'सर्वर से जवाब नहीं मिला।');
+          throw new Error(j.error === 'unauthorised' ? tx('revBadKey') : tx('revNoAns'));
         }
         return j;
       });
-    }, function () { throw new Error('इंटरनेट या पता गलत है।'); });
+    }, function () { throw new Error(tx('revNoNet')); });
   }
 
   function loadRev() {
-    if (!revBase()) { revErr('पहले राय का पता डालें।'); return; }
-    if (!revSecret()) { revErr('राय की चाबी डालें।'); return; }
+    if (!revBase()) { revErr(tx('revNeedUrl')); return; }
+    if (!revSecret()) { revErr(tx('revNeedKey')); return; }
     try { localStorage.setItem(REV_KEY, revSecret()); } catch (e) {}
     revErr('');
     $('revLoad').disabled = true;
-    $('revLoad').textContent = 'ला रहे हैं…';
+    $('revLoad').textContent = tx('revLoading');
     revFetch(revBase() + '/admin?key=' + encodeURIComponent(revSecret()), { cache: 'no-store' })
       .then(function (j) {
         reviews = j.reviews || [];
@@ -780,7 +975,7 @@ a{color:var(--leaf-d)}
       .catch(function (e) { revErr(e.message); })
       .then(function () {
         $('revLoad').disabled = false;
-        $('revLoad').textContent = 'राय दोबारा देखें';
+        $('revLoad').textContent = tx('revAgain');
       });
   }
 
@@ -814,13 +1009,13 @@ a{color:var(--leaf-d)}
       ? Math.round((shown.reduce(function (a, r) { return a + (Number(r.stars) || 0); }, 0) / shown.length) * 10) / 10
       : 0;
     $('revCount').textContent = shown.length
-      ? '— ' + shown.length + ' राय, औसत ' + avg + ' ★'
-      : '— अभी कोई राय नहीं';
+      ? tx('revStat', { n: shown.length, a: avg })
+      : tx('revNoneShort');
 
     if (!reviews.length) {
       var none = document.createElement('p');
       none.className = 'hint';
-      none.textContent = 'अभी तक किसी ग्राहक ने राय नहीं दी।';
+      none.textContent = tx('revNone');
       host.appendChild(none);
       return;
     }
@@ -835,14 +1030,14 @@ a{color:var(--leaf-d)}
       head.appendChild(st);
       if (r.featured) {
         var bg = document.createElement('span');
-        bg.className = 'badge'; bg.textContent = 'वेबसाइट पर ऊपर';
+        bg.className = 'badge'; bg.textContent = tx('revOnTop');
         head.appendChild(bg);
       }
       wrap.appendChild(head);
 
       var meta = document.createElement('div');
       meta.className = 'rev-meta';
-      meta.textContent = [r.name || 'बिना नाम', r.flat || '', revDate(r.ts)]
+      meta.textContent = [r.name || tx('revNoName'), r.flat || '', revDate(r.ts)]
         .filter(function (x) { return x; }).join(' • ');
       wrap.appendChild(meta);
 
@@ -858,7 +1053,7 @@ a{color:var(--leaf-d)}
       var feat = document.createElement('button');
       feat.type = 'button'; feat.className = 'chip';
       feat.setAttribute('aria-pressed', String(!!r.featured));
-      feat.textContent = r.featured ? 'ऊपर से हटाएँ' : 'ऊपर दिखाएँ';
+      feat.textContent = r.featured ? tx('revUnfeat') : tx('revFeature');
       feat.addEventListener('click', function () {
         revAction(r, r.featured ? 'unfeature' : 'feature', feat);
       });
@@ -866,16 +1061,16 @@ a{color:var(--leaf-d)}
 
       var hid = document.createElement('button');
       hid.type = 'button'; hid.className = 'chip';
-      hid.textContent = r.hidden ? 'फिर दिखाएँ' : 'छुपाएँ';
+      hid.textContent = r.hidden ? tx('revShow') : tx('revHide');
       hid.addEventListener('click', function () {
         revAction(r, r.hidden ? 'show' : 'hide', hid);
       });
       acts.appendChild(hid);
 
       var del = document.createElement('button');
-      del.type = 'button'; del.className = 'chip danger'; del.textContent = 'मिटाएँ';
+      del.type = 'button'; del.className = 'chip danger'; del.textContent = tx('revDelete');
       del.addEventListener('click', function () {
-        if (!confirm('यह राय हमेशा के लिए मिट जाएगी। मिटा दें?')) return;
+        if (!confirm(tx('revDelAsk'))) return;
         revAction(r, 'delete', del);
       });
       acts.appendChild(del);
@@ -928,6 +1123,18 @@ a{color:var(--leaf-d)}
       $(t[1]).classList.toggle('hidden', !on);
     });
   }
+  /* --------------------------- language toggle --------------------------- */
+  $('langBtn').addEventListener('click', function () {
+    alang = alang ? 0 : 1;
+    try { localStorage.setItem(LANG_KEY, alang ? 'hi' : 'en'); } catch (e) {}
+    paintUI();
+    /* redraw anything already on screen so its labels follow */
+    if (files['index.html']) { drawVeg(); drawSet(); }
+    if (files['garments.html']) drawGar();
+    if (reviews.length) drawRevList();
+  });
+  paintUI();
+
   $('tabVeg').addEventListener('click', function () { tab('tabVeg'); });
   $('tabGar').addEventListener('click', function () { tab('tabGar'); });
   $('tabRev').addEventListener('click', function () { tab('tabRev'); });
@@ -936,7 +1143,7 @@ a{color:var(--leaf-d)}
   /* -------------------------------- save --------------------------------- */
   $('save').addEventListener('click', function () {
     $('save').disabled = true;
-    setStatus('सेव हो रहा है…', true);
+    setStatus(tx('saving'), true);
     var chain = Promise.resolve();
     pendingPhotos.forEach(function (ph) {
       chain = chain.then(function () { return savePhoto(ph); });
@@ -945,14 +1152,14 @@ a{color:var(--leaf-d)}
       .then(function () { pendingPhotos = []; syncCrossSell(); return saveFile('index.html'); })
       .then(function () { return saveFile('garments.html'); })
       .then(function () {
-        setStatus('सेव हो गया ✓ — 1 मिनट में वेबसाइट पर दिखेगा');
+        setStatus(tx('savedOk'));
         $('save').disabled = true;
       })
       .catch(function (e) {
         $('save').disabled = false;
-        if (e.message === 'AUTH') { setStatus('टोकन काम नहीं कर रहा — दोबारा लॉगिन करें'); logout(); }
-        else if (/409/.test(e.message)) setStatus('किसी और ने भी बदला है — पेज रिफ्रेश करके दोबारा करें');
-        else setStatus('सेव नहीं हो पाया: ' + e.message);
+        if (e.message === 'AUTH') { setStatus(tx('saveAuth')); logout(); }
+        else if (/409/.test(e.message)) setStatus(tx('saveClash'));
+        else setStatus(tx('saveFail') + e.message);
       });
   });
 
@@ -961,7 +1168,7 @@ a{color:var(--leaf-d)}
     token = t;
     $('loginErr').classList.add('hidden');
     $('doLogin').disabled = true;
-    $('doLogin').textContent = 'खुल रहा है…';
+    $('doLogin').textContent = tx('opening');
     Promise.all([loadFile('index.html'), loadFile('garments.html')])
       .then(function () {
         try { localStorage.setItem(TOK_KEY, token); } catch (e) {}
@@ -969,21 +1176,21 @@ a{color:var(--leaf-d)}
         $('editor').classList.remove('hidden');
         $('savebar').classList.remove('hidden');
         drawVeg(); drawGar(); drawSet(); drawRev();
-        setStatus('सब सेव है');
+        setStatus(tx('savedAll'));
         $('save').disabled = true;
       })
       .catch(function (e) {
         $('doLogin').disabled = false;
-        $('doLogin').textContent = 'खोलें';
+        $('doLogin').textContent = tx('open');
         $('loginErr').classList.remove('hidden');
         $('loginErr').textContent = e.message === 'AUTH'
-          ? 'यह टोकन काम नहीं कर रहा। ऊपर बताए तरीके से नया बनाएँ।'
-          : ('कुछ गड़बड़: ' + e.message);
+          ? tx('badTok')
+          : (tx('somethingUp') + e.message);
       });
   }
   $('doLogin').addEventListener('click', function () {
     var t = $('tok').value.trim();
-    if (!t) { $('loginErr').classList.remove('hidden'); $('loginErr').textContent = 'टोकन डालें।'; return; }
+    if (!t) { $('loginErr').classList.remove('hidden'); $('loginErr').textContent = tx('needTok'); return; }
     boot(t);
   });
   $('tok').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('doLogin').click(); });
@@ -998,10 +1205,10 @@ a{color:var(--leaf-d)}
     $('login').classList.remove('hidden');
     $('tok').value = '';
     $('doLogin').disabled = false;
-    $('doLogin').textContent = 'खोलें';
+    $('doLogin').textContent = tx('open');
   }
   $('logout').addEventListener('click', function () {
-    if (confirm('इस फ़ोन से टोकन हटा दें?')) logout();
+    if (confirm(tx('logoutAsk'))) logout();
   });
 
   window.addEventListener('beforeunload', function (e) {

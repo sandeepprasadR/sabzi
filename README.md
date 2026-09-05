@@ -24,7 +24,14 @@ door. No app, no signup, no payment gateway, no server bills.
 
 Open **https://guru-ashish.in/admin.html** on a phone. Paste a GitHub
 token once (the page explains how to make one) and it stays on that
-phone. From there:
+phone.
+
+The page is in **English by default**, with a Hindi toggle in the header
+that remembers the choice. It translates the admin only — product names
+stay as they are, and the WhatsApp rate list stays Hindi because it goes
+to the society group.
+
+From there:
 
 - open any item and change its name, category, price and unit
 - for clothes: which sizes are in stock, colours, fabric, a line of
