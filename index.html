@@ -126,6 +126,12 @@ a:hover{color:var(--carrot)}
 .card.on{border-color:var(--leaf);box-shadow:0 0 0 3px var(--leaf-l),var(--shadow)}
 .art{width:76px;height:76px;display:block}
 .artemoji{display:flex;align-items:center;justify-content:center;font-size:40px;line-height:1}
+.soon{display:flex;align-items:center;gap:11px;margin:16px 0 0;padding:12px 14px;
+  border:1.5px dashed var(--leaf-line,#cfe3d4);background:var(--leaf-l,#eef6f0);
+  border-radius:14px;line-height:1.4}
+.soon .soon-i{font-size:23px;flex:0 0 auto}
+.soon b{display:block;font-size:15px;font-weight:800;color:var(--leaf-d,#1b7a3e)}
+.soon span span{display:block;font-size:13px;color:var(--muted)}
 .pr .mrp{margin-left:6px;font-size:.72em;font-weight:600;color:var(--muted);text-decoration:line-through}
 .oline .artemoji{font-size:24px}
 .shotwrap{margin:-12px -11px 0;width:calc(100% + 22px);aspect-ratio:4/3;overflow:hidden;
@@ -439,6 +445,10 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     <p class="photobar" id="photoBar"></p>
     <div class="tabs" id="tabs" role="tablist"></div>
     <div id="grid" class="grid"></div>
+    <p class="soon" id="soon" hidden>
+      <span class="soon-i" aria-hidden="true">🧂</span>
+      <span><b id="soonTtl"></b><span id="soonSub"></span></span>
+    </p>
   </section>
 
   <section class="section" id="orderForm">
@@ -635,6 +645,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       "upiName": "Tarun Bhatia",
       "reportHours": 12,
       "reviewsApi": "https://guru-ashish-reviews.sandeepniftian2002.workers.dev",
+      "masalaSoon": true,
       "crossSell": {
         "on": true,
         "photos": [
@@ -1828,6 +1839,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"फ्री", perk3a:"होम डिलीवरी",
       ttlRates:"आज की रेट लिस्ट", updated:"अपडेट: {d}",
       ratesHint:"दाम रोज़ मंडी के हिसाब से बदलते हैं। पैसे डिलीवरी के समय दें, नकद या UPI।",
+      soonTtl:"मसाले जल्द आ रहे हैं", soonSub:"रोज़ की रसोई के मसाले, यहीं सब्ज़ी के साथ",
       allCat:"सब", add:"जोड़ें", per:"/", kg:"किलो", g:"ग्राम", gram250:"250 ग्राम", pack:"पैकेट",
       more:"बढ़ाएँ", less:"कम करें",
       ttlYou:"आपकी जानकारी", lblName:"आपका नाम", lblFlat:"टावर / फ्लैट नंबर",
@@ -1890,6 +1902,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"Free", perk3a:"home delivery",
       ttlRates:"Today's rate list", updated:"Updated {d}",
       ratesHint:"Prices follow the morning mandi. Pay at the door, cash or UPI.",
+      soonTtl:"Spices coming soon", soonSub:"Everyday kitchen masalas, right here with the vegetables",
       allCat:"All", add:"Add", per:"/", kg:"kg", g:"g", gram250:"250 g", pack:"pack",
       more:"increase", less:"decrease",
       ttlYou:"Your details", lblName:"Your name", lblFlat:"Tower / flat number",
@@ -1951,6 +1964,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ফ্রি", perk3a:"হোম ডেলিভারি",
       ttlRates:"আজকের দাম", updated:"আপডেট {d}",
       ratesHint:"দাম রোজ মান্ডি অনুযায়ী বদলায়। টাকা দরজায় দিন, নগদ বা UPI।",
+      soonTtl:"মশলা শীঘ্রই আসছে", soonSub:"রোজকার রান্নার মশলা, সবজির সঙ্গেই",
       allCat:"সব", add:"যোগ করুন", per:"/", kg:"কেজি", g:"গ্রাম", gram250:"250 গ্রাম", pack:"প্যাকেট",
       more:"বাড়ান", less:"কমান",
       ttlYou:"আপনার তথ্য", lblName:"আপনার নাম", lblFlat:"টাওয়ার / ফ্ল্যাট নম্বর",
@@ -2012,6 +2026,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ਮੁਫ਼ਤ", perk3a:"ਹੋਮ ਡਿਲੀਵਰੀ",
       ttlRates:"ਅੱਜ ਦੇ ਭਾਅ", updated:"ਅਪਡੇਟ {d}",
       ratesHint:"ਭਾਅ ਰੋਜ਼ ਮੰਡੀ ਮੁਤਾਬਕ ਬਦਲਦੇ ਹਨ। ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ ਦਿਓ, ਨਕਦ ਜਾਂ UPI।",
+      soonTtl:"ਮਸਾਲੇ ਜਲਦੀ ਆ ਰਹੇ ਹਨ", soonSub:"ਰੋਜ਼ ਦੀ ਰਸੋਈ ਦੇ ਮਸਾਲੇ, ਇੱਥੇ ਹੀ ਸਬਜ਼ੀ ਨਾਲ",
       allCat:"ਸਭ", add:"ਪਾਓ", per:"/", kg:"ਕਿਲੋ", g:"ਗ੍ਰਾਮ", gram250:"250 ਗ੍ਰਾਮ", pack:"ਪੈਕੇਟ",
       more:"ਵਧਾਓ", less:"ਘਟਾਓ",
       ttlYou:"ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ", lblName:"ਤੁਹਾਡਾ ਨਾਮ", lblFlat:"ਟਾਵਰ / ਫਲੈਟ ਨੰਬਰ",
@@ -2073,6 +2088,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ఉచితం", perk3a:"హోమ్ డెలివరీ",
       ttlRates:"నేటి రేట్లు", updated:"అప్‌డేట్ {d}",
       ratesHint:"రేట్లు రోజూ మండీ ప్రకారం మారుతాయి. డబ్బు ఇంటి వద్ద చెల్లించండి, నగదు లేదా UPI.",
+      soonTtl:"మసాలాలు త్వరలో", soonSub:"రోజువారీ వంట మసాలాలు, ఇక్కడే కూరగాయలతో పాటు",
       allCat:"అన్నీ", add:"చేర్చండి", per:"/", kg:"కిలో", g:"గ్రా", gram250:"250 గ్రా", pack:"ప్యాకెట్",
       more:"పెంచు", less:"తగ్గించు",
       ttlYou:"మీ వివరాలు", lblName:"మీ పేరు", lblFlat:"టవర్ / ఫ్లాట్ నంబర్",
@@ -2134,7 +2150,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   var t = T[lang];
 
   var el = {};
-  ['grid','tabs','cartbar','cartCount','cartTotal','cartToggle','cartEmptyTxt','cartFull','cartLead','chev',
+  ['grid','tabs','soon','soonTtl','soonSub','cartbar','cartCount','cartTotal','cartToggle','cartEmptyTxt','cartFull','cartLead','chev',
    'copyRow','copyHint','copyBtn','sendOrder','btnSend','sheet','sheetBody','sheetTotal','sheetClose','sheetSend','sheetWarn','sheetNote',
    'sheetTitle','sheetSub','sheetTotLbl','scrim','minTrack','minTxt','minFill',
    'fName','fFlat','fPhone','fNote','errName','errFlat',
@@ -2153,6 +2169,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   /* ============================== boot ================================== */
   buildLangMenu();
   renderTabs();
+  paintSoon();
   renderGrid();
   restoreInfo();
   applyLang();
@@ -2190,7 +2207,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   function setLang(code) {
     if (!T[code]) return;
     lang = code; t = T[code]; save(LANG_KEY, code);
-    applyLang(); renderTabs(); renderGrid(); renderCart();
+    applyLang(); renderTabs(); renderGrid(); renderCart(); paintSoon();
   }
   function loadFont(name) {
     if (!name) return;
@@ -2290,8 +2307,16 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
   }
 
   /* ============================== catalogue ============================== */
+  function shownCats() {
+    return (DATA.categories || []).filter(function (c) {
+      return products.some(function (p) {
+        return p.cat === c.id && priced(p) && !held(p);
+      });
+    });
+  }
+
   function renderTabs() {
-    var cats = DATA.categories || [];
+    var cats = shownCats();
     el.tabs.innerHTML = '';
     if (cats.length < 2) { el.tabs.hidden = true; return; }
     el.tabs.hidden = false;
@@ -2313,9 +2338,13 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
      it at all; the admin says as much next to the empty box. */
   function priced(p) { return Number(p.price) > 0; }
 
+  /* The spice range is loaded and priced but not published: it waits on the
+     supplier's word. One switch in the admin turns the whole category on. */
+  function held(p) { return store.masalaSoon !== false && p.cat === 'kokora'; }
+
   function visible() {
     return products.filter(function (p) {
-      return priced(p) && (activeCat === 'all' || p.cat === activeCat);
+      return priced(p) && !held(p) && (activeCat === 'all' || p.cat === activeCat);
     });
   }
 
@@ -2326,6 +2355,16 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     return p.art && document.getElementById('v-' + p.art)
       ? '<svg class="art" aria-hidden="true"><use href="#v-' + p.art + '"></use></svg>'
       : '<div class="art artemoji" aria-hidden="true">' + esc(p.emoji || '🛒') + '</div>';
+  }
+
+  function paintSoon() {
+    var on = store.masalaSoon !== false &&
+             products.some(function (p) { return p.cat === 'kokora'; });
+    el.soon.hidden = !on;
+    if (on) {
+      el.soonTtl.textContent = t.soonTtl;
+      el.soonSub.textContent = t.soonSub;
+    }
   }
 
   function renderGrid() {

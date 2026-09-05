@@ -281,6 +281,15 @@ a{color:var(--leaf-d)}
         <p class="note note-amber" data-tx="setNote"></p>
       </div>
       <div class="card">
+        <h2 data-tx="soonH"></h2>
+        <label class="switch" style="display:flex;gap:11px;align-items:flex-start;margin-top:8px">
+          <input type="checkbox" id="setSoon" style="width:22px;height:22px;margin:2px 0 0;accent-color:var(--leaf-d)">
+          <span style="font-weight:700" data-tx="soonLbl"></span>
+        </label>
+        <p class="help" id="soonHint"></p>
+      </div>
+
+      <div class="card">
         <h2 data-tx="waH"></h2>
         <p class="hint" data-tx="waHint"></p>
         <textarea id="waList" rows="12" readonly style="margin-top:10px;font-size:14px"></textarea>
@@ -487,6 +496,10 @@ a{color:var(--leaf-d)}
     costLoss:   ['₹{c} a {u} · you sell at ₹{p} · that is ₹{m} below cost',
                  '₹{c} प्रति {u} · आप बेचते हैं ₹{p} · यह लागत से ₹{m} कम है'],
 
+    soonH:      ['The spice range', 'मसाले'],
+    soonLbl:    ['Keep the spices hidden for now', 'मसाले अभी छुपाए रखें'],
+    soonHint:   ['The website shows "Spices coming soon" instead of the packets. Every price is already filled in, so untick this the day the supplier agrees and all {n} of them go live.',
+                 'वेबसाइट पर मसालों की जगह "मसाले जल्द आ रहे हैं" दिखेगा। दाम पहले से भरे हैं, इसलिए जिस दिन हामी मिल जाए, यह हटा दीजिए और {n} मसाले एक साथ दिखने लगेंगे।'],
     noPrice:    ['No price yet, so it stays off the website. Fill the price in and it appears.',
                  'दाम नहीं भरा है, इसलिए यह वेबसाइट पर नहीं दिख रहा। दाम भरते ही दिखने लगेगा।'],
     allItems:   ['All', 'सब'],
@@ -1294,6 +1307,8 @@ a{color:var(--leaf-d)}
     $('setMin').value   = s.minOrder || 0;
     $('setHours').value = s.reportHours || 24;
     $('setUpi').value   = s.upiId || '';
+    $('setSoon').checked = s.masalaSoon !== false;
+    $('soonHint').textContent = tx('soonHint', { n: spiceCount() });
     paintWaList();
   }
 
@@ -1320,6 +1335,12 @@ a{color:var(--leaf-d)}
   }
   var SITE = 'https://guru-ashish.in';
 
+  function spiceCount() {
+    if (!files['index.html']) return 0;
+    return (files['index.html'].data.products || [])
+      .filter(function (p) { return p.cat === 'kokora'; }).length;
+  }
+
   function paintWaList() {
     if (!files['index.html']) return;
     var d = files['index.html'].data, s = d.store;
@@ -1337,7 +1358,11 @@ a{color:var(--leaf-d)}
       '🚚 फ्री होम डिलीवरी, ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
       '🛒 ऑर्डर: ' + SITE);
 
-    if (spices) out.push('', '🧂 मसाले भी मिलते हैं, ' + spices + ' तरह के');
+    if (spices) {
+      out.push('', s.masalaSoon === false
+        ? '🧂 मसाले भी मिलते हैं, ' + spices + ' तरह के'
+        : '🧂 मसाले जल्द आ रहे हैं');
+    }
 
     /* The same message carries the other shop. Most of the society knows
        Tarun for vegetables and has never heard about the clothes. */
@@ -1481,6 +1506,11 @@ a{color:var(--leaf-d)}
       b.disabled = false; b.textContent = old;
       setStatus(tx('saveFail') + 'picture');
     });
+  });
+
+  $('setSoon').addEventListener('change', function () {
+    files['index.html'].data.store.masalaSoon = $('setSoon').checked;
+    markDirty(); paintWaList();
   });
 
   $('copyWa').addEventListener('click', function () {
