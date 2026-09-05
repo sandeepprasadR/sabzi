@@ -337,7 +337,7 @@ body.hasbag{padding-bottom:96px}
 
     <p class="smallnote" id="courierNote" hidden></p>
 
-    <div class="fld">
+    <div class="fld" id="payChoice">
       <span id="lblPay"></span>
       <div class="modes">
         <button type="button" id="payUpi" aria-pressed="false"></button>
@@ -706,7 +706,7 @@ body.hasbag{padding-bottom:96px}
       lblHow:"कैसे लेंगे?", modeShop:"दुकान से ले लूँगा", modeCourier:"कूरियर से भेजिए",
       lblGName:"आपका नाम", lblGPhone:"मोबाइल नंबर", lblGAddr:"पूरा पता — कूरियर के लिए",
       phAddr:"मकान/फ्लैट, गली, इलाका, शहर, पिन कोड",
-      courierNote:"कूरियर का खर्च वज़न और जगह पर निर्भर है — तरुण WhatsApp पर बता देंगे। पैसे UPI या कैश से।",
+      courierNote:"कूरियर का खर्च अलग से जुड़ेगा — जितना असल में लगेगा, उतना ही, ऊपर से कुछ नहीं। तरुण WhatsApp पर सामान + कूरियर की कुल रकम बताएँगे। पूरा पैसा पहले UPI से आने पर ही सामान भेजा जाएगा।",
       sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"नाम लिखें।", needPhone:"10 अंकों का मोबाइल नंबर लिखें।",
       needAddr:"कूरियर के लिए पूरा पता लिखें।", sizeIs:"साइज़",
       upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiPayAny:"UPI ऐप खोलें",
@@ -736,7 +736,7 @@ body.hasbag{padding-bottom:96px}
       lblHow:"How will you take it?", modeShop:"I\u2019ll collect from the shop", modeCourier:"Send by courier",
       lblGName:"Your name", lblGPhone:"Mobile number", lblGAddr:"Full address — for courier",
       phAddr:"House/flat, street, area, city, PIN code",
-      courierNote:"Courier cost depends on weight and distance — Tarun will tell you on WhatsApp. Pay by UPI or cash.",
+      courierNote:"Courier is charged on top, at exactly what it actually costs — nothing added. Tarun will tell you the total for goods plus courier on WhatsApp. The parcel is sent once the full amount is paid by UPI.",
       sendOrder:"Send order on WhatsApp", needName:"Please enter your name.", needPhone:"Enter a 10-digit mobile number.",
       needAddr:"Enter the full address for courier.", sizeIs:"Size",
       upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiPayAny:"Open UPI app",
@@ -766,7 +766,7 @@ body.hasbag{padding-bottom:96px}
       lblHow:"কীভাবে নেবেন?", modeShop:"দোকান থেকে নেব", modeCourier:"কুরিয়ারে পাঠান",
       lblGName:"আপনার নাম", lblGPhone:"মোবাইল নম্বর", lblGAddr:"সম্পূর্ণ ঠিকানা — কুরিয়ারের জন্য",
       phAddr:"বাড়ি/ফ্ল্যাট, রাস্তা, এলাকা, শহর, পিন কোড",
-      courierNote:"কুরিয়ার খরচ ওজন ও দূরত্বের উপর নির্ভর করে — তরুণ WhatsApp-এ জানিয়ে দেবেন। UPI বা নগদে দিন।",
+      courierNote:"কুরিয়ার খরচ আলাদা করে যোগ হবে — যা সত্যিই লাগে, ঠিক তাই, বাড়তি কিছু নয়। তরুণ WhatsApp-এ জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানাবেন। পুরো টাকা UPI-তে পাওয়ার পরেই পার্সেল পাঠানো হবে।",
       sendOrder:"WhatsApp-এ অর্ডার পাঠান", needName:"নাম লিখুন।", needPhone:"১০ সংখ্যার মোবাইল নম্বর লিখুন।",
       needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ",
       upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiPayAny:"UPI অ্যাপ খুলুন",
@@ -796,7 +796,7 @@ body.hasbag{padding-bottom:96px}
       lblHow:"ਕਿਵੇਂ ਲਵੋਗੇ?", modeShop:"ਦੁਕਾਨ ਤੋਂ ਲੈ ਲਵਾਂਗਾ", modeCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ ਭੇਜੋ",
       lblGName:"ਤੁਹਾਡਾ ਨਾਮ", lblGPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblGAddr:"ਪੂਰਾ ਪਤਾ — ਕੋਰੀਅਰ ਲਈ",
       phAddr:"ਘਰ/ਫਲੈਟ, ਗਲੀ, ਇਲਾਕਾ, ਸ਼ਹਿਰ, ਪਿਨ ਕੋਡ",
-      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਭਾਰ ਤੇ ਦੂਰੀ ਉੱਤੇ ਨਿਰਭਰ ਹੈ — ਤਰੁਣ WhatsApp ਉੱਤੇ ਦੱਸ ਦੇਣਗੇ। UPI ਜਾਂ ਨਕਦ।",
+      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਵੱਖਰਾ ਜੁੜੇਗਾ — ਜਿੰਨਾ ਅਸਲ ਵਿੱਚ ਲੱਗੇਗਾ, ਓਨਾ ਹੀ, ਉੱਤੋਂ ਕੁਝ ਨਹੀਂ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ। ਪੂਰੇ ਪੈਸੇ UPI ਨਾਲ ਆਉਣ ਉੱਤੇ ਹੀ ਸਮਾਨ ਭੇਜਿਆ ਜਾਵੇਗਾ।",
       sendOrder:"WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ", needName:"ਨਾਮ ਲਿਖੋ।", needPhone:"10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਲਿਖੋ।",
       needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼",
       upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiPayAny:"UPI ਐਪ ਖੋਲ੍ਹੋ",
@@ -826,7 +826,7 @@ body.hasbag{padding-bottom:96px}
       lblHow:"ఎలా తీసుకుంటారు?", modeShop:"దుకాణం నుంచి తీసుకుంటాను", modeCourier:"కొరియర్‌లో పంపండి",
       lblGName:"మీ పేరు", lblGPhone:"మొబైల్ నంబర్", lblGAddr:"పూర్తి చిరునామా — కొరియర్ కోసం",
       phAddr:"ఇల్లు/ఫ్లాట్, వీధి, ప్రాంతం, నగరం, పిన్ కోడ్",
-      courierNote:"కొరియర్ ఖర్చు బరువు, దూరం మీద ఆధారపడి ఉంటుంది — తరుణ్ WhatsAppలో చెబుతారు. UPI లేదా నగదు.",
+      courierNote:"కొరియర్ ఖర్చు విడిగా కలుస్తుంది — నిజంగా ఎంత అవుతుందో అంతే, పైన ఏమీ లేదు. వస్తువులు, కొరియర్ కలిపి మొత్తం ఎంతో తరుణ్ WhatsAppలో చెబుతారు. పూర్తి డబ్బు UPI ద్వారా అందిన తర్వాతే పార్సెల్ పంపబడుతుంది.",
       sendOrder:"WhatsAppలో ఆర్డర్ పంపండి", needName:"పేరు రాయండి.", needPhone:"10 అంకెల మొబైల్ నంబర్ రాయండి.",
       needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు",
       upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiPayAny:"UPI యాప్ తెరవండి",
@@ -845,23 +845,28 @@ body.hasbag{padding-bottom:96px}
     hi: { order:"ऑर्डर", size:"साइज़", total:"कुल", name:"नाम", phone:"फ़ोन",
           how:"कैसे चाहिए", atShop:"दुकान से ले लूँगा", byCourier:"कूरियर से भेजिए", addr:"पता",
           pay:"पैसे", paidUpi:"UPI से भेज दिए", willUpi:"UPI से भेज रहा/रही हूँ",
-          onDeliv:"सामान मिलने पर दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
+          onDeliv:"सामान मिलने पर दूँगा/दूँगी",
+          courierPay:"सामान + कूरियर की कुल रकम बताइए — एडवांस UPI से भेज दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
     en: { order:"Order", size:"Size", total:"Total", name:"Name", phone:"Phone",
           how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address",
           pay:"Payment", paidUpi:"Sent by UPI", willUpi:"Sending by UPI",
-          onDeliv:"Will pay on receiving", shot:"Sending the payment screenshot in this chat" },
+          onDeliv:"Will pay on receiving",
+          courierPay:"Tell me the total for goods plus courier — I will send it by UPI in advance", shot:"Sending the payment screenshot in this chat" },
     bn: { order:"অর্ডার", size:"সাইজ", total:"মোট", name:"নাম", phone:"ফোন",
           how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা",
           pay:"টাকা", paidUpi:"UPI-তে পাঠিয়েছি", willUpi:"UPI-তে পাঠাচ্ছি",
-          onDeliv:"জিনিস পাওয়ার সময় দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
+          onDeliv:"জিনিস পাওয়ার সময় দেব",
+          courierPay:"জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানান — অগ্রিম UPI-তে পাঠিয়ে দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
     pa: { order:"ਆਰਡਰ", size:"ਸਾਈਜ਼", total:"ਕੁੱਲ", name:"ਨਾਮ", phone:"ਫ਼ੋਨ",
           how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ",
           pay:"ਪੈਸੇ", paidUpi:"UPI ਨਾਲ ਭੇਜ ਦਿੱਤੇ", willUpi:"UPI ਨਾਲ ਭੇਜ ਰਿਹਾ ਹਾਂ",
-          onDeliv:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
+          onDeliv:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ ਦਿਆਂਗਾ",
+          courierPay:"ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸੋ — ਐਡਵਾਂਸ UPI ਨਾਲ ਭੇਜ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
     te: { order:"ఆర్డర్", size:"సైజు", total:"మొత్తం", name:"పేరు", phone:"ఫోన్",
           how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా",
           pay:"చెల్లింపు", paidUpi:"UPI ద్వారా పంపాను", willUpi:"UPI ద్వారా పంపుతున్నాను",
-          onDeliv:"వస్తువు అందినప్పుడు ఇస్తాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
+          onDeliv:"వస్తువు అందినప్పుడు ఇస్తాను",
+          courierPay:"వస్తువులు, కొరియర్ కలిపి మొత్తం చెప్పండి — ముందుగానే UPI ద్వారా పంపుతాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
   };
 
   var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
@@ -891,7 +896,7 @@ body.hasbag{padding-bottom:96px}
    'lblGPhone','gPhone','errGPhone','addrWrap','lblGAddr','gAddr','errGAddr',
    'courierNote','totLbl','bagTotal','bagSend','bagSendTxt',
    'upiBox','upiTtl','upiIdTxt','upiCopy','upiPayBtn','upiNote',
-   'lblPay','payUpi','payLater','paidRow','paidChk','paidLbl','shotHint'
+   'payChoice','lblPay','payUpi','payLater','paidRow','paidChk','paidLbl','shotHint'
   ].forEach(function (id) { el[id] = document.getElementById(id); });
 
   buildLangMenu();
@@ -1354,7 +1359,19 @@ body.hasbag{padding-bottom:96px}
     el.modeCourier.setAttribute('aria-pressed', String(m === 'courier'));
     el.addrWrap.hidden = m !== 'courier';
     el.courierNote.hidden = m !== 'courier';
+    /* Courier is paid in advance, and the amount is not known until Tarun has
+       weighed the parcel — so there is nothing to choose between yet. The
+       courier note above explains what happens instead. */
+    el.payChoice.hidden = m === 'courier';
+    if (m === 'courier') setPayWayQuiet('later');
     paintUpi();
+  }
+
+  function setPayWayQuiet(w) {
+    payWay = w;
+    el.payUpi.setAttribute('aria-pressed', String(w === 'upi'));
+    el.payLater.setAttribute('aria-pressed', String(w === 'later'));
+    el.paidChk.checked = false;
   }
 
   function need(input, err, ok, msg) {
@@ -1398,9 +1415,10 @@ body.hasbag{padding-bottom:96px}
     /* The page cannot verify a payment — it has no server and never sees the
        bank. So this is the customer's own statement, written in their voice,
        and the screenshot is what Tarun actually checks against PhonePe. */
-    if (payWay === 'upi') {
-      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) +
-                 (mode === 'shop' ? ' — ₹' + bagTotal() : ''));
+    if (mode === 'courier') {
+      lines.push(m.pay + ': ' + m.courierPay);
+    } else if (payWay === 'upi') {
+      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' — ₹' + bagTotal());
       if (el.paidChk.checked) lines.push(m.shot);
     } else {
       lines.push(m.pay + ': ' + m.onDeliv);
