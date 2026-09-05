@@ -1605,9 +1605,11 @@ a{color:var(--leaf-d)}
       wrap.appendChild(meta);
 
       if (r.text) {
-        var tx = document.createElement('p');
-        tx.className = 'rev-text'; tx.textContent = r.text;
-        wrap.appendChild(tx);
+        /* not `tx`: that is the translator, and a local of the same name
+           shadows it for the whole function, which broke every label below */
+        var body = document.createElement('p');
+        body.className = 'rev-text'; body.textContent = r.text;
+        wrap.appendChild(body);
       }
 
       var acts = document.createElement('div');
