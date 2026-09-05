@@ -1575,6 +1575,27 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
      tab, since there WhatsApp Web opens fine and we would rather not throw
      away the shop page.
      --------------------------------------------------------------------- */
+  /* What was ordered, never who ordered it. Fire and forget, so a failed
+     analytics call can never delay or break the handoff to WhatsApp. */
+  function logOrder(lines) {
+    var base = (store.reviewsApi || '').replace(/\/+$/, '');
+    if (!base || !lines.length) return;
+    try {
+      fetch(base + '/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          shop: 'veg',
+          items: lines.map(function (l) {
+            return { id: l.p.id, name: l.p.en || l.p.hi || l.p.id,
+                     size: '', color: '', qty: l.qty, price: Number(l.p.price) || 0 };
+          })
+        })
+      }).catch(function () {});
+    } catch (e) { /* never block the order */ }
+  }
+
   function openWA(lines) {
     lastMsg = lines.join('\n');
     var url = 'https://wa.me/' + store.whatsapp + '?text=' +
@@ -1646,6 +1667,8 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     if (phone) msg.push(m.mobile + ': ' + phone);
     var note = el.fNote.value.trim();
     if (note) msg.push(m.note + ': ' + note);
+
+    logOrder(lines);
 
     if (payWay === 'upi') {
       msg.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' — ₹' + fmt(total));

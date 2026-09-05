@@ -412,7 +412,8 @@ body.hasbag{padding-bottom:96px}
       "ownerNameEn": "Tarun",
       "ownerPhoto": "",
       "upiId": "8400357057@ybl",
-      "upiName": "Tarun Bhatia"
+      "upiName": "Tarun Bhatia",
+      "reviewsApi": ""
     },
     "categories": [
       {
@@ -1496,6 +1497,8 @@ body.hasbag{padding-bottom:96px}
     /* The page cannot verify a payment — it has no server and never sees the
        bank. So this is the customer's own statement, written in their voice,
        and the screenshot is what Tarun actually checks against PhonePe. */
+    logOrder();
+
     if (mode === 'courier') {
       lines.push(m.pay + ': ' + m.courierPay);
     } else if (payWay === 'upi') {
@@ -1505,6 +1508,32 @@ body.hasbag{padding-bottom:96px}
       lines.push(m.pay + ': ' + m.onDeliv);
     }
     openWA(lines);
+  }
+
+  /* Tell the shop what was ordered — item, size, colour, quantity, price and
+     nothing else. No name, phone or address goes anywhere near this.
+
+     Fire and forget on purpose: the customer is about to be handed to
+     WhatsApp, and an analytics call must never be the thing that delays or
+     breaks an order. If it fails, it fails silently. */
+  function logOrder() {
+    var base = (shop.reviewsApi || '').replace(/\/+$/, '');
+    if (!base || !bag.length) return;
+    try {
+      fetch(base + '/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          shop: 'gar',
+          items: bag.map(function (l) {
+            var it = itemById(l.id) || {};
+            return { id: l.id, name: it.en || it.hi || l.id, size: l.size || '',
+                     color: l.color || '', qty: l.qty, price: Number(it.price) || 0 };
+          })
+        })
+      }).catch(function () {});
+    } catch (e) { /* never block the order */ }
   }
 
   /* Same handoff the vegetable page uses: on a touch device a new tab loses
