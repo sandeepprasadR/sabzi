@@ -1,0 +1,1705 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4b1339">
+<title>गुरु आशीष गारमेंट्स</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Baloo+2:wght@600;700;800&display=swap">
+<style>
+:root{
+  --leaf:#14663a; --leaf-d:#0e4d2b; --leaf-l:#e4f0e7; --leaf-line:#c3ddca;
+  --brand:#4b1339; --brand-2:#6a1b4d; --marigold:#e8a92c;
+  --carrot:#b8480a; --carrot-d:#8f3706;
+  --cream:#fdf8ee; --paper:#ffffff; --ink:#1b211c; --muted:#57655a;
+  --line:#e3ddcd; --r:18px;
+  --shadow:0 1px 2px rgba(27,45,32,.06), 0 6px 18px rgba(27,45,32,.06);
+  --tap:52px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{
+  background:var(--cream); color:var(--ink);
+  font-family:"Noto Sans Devanagari","Nirmala UI",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:16.5px; line-height:1.62; text-wrap:pretty; padding-bottom:34px;
+}
+html[lang="bn"] body{font-family:"Noto Sans Bengali","Nirmala UI",system-ui,sans-serif}
+html[lang="pa"] body{font-family:"Noto Sans Gurmukhi","Nirmala UI",system-ui,sans-serif}
+html[lang="te"] body{font-family:"Noto Sans Telugu","Nirmala UI",system-ui,sans-serif}
+html[lang="en"] body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{margin:0;line-height:1.3;font-weight:800}
+button,input{font-family:inherit;font-size:inherit}
+a{color:var(--leaf-d);text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover{color:var(--carrot)}
+:focus-visible{outline:3px solid var(--leaf-d);outline-offset:2px;border-radius:6px}
+.wrap{max-width:660px;margin:0 auto;padding:0 14px}
+
+/* ---------- shared header treatment ---------- */
+.hdr{background:var(--brand);background-image:linear-gradient(178deg,var(--brand-2),var(--brand));color:#fff;padding:12px 0 26px;position:relative}
+.hdr:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:14px;background:var(--cream);
+  border-radius:16px 16px 0 0;border-top:3px solid var(--marigold)}
+.hdr-top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.shop{min-width:0}
+.shop h1{font-family:"Baloo 2","Noto Sans Devanagari",system-ui,sans-serif;font-size:23px;font-weight:700;letter-spacing:.2px;line-height:1.24}
+.shop .sub{font-size:12.5px;opacity:.82;font-weight:500;letter-spacing:.3px;text-transform:uppercase}
+.lang{position:relative;flex:0 0 auto}
+.lang-btn{display:flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:12px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;font-weight:700;cursor:pointer}
+.lang-btn:active{background:rgba(255,255,255,.26)}
+.lang-btn svg{width:17px;height:17px;flex:0 0 auto}
+.lang-btn .cur{font-size:15px}
+.lang-menu{position:absolute;right:0;top:calc(100% + 6px);z-index:60;background:var(--paper);color:var(--ink);
+  border-radius:14px;box-shadow:0 10px 30px rgba(10,30,18,.28);padding:6px;min-width:172px;border:1px solid var(--line)}
+.lang-menu button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:8px;
+  min-height:46px;padding:0 12px;border:0;background:transparent;border-radius:10px;font-weight:600;
+  cursor:pointer;color:var(--ink);text-align:left}
+.lang-menu button:active{background:var(--leaf-l)}
+.lang-menu button[aria-checked="true"]{background:var(--leaf-l);color:var(--leaf-d)}
+.lang-menu .tick{color:var(--leaf);font-weight:800}
+.owner{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px;border-radius:16px;
+  background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16)}
+.avatar{width:52px;height:52px;flex:0 0 auto;border-radius:50%;background:#f0e2c4;color:#7a4a12;
+  display:grid;place-items:center;font-family:"Baloo 2",sans-serif;font-size:24px;font-weight:700;overflow:hidden;
+  border:2px solid rgba(255,255,255,.5)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.owner-name{font-weight:800;font-size:16.5px;line-height:1.35}
+.owner-flat{font-size:13.5px;opacity:.85}
+.status{display:inline-flex;align-items:center;gap:6px;margin-top:2px;font-size:13px;font-weight:700;
+  padding:2px 9px 2px 7px;border-radius:999px;background:rgba(255,255,255,.16)}
+.dot{width:8px;height:8px;border-radius:50%;background:#54e08a;box-shadow:0 0 0 3px rgba(84,224,138,.28)}
+.status.shut .dot{background:#ffb35c;box-shadow:0 0 0 3px rgba(255,179,92,.25)}
+.quote{margin:10px 0 0;padding:0 2px;font-size:15.5px;line-height:1.65;opacity:.95}
+.quote b{font-weight:700}
+
+/* ---------- visit card (garments-specific) ---------- */
+.section{margin-top:22px}
+.section h2{font-size:19.5px}
+.panel{background:var(--paper);border:1.5px solid var(--line);border-radius:var(--r);padding:15px;box-shadow:var(--shadow)}
+.visit{display:grid;gap:12px}
+.visit .addr{font-size:16px;line-height:1.6;margin:0}
+.visit .addr b{font-weight:700}
+.meta{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:7px;background:var(--leaf-l);border:1px solid var(--leaf-line);
+  color:var(--leaf-d);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:700}
+.pill svg{width:16px;height:16px}
+.row2{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:0;border-radius:14px;min-height:var(--tap);padding:0 18px;font-size:16px;font-weight:800;
+  cursor:pointer;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn svg{width:19px;height:19px;flex:0 0 auto}
+.btn-ghost{flex:1 1 140px;background:var(--paper);border:1.5px solid var(--line);color:var(--ink)}
+.btn-ghost:active{background:var(--leaf-l)}
+.btn-go{background:var(--carrot);color:#fff;box-shadow:0 3px 0 var(--carrot-d)}
+.btn-go:active{background:var(--carrot-d);box-shadow:0 1px 0 var(--carrot-d);transform:translateY(2px)}
+
+/* ---------- browsing rhythm: tall photo-led cards ---------- */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 14px 12px;margin:0 -14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);
+  background:var(--paper);color:var(--ink);font-weight:700;font-size:15px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.hint{color:var(--muted);font-size:14px;margin:2px 0 14px}
+
+.rack{display:grid;grid-template-columns:1fr;gap:20px}
+@media (min-width:520px){.rack{grid-template-columns:1fr 1fr;gap:18px}}
+.item{background:var(--paper);border:1.5px solid var(--line);border-radius:20px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column}
+.shot{position:relative;aspect-ratio:4/5;background:#f6f1e4;display:block;overflow:hidden}
+@media (min-width:520px){.shot{aspect-ratio:3/4}}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.slot{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:8px;text-align:center;
+  padding:20px;background:repeating-linear-gradient(135deg,#f7f2e5 0 12px,#f2ecdd 12px 24px);
+  border-bottom:1.5px dashed var(--leaf-line)}
+.slot svg{width:58px;height:58px;opacity:.55}
+.slot b{font-size:14px;font-weight:800;color:var(--muted);line-height:1.4}
+.slot code{font-size:11.5px;font-weight:700;color:#8b7a55;background:#fffdf6;border:1px solid #e6dcc2;
+  border-radius:7px;padding:3px 7px;font-family:ui-monospace,Menlo,monospace;word-break:break-all;max-width:100%}
+.item-body{padding:14px 15px 15px;display:flex;flex-direction:column;gap:10px;flex:1}
+.item-nm{font-size:21px;font-weight:700;line-height:1.3}
+.item-en{font-size:12.5px;color:var(--muted);font-weight:600;letter-spacing:.2px;margin-top:-6px}
+.item-pr{font-size:23px;font-weight:800;color:var(--leaf-d);font-variant-numeric:tabular-nums;line-height:1.2}
+.item-pr small{font-size:12.5px;font-weight:600;color:var(--muted)}
+.sizes{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.sizes .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.sz{min-width:44px;min-height:36px;display:grid;place-items:center;padding:0 10px;border-radius:9px;
+  border:1.5px solid var(--leaf-line);background:var(--leaf-l);color:var(--leaf-d);font-weight:800;font-size:14px;
+  font-variant-numeric:tabular-nums}
+.ask{margin-top:auto;display:flex;flex-direction:column;gap:9px}
+.ask .btn{width:100%}
+.asklink{align-self:center;background:none;border:0;color:var(--muted);font-family:inherit;
+  font-size:13.5px;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
+
+/* ---------- picking a size and a quantity ---------- */
+.sz{min-width:44px;min-height:40px;padding:0 12px;cursor:pointer;font-family:inherit}
+.sz[aria-pressed="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.sz[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.colors{display:flex;flex-wrap:wrap;gap:7px;align-items:center}
+.colors .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.colr{min-height:36px;display:inline-grid;place-items:center;padding:0 11px;border-radius:9px;
+  border:1.5px solid var(--line);background:#fff;color:var(--ink);font-weight:700;font-size:13.5px;
+  font-family:inherit;cursor:pointer}
+.colr[aria-pressed="true"]{background:var(--leaf-d);border-color:var(--leaf-d);color:#fff}
+.item-note{font-size:13.5px;color:var(--muted);line-height:1.55}
+.lowstock{font-size:13px;font-weight:800;color:#8a3b16;background:#fdecdf;border-radius:999px;
+  padding:4px 11px;align-self:flex-start}
+.item-fab{display:inline-block;font-size:12px;font-weight:800;color:var(--leaf-d);background:var(--leaf-l);
+  border-radius:999px;padding:3px 10px;letter-spacing:.2px}
+.mrp{font-size:15px;font-weight:700;color:var(--muted);text-decoration:line-through;margin-left:7px}
+.qtyrow{display:flex;align-items:center;gap:10px}
+.qtyrow .lbl{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.4px;text-transform:uppercase}
+.stepper{display:flex;align-items:center;gap:2px;border:1.5px solid var(--line);border-radius:11px;overflow:hidden}
+.stepper button{width:44px;height:42px;border:0;background:#fff;color:var(--leaf-d);font-size:21px;
+  font-weight:800;font-family:inherit;cursor:pointer;line-height:1}
+.stepper button:active{background:var(--leaf-l)}
+.stepper span{min-width:40px;text-align:center;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.item.out{opacity:.62}
+.outbadge{display:inline-block;font-size:13px;font-weight:800;color:#8a3b16;background:#fdecdf;
+  border:1.5px solid #f0c9a8;border-radius:999px;padding:7px 14px;text-align:center}
+
+/* ---------- bag bar + sheet ---------- */
+.bagbar{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--paper);
+  border-top:1.5px solid var(--line);box-shadow:0 -6px 22px rgba(60,40,10,.13);
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.bagbar .in{max-width:660px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.bagbar .sum{flex:1;min-width:0;line-height:1.35}
+.bagbar .sum b{display:block;font-size:15.5px;font-weight:800}
+.bagbar .sum span{display:block;font-size:12.5px;color:var(--muted);font-weight:600}
+.bagbar .btn{flex:0 0 auto;width:auto;padding:0 20px}
+body.hasbag{padding-bottom:96px}
+
+/* .sheet sets display:flex, which outranks the browser's [hidden] rule, and without
+   this an invisible sheet still swallows taps meant for the bag bar under it. */
+[hidden]{display:none!important}
+.scrim{position:fixed;inset:0;z-index:79;background:rgba(28,18,4,.45)}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:80;background:var(--paper);
+  border-radius:22px 22px 0 0;max-height:88vh;display:flex;flex-direction:column;
+  box-shadow:0 -14px 40px rgba(30,20,5,.3)}
+.sheet-head{display:flex;align-items:flex-start;gap:10px;padding:16px 16px 10px;border-bottom:1.5px solid var(--line)}
+.sheet-head h3{flex:1;font-size:19px;font-weight:800;margin:0}
+.sheet-head .close{width:44px;height:44px;border:0;background:none;font-size:20px;color:var(--muted);cursor:pointer}
+.sheet-body{overflow:auto;padding:12px 16px;flex:1}
+.sheet-foot{padding:12px 16px calc(14px + env(safe-area-inset-bottom));border-top:1.5px solid var(--line);background:#fff}
+.line{display:flex;align-items:flex-start;gap:11px;padding:11px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line img{width:56px;height:70px;object-fit:cover;border-radius:10px;flex:0 0 auto;background:#eee}
+.line .l-nm{flex:1;min-width:0}
+.line .l-nm b{display:block;font-size:15.5px;font-weight:700;line-height:1.35}
+.line .l-nm small{display:block;font-size:12.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.line .l-pr{font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.line .rm{border:0;background:none;color:var(--carrot);font-family:inherit;font-size:13px;
+  font-weight:700;text-decoration:underline;cursor:pointer;padding:4px 0 0}
+.totrow{display:flex;justify-content:space-between;align-items:baseline;font-size:19px;font-weight:800;margin-bottom:10px}
+.fld{margin-top:12px}
+.fld > span{display:block;font-size:13.5px;font-weight:700;margin-bottom:5px}
+.fld input,.fld textarea{width:100%;font-family:inherit;font-size:16px;padding:12px;border:1.5px solid var(--line);
+  border-radius:12px;background:#fff;color:var(--ink)}
+.fld input:focus,.fld textarea:focus{outline:2px solid var(--leaf-d);border-color:transparent}
+.fld .err{display:block;color:var(--carrot-d);font-size:13px;font-weight:700;margin-top:5px}
+.modes{display:flex;gap:9px;margin-top:6px}
+.modes button{flex:1;min-height:52px;border:1.5px solid var(--line);background:#fff;border-radius:13px;
+  font-family:inherit;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;padding:6px 8px;line-height:1.3}
+.modes button[aria-pressed="true"]{background:var(--leaf-l);border-color:var(--leaf-d);color:var(--leaf-d)}
+.smallnote{font-size:13px;color:var(--muted);line-height:1.6;margin:10px 0 0}
+.upi{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line)}
+.upi h3{font-size:15px;margin:0 0 8px}
+.upi-id{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.upi-id code{font:600 15px/1.4 ui-monospace,Menlo,Consolas,monospace;background:var(--leaf-l);
+  color:var(--leaf-d);padding:7px 10px;border-radius:9px}
+.upi-copy{min-height:44px;padding:0 12px;border:1.5px solid var(--line);background:#fff;border-radius:10px;
+  font-family:inherit;font-size:14px;font-weight:700;color:var(--ink);cursor:pointer}
+.upi-note{font-size:13.5px;color:var(--muted);margin:8px 0 0;line-height:1.6}
+.btn-upi{display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+  margin-top:10px;width:100%;background:#5f259f;color:#fff;border:0;border-radius:14px;
+  min-height:52px;padding:10px 14px;text-align:center;text-decoration:none;
+  font-family:inherit;font-size:16px;font-weight:700;line-height:1.3;cursor:pointer}
+.btn-upi:active{background:#4d1e80}
+.paidrow{display:flex;align-items:flex-start;gap:10px;margin-top:12px;padding:11px 12px;
+  border:1.5px solid var(--leaf-line);background:var(--leaf-l);border-radius:12px;cursor:pointer}
+.paidrow input{width:22px;height:22px;flex:0 0 auto;accent-color:var(--leaf-d);margin:0}
+.paidrow span{font-size:14.5px;font-weight:700;color:var(--leaf-d);line-height:1.45}
+
+.care{margin-top:20px;background:#fffaf0;border-color:#f0dfb8}
+.care h3{font-size:15.5px;font-weight:800;margin:0 0 6px}
+.care p{margin:0;font-size:14px;line-height:1.7;color:#6b5a33}
+.care ul{margin:0;padding-left:18px;font-size:14px;line-height:1.75;color:#6b5a33}
+.care ul li{margin-bottom:5px}
+.care ul li:last-child{margin-bottom:0}
+.foot{text-align:center;color:var(--muted);font-size:13.5px;margin:30px 0 4px;line-height:1.7}
+.shot{position:relative}
+.newtag{position:absolute;top:9px;left:9px;z-index:2;padding:5px 10px;border-radius:999px;
+  background:var(--carrot,#c2410c);color:#fff;font-size:11.5px;font-weight:800;
+  letter-spacing:.3px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.crosslink{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-size:14.5px;font-weight:700}
+.crosslink svg{width:16px;height:16px}
+/* the same way back, at the top of the header, for the customer who came
+   from the vegetable page and does not want to scroll to the bottom */
+.backveg{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;padding:9px 13px;
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);border-radius:999px;
+  color:#fff;text-decoration:none;font-size:13.5px;font-weight:700;line-height:1}
+.backveg:active{background:rgba(255,255,255,.24)}
+.backveg svg{width:15px;height:15px;flex:0 0 auto}
+.backveg .bk{font-size:18px;font-weight:800;opacity:.8;margin:-2px 1px 0 -2px}
+@media (prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  .btn-go:active{transform:none}
+}
+@media (max-width:339px){
+  .item-nm{font-size:19px}.item-pr{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.6 8.2c-.5.6-.6 1.6.3 2.9.9 1.3 2.2 2.2 3.4 2.6 1.1.4 1.9.2 2.3-.4l-1.6-1.1-1 .6c-.7-.4-1.5-1.2-1.9-2l.6-.9-1.1-1.7z" fill="currentColor"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M6 3h3l1.6 4-2 1.5c.8 2.6 3.3 5.1 5.9 5.9l1.5-2 4 1.6V18c0 1.4-1.3 2.5-2.7 2.3C11 19.5 4.5 13 3.7 5.7 3.5 4.3 4.6 3 6 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5c4.5-5.2 7-8.6 7-11.5a7 7 0 1 0-14 0c0 2.9 2.5 6.3 7 11.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.2 6-5.5-3-5.5 3 1.2-6L3.2 9.9l6.1-.8L12 3.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 8.5h18v7H3v-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7.5 8.5v3M12 8.5v4M16.5 8.5v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4c0 9-5.5 14-13 14 0-8 5-13 13-14z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 20c2-5 6-9 11-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-hanger" viewBox="0 0 64 64">
+  <path d="M32 22c-3.3 0-6-2.4-6-5.5S28.7 11 32 11s6 2.4 6 5.5" fill="none" stroke="#8a7a52" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 22v5L8 42c-1.8 1.1-1 4 1.2 4h45.6c2.2 0 3-2.9 1.2-4L32 27z" fill="#efe6d0" stroke="#8a7a52" stroke-width="3" stroke-linejoin="round"/>
+</symbol>
+</defs></svg>
+
+<header class="hdr">
+  <div class="wrap">
+    <a class="backveg" href="index.html">
+      <span class="bk" aria-hidden="true">&lsaquo;</span>
+      <svg aria-hidden="true"><use href="#i-leaf"></use></svg>
+      <span id="backTxt"></span>
+    </a>
+    <div class="hdr-top">
+      <div class="shop">
+        <h1 id="shopName">गुरु आशीष गारमेंट्स</h1>
+        <div class="sub" id="shopSub"></div>
+      </div>
+      <div class="lang">
+        <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-expanded="false">
+          <svg aria-hidden="true"><use href="#i-globe"></use></svg>
+          <span class="cur" id="langCur">हिं</span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" hidden></div>
+      </div>
+    </div>
+
+    <div class="owner">
+      <div class="avatar" id="ownerAvatar"></div>
+      <div>
+        <div class="owner-name" id="ownerName"></div>
+        <div class="owner-flat" id="ownerSince"></div>
+        <div class="status" id="statusPill"><span class="dot"></span><span id="statusTxt"></span></div>
+      </div>
+    </div>
+    <p class="quote" id="ownerQuote"></p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="section">
+    <div class="panel visit">
+      <h2 id="ttlVisit"></h2>
+      <p class="addr" id="addrTxt"></p>
+      <div class="meta" id="metaRow"></div>
+      <div class="row2">
+        <a class="btn btn-ghost" id="mapLink" href="#" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"></use></svg><span id="btnMap"></span></a>
+        <a class="btn btn-ghost" id="callLink" href="#"><svg aria-hidden="true"><use href="#i-phone"></use></svg><span id="btnCall"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalogue">
+    <h2 id="ttlRack"></h2>
+    <p class="hint" id="rackHint"></p>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="rack" id="rack"></div>
+
+    <div class="panel care" id="careBox">
+      <h3 id="careTtl"></h3>
+      <p id="careTxt"></p>
+    </div>
+
+    <div class="panel care" id="retBox">
+      <h3 id="retTtl"></h3>
+      <ul id="retList"></ul>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p id="footTxt"></p>
+    <a class="crosslink" href="index.html"><svg aria-hidden="true"><use href="#i-leaf"></use></svg><span id="crossTxt"></span></a>
+  </footer>
+</main>
+
+<div class="bagbar" id="bagbar" hidden><div class="in">
+  <span class="sum"><b id="bagCount"></b><span id="bagHint"></span></span>
+  <button class="btn btn-go" id="bagOpen"><span id="bagOpenTxt"></span></button>
+</div></div>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-head">
+    <h3 id="sheetTitle"></h3>
+    <button class="close" id="sheetClose" aria-label="close">&#10005;</button>
+  </div>
+  <div class="sheet-body">
+    <div id="bagLines"></div>
+
+    <div class="fld">
+      <span id="lblHow"></span>
+      <div class="modes">
+        <button type="button" id="modeShop" aria-pressed="true"></button>
+        <button type="button" id="modeCourier" aria-pressed="false"></button>
+      </div>
+    </div>
+
+    <label class="fld"><span id="lblGName"></span>
+      <input id="gName" type="text" autocomplete="name">
+      <span class="err" id="errGName" hidden></span></label>
+
+    <label class="fld"><span id="lblGPhone"></span>
+      <input id="gPhone" type="tel" inputmode="numeric" autocomplete="tel">
+      <span class="err" id="errGPhone" hidden></span></label>
+
+    <label class="fld" id="addrWrap" hidden><span id="lblGAddr"></span>
+      <textarea id="gAddr" rows="4" autocomplete="street-address"></textarea>
+      <span class="err" id="errGAddr" hidden></span></label>
+
+    <p class="smallnote" id="courierNote" hidden></p>
+    <p class="smallnote" id="careShort"></p>
+
+    <div class="fld" id="payChoice">
+      <span id="lblPay"></span>
+      <div class="modes">
+        <button type="button" id="payUpi" aria-pressed="false"></button>
+        <button type="button" id="payLater" aria-pressed="true"></button>
+      </div>
+    </div>
+
+    <div class="upi" id="upiBox" hidden>
+      <h3 id="upiTtl"></h3>
+      <div class="upi-id">
+        <code id="upiIdTxt"></code>
+        <button class="upi-copy" id="upiCopy" type="button"></button>
+      </div>
+      <a class="btn-upi" id="upiPayBtn" href="#" role="button"></a>
+      <label class="paidrow" id="paidRow">
+        <input type="checkbox" id="paidChk">
+        <span id="paidLbl"></span>
+      </label>
+      <p class="upi-note" id="upiNote"></p>
+    </div>
+  </div>
+  <div class="sheet-foot">
+    <div class="totrow"><span id="totLbl"></span><span>&#8377;<span id="bagTotal">0</span></span></div>
+    <button class="btn btn-go" id="bagSend"><svg aria-hidden="true"><use href="#i-wa"></use></svg><span id="bagSendTxt"></span></button>
+    <p class="upi-note" id="shotHint" hidden style="text-align:center"></p>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   Guru Ashish Garments, browse-and-ask page. No cart, no checkout.
+   Every tap opens WhatsApp with a question about that one item.
+
+   EDIT ITEMS, PRICES, PHOTOS AND SHOP DETAILS ONLY INSIDE `DATA` BELOW.
+   ========================================================================== */
+(function () {
+  'use strict';
+
+  var DATA = /*<CATALOGUE>*/{
+    "shop": {
+      "name": "गुरु आशीष गारमेंट्स",
+      "nameEn": "Guru Ashish Garments",
+      "whatsapp": "918400357057",
+      "phone1": "8400357057",
+      "phone2": "9354001343",
+      "address": "धरमपुर मेन रोड, सेक्टर 108, गुरुग्राम",
+      "addressEn": "Dharampur Main Road, Sector 108, Gurugram",
+      "mapQuery": "Guru Ashish Garments, Dharampur Main Road, Sector 108, Gurugram",
+      "openTime": "10:00",
+      "closeTime": "21:00",
+      "sinceYears": 5,
+      "ownerName": "तरुण",
+      "ownerNameEn": "Tarun",
+      "ownerPhoto": "",
+      "upiId": "8400357057@ybl",
+      "upiName": "Tarun Bhatia",
+      "reviewsApi": "https://guru-ashish-reviews.sandeepniftian2002.workers.dev"
+    },
+    "categories": [
+      {
+        "id": "men",
+        "hi": "पुरुष",
+        "en": "Men",
+        "bn": "পুরুষ",
+        "pa": "ਮਰਦ",
+        "te": "పురుషులు"
+      },
+      {
+        "id": "women",
+        "hi": "महिला",
+        "en": "Women",
+        "bn": "মহিলা",
+        "pa": "ਔਰਤਾਂ",
+        "te": "మహిళలు"
+      },
+      {
+        "id": "kids",
+        "hi": "बच्चे",
+        "en": "Kids",
+        "bn": "বাচ্চা",
+        "pa": "ਬੱਚੇ",
+        "te": "పిల్లలు"
+      }
+    ],
+    "items": [
+      {
+        "id": "kurta",
+        "cat": "men",
+        "price": 649,
+        "photo": "garments/kurta.jpg",
+        "hi": "कुर्ता",
+        "en": "Kurta",
+        "bn": "কুর্তা",
+        "pa": "ਕੁੜਤਾ",
+        "te": "కుర్తా",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true,
+        "stock": 0,
+        "buyPrice": 0,
+        "buyQty": 0,
+        "newSince": "2026-09-05"
+      },
+      {
+        "id": "shirt",
+        "cat": "men",
+        "price": 490,
+        "photo": "photos/garments/shirt.jpg",
+        "hi": "कॉटन शर्ट",
+        "en": "Cotton Shirt",
+        "bn": "কটন শার্ট",
+        "pa": "ਕਾਟਨ ਸ਼ਰਟ",
+        "te": "కాటన్ షర్టు",
+        "sizes": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL"
+        ],
+        "available": true,
+        "mrp": 590,
+        "stock": 0,
+        "colors": [
+          "लाल",
+          "नीला",
+          "ऑफ़ व्हाइट",
+          "पीला",
+          "गुलाबी"
+        ],
+        "fabric": "प्योर कॉटन / साटन"
+      },
+      {
+        "id": "jeans",
+        "cat": "men",
+        "price": 640,
+        "photo": "garments/jeans.jpg",
+        "hi": "जीन्स",
+        "en": "Jeans",
+        "bn": "জিন্স",
+        "pa": "ਜੀਨਸ",
+        "te": "జీన్స్",
+        "sizes": [
+          "38",
+          "40",
+          "42",
+          "44"
+        ],
+        "available": true,
+        "mrp": 740,
+        "stock": 0,
+        "colors": [
+          "काला",
+          "नीला",
+          "ग्रे",
+          "आइस ब्लू"
+        ],
+        "fabric": "कॉटन / लाइक्रा",
+        "newSince": "2026-09-05"
+      },
+      {
+        "id": "kurti",
+        "cat": "women",
+        "price": 549,
+        "photo": "garments/kurti.jpg",
+        "hi": "कुर्ती",
+        "en": "Kurti",
+        "bn": "কুর্তি",
+        "pa": "ਕੁੜਤੀ",
+        "te": "కుర్తీ",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "leggings",
+        "cat": "women",
+        "price": 299,
+        "photo": "garments/leggings.jpg",
+        "hi": "लेगिंग्स",
+        "en": "Leggings",
+        "bn": "লেগিংস",
+        "pa": "ਲੈਗਿੰਗਸ",
+        "te": "లెగ్గింగ్స్",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "kidstee",
+        "cat": "kids",
+        "price": 249,
+        "photo": "garments/kidstee.jpg",
+        "hi": "बच्चों की टी-शर्ट",
+        "en": "Kids T-Shirt",
+        "bn": "বাচ্চাদের টি-শার্ট",
+        "pa": "ਬੱਚਿਆਂ ਦੀ ਟੀ-ਸ਼ਰਟ",
+        "te": "పిల్లల టీ-షర్ట్",
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "g1788424169736",
+        "hi": "पुरुष अंडरवियर",
+        "en": "Men's Underwear",
+        "price": 95,
+        "photo": "photos/garments/g1788424169736.jpg",
+        "cat": "men",
+        "available": true,
+        "bn": "পুরুষদের অন্তর্বাস",
+        "pa": "ਮਰਦਾਂ ਦਾ ਅੰਡਰਵੀਅਰ",
+        "te": "పురుషుల లోదుస్తులు",
+        "sizes": [],
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "stock": 0
+      },
+      {
+        "id": "g1788425910051",
+        "hi": "Macho Innerwear",
+        "en": "Macho Innerwear",
+        "price": 99,
+        "photo": "photos/garments/g1788425910051.jpg",
+        "cat": "men",
+        "available": true,
+        "stock": 0,
+        "sizes": []
+      },
+      {
+        "id": "tshirt",
+        "cat": "men",
+        "mrp": 525,
+        "price": 450,
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL",
+          "4XL"
+        ],
+        "hi": "टी-शर्ट",
+        "en": "T-Shirt",
+        "bn": "টি-শার্ট",
+        "pa": "ਟੀ-ਸ਼ਰਟ",
+        "te": "టీ-షర్ట్",
+        "photo": "photos/garments/tshirt.jpg",
+        "colors": [
+          "काला",
+          "सफ़ेद",
+          "लाल",
+          "पीला",
+          "नीला"
+        ],
+        "fabric": "कॉटन / लाइक्रा",
+        "note": "",
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "lower",
+        "cat": "men",
+        "mrp": 490,
+        "price": 390,
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL",
+          "4XL"
+        ],
+        "hi": "लोअर",
+        "en": "Lower",
+        "bn": "লোয়ার",
+        "pa": "ਲੋਅਰ",
+        "te": "లోయర్",
+        "photo": "photos/garments/lower.jpg",
+        "colors": [
+          "काला",
+          "नीला",
+          "ग्रे",
+          "मस्टर्ड",
+          "ऑफ़ व्हाइट"
+        ],
+        "fabric": "कॉटन / लाइक्रा",
+        "note": "",
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "trousers",
+        "cat": "men",
+        "mrp": 790,
+        "price": 690,
+        "sizes": [
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "3XL"
+        ],
+        "hi": "ट्राउज़र",
+        "en": "Trousers",
+        "bn": "ট্রাউজার",
+        "pa": "ਟਰਾਊਜ਼ਰ",
+        "te": "ట్రౌజర్",
+        "photo": "photos/garments/trousers.jpg",
+        "colors": [
+          "काला",
+          "नीला",
+          "ग्रे",
+          "बेज"
+        ],
+        "fabric": "कॉटन",
+        "note": "",
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "formalpant",
+        "cat": "men",
+        "mrp": 450,
+        "price": 350,
+        "sizes": [
+          "38",
+          "40",
+          "42"
+        ],
+        "hi": "फॉर्मल पैंट",
+        "en": "Formal Pants",
+        "bn": "ফরমাল প্যান্ট",
+        "pa": "ਫਾਰਮਲ ਪੈਂਟ",
+        "te": "ఫార్మల్ ప్యాంట్",
+        "photo": "photos/garments/formalpant.jpg",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true,
+        "stock": 0
+      },
+      {
+        "id": "capri",
+        "cat": "women",
+        "mrp": 490,
+        "price": 400,
+        "sizes": [
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XXL"
+        ],
+        "hi": "कैप्री",
+        "en": "Capris",
+        "bn": "ক্যাপ্রি",
+        "pa": "ਕੈਪਰੀ",
+        "te": "కాప్రి",
+        "photo": "photos/garments/capri.jpg",
+        "colors": [],
+        "fabric": "",
+        "note": "",
+        "available": true,
+        "stock": 0
+      }
+    ]
+  }/*</CATALOGUE>*/;
+
+  /* ====================== TRANSLATIONS (garments page) ==================== */
+  var LANGS = [
+    { code:"hi", label:"हिंदी",   short:"हिं", font:null },
+    { code:"en", label:"English", short:"EN",  font:null },
+    { code:"bn", label:"বাংলা",    short:"বাং", font:"Noto+Sans+Bengali" },
+    { code:"pa", label:"ਪੰਜਾਬੀ",   short:"ਪੰਜ", font:"Noto+Sans+Gurmukhi" },
+    { code:"te", label:"తెలుగు",   short:"తె",  font:"Noto+Sans+Telugu" }
+  ];
+
+  var T = {
+    hi: {
+      sub:"कपड़े की दुकान · सेक्टर 108", chooseLang:"भाषा चुनें",
+      since:"{y} साल से इसी जगह", openNow:"दुकान खुली है", closedNow:"दुकान बंद है",
+      hours:"{a} से {b}", opensAt:"{t} बजे खुलेगी",
+      quote:"छूकर देखिए, पहनकर देखिए, फिर लीजिए।",
+      ttlVisit:"दुकान पर आइए", btnMap:"नक्शे पर देखें", btnCall:"कॉल करें",
+      ttlRack:"दुकान में क्या है", allCat:"सब",
+      rackHint:"साइज़ चुनिए, बैग में डालिए और WhatsApp पर ऑर्डर भेज दीजिए। सामान दुकान से ले जाइए या कूरियर से मँगवा लीजिए।",
+      sizesLbl:"साइज़",
+      careTtl:"धुलाई का ध्यान रखें",
+      careTxt:"हर कपड़े पर धुलाई का लेबल लगा है, उसी के हिसाब से धोइए। पहली बार कपड़े को अलग से, ठंडे पानी में, उल्टा करके धोइए। लेबल के तरीके से न धोने पर रंग निकल जाए या कपड़ा खराब हो जाए, तो इसकी ज़िम्मेदारी दुकान की नहीं होगी।",
+      careShort:"धुलाई लेबल के हिसाब से कीजिए। लेबल के तरीके से न धोने पर रंग निकलने की ज़िम्मेदारी दुकान की नहीं होगी।",
+      retTtl:"बदली और वापसी",
+      ret:["साइज़ ठीक न बैठे तो 7 दिन के अंदर बदल सकते हैं।","कपड़ा पहना या धुला हुआ न हो, टैग लगा हो और बिल साथ हो।","सफ़ाई की वजह से अंडरगारमेंट्स और इनरवियर नहीं बदले जाते।","सेल के सामान पर सिर्फ़ बदली, पैसे वापस नहीं।","कूरियर से मँगाया हो तो वापसी का खर्च आपका। हमारी गलती से गलत सामान गया हो तो खर्च हमारा।","धुलाई लेबल के हिसाब से न धोने से हुआ नुकसान इसमें नहीं आता।"], ask:"WhatsApp पर पूछें", from:"से",
+      slot:"फोटो यहाँ आएगी", slotHelp:"इस नाम से फोटो डालिए:",
+      foot:"गुरु आशीष गारमेंट्स · धरमपुर मेन रोड, सेक्टर 108",
+      cross:"सब्ज़ी ऑर्डर करें", backVeg:"सब्ज़ी की दुकान पर वापस",
+      newCat:"नया आया है", newTag:"नया", newNone:"अभी कोई नई चीज़ नहीं आई।",
+      bagAdd:"बैग में डालें", bagAdded:"डाल दिया ✓", pickSize:"पहले साइज़ चुनें", pickColor:"रंग चुनें",
+      colorsLbl:"रंग", qtyLbl:"कितने", soldOut:"अभी स्टॉक में नहीं", onlyLeft:"सिर्फ़ {n} बचे हैं", askMore:"इसके बारे में पूछें",
+      bagOne:"बैग में 1 चीज़", bagMany:"बैग में {n} चीज़ें", bagHint:"कुल ₹{t}", bagView:"बैग देखें",
+      bagTitle:"आपका बैग", bagEmpty:"बैग अभी खाली है", removeLbl:"हटाएँ", totLbl:"कुल",
+      lblHow:"कैसे लेंगे?", modeShop:"दुकान से लेना है", modeCourier:"कूरियर से भेजिए",
+      lblGName:"आपका नाम", lblGPhone:"मोबाइल नंबर", lblGAddr:"पूरा पता (कूरियर के लिए)",
+      phAddr:"मकान/फ्लैट, गली, इलाका, शहर, पिन कोड",
+      courierNote:"कूरियर का खर्च अलग से जुड़ेगा, जितना असल में लगेगा उतना ही, ऊपर से कुछ नहीं। तरुण WhatsApp पर सामान और कूरियर की कुल रकम बता देंगे। पूरा पैसा पहले UPI से आने पर ही सामान भेजा जाएगा।",
+      sendOrder:"WhatsApp पर ऑर्डर भेजें", needName:"अपना नाम लिखिए।", needPhone:"10 अंकों का मोबाइल नंबर लिखिए।",
+      needAddr:"कूरियर के लिए पूरा पता लिखिए।", sizeIs:"साइज़",
+      upiTtl:"UPI से पैसे भेजें", upiPay:"UPI से ₹{a} भेजें", upiPayAny:"UPI ऐप खोलें",
+      upiCopy:"UPI ID कॉपी करें", upiCopied:"कॉपी हो गया ✓",
+      lblPay:"पैसे कैसे देंगे?", payUpi:"अभी UPI से", payLater:"सामान मिलने पर",
+      paidLbl:"मैंने पैसे भेज दिए हैं, स्क्रीनशॉट भी भेजूँगा",
+      shotHint:"ऑर्डर भेजने के बाद, उसी WhatsApp चैट में पेमेंट का स्क्रीनशॉट भी लगा दें।",
+      upiNoteShop:"पहले नीचे से ऑर्डर भेजिए। फिर चाहें तो UPI से पैसे भेजिए, या दुकान पर सामान लेते समय दीजिए।",
+      upiNoteCourier:"पहले नीचे से ऑर्डर भेजिए। कूरियर का खर्च अभी जुड़ा नहीं है। तरुण WhatsApp पर कुल रकम बता देंगे, तब पैसे भेजिए।"
+    },
+    en: {
+      sub:"Clothing shop · Sector 108", chooseLang:"Choose language",
+      since:"Same spot for {y} years", openNow:"Shop is open", closedNow:"Shop is closed",
+      hours:"{a} to {b}", opensAt:"Opens at {t}",
+      quote:"See it, feel it, try it on, then buy it.",
+      ttlVisit:"Come to the shop", btnMap:"Open in maps", btnCall:"Call",
+      ttlRack:"In the shop", allCat:"All",
+      rackHint:"Pick a size, add to the bag and send the order on WhatsApp. Collect from the shop, or have it couriered.",
+      sizesLbl:"Sizes",
+      careTtl:"Please follow the wash care",
+      careTxt:"Every garment carries a wash-care label, so please wash it the way the label says. For the first wash, wash it separately, in cold water, inside out. If the colour bleeds or the garment is damaged because it was not washed as the label says, the shop cannot take responsibility.",
+      careShort:"Wash as the care label says. If colour bleeds because it was not washed that way, the shop cannot take responsibility.",
+      retTtl:"Exchange and returns",
+      ret:["If the size does not fit, exchange it within 7 days.","Unworn, unwashed, tags on, and bring the bill.","Undergarments and innerwear cannot be exchanged, for hygiene.","Sale items: exchange only, no refund.","Sent by courier? Return postage is yours. If we sent the wrong thing, it is ours.","Damage from not following the wash-care label is not covered."], ask:"Ask on WhatsApp", from:"from",
+      slot:"Photo goes here", slotHelp:"Add a photo with this name:",
+      foot:"Guru Ashish Garments · Dharampur Main Road, Sector 108",
+      cross:"Order vegetables", backVeg:"Back to the vegetable shop",
+      newCat:"New in", newTag:"NEW", newNone:"Nothing new has come in just now.",
+      bagAdd:"Add to bag", bagAdded:"Added ✓", pickSize:"Pick a size first", pickColor:"Pick a colour",
+      colorsLbl:"Colours", qtyLbl:"How many", soldOut:"Out of stock", onlyLeft:"Only {n} left", askMore:"Ask about this",
+      bagOne:"1 item in bag", bagMany:"{n} items in bag", bagHint:"Total ₹{t}", bagView:"View bag",
+      bagTitle:"Your bag", bagEmpty:"Your bag is empty", removeLbl:"Remove", totLbl:"Total",
+      lblHow:"How will you take it?", modeShop:"I\u2019ll collect from the shop", modeCourier:"Send by courier",
+      lblGName:"Your name", lblGPhone:"Mobile number", lblGAddr:"Full address (for courier)",
+      phAddr:"House/flat, street, area, city, PIN code",
+      courierNote:"Courier is charged on top, at exactly what it actually costs, with nothing added. Tarun will tell you the total for goods plus courier on WhatsApp. The parcel is sent once the full amount is paid by UPI.",
+      sendOrder:"Send order on WhatsApp", needName:"Please enter your name.", needPhone:"Enter a 10-digit mobile number.",
+      needAddr:"Enter the full address for courier.", sizeIs:"Size",
+      upiTtl:"Pay by UPI", upiPay:"Pay ₹{a} by UPI", upiPayAny:"Open UPI app",
+      upiCopy:"Copy UPI ID", upiCopied:"Copied ✓",
+      lblPay:"How will you pay?", payUpi:"By UPI now", payLater:"When I get it",
+      paidLbl:"I have sent the money, and I will send the screenshot too",
+      shotHint:"After sending the order, attach the payment screenshot in the same WhatsApp chat.",
+      upiNoteShop:"Send the order below first, then pay by UPI if you like, or pay at the shop when you collect.",
+      upiNoteCourier:"Send the order below first. Courier cost is not included yet. Tarun will tell you the final amount on WhatsApp, and you pay then."
+    },
+    bn: {
+      sub:"কাপড়ের দোকান · সেক্টর 108", chooseLang:"ভাষা বাছুন",
+      since:"{y} বছর ধরে একই জায়গায়", openNow:"দোকান খোলা", closedNow:"দোকান বন্ধ",
+      hours:"{a} থেকে {b}", opensAt:"{t}-এ খুলবে",
+      quote:"ছুঁয়ে দেখুন, পরে দেখুন, তারপর নিন।",
+      ttlVisit:"দোকানে আসুন", btnMap:"ম্যাপে দেখুন", btnCall:"ফোন করুন",
+      ttlRack:"দোকানে যা আছে", allCat:"সব",
+      rackHint:"সাইজ বাছুন, ব্যাগে দিন আর WhatsApp-এ অর্ডার পাঠান। দোকান থেকে নিন, বা কুরিয়ারে আনান।",
+      sizesLbl:"সাইজ",
+      careTtl:"ধোয়ার নিয়ম মেনে চলুন",
+      careTxt:"প্রতিটি কাপড়ে ধোয়ার লেবেল দেওয়া আছে, সেই অনুযায়ীই ধোবেন। প্রথমবার আলাদা করে, ঠান্ডা জলে, উল্টো করে ধুয়ে নিন। লেবেলের নিয়ম না মেনে ধোয়ার ফলে রং উঠলে বা কাপড় নষ্ট হলে দোকান দায়ী থাকবে না।",
+      careShort:"লেবেল অনুযায়ী ধোবেন। সেভাবে না ধোয়ায় রং উঠলে দোকান দায়ী থাকবে না।",
+      retTtl:"বদল ও ফেরত",
+      ret:["সাইজ না মিললে ৭ দিনের মধ্যে বদলে নিন।","না পরা, না ধোয়া, ট্যাগ লাগানো, বিল সঙ্গে।","স্বাস্থ্যবিধির কারণে অন্তর্বাস বদলানো যায় না।","সেলের জিনিস: শুধু বদল, টাকা ফেরত নয়।","কুরিয়ারে আনালে ফেরতের খরচ আপনার। আমাদের ভুলে ভুল জিনিস গেলে খরচ আমাদের।","লেবেল না মেনে ধোয়ার ক্ষতি এর মধ্যে পড়ে না।"], ask:"WhatsApp-এ জিজ্ঞেস করুন", from:"থেকে",
+      slot:"ছবি এখানে আসবে", slotHelp:"এই নামে ছবি দিন:",
+      foot:"গুরু আশীষ গারমেন্টস · ধরমপুর মেন রোড, সেক্টর 108",
+      cross:"সবজি অর্ডার করুন", backVeg:"সবজির দোকানে ফিরুন",
+      newCat:"নতুন এসেছে", newTag:"নতুন", newNone:"এখন নতুন কিছু আসেনি।",
+      bagAdd:"ব্যাগে দিন", bagAdded:"দেওয়া হয়েছে ✓", pickSize:"আগে সাইজ বাছুন", pickColor:"রং বাছুন",
+      colorsLbl:"রং", qtyLbl:"কতগুলো", soldOut:"এখন স্টকে নেই", onlyLeft:"মাত্র {n}টি বাকি", askMore:"এটি সম্পর্কে জিজ্ঞেস করুন",
+      bagOne:"ব্যাগে ১টি জিনিস", bagMany:"ব্যাগে {n}টি জিনিস", bagHint:"মোট ₹{t}", bagView:"ব্যাগ দেখুন",
+      bagTitle:"আপনার ব্যাগ", bagEmpty:"ব্যাগ এখন খালি", removeLbl:"সরান", totLbl:"মোট",
+      lblHow:"কীভাবে নেবেন?", modeShop:"দোকান থেকে নেব", modeCourier:"কুরিয়ারে পাঠান",
+      lblGName:"আপনার নাম", lblGPhone:"মোবাইল নম্বর", lblGAddr:"সম্পূর্ণ ঠিকানা (কুরিয়ারের জন্য)",
+      phAddr:"বাড়ি/ফ্ল্যাট, রাস্তা, এলাকা, শহর, পিন কোড",
+      courierNote:"কুরিয়ার খরচ আলাদা করে যোগ হবে, যা সত্যিই লাগে ঠিক তাই, বাড়তি কিছু নয়। তরুণ WhatsApp-এ জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানাবেন। পুরো টাকা UPI-তে পাওয়ার পরেই পার্সেল পাঠানো হবে।",
+      sendOrder:"WhatsApp-এ অর্ডার পাঠান", needName:"নাম লিখুন।", needPhone:"১০ সংখ্যার মোবাইল নম্বর লিখুন।",
+      needAddr:"কুরিয়ারের জন্য সম্পূর্ণ ঠিকানা লিখুন।", sizeIs:"সাইজ",
+      upiTtl:"UPI-তে টাকা পাঠান", upiPay:"UPI-তে ₹{a} পাঠান", upiPayAny:"UPI অ্যাপ খুলুন",
+      upiCopy:"UPI ID কপি করুন", upiCopied:"কপি হয়েছে ✓",
+      lblPay:"কীভাবে দেবেন?", payUpi:"এখনই UPI-তে", payLater:"জিনিস পাওয়ার সময়",
+      paidLbl:"আমি টাকা পাঠিয়েছি, স্ক্রিনশটও পাঠাব",
+      shotHint:"অর্ডার পাঠানোর পর, একই WhatsApp চ্যাটে পেমেন্টের স্ক্রিনশট দিন।",
+      upiNoteShop:"আগে নিচে থেকে অর্ডার পাঠান, তারপর চাইলে UPI-তে টাকা দিন, বা দোকান থেকে নেওয়ার সময় দিন।",
+      upiNoteCourier:"আগে নিচে থেকে অর্ডার পাঠান। কুরিয়ার খরচ এখনও যোগ হয়নি। তরুণ WhatsApp-এ মোট টাকা জানাবেন, তখন পাঠাবেন।"
+    },
+    pa: {
+      sub:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ · ਸੈਕਟਰ 108", chooseLang:"ਭਾਸ਼ਾ ਚੁਣੋ",
+      since:"{y} ਸਾਲ ਤੋਂ ਇਸੇ ਥਾਂ", openNow:"ਦੁਕਾਨ ਖੁੱਲ੍ਹੀ ਹੈ", closedNow:"ਦੁਕਾਨ ਬੰਦ ਹੈ",
+      hours:"{a} ਤੋਂ {b}", opensAt:"{t} ਵਜੇ ਖੁੱਲ੍ਹੇਗੀ",
+      quote:"ਛੂਹ ਕੇ ਵੇਖੋ, ਪਾ ਕੇ ਵੇਖੋ, ਫਿਰ ਲਓ।",
+      ttlVisit:"ਦੁਕਾਨ 'ਤੇ ਆਓ", btnMap:"ਨਕਸ਼ੇ 'ਤੇ ਵੇਖੋ", btnCall:"ਕਾਲ ਕਰੋ",
+      ttlRack:"ਦੁਕਾਨ ਵਿੱਚ ਕੀ ਹੈ", allCat:"ਸਭ",
+      rackHint:"ਸਾਈਜ਼ ਚੁਣੋ, ਬੈਗ ਵਿੱਚ ਪਾਓ ਤੇ WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ। ਦੁਕਾਨ ਤੋਂ ਲਵੋ, ਜਾਂ ਕੋਰੀਅਰ ਰਾਹੀਂ ਮੰਗਵਾਓ।",
+      sizesLbl:"ਸਾਈਜ਼",
+      careTtl:"ਧੁਆਈ ਦਾ ਧਿਆਨ ਰੱਖੋ",
+      careTxt:"ਹਰ ਕੱਪੜੇ ਉੱਤੇ ਧੁਆਈ ਦਾ ਲੇਬਲ ਲੱਗਾ ਹੈ, ਉਸੇ ਮੁਤਾਬਕ ਧੋਵੋ। ਪਹਿਲੀ ਵਾਰ ਵੱਖਰਾ, ਠੰਢੇ ਪਾਣੀ ਵਿੱਚ, ਪੁੱਠਾ ਕਰਕੇ ਧੋਵੋ। ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲ ਜਾਵੇ ਜਾਂ ਕੱਪੜਾ ਖਰਾਬ ਹੋਵੇ, ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ ਹੋਵੇਗੀ।",
+      careShort:"ਲੇਬਲ ਮੁਤਾਬਕ ਧੋਵੋ। ਉਸ ਤਰ੍ਹਾਂ ਨਾ ਧੋਣ ਕਰਕੇ ਰੰਗ ਨਿਕਲੇ ਤਾਂ ਦੁਕਾਨ ਜ਼ਿੰਮੇਵਾਰ ਨਹੀਂ।",
+      retTtl:"ਬਦਲੀ ਤੇ ਵਾਪਸੀ",
+      ret:["ਸਾਈਜ਼ ਠੀਕ ਨਾ ਬੈਠੇ ਤਾਂ 7 ਦਿਨਾਂ ਵਿੱਚ ਬਦਲ ਸਕਦੇ ਹੋ।","ਕੱਪੜਾ ਪਾਇਆ ਜਾਂ ਧੋਇਆ ਨਾ ਹੋਵੇ, ਟੈਗ ਲੱਗਾ ਹੋਵੇ, ਬਿੱਲ ਨਾਲ ਹੋਵੇ।","ਸਫ਼ਾਈ ਕਰਕੇ ਅੰਡਰਗਾਰਮੈਂਟਸ ਨਹੀਂ ਬਦਲੇ ਜਾਂਦੇ।","ਸੇਲ ਦੇ ਸਮਾਨ ਉੱਤੇ ਸਿਰਫ਼ ਬਦਲੀ, ਪੈਸੇ ਵਾਪਸ ਨਹੀਂ।","ਕੋਰੀਅਰ ਨਾਲ ਮੰਗਵਾਇਆ ਹੋਵੇ ਤਾਂ ਵਾਪਸੀ ਦਾ ਖਰਚ ਤੁਹਾਡਾ। ਸਾਡੀ ਗਲਤੀ ਹੋਵੇ ਤਾਂ ਸਾਡਾ।","ਲੇਬਲ ਮੁਤਾਬਕ ਨਾ ਧੋਣ ਦਾ ਨੁਕਸਾਨ ਇਸ ਵਿੱਚ ਨਹੀਂ ਆਉਂਦਾ।"], ask:"WhatsApp 'ਤੇ ਪੁੱਛੋ", from:"ਤੋਂ",
+      slot:"ਫੋਟੋ ਇੱਥੇ ਆਵੇਗੀ", slotHelp:"ਇਸ ਨਾਮ ਨਾਲ ਫੋਟੋ ਪਾਓ:",
+      foot:"ਗੁਰੂ ਆਸ਼ੀਸ਼ ਗਾਰਮੈਂਟਸ · ਧਰਮਪੁਰ ਮੇਨ ਰੋਡ, ਸੈਕਟਰ 108",
+      cross:"ਸਬਜ਼ੀ ਆਰਡਰ ਕਰੋ", backVeg:"ਸਬਜ਼ੀ ਦੀ ਦੁਕਾਨ 'ਤੇ ਵਾਪਸ",
+      newCat:"ਨਵਾਂ ਆਇਆ ਹੈ", newTag:"ਨਵਾਂ", newNone:"ਹਾਲੇ ਕੁਝ ਨਵਾਂ ਨਹੀਂ ਆਇਆ।",
+      bagAdd:"ਬੈਗ ਵਿੱਚ ਪਾਓ", bagAdded:"ਪਾ ਦਿੱਤਾ ✓", pickSize:"ਪਹਿਲਾਂ ਸਾਈਜ਼ ਚੁਣੋ", pickColor:"ਰੰਗ ਚੁਣੋ",
+      colorsLbl:"ਰੰਗ", qtyLbl:"ਕਿੰਨੇ", soldOut:"ਹੁਣ ਸਟਾਕ ਵਿੱਚ ਨਹੀਂ", onlyLeft:"ਸਿਰਫ਼ {n} ਬਚੇ ਹਨ", askMore:"ਇਸ ਬਾਰੇ ਪੁੱਛੋ",
+      bagOne:"ਬੈਗ ਵਿੱਚ 1 ਚੀਜ਼", bagMany:"ਬੈਗ ਵਿੱਚ {n} ਚੀਜ਼ਾਂ", bagHint:"ਕੁੱਲ ₹{t}", bagView:"ਬੈਗ ਵੇਖੋ",
+      bagTitle:"ਤੁਹਾਡਾ ਬੈਗ", bagEmpty:"ਬੈਗ ਹਾਲੇ ਖਾਲੀ ਹੈ", removeLbl:"ਹਟਾਓ", totLbl:"ਕੁੱਲ",
+      lblHow:"ਕਿਵੇਂ ਲਵੋਗੇ?", modeShop:"ਦੁਕਾਨ ਤੋਂ ਲੈ ਲਵਾਂਗਾ", modeCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ ਭੇਜੋ",
+      lblGName:"ਤੁਹਾਡਾ ਨਾਮ", lblGPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblGAddr:"ਪੂਰਾ ਪਤਾ (ਕੋਰੀਅਰ ਲਈ)",
+      phAddr:"ਘਰ/ਫਲੈਟ, ਗਲੀ, ਇਲਾਕਾ, ਸ਼ਹਿਰ, ਪਿਨ ਕੋਡ",
+      courierNote:"ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਵੱਖਰਾ ਜੁੜੇਗਾ, ਜਿੰਨਾ ਅਸਲ ਵਿੱਚ ਲੱਗੇਗਾ ਓਨਾ ਹੀ, ਉੱਤੋਂ ਕੁਝ ਨਹੀਂ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ। ਪੂਰੇ ਪੈਸੇ UPI ਨਾਲ ਆਉਣ ਉੱਤੇ ਹੀ ਸਮਾਨ ਭੇਜਿਆ ਜਾਵੇਗਾ।",
+      sendOrder:"WhatsApp ਉੱਤੇ ਆਰਡਰ ਭੇਜੋ", needName:"ਨਾਮ ਲਿਖੋ।", needPhone:"10 ਅੰਕਾਂ ਦਾ ਮੋਬਾਈਲ ਨੰਬਰ ਲਿਖੋ।",
+      needAddr:"ਕੋਰੀਅਰ ਲਈ ਪੂਰਾ ਪਤਾ ਲਿਖੋ।", sizeIs:"ਸਾਈਜ਼",
+      upiTtl:"UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ", upiPay:"UPI ਨਾਲ ₹{a} ਭੇਜੋ", upiPayAny:"UPI ਐਪ ਖੋਲ੍ਹੋ",
+      upiCopy:"UPI ID ਕਾਪੀ ਕਰੋ", upiCopied:"ਕਾਪੀ ਹੋ ਗਿਆ ✓",
+      lblPay:"ਪੈਸੇ ਕਿਵੇਂ ਦਿਓਗੇ?", payUpi:"ਹੁਣੇ UPI ਨਾਲ", payLater:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ",
+      paidLbl:"ਮੈਂ ਪੈਸੇ ਭੇਜ ਦਿੱਤੇ ਹਨ, ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਭੇਜਾਂਗਾ",
+      shotHint:"ਆਰਡਰ ਭੇਜਣ ਤੋਂ ਬਾਅਦ, ਉਸੇ WhatsApp ਚੈਟ ਵਿੱਚ ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਵੀ ਪਾ ਦਿਓ।",
+      upiNoteShop:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ, ਫਿਰ ਚਾਹੋ ਤਾਂ UPI ਨਾਲ ਪੈਸੇ ਭੇਜੋ, ਜਾਂ ਦੁਕਾਨ ਤੋਂ ਸਮਾਨ ਲੈਂਦੇ ਵੇਲੇ ਦਿਓ।",
+      upiNoteCourier:"ਪਹਿਲਾਂ ਹੇਠਾਂ ਤੋਂ ਆਰਡਰ ਭੇਜੋ। ਕੋਰੀਅਰ ਦਾ ਖਰਚ ਹਾਲੇ ਨਹੀਂ ਜੁੜਿਆ। ਤਰੁਣ WhatsApp ਉੱਤੇ ਕੁੱਲ ਰਕਮ ਦੱਸਣਗੇ, ਫਿਰ ਭੇਜਿਓ।"
+    },
+    te: {
+      sub:"బట్టల దుకాణం · సెక్టర్ 108", chooseLang:"భాష ఎంచుకోండి",
+      since:"{y} ఏళ్లుగా ఇదే చోట", openNow:"దుకాణం తెరిచి ఉంది", closedNow:"దుకాణం మూసి ఉంది",
+      hours:"{a} నుంచి {b}", opensAt:"{t}కి తెరుస్తారు",
+      quote:"ముట్టుకుని చూడండి, వేసుకుని చూడండి, ఆ తర్వాత తీసుకోండి.",
+      ttlVisit:"దుకాణానికి రండి", btnMap:"మ్యాప్‌లో చూడండి", btnCall:"కాల్ చేయండి",
+      ttlRack:"దుకాణంలో ఏమి ఉంది", allCat:"అన్నీ",
+      rackHint:"సైజు ఎంచుకుని, బ్యాగ్‌లో వేసి WhatsAppలో ఆర్డర్ పంపండి. దుకాణం నుంచి తీసుకోండి, లేదా కొరియర్‌లో తెప్పించుకోండి.",
+      sizesLbl:"సైజులు",
+      careTtl:"ఉతికే విధానం పాటించండి",
+      careTxt:"ప్రతి బట్టపై ఉతికే లేబుల్ ఉంటుంది, దాని ప్రకారమే ఉతకండి. మొదటిసారి విడిగా, చల్లని నీటిలో, లోపలివైపు తిప్పి ఉతకండి. లేబుల్ ప్రకారం ఉతకకపోవడం వల్ల రంగు పోయినా, బట్ట పాడైనా దుకాణం బాధ్యత వహించదు.",
+      careShort:"లేబుల్ ప్రకారం ఉతకండి. అలా ఉతకకపోవడం వల్ల రంగు పోతే దుకాణం బాధ్యత వహించదు.",
+      retTtl:"మార్పిడి, వాపసు",
+      ret:["సైజు సరిపోకపోతే 7 రోజుల్లో మార్చుకోవచ్చు.","వేసుకోకుండా, ఉతకకుండా, ట్యాగ్‌తో, బిల్లుతో తీసుకురండి.","పరిశుభ్రత కారణంగా లోదుస్తులు మార్చబడవు.","సేల్ వస్తువులు: మార్పిడి మాత్రమే, డబ్బు వాపసు లేదు.","కొరియర్‌లో తెప్పించుకుంటే వాపసు ఖర్చు మీది. మా తప్పు అయితే మాది.","లేబుల్ పాటించకపోవడం వల్ల జరిగిన నష్టం ఇందులో రాదు."], ask:"WhatsAppలో అడగండి", from:"నుంచి",
+      slot:"ఫోటో ఇక్కడ వస్తుంది", slotHelp:"ఈ పేరుతో ఫోటో పెట్టండి:",
+      foot:"గురు ఆశీష్ గార్మెంట్స్ · ధరంపుర్ మెయిన్ రోడ్, సెక్టర్ 108",
+      cross:"కూరగాయలు ఆర్డర్ చేయండి", backVeg:"కూరగాయల దుకాణానికి తిరిగి",
+      newCat:"కొత్తగా వచ్చినవి", newTag:"కొత్త", newNone:"ఇప్పుడే కొత్తగా ఏమీ రాలేదు.",
+      bagAdd:"బ్యాగ్‌లో వేయండి", bagAdded:"వేశాం ✓", pickSize:"ముందు సైజు ఎంచుకోండి", pickColor:"రంగు ఎంచుకోండి",
+      colorsLbl:"రంగులు", qtyLbl:"ఎన్ని", soldOut:"ఇప్పుడు స్టాక్‌లో లేదు", onlyLeft:"కేవలం {n} మిగిలాయి", askMore:"దీని గురించి అడగండి",
+      bagOne:"బ్యాగ్‌లో 1 వస్తువు", bagMany:"బ్యాగ్‌లో {n} వస్తువులు", bagHint:"మొత్తం ₹{t}", bagView:"బ్యాగ్ చూడండి",
+      bagTitle:"మీ బ్యాగ్", bagEmpty:"బ్యాగ్ ఖాళీగా ఉంది", removeLbl:"తీసివేయండి", totLbl:"మొత్తం",
+      lblHow:"ఎలా తీసుకుంటారు?", modeShop:"దుకాణం నుంచి తీసుకుంటాను", modeCourier:"కొరియర్‌లో పంపండి",
+      lblGName:"మీ పేరు", lblGPhone:"మొబైల్ నంబర్", lblGAddr:"పూర్తి చిరునామా (కొరియర్ కోసం)",
+      phAddr:"ఇల్లు/ఫ్లాట్, వీధి, ప్రాంతం, నగరం, పిన్ కోడ్",
+      courierNote:"కొరియర్ ఖర్చు విడిగా కలుస్తుంది, నిజంగా ఎంత అవుతుందో అంతే, పైన ఏమీ లేదు. వస్తువులు, కొరియర్ కలిపి మొత్తం ఎంతో తరుణ్ WhatsAppలో చెబుతారు. పూర్తి డబ్బు UPI ద్వారా అందిన తర్వాతే పార్సెల్ పంపబడుతుంది.",
+      sendOrder:"WhatsAppలో ఆర్డర్ పంపండి", needName:"పేరు రాయండి.", needPhone:"10 అంకెల మొబైల్ నంబర్ రాయండి.",
+      needAddr:"కొరియర్ కోసం పూర్తి చిరునామా రాయండి.", sizeIs:"సైజు",
+      upiTtl:"UPI ద్వారా చెల్లించండి", upiPay:"UPI ద్వారా ₹{a} చెల్లించండి", upiPayAny:"UPI యాప్ తెరవండి",
+      upiCopy:"UPI ID కాపీ చేయండి", upiCopied:"కాపీ అయ్యింది ✓",
+      lblPay:"ఎలా చెల్లిస్తారు?", payUpi:"ఇప్పుడే UPI ద్వారా", payLater:"వస్తువు అందినప్పుడు",
+      paidLbl:"నేను డబ్బు పంపాను, స్క్రీన్‌షాట్ కూడా పంపుతాను",
+      shotHint:"ఆర్డర్ పంపిన తర్వాత, అదే WhatsApp చాట్‌లో చెల్లింపు స్క్రీన్‌షాట్ పెట్టండి.",
+      upiNoteShop:"ముందు కింద నుంచి ఆర్డర్ పంపండి, తర్వాత కావాలంటే UPI ద్వారా చెల్లించండి, లేదా దుకాణంలో తీసుకునేటప్పుడు ఇవ్వండి.",
+      upiNoteCourier:"ముందు కింద నుంచి ఆర్డర్ పంపండి. కొరియర్ ఖర్చు ఇంకా కలపలేదు. తరుణ్ WhatsAppలో మొత్తం చెబుతారు, అప్పుడు పంపండి."
+    }
+  };
+
+  /* Labels for the WhatsApp order. Item names stay English inside the message
+     so Tarun can read an order quickly whatever language the customer used. */
+  var GMSG = {
+    hi: { order:"ऑर्डर", size:"साइज़", total:"कुल", name:"नाम", phone:"फ़ोन",
+          how:"कैसे चाहिए", atShop:"दुकान से खुद ले लूँगा/लूँगी", byCourier:"कूरियर से भेजिए", addr:"पता",
+          pay:"पैसे", paidUpi:"UPI से भेज दिए", willUpi:"UPI से भेज रहा/रही हूँ",
+          onDeliv:"सामान मिलने पर दूँगा/दूँगी",
+          courierPay:"सामान और कूरियर की कुल रकम बताइए, एडवांस UPI से भेज दूँगा/दूँगी", shot:"पेमेंट का स्क्रीनशॉट इसी चैट में भेज रहा/रही हूँ" },
+    en: { order:"Order", size:"Size", total:"Total", name:"Name", phone:"Phone",
+          how:"Collection", atShop:"Will collect from shop", byCourier:"Send by courier", addr:"Address",
+          pay:"Payment", paidUpi:"Sent by UPI", willUpi:"Sending by UPI",
+          onDeliv:"Will pay on receiving",
+          courierPay:"Tell me the total for goods plus courier, and I will send it by UPI in advance", shot:"Sending the payment screenshot in this chat" },
+    bn: { order:"অর্ডার", size:"সাইজ", total:"মোট", name:"নাম", phone:"ফোন",
+          how:"কীভাবে", atShop:"দোকান থেকে নেব", byCourier:"কুরিয়ারে পাঠান", addr:"ঠিকানা",
+          pay:"টাকা", paidUpi:"UPI-তে পাঠিয়েছি", willUpi:"UPI-তে পাঠাচ্ছি",
+          onDeliv:"জিনিস পাওয়ার সময় দেব",
+          courierPay:"জিনিস ও কুরিয়ার মিলিয়ে মোট টাকা জানান, অগ্রিম UPI-তে পাঠিয়ে দেব", shot:"পেমেন্টের স্ক্রিনশট এই চ্যাটে পাঠাচ্ছি" },
+    pa: { order:"ਆਰਡਰ", size:"ਸਾਈਜ਼", total:"ਕੁੱਲ", name:"ਨਾਮ", phone:"ਫ਼ੋਨ",
+          how:"ਕਿਵੇਂ", atShop:"ਦੁਕਾਨ ਤੋਂ ਲਵਾਂਗਾ", byCourier:"ਕੋਰੀਅਰ ਰਾਹੀਂ", addr:"ਪਤਾ",
+          pay:"ਪੈਸੇ", paidUpi:"UPI ਨਾਲ ਭੇਜ ਦਿੱਤੇ", willUpi:"UPI ਨਾਲ ਭੇਜ ਰਿਹਾ ਹਾਂ",
+          onDeliv:"ਸਮਾਨ ਮਿਲਣ ਉੱਤੇ ਦਿਆਂਗਾ",
+          courierPay:"ਸਮਾਨ ਤੇ ਕੋਰੀਅਰ ਦੀ ਕੁੱਲ ਰਕਮ ਦੱਸੋ, ਐਡਵਾਂਸ UPI ਨਾਲ ਭੇਜ ਦਿਆਂਗਾ", shot:"ਪੇਮੈਂਟ ਦਾ ਸਕਰੀਨਸ਼ਾਟ ਇਸੇ ਚੈਟ ਵਿੱਚ ਭੇਜ ਰਿਹਾ ਹਾਂ" },
+    te: { order:"ఆర్డర్", size:"సైజు", total:"మొత్తం", name:"పేరు", phone:"ఫోన్",
+          how:"ఎలా", atShop:"దుకాణం నుంచి తీసుకుంటాను", byCourier:"కొరియర్‌లో పంపండి", addr:"చిరునామా",
+          pay:"చెల్లింపు", paidUpi:"UPI ద్వారా పంపాను", willUpi:"UPI ద్వారా పంపుతున్నాను",
+          onDeliv:"వస్తువు అందినప్పుడు ఇస్తాను",
+          courierPay:"వస్తువులు, కొరియర్ కలిపి మొత్తం చెప్పండి, ముందుగానే UPI ద్వారా పంపుతాను", shot:"చెల్లింపు స్క్రీన్‌షాట్ ఈ చాట్‌లో పంపుతున్నాను" }
+  };
+
+  var LANG_KEY = 'gavs.lang.v1';   /* shared with the vegetable page */
+  var shop = DATA.shop;
+  var items = DATA.items || [];
+  var NEW_DAYS = 30;          /* how long a 'नया' label lives */
+  var lang = load(LANG_KEY, null);
+  if (typeof lang !== 'string' || !T[lang]) lang = 'hi';
+  var t = T[lang];
+  var activeCat = 'all';
+
+  /* Per-card selection lives here, not in the DOM, so a re-render (language
+     switch, category tab) doesn't silently lose what the customer picked. */
+  var picked = {};              /* id -> { size, color, qty } */
+
+  var BAG_KEY = 'gavs.bag.v1';
+  var GINFO_KEY = 'gavs.ginfo.v1';
+  var bag = load(BAG_KEY, []);  /* [{ id, size, color, qty }] */
+  var mode = 'shop';            /* 'shop' | 'courier' */
+  var payWay = 'later';         /* 'upi' | 'later' */
+
+  var el = {};
+  ['langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerSince',
+   'statusPill','statusTxt','ownerQuote','ttlVisit','addrTxt','metaRow','mapLink','btnMap',
+   'callLink','btnCall','ttlRack','rackHint','tabs','rack','footTxt','crossTxt','backTxt',
+   'careTtl','careTxt','careShort','retTtl','retList',
+   'bagbar','bagCount','bagHint','bagOpen','bagOpenTxt','scrim','sheet','sheetTitle','sheetClose',
+   'bagLines','lblHow','modeShop','modeCourier','lblGName','gName','errGName',
+   'lblGPhone','gPhone','errGPhone','addrWrap','lblGAddr','gAddr','errGAddr',
+   'courierNote','totLbl','bagTotal','bagSend','bagSendTxt',
+   'upiBox','upiTtl','upiIdTxt','upiCopy','upiPayBtn','upiNote',
+   'payChoice','lblPay','payUpi','payLater','paidRow','paidChk','paidLbl','shotHint'
+  ].forEach(function (id) { el[id] = document.getElementById(id); });
+
+  buildLangMenu();
+  applyLang();
+  setInterval(paintStatus, 60000);
+
+  /* ============================ language ================================= */
+  function buildLangMenu() {
+    LANGS.forEach(function (L) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.setAttribute('role', 'menuitemradio'); b.dataset.code = L.code;
+      b.innerHTML = '<span>' + L.label + '</span><span class="tick"></span>';
+      b.addEventListener('click', function () { setLang(L.code); closeLangMenu(); });
+      el.langMenu.appendChild(b);
+    });
+    el.langBtn.addEventListener('click', function () {
+      if (el.langMenu.hidden) { el.langMenu.hidden = false; el.langBtn.setAttribute('aria-expanded', 'true'); }
+      else closeLangMenu();
+    });
+    document.addEventListener('click', function (e) {
+      if (!el.langMenu.hidden && !e.target.closest('.lang')) closeLangMenu();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !el.langMenu.hidden) closeLangMenu();
+    });
+  }
+  function closeLangMenu() { el.langMenu.hidden = true; el.langBtn.setAttribute('aria-expanded', 'false'); }
+  function setLang(code) {
+    if (!T[code]) return;
+    lang = code; t = T[code]; save(LANG_KEY, code);
+    applyLang();
+  }
+  function loadFont(name) {
+    if (!name) return;
+    var href = 'https://fonts.googleapis.com/css2?family=' + name + ':wght@400;500;600;700;800&display=swap';
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href;
+    document.head.appendChild(l);
+  }
+
+  function applyLang() {
+    var L = LANGS.filter(function (x) { return x.code === lang; })[0];
+    loadFont(L.font);
+    document.documentElement.lang = lang;
+    el.langCur.textContent = L.short;
+    el.langBtn.setAttribute('aria-label', t.chooseLang);
+    Array.prototype.forEach.call(el.langMenu.children, function (b) {
+      var on = b.dataset.code === lang;
+      b.setAttribute('aria-checked', on ? 'true' : 'false');
+      b.querySelector('.tick').textContent = on ? '✓' : '';
+    });
+
+    el.shopName.textContent = lang === 'en' ? shop.nameEn : shop.name;
+    el.shopSub.textContent = t.sub;
+    document.title = lang === 'en' ? shop.nameEn : shop.name;
+
+    el.ownerName.textContent = lang === 'en' ? shop.ownerNameEn : shop.ownerName;
+    el.ownerSince.textContent = fill(t.since, { y: shop.sinceYears });
+    el.ownerAvatar.innerHTML = shop.ownerPhoto
+      ? '<img src="' + shop.ownerPhoto + '" alt="">'
+      : (lang === 'en' ? shop.ownerNameEn : shop.ownerName).charAt(0);
+    el.ownerQuote.innerHTML = t.quote;
+
+    el.ttlVisit.textContent = t.ttlVisit;
+    el.addrTxt.textContent = lang === 'en' ? shop.addressEn : shop.address;
+    el.metaRow.innerHTML =
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-clock"></use></svg>' +
+        esc(fill(t.hours, { a: pretty(shop.openTime), b: pretty(shop.closeTime) })) + '</span>' +
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-star"></use></svg>' +
+        esc(fill(t.since, { y: shop.sinceYears })) + '</span>' +
+      '<span class="pill"><svg aria-hidden="true"><use href="#i-ruler"></use></svg>M to XXL</span>';
+    el.mapLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(shop.mapQuery);
+    el.btnMap.textContent = t.btnMap;
+    el.callLink.href = 'tel:+91' + shop.phone1;
+    el.btnCall.textContent = t.btnCall + ' · ' + shop.phone1;
+
+    el.ttlRack.textContent = t.ttlRack;
+    el.rackHint.textContent = t.rackHint;
+    el.footTxt.textContent = t.foot + ' · ' + shop.phone1 + ' / ' + shop.phone2;
+    el.crossTxt.textContent = t.cross;
+    el.backTxt.textContent = t.backVeg;
+    el.careTtl.textContent = t.careTtl;
+    el.careTxt.textContent = t.careTxt;
+    el.careShort.textContent = t.careShort;
+    el.retTtl.textContent = t.retTtl;
+    el.retList.innerHTML = '';
+    (t.ret || []).forEach(function (line) {
+      var li = document.createElement('li');
+      li.textContent = line;
+      el.retList.appendChild(li);
+    });
+
+    paintStatus();
+    renderTabs();
+    renderRack();
+    paintBagChrome();
+    paintBag();
+  }
+
+  /* Static labels inside the bag sheet, separate from paintBag(), which is
+     about contents and runs on every add and remove. */
+  function paintBagChrome() {
+    el.sheetTitle.textContent = t.bagTitle;
+    el.lblHow.textContent = t.lblHow;
+    el.modeShop.textContent = t.modeShop;
+    el.modeCourier.textContent = t.modeCourier;
+    el.lblGName.textContent = t.lblGName;
+    el.lblGPhone.textContent = t.lblGPhone;
+    el.lblGAddr.textContent = t.lblGAddr;
+    el.gAddr.placeholder = t.phAddr;
+    el.courierNote.textContent = t.courierNote;
+    el.totLbl.textContent = t.totLbl;
+    el.bagSendTxt.textContent = t.sendOrder;
+    el.bagOpenTxt.textContent = t.bagView;
+    el.lblPay.textContent = t.lblPay;
+    el.payUpi.textContent = t.payUpi;
+    el.payLater.textContent = t.payLater;
+    el.paidLbl.textContent = t.paidLbl;
+  }
+
+  /* ============================ open / closed ============================ */
+  function mins(hhmm) {
+    var p = String(hhmm || '').split(':');
+    return (parseInt(p[0], 10) || 0) * 60 + (parseInt(p[1], 10) || 0);
+  }
+  function isOpen() {
+    var now = new Date(), m = now.getHours() * 60 + now.getMinutes();
+    return m >= mins(shop.openTime) && m <= mins(shop.closeTime);
+  }
+  function pretty(hhmm) {
+    var p = String(hhmm || '').split(':'), h = parseInt(p[0], 10) || 0, mm = p[1] || '00';
+    var ap = h >= 12 ? 'PM' : 'AM', h12 = h % 12 === 0 ? 12 : h % 12;
+    return h12 + ':' + mm + ' ' + ap;
+  }
+  function paintStatus() {
+    var open = isOpen();
+    el.statusPill.classList.toggle('shut', !open);
+    el.statusTxt.textContent = open
+      ? t.openNow + ' · ' + fill(t.hours, { a: pretty(shop.openTime), b: pretty(shop.closeTime) })
+      : t.closedNow + ' · ' + fill(t.opensAt, { t: pretty(shop.openTime) });
+  }
+
+  /* ============================== catalogue ==============================
+     What is new. Tarun marks an item in the admin and it stamps the date;
+     the label lives for thirty days and then lets go by itself, because a
+     kurta still flagged new in March is worse than no flag at all.
+
+     NEW_DAYS is declared up with the other state, not here: the first render
+     happens before this line would run, and a hoisted `var` is undefined at
+     that point, which quietly made every comparison false. */
+  function isNew(it) {
+    if (!it.newSince) return false;
+    var d = new Date(it.newSince + 'T00:00:00');
+    if (isNaN(d.getTime())) return false;
+    return (Date.now() - d.getTime()) / 86400000 <= NEW_DAYS;
+  }
+  function anyNew() { return items.some(isNew); }
+
+  function renderTabs() {
+    var cats = DATA.categories || [];
+    el.tabs.innerHTML = '';
+    if (cats.length < 2 && !anyNew()) { el.tabs.hidden = true; return; }
+    el.tabs.hidden = false;
+    /* new first: it is the reason a regular customer opens the page again */
+    (anyNew() ? [{ id:'new', label:t.newCat }] : [])
+      .concat([{ id:'all', label:t.allCat }])
+      .concat(cats.map(function (c) {
+      return { id: c.id, label: c[lang] || c.en };
+    })).forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', c.id === activeCat ? 'true' : 'false');
+      b.textContent = c.label;
+      b.addEventListener('click', function () { activeCat = c.id; renderTabs(); renderRack(); });
+      el.tabs.appendChild(b);
+    });
+  }
+
+  function pickOf(it) {
+    if (!picked[it.id]) {
+      var sizes = it.sizes || [];
+      picked[it.id] = {
+        size: sizes.length === 1 ? sizes[0] : '',
+        color: (it.colors || []).length === 1 ? it.colors[0] : '',
+        qty: 1
+      };
+    }
+    return picked[it.id];
+  }
+
+  function renderRack() {
+    el.rack.innerHTML = '';
+    items.filter(function (it) {
+      if (activeCat === 'new') return isNew(it);
+      return activeCat === 'all' || it.cat === activeCat;
+    }).forEach(function (it) { el.rack.appendChild(card(it)); });
+  }
+
+  /* Stock is a number Tarun keeps by hand. Zero means he has said there are
+     none, which is a stronger statement than never having counted, so only
+     an explicit zero closes the item. */
+  function soldOut(it) {
+    return it.available === false || (it.stock !== undefined && Number(it.stock) === 0 && it._counted);
+  }
+
+  function card(it) {
+    var out = it.available === false || Number(it.stock) < 0;
+    var sel = pickOf(it);
+
+    var art = document.createElement('article');
+    art.className = 'item' + (out ? ' out' : '');
+
+    var shot = document.createElement('div');
+    shot.className = 'shot';
+    if (it.photo) {
+      var im = document.createElement('img');
+      im.src = it.photo; im.alt = name(it); im.loading = 'lazy'; im.decoding = 'async';
+      shot.appendChild(im);
+    } else {
+      shot.innerHTML = '<div class="slot"><svg aria-hidden="true"><use href="#i-hanger"></use></svg>' +
+                       '<b>' + esc(name(it)) + '</b></div>';
+    }
+    if (isNew(it)) {
+      var tag = document.createElement('span');
+      tag.className = 'newtag'; tag.textContent = t.newTag;
+      shot.appendChild(tag);
+    }
+    art.appendChild(shot);
+
+    var body = document.createElement('div');
+    body.className = 'item-body';
+
+    var head = document.createElement('div');
+    head.innerHTML = '<div class="item-nm">' + esc(name(it)) + '</div>' +
+      (lang === 'en' ? '' : '<div class="item-en">' + esc(it.en || '') + '</div>');
+    body.appendChild(head);
+
+    var pr = document.createElement('div');
+    pr.className = 'item-pr';
+    /* "से" means "from ₹350", a starting price. Put a struck-through old
+       price after it and it reads as a range, ₹350 to ₹450, which is the
+       opposite of a discount. So it is one or the other, never both. */
+    var cut = it.mrp && Number(it.mrp) > Number(it.price);
+    pr.innerHTML = '₹' + it.price +
+      (cut ? '<span class="mrp">₹' + it.mrp + '</span>'
+           : ' <small>' + esc(t.from) + '</small>');
+    body.appendChild(pr);
+
+    var left = Number(it.stock) || 0;
+    if (!out && left > 0 && left <= 3) {
+      var lw = document.createElement('div');
+      lw.className = 'lowstock';
+      lw.textContent = fill(t.onlyLeft, { n: left });
+      body.appendChild(lw);
+    }
+
+    if (it.fabric) {
+      var fab = document.createElement('div');
+      fab.innerHTML = '<span class="item-fab">' + esc(it.fabric) + '</span>';
+      body.appendChild(fab);
+    }
+    if (it.note) {
+      var nt = document.createElement('p');
+      nt.className = 'item-note'; nt.textContent = it.note;
+      body.appendChild(nt);
+    }
+
+    /* sizes */
+    var sizes = it.sizes || [];
+    if (sizes.length) {
+      var sr = document.createElement('div');
+      sr.className = 'sizes';
+      sr.innerHTML = '<span class="lbl">' + esc(t.sizesLbl) + '</span>';
+      sizes.forEach(function (sz) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'sz';
+        b.setAttribute('aria-pressed', String(sel.size === sz));
+        b.textContent = sz;
+        b.disabled = out;
+        b.addEventListener('click', function () { sel.size = (sel.size === sz ? '' : sz); refresh(it, art); });
+        sr.appendChild(b);
+      });
+      body.appendChild(sr);
+    }
+
+    /* colours */
+    var colors = it.colors || [];
+    if (colors.length) {
+      var cr = document.createElement('div');
+      cr.className = 'colors';
+      cr.innerHTML = '<span class="lbl">' + esc(t.colorsLbl) + '</span>';
+      colors.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button'; b.className = 'colr';
+        b.setAttribute('aria-pressed', String(sel.color === c));
+        b.textContent = c;
+        b.disabled = out;
+        b.addEventListener('click', function () { sel.color = (sel.color === c ? '' : c); refresh(it, art); });
+        cr.appendChild(b);
+      });
+      body.appendChild(cr);
+    }
+
+    var acts = document.createElement('div');
+    acts.className = 'ask';
+
+    if (out) {
+      var ob = document.createElement('span');
+      ob.className = 'outbadge'; ob.textContent = t.soldOut;
+      acts.appendChild(ob);
+    } else {
+      /* quantity */
+      var qr = document.createElement('div');
+      qr.className = 'qtyrow';
+      qr.innerHTML = '<span class="lbl">' + esc(t.qtyLbl) + '</span>';
+      var st = document.createElement('div');
+      st.className = 'stepper';
+      var minus = document.createElement('button');
+      minus.type = 'button'; minus.textContent = '−';
+      minus.setAttribute('aria-label', t.qtyLbl + ' −');
+      minus.addEventListener('click', function () { sel.qty = Math.max(1, sel.qty - 1); refresh(it, art); });
+      var num = document.createElement('span'); num.textContent = sel.qty;
+      var plus = document.createElement('button');
+      plus.type = 'button'; plus.textContent = '+';
+      plus.setAttribute('aria-label', t.qtyLbl + ' +');
+      plus.addEventListener('click', function () { sel.qty = Math.min(20, sel.qty + 1); refresh(it, art); });
+      st.appendChild(minus); st.appendChild(num); st.appendChild(plus);
+      qr.appendChild(st);
+      acts.appendChild(qr);
+
+      var add = document.createElement('button');
+      add.type = 'button'; add.className = 'btn btn-go';
+      add.textContent = sizes.length && !sel.size ? t.pickSize : t.bagAdd;
+      add.addEventListener('click', function () {
+        if (sizes.length && !sel.size) { flashSizes(art); return; }
+        addToBag(it, sel);
+        add.textContent = t.bagAdded;
+        setTimeout(function () { add.textContent = sizes.length && !sel.size ? t.pickSize : t.bagAdd; }, 1400);
+      });
+      acts.appendChild(add);
+    }
+
+    var ask = document.createElement('button');
+    ask.type = 'button'; ask.className = 'asklink';
+    ask.textContent = t.askMore;
+    ask.addEventListener('click', function () { openWA([askLine(it)]); });
+    acts.appendChild(ask);
+
+    body.appendChild(acts);
+    art.appendChild(body);
+    return art;
+  }
+
+  /* Redraw one card in place, cheaper than re-rendering the rack and it
+     keeps the customer's scroll position exactly where it was. */
+  function refresh(it, node) {
+    var fresh = card(it);
+    node.replaceWith(fresh);
+  }
+
+  function flashSizes(node) {
+    var row = node.querySelector('.sizes');
+    if (!row) return;
+    row.scrollIntoView({ block: 'nearest' });
+    row.animate
+      ? row.animate([{ opacity: 1 }, { opacity: .35 }, { opacity: 1 }], { duration: 480, iterations: 2 })
+      : null;
+  }
+
+  /* ================================= bag ================================= */
+  function itemById(id) {
+    for (var i = 0; i < items.length; i++) if (items[i].id === id) return items[i];
+    return null;
+  }
+
+  function addToBag(it, sel) {
+    var same = bag.filter(function (l) {
+      return l.id === it.id && l.size === sel.size && l.color === sel.color;
+    })[0];
+    if (same) same.qty = Math.min(20, same.qty + sel.qty);
+    else bag.push({ id: it.id, size: sel.size, color: sel.color, qty: sel.qty });
+    save(BAG_KEY, bag);
+    paintBag();
+  }
+
+  function bagTotal() {
+    return bag.reduce(function (sum, l) {
+      var it = itemById(l.id);
+      return sum + (it ? Number(it.price) * l.qty : 0);
+    }, 0);
+  }
+  function bagCount() {
+    return bag.reduce(function (n, l) { return n + l.qty; }, 0);
+  }
+
+  function paintBag() {
+    /* drop anything whose item has since been removed from the catalogue */
+    var before = bag.length;
+    bag = bag.filter(function (l) { return itemById(l.id); });
+    if (bag.length !== before) save(BAG_KEY, bag);
+
+    var n = bagCount();
+    el.bagbar.hidden = n === 0;
+    document.body.classList.toggle('hasbag', n > 0);
+    if (n) {
+      el.bagCount.textContent = n === 1 ? t.bagOne : fill(t.bagMany, { n: n });
+      el.bagHint.textContent = fill(t.bagHint, { t: bagTotal() });
+      el.bagOpenTxt.textContent = t.bagView;
+    }
+    paintLines();
+  }
+
+  function paintLines() {
+    el.bagLines.innerHTML = '';
+    if (!bag.length) {
+      var e = document.createElement('p');
+      e.className = 'smallnote'; e.textContent = t.bagEmpty;
+      el.bagLines.appendChild(e);
+      el.bagTotal.textContent = '0';
+      return;
+    }
+    bag.forEach(function (l, i) {
+      var it = itemById(l.id);
+      var row = document.createElement('div');
+      row.className = 'line';
+
+      if (it.photo) {
+        var im = document.createElement('img');
+        im.src = it.photo; im.alt = ''; im.loading = 'lazy';
+        row.appendChild(im);
+      }
+
+      var bits = [];
+      if (l.size) bits.push(t.sizeIs + ' ' + l.size);
+      if (l.color) bits.push(l.color);
+      bits.push('× ' + l.qty);
+
+      var nm = document.createElement('div');
+      nm.className = 'l-nm';
+      nm.innerHTML = '<b>' + esc(name(it)) + '</b><small>' + esc(bits.join(' · ')) + '</small>';
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'rm'; rm.textContent = t.removeLbl;
+      rm.addEventListener('click', function () {
+        bag.splice(i, 1); save(BAG_KEY, bag); paintBag();
+      });
+      nm.appendChild(rm);
+      row.appendChild(nm);
+
+      var pr = document.createElement('div');
+      pr.className = 'l-pr';
+      pr.textContent = '₹' + (Number(it.price) * l.qty);
+      row.appendChild(pr);
+
+      el.bagLines.appendChild(row);
+    });
+    el.bagTotal.textContent = bagTotal();
+    paintUpi();
+  }
+
+  /* Same UPI id as the vegetable page. The amount is pre-filled only when the
+     customer is collecting, because then the bag total is the whole bill. For
+     courier the carriage is not known yet, so pre-filling would name a figure
+     that is about to change. */
+  function setPayWay(w) {
+    payWay = w;
+    el.payUpi.setAttribute('aria-pressed', String(w === 'upi'));
+    el.payLater.setAttribute('aria-pressed', String(w === 'later'));
+    if (w !== 'upi') el.paidChk.checked = false;
+    paintUpi();
+  }
+
+  function paintUpi() {
+    var upi = (shop.upiId || '').trim();
+    el.upiBox.hidden = !upi || !bag.length || payWay !== 'upi';
+    if (el.upiBox.hidden) { el.shotHint.hidden = true; return; }
+
+    el.upiTtl.textContent   = t.upiTtl;
+    el.upiIdTxt.textContent = upi;
+    el.upiCopy.textContent  = t.upiCopy;
+
+    var pay = mode === 'shop' ? bagTotal() : 0;
+    el.upiPayBtn.textContent = pay ? fill(t.upiPay, { a: pay }) : t.upiPayAny;
+    el.upiPayBtn.setAttribute('href', upiLink(pay));
+    el.shotHint.hidden = !el.paidChk.checked;
+    el.shotHint.textContent = t.shotHint;
+    el.upiNote.textContent = mode === 'courier' ? t.upiNoteCourier : t.upiNoteShop;
+  }
+
+  function upiLink(amount) {
+    var q = 'pa=' + encodeURIComponent(shop.upiId) +
+            '&pn=' + encodeURIComponent(shop.upiName || shop.nameEn) +
+            '&cu=INR';
+    if (amount > 0) q += '&am=' + encodeURIComponent(amount);
+    return 'upi://pay?' + q;
+  }
+
+  function openSheet() {
+    paintLines();
+    el.scrim.hidden = false; el.sheet.hidden = false;
+    document.body.style.overflow = 'hidden';
+    el.sheetClose.focus();
+  }
+  function closeSheet() {
+    el.scrim.hidden = true; el.sheet.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function setMode(m) {
+    mode = m;
+    el.modeShop.setAttribute('aria-pressed', String(m === 'shop'));
+    el.modeCourier.setAttribute('aria-pressed', String(m === 'courier'));
+    el.addrWrap.hidden = m !== 'courier';
+    el.courierNote.hidden = m !== 'courier';
+    /* Courier is paid in advance, and the amount is not known until Tarun has
+       weighed the parcel, so there is nothing to choose between yet. The
+       courier note above explains what happens instead. */
+    el.payChoice.hidden = m === 'courier';
+    if (m === 'courier') setPayWayQuiet('later');
+    paintUpi();
+  }
+
+  function setPayWayQuiet(w) {
+    payWay = w;
+    el.payUpi.setAttribute('aria-pressed', String(w === 'upi'));
+    el.payLater.setAttribute('aria-pressed', String(w === 'later'));
+    el.paidChk.checked = false;
+  }
+
+  function need(input, err, ok, msg) {
+    err.hidden = ok; err.textContent = ok ? '' : msg;
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    return ok;
+  }
+
+  function sendOrder() {
+    var nm = el.gName.value.trim();
+    var ph = el.gPhone.value.replace(/\D/g, '');
+    var ad = el.gAddr.value.trim();
+
+    var okN = need(el.gName, el.errGName, !!nm, t.needName);
+    var okP = need(el.gPhone, el.errGPhone, ph.length === 10, t.needPhone);
+    var okA = mode !== 'courier' || need(el.gAddr, el.errGAddr, ad.length >= 12, t.needAddr);
+    if (!okN || !okP || !okA) {
+      (!okN ? el.gName : !okP ? el.gPhone : el.gAddr).focus();
+      return;
+    }
+    if (!bag.length) return;
+
+    try { save(GINFO_KEY, { name: nm, phone: ph, addr: ad, mode: mode }); } catch (e) {}
+
+    var m = GMSG[lang] || GMSG.hi;
+    var lines = ['*' + DATA.shop.nameEn + ' · ' + m.order + '*', ''];
+    bag.forEach(function (l, i) {
+      var it = itemById(l.id);
+      var bits = [it.en || it.hi];
+      if (l.size) bits.push(m.size + ' ' + l.size);
+      if (l.color) bits.push(l.color);
+      lines.push((i + 1) + ') ' + bits.join(', ') + ' × ' + l.qty +
+                 ' = ₹' + (Number(it.price) * l.qty));
+    });
+    lines.push('', m.total + ': ₹' + bagTotal(), '');
+    lines.push(m.name + ': ' + nm);
+    lines.push(m.phone + ': ' + ph);
+    lines.push(m.how + ': ' + (mode === 'courier' ? m.byCourier : m.atShop));
+    if (mode === 'courier') lines.push(m.addr + ': ' + ad);
+
+    /* The page cannot verify a payment, because it has no server and never sees the
+       bank. So this is the customer's own statement, written in their voice,
+       and the screenshot is what Tarun actually checks against PhonePe. */
+    logOrder();
+
+    if (mode === 'courier') {
+      lines.push(m.pay + ': ' + m.courierPay);
+    } else if (payWay === 'upi') {
+      lines.push(m.pay + ': ' + (el.paidChk.checked ? m.paidUpi : m.willUpi) + ' · ₹' + bagTotal());
+      if (el.paidChk.checked) lines.push(m.shot);
+    } else {
+      lines.push(m.pay + ': ' + m.onDeliv);
+    }
+    openWA(lines);
+  }
+
+  /* Tell the shop what was ordered: item, size, colour, quantity, price and
+     nothing else. No name, phone or address goes anywhere near this.
+
+     Fire and forget on purpose: the customer is about to be handed to
+     WhatsApp, and an analytics call must never be the thing that delays or
+     breaks an order. If it fails, it fails silently. */
+  function logOrder() {
+    var base = (shop.reviewsApi || '').replace(/\/+$/, '');
+    if (!base || !bag.length) return;
+    try {
+      fetch(base + '/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          shop: 'gar',
+          items: bag.map(function (l) {
+            var it = itemById(l.id) || {};
+            return { id: l.id, name: it.en || it.hi || l.id, size: l.size || '',
+                     color: l.color || '', qty: l.qty, price: Number(it.price) || 0 };
+          })
+        })
+      }).catch(function () {});
+    } catch (e) { /* never block the order */ }
+  }
+
+  /* Same handoff the vegetable page uses: on a touch device a new tab loses
+     the query string when WhatsApp takes over, so navigate directly. */
+  function openWA(lines) {
+    var url = 'https://wa.me/' + shop.whatsapp + '?text=' + encodeURIComponent(lines.join('\n'));
+    var touch = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    if (touch) { window.location.href = url; return; }
+    var w = null;
+    try { w = window.open(url, '_blank'); } catch (e) { w = null; }
+    if (w) { try { w.opener = null; } catch (e) {} return; }
+    window.location.href = url;
+  }
+
+  function askLine(it) {
+    return DATA.shop.nameEn + ': ' + (it.en || it.hi) + ' ke baare mein poochna hai';
+  }
+
+  /* ---------------------------- bag wiring ---------------------------- */
+  el.bagOpen.addEventListener('click', openSheet);
+  el.sheetClose.addEventListener('click', closeSheet);
+  el.scrim.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !el.sheet.hidden) closeSheet();
+  });
+  el.payUpi.addEventListener('click', function () { setPayWay('upi'); });
+  el.payLater.addEventListener('click', function () { setPayWay('later'); });
+  el.paidChk.addEventListener('change', paintUpi);
+  /* Tapping the pay button hands off to a UPI app, so tick the box for them,
+     because they are unlikely to come back and find it. They can still untick it. */
+  el.upiPayBtn.addEventListener('click', function () {
+    el.paidChk.checked = true;
+    paintUpi();   /* setting .checked in code fires no change event */
+  });
+
+  el.modeShop.addEventListener('click', function () { setMode('shop'); });
+  el.modeCourier.addEventListener('click', function () { setMode('courier'); });
+  el.bagSend.addEventListener('click', sendOrder);
+  el.upiCopy.addEventListener('click', function () {
+    var id = (shop.upiId || '').trim(), done = function () {
+      var old = el.upiCopy.textContent;
+      el.upiCopy.textContent = t.upiCopied;
+      setTimeout(function () { el.upiCopy.textContent = old; }, 1600);
+    };
+    if (navigator.clipboard) navigator.clipboard.writeText(id).then(done, done);
+    else done();
+  });
+
+  /* Bring back whatever this phone told us last time. */
+  (function restore() {
+    var info = load(GINFO_KEY, {});
+    el.gName.value = info.name || '';
+    el.gPhone.value = info.phone || '';
+    el.gAddr.value = info.addr || '';
+    setMode(info.mode === 'courier' ? 'courier' : 'shop');
+    setPayWay('later');
+  })();
+
+  /* =============================== helpers =============================== */
+  function name(it) { return it[lang] || it.en; }
+  function fill(str, vals) {
+    return String(str).replace(/\{(\w+)\}/g, function (_, k) {
+      return vals[k] === undefined ? '' : vals[k];
+    });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    });
+  }
+  function load(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
+    catch (e) { return fallback; }
+  }
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) { /* private mode */ }
+  }
+})();
+</script>
+</body>
+</html>
