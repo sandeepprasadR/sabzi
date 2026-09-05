@@ -125,6 +125,9 @@ a:hover{color:var(--carrot)}
   box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
 .card.on{border-color:var(--leaf);box-shadow:0 0 0 3px var(--leaf-l),var(--shadow)}
 .art{width:76px;height:76px;display:block}
+.artemoji{display:flex;align-items:center;justify-content:center;font-size:40px;line-height:1}
+.pr .mrp{margin-left:6px;font-size:.72em;font-weight:600;color:var(--muted);text-decoration:line-through}
+.oline .artemoji{font-size:24px}
 .shotwrap{margin:-12px -11px 0;width:calc(100% + 22px);aspect-ratio:4/3;overflow:hidden;
   background:#f6f1e4;border-radius:16px 16px 0 0;position:relative}
 .shotwrap img{width:100%;height:100%;object-fit:cover;display:block}
@@ -659,6 +662,14 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         "bn": "মসলা",
         "pa": "ਮਸਾਲਾ",
         "te": "మసాలా"
+      },
+      {
+        "id": "kokora",
+        "hi": "पैकेट मसाले",
+        "en": "Packet spices",
+        "bn": "প্যাকেট মশলা",
+        "pa": "ਪੈਕੇਟ ਮਸਾਲੇ",
+        "te": "ప్యాకెట్ మసాలా"
       }
     ],
     "products": [
@@ -830,7 +841,937 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         "available": true,
         "photo": "photos/item1788592029103.jpg",
         "stock": 0
-      }
+      },
+
+        {
+          "id": "ks_bombaybir12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍚",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "बॉम्बे बिरयानी मसाला 10g (12 पाउच)",
+          "en": "Bombay Biryani 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_chai",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "☕",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "चाय कड़क मसाला",
+          "en": "Chai Kadak Masala",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_chickencurry",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍗",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "चिकन करी मसाला",
+          "en": "Chicken Curry Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_chole12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍛",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "छोले मसाला 10g (12 पाउच)",
+          "en": "Chole Masala 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_currymix",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍲",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "करी मिक्स मसाला",
+          "en": "Curry Mix Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_dumbiryani",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍚",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "दम बिरयानी मसाला",
+          "en": "Dum Biryani Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_garam12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧂",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "गरम मसाला 10g (12 पाउच)",
+          "en": "Garam Masala 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_grilledchick",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍗",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "ग्रिल्ड चिकन मसाला",
+          "en": "Grilled Chicken Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_boldheat",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🎁",
+          "price": 220,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "बोल्ड हीट कॉम्बो",
+          "en": "Bold Heat Combo",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_achari50",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥩",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "अचारी मीट मसाला 50g",
+          "en": "Achari Meat Masala 50g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_bayleaf80",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌿",
+          "price": 135,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "तेज पत्ता पाउडर 80g",
+          "en": "Bay Leaf (Tej Patta) Powder 80g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 150
+        },
+        {
+          "id": "ks_bbqrub",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🔥",
+          "price": 180,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "बीबीक्यू रब 100g",
+          "en": "BBQ Rub 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_kalimirch",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "⚫",
+          "price": 153,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "काली मिर्च पाउडर 100g",
+          "en": "Black Pepper (Kali Mirch) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 170
+        },
+        {
+          "id": "ks_bombaybir60",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍚",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "बॉम्बे बिरयानी मसाला 60g",
+          "en": "Bombay Biryani Masala 60g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_chaat100",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥗",
+          "price": 85,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "चाट मसाला 100g",
+          "en": "Chaat Masala 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 99
+        },
+        {
+          "id": "ks_chickentikka",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍗",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "चिकन टिक्का मसाला 50g",
+          "en": "Chicken Tikka Masala 50g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_cinnamon",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 90,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "दालचीनी पाउडर 100g",
+          "en": "Cinnamon Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 100
+        },
+        {
+          "id": "ks_clove",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 243,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "लौंग पाउडर 100g",
+          "en": "Clove (Laung) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 270
+        },
+        {
+          "id": "ks_dhaniya",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌿",
+          "price": 45,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "धनिया पाउडर 100g",
+          "en": "Coriander (Dhaniya) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_jeerapd",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥄",
+          "price": 85,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "जीरा पाउडर 100g",
+          "en": "Cumin (Jeera) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_amchur",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥭",
+          "price": 85,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "अमचूर पाउडर 100g",
+          "en": "Dry Mango (Amchur) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_saunf",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌾",
+          "price": 108,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सौंफ पाउडर 100g",
+          "en": "Fennel (Saunf) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 120
+        },
+        {
+          "id": "ks_methi",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌱",
+          "price": 54,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "मेथी दाना पाउडर 100g",
+          "en": "Fenugreek (Methi Dana) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 60
+        },
+        {
+          "id": "ks_garam100",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧂",
+          "price": 100,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "गरम मसाला 100g",
+          "en": "Garam Masala 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_garlicpd",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧄",
+          "price": 117,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "लहसुन पाउडर 100g",
+          "en": "Garlic Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 130
+        },
+        {
+          "id": "ks_gingerpd",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🫚",
+          "price": 126,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सोंठ (अदरक) पाउडर 100g",
+          "en": "Ginger Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 140
+        },
+        {
+          "id": "ks_elaichi",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 675,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "हरी इलायची पाउडर 100g",
+          "en": "Green Cardamom (Elaichi) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 750
+        },
+        {
+          "id": "ks_grchmustard",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧂",
+          "price": 150,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "हरी मिर्च सरसों सीज़निंग 100g",
+          "en": "Green Chilli Mustard Seasoning 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_grchseason",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌶️",
+          "price": 150,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "हरी मिर्च सीज़निंग 100g",
+          "en": "Green Chilli Seasoning 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_kashmiri",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌶️",
+          "price": 110,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "कश्मीरी मिर्च पाउडर 100g",
+          "en": "Kashmiri Mirch Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_javitri",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 414,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "जावित्री पाउडर 100g",
+          "en": "Mace (Javitri) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 460
+        },
+        {
+          "id": "ks_meat100",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍖",
+          "price": 99,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "मीट मसाला 100g",
+          "en": "Meat Masala 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_jaiphal",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 225,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "जायफल पाउडर 100g",
+          "en": "Nutmeg (Jaiphal) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 250
+        },
+        {
+          "id": "ks_peanutsoy",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧂",
+          "price": 150,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पीनट सोया सीज़निंग 100g",
+          "en": "Peanut Soy Seasoning 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_pecanrub",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🔥",
+          "price": 200,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पेकन रब 100g",
+          "en": "Pecan Rub 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_piripiri",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌶️",
+          "price": 99,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पीरी पीरी सीज़निंग 100g",
+          "en": "Piri Piri Seasoning 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_lalmirch",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌶️",
+          "price": 60,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "लाल मिर्च पाउडर 100g",
+          "en": "Red Chilli (Lal Mirch) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_staranise",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🌰",
+          "price": 189,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "चक्र फूल पाउडर 100g",
+          "en": "Star Anise (Chakra Phool) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 210
+        },
+        {
+          "id": "ks_sweettangy",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧂",
+          "price": 150,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "स्वीट एंड टैंगी मस्टर्ड रब 100g",
+          "en": "Sweet & Tangy Mustard Rub 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_haldipd",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🟡",
+          "price": 45,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "हल्दी पाउडर 100g",
+          "en": "Turmeric (Haldi) Powder 100g",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_lambchop",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍖",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "लैंब चॉप मैरिनेड",
+          "en": "Lamb Chop Marinade",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_meat12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍖",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "मीट मसाला 10g (12 पाउच)",
+          "en": "Meat Masala 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_muttonburra",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍖",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "मटन बर्रा मैरिनेड",
+          "en": "Mutton Burra Marinade",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_muttoncurry",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍖",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "मटन करी मसाला",
+          "en": "Mutton Curry Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_paneertikka",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🧀",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पनीर टिक्का मैरिनेड",
+          "en": "Paneer Tikka Marinade",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_pavbhaji",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍞",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पाव भाजी मसाला",
+          "en": "Pav Bhaji Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_pindichana",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍛",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "पिंडी छोला मसाला",
+          "en": "Pindi Chana Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_sabzi12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥬",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सब्ज़ी मसाला 10g (12 पाउच)",
+          "en": "Sabzi Masala 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_saladseason",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥗",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सलाद सीज़निंग",
+          "en": "Salad Seasoning Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_sambhar",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🥘",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सांभर मसाला",
+          "en": "Sambhar Masala Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_tandoorimar",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🔥",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "तंदूरी चिकन मैरिनेड",
+          "en": "Tandoori Chicken Marinade",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_tandoori12",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🔥",
+          "price": 120,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "तंदूरी चिकन मसाला 10g (12 पाउच)",
+          "en": "Tandoori Chicken Masala 10g Pouches (Pack of 12)",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_vegbiryani",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🍚",
+          "price": 80,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "वेज बिरयानी मसाला",
+          "en": "Veg Biryani Spice Mix",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0
+        },
+        {
+          "id": "ks_royalnonveg",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🎁",
+          "price": 300,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "रॉयल नॉन-वेज कलेक्शन",
+          "en": "Royal Non-Veg Collection",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 320
+        },
+        {
+          "id": "ks_signature",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🎁",
+          "price": 300,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "सिग्नेचर टेस्ट कलेक्शन",
+          "en": "Signature Taste Collection",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 320
+        },
+        {
+          "id": "ks_vegdelight",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🎁",
+          "price": 140,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "वेज डिलाइट कलेक्शन",
+          "en": "Veg Delight Collection",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 160
+        },
+        {
+          "id": "ks_flavourduo",
+          "cat": "kokora",
+          "art": "",
+          "emoji": "🎁",
+          "price": 140,
+          "unit": "pc",
+          "step": 1,
+          "photo": "",
+          "hi": "एवरीडे फ्लेवर डुओ",
+          "en": "Everyday Flavor Duo",
+          "available": true,
+          "stock": 0,
+          "buyPrice": 0,
+          "buyQty": 0,
+          "mrp": 180
+        }
     ]
   }/*</CATALOGUE>*/;
 
@@ -887,7 +1828,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"फ्री", perk3a:"होम डिलीवरी",
       ttlRates:"आज की रेट लिस्ट", updated:"अपडेट: {d}",
       ratesHint:"दाम रोज़ मंडी के हिसाब से बदलते हैं। पैसे डिलीवरी के समय दें, नकद या UPI।",
-      allCat:"सब", add:"जोड़ें", per:"/", kg:"किलो", g:"ग्राम", gram250:"250 ग्राम",
+      allCat:"सब", add:"जोड़ें", per:"/", kg:"किलो", g:"ग्राम", gram250:"250 ग्राम", pack:"पैकेट",
       more:"बढ़ाएँ", less:"कम करें",
       ttlYou:"आपकी जानकारी", lblName:"आपका नाम", lblFlat:"टावर / फ्लैट नंबर",
       lblPhone:"मोबाइल नंबर", lblNote:"कोई और सामान या सूचना?",
@@ -949,7 +1890,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"Free", perk3a:"home delivery",
       ttlRates:"Today's rate list", updated:"Updated {d}",
       ratesHint:"Prices follow the morning mandi. Pay at the door, cash or UPI.",
-      allCat:"All", add:"Add", per:"/", kg:"kg", g:"g", gram250:"250 g",
+      allCat:"All", add:"Add", per:"/", kg:"kg", g:"g", gram250:"250 g", pack:"pack",
       more:"increase", less:"decrease",
       ttlYou:"Your details", lblName:"Your name", lblFlat:"Tower / flat number",
       lblPhone:"Mobile number", lblNote:"Anything else, or a note?",
@@ -1010,7 +1951,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ফ্রি", perk3a:"হোম ডেলিভারি",
       ttlRates:"আজকের দাম", updated:"আপডেট {d}",
       ratesHint:"দাম রোজ মান্ডি অনুযায়ী বদলায়। টাকা দরজায় দিন, নগদ বা UPI।",
-      allCat:"সব", add:"যোগ করুন", per:"/", kg:"কেজি", g:"গ্রাম", gram250:"250 গ্রাম",
+      allCat:"সব", add:"যোগ করুন", per:"/", kg:"কেজি", g:"গ্রাম", gram250:"250 গ্রাম", pack:"প্যাকেট",
       more:"বাড়ান", less:"কমান",
       ttlYou:"আপনার তথ্য", lblName:"আপনার নাম", lblFlat:"টাওয়ার / ফ্ল্যাট নম্বর",
       lblPhone:"মোবাইল নম্বর", lblNote:"আর কিছু বা কোনো কথা?",
@@ -1071,7 +2012,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ਮੁਫ਼ਤ", perk3a:"ਹੋਮ ਡਿਲੀਵਰੀ",
       ttlRates:"ਅੱਜ ਦੇ ਭਾਅ", updated:"ਅਪਡੇਟ {d}",
       ratesHint:"ਭਾਅ ਰੋਜ਼ ਮੰਡੀ ਮੁਤਾਬਕ ਬਦਲਦੇ ਹਨ। ਪੈਸੇ ਦਰਵਾਜ਼ੇ 'ਤੇ ਦਿਓ, ਨਕਦ ਜਾਂ UPI।",
-      allCat:"ਸਭ", add:"ਪਾਓ", per:"/", kg:"ਕਿਲੋ", g:"ਗ੍ਰਾਮ", gram250:"250 ਗ੍ਰਾਮ",
+      allCat:"ਸਭ", add:"ਪਾਓ", per:"/", kg:"ਕਿਲੋ", g:"ਗ੍ਰਾਮ", gram250:"250 ਗ੍ਰਾਮ", pack:"ਪੈਕੇਟ",
       more:"ਵਧਾਓ", less:"ਘਟਾਓ",
       ttlYou:"ਤੁਹਾਡੀ ਜਾਣਕਾਰੀ", lblName:"ਤੁਹਾਡਾ ਨਾਮ", lblFlat:"ਟਾਵਰ / ਫਲੈਟ ਨੰਬਰ",
       lblPhone:"ਮੋਬਾਈਲ ਨੰਬਰ", lblNote:"ਹੋਰ ਕੁਝ ਜਾਂ ਕੋਈ ਗੱਲ?",
@@ -1132,7 +2073,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       perk3b:"ఉచితం", perk3a:"హోమ్ డెలివరీ",
       ttlRates:"నేటి రేట్లు", updated:"అప్‌డేట్ {d}",
       ratesHint:"రేట్లు రోజూ మండీ ప్రకారం మారుతాయి. డబ్బు ఇంటి వద్ద చెల్లించండి, నగదు లేదా UPI.",
-      allCat:"అన్నీ", add:"చేర్చండి", per:"/", kg:"కిలో", g:"గ్రా", gram250:"250 గ్రా",
+      allCat:"అన్నీ", add:"చేర్చండి", per:"/", kg:"కిలో", g:"గ్రా", gram250:"250 గ్రా", pack:"ప్యాకెట్",
       more:"పెంచు", less:"తగ్గించు",
       ttlYou:"మీ వివరాలు", lblName:"మీ పేరు", lblFlat:"టవర్ / ఫ్లాట్ నంబర్",
       lblPhone:"మొబైల్ నంబర్", lblNote:"ఇంకేమైనా లేదా సందేశం?",
@@ -1367,8 +2308,24 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     });
   }
 
+  /* A price of zero is not a free vegetable, it is a price nobody has set
+     yet. Such an item cannot be ordered honestly, so the shop does not show
+     it at all; the admin says as much next to the empty box. */
+  function priced(p) { return Number(p.price) > 0; }
+
   function visible() {
-    return products.filter(function (p) { return activeCat === 'all' || p.cat === activeCat; });
+    return products.filter(function (p) {
+      return priced(p) && (activeCat === 'all' || p.cat === activeCat);
+    });
+  }
+
+  /* Six vegetables were drawn by hand and carry an `art` id. Everything
+     added since is a photo, and anything with neither falls back to its
+     emoji rather than to an empty box. */
+  function artFor(p) {
+    return p.art && document.getElementById('v-' + p.art)
+      ? '<svg class="art" aria-hidden="true"><use href="#v-' + p.art + '"></use></svg>'
+      : '<div class="art artemoji" aria-hidden="true">' + esc(p.emoji || '🛒') + '</div>';
   }
 
   function renderGrid() {
@@ -1382,10 +2339,12 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         (src
           ? '<div class="shotwrap"><img src="' + esc(src) + '" alt="" loading="lazy" decoding="async">' +
             '<button class="photorm" type="button" data-rm="' + p.id + '" aria-label="' + esc(t.photoRm) + '">✕</button></div>'
-          : '<svg class="art" aria-hidden="true"><use href="#v-' + p.art + '"></use></svg>') +
+          : artFor(p)) +
         '<div class="nm">' + esc(name(p)) + '</div>' +
         (lang === 'en' ? '' : '<div class="en">' + esc(p.en) + '</div>') +
-        '<div class="pr">₹' + p.price + ' <small>' + t.per + ' ' + unitLabel(p.unit) + '</small></div>' +
+        '<div class="pr">₹' + p.price +
+          (Number(p.mrp) > Number(p.price) ? '<span class="mrp">₹' + p.mrp + '</span>' : '') +
+          ' <small>' + t.per + ' ' + unitLabel(p.unit) + '</small></div>' +
         '<div class="ctrl"></div>';
       if (p.available === false) card.classList.add('gone');
       el.grid.appendChild(card);
@@ -1529,7 +2488,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
         row.innerHTML =
           (photoFor(l.p)
             ? '<img class="art" style="border-radius:9px;object-fit:cover" src="' + esc(photoFor(l.p)) + '" alt="">'
-            : '<svg class="art" aria-hidden="true"><use href="#v-' + l.p.art + '"></use></svg>') +
+            : artFor(l.p)) +
           '<span class="who"><b>' + esc(name(l.p)) + '</b>' +
           (lang === 'en' ? '' : '<span>' + esc(l.p.en) + '</span>') + '</span>';
         row.appendChild(stepper(l.p, l.qty, 'mini', ''));
@@ -1821,14 +2780,23 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
 
   /* =============================== helpers =============================== */
   function name(p) { return p[lang] || p.en; }
-  function unitLabel(unit) { return unit === 'kg' ? t.kg : unit === '250g' ? t.gram250 : unit; }
+  function unitLabel(unit) {
+    return unit === 'kg' ? t.kg
+         : unit === '250g' ? t.gram250
+         : unit === 'pc' ? t.pack
+         : unit;
+  }
 
+  /* Anything sold by weight is counted in grams and kilos. A packet is
+     counted in packets: a jar of turmeric is not 250 grams of anything. */
   function qtyLabel(p, qty) {
+    if (p.unit === 'pc') return fmt(qty) + ' ' + t.pack;
     var grams = p.unit === 'kg' ? qty * 1000 : qty * 250;
     if (grams < 1000) return grams + ' ' + t.g;
     return fmt(grams / 1000) + ' ' + t.kg;
   }
   function qtyLabelHi(p, qty) {
+    if (p.unit === 'pc') return fmt(qty) + ' पैकेट';
     var grams = p.unit === 'kg' ? qty * 1000 : qty * 250;
     if (grams < 1000) return grams + ' ग्राम';
     return fmt(grams / 1000) + ' किलो';

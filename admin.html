@@ -213,6 +213,7 @@ a{color:var(--leaf-d)}
         <h2 data-tx="vegH"></h2>
         <p class="hint" data-tx="vegHint"></p>
         <p class="stocktot" id="vegTotal"></p>
+        <div class="picks" id="vegFilter" style="margin-bottom:4px"></div>
         <div id="vegList"></div>
         <button class="btn btn-ghost" id="addVeg" style="margin-top:12px" data-tx="addVeg"></button>
       </div>
@@ -486,6 +487,9 @@ a{color:var(--leaf-d)}
     costLoss:   ['₹{c} a {u} · you sell at ₹{p} · that is ₹{m} below cost',
                  '₹{c} प्रति {u} · आप बेचते हैं ₹{p} · यह लागत से ₹{m} कम है'],
 
+    noPrice:    ['No price yet, so it stays off the website. Fill the price in and it appears.',
+                 'दाम नहीं भरा है, इसलिए यह वेबसाइट पर नहीं दिख रहा। दाम भरते ही दिखने लगेगा।'],
+    allItems:   ['All', 'सब'],
     isNew:      ['New', 'नया'],
     newFor:     ['New for {n} more days', '{n} दिन और "नया" दिखेगा'],
     newOff:     ['Not marked new', 'नया नहीं लगा'],
@@ -1011,10 +1015,31 @@ a{color:var(--leaf-d)}
     return (d.categories || []).map(function (c) { return [c.id, catLabel(c)]; });
   }
 
+  /* One list of thirty-odd items on a phone is a scroll, not a list. The
+     categories the shop already has make it a list again. */
+  var vegFilter = 'all';
+
+  function drawVegFilter() {
+    var host = $('vegFilter');
+    var cats = [['all', tx('allItems')]].concat(vegCats());
+    host.innerHTML = '';
+    if (cats.length < 3) return;
+    cats.forEach(function (c) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'pick';
+      b.setAttribute('aria-pressed', String(vegFilter === c[0]));
+      b.textContent = c[1];
+      b.addEventListener('click', function () { vegFilter = c[0]; drawVeg(); });
+      host.appendChild(b);
+    });
+  }
+
   function drawVeg() {
     var d = files['index.html'].data, host = $('vegList');
     host.innerHTML = '';
+    drawVegFilter();
     (d.products || []).forEach(function (p, i) {
+      if (vegFilter !== 'all' && p.cat !== vegFilter) return;
       host.appendChild(itemRow(p, {
         fallbackEmoji: p.emoji || '🥬',
         sub: function (o) { return (o.en || '') + ' · ' + unitShort(o.unit) + ' · ' + stockLine(o); },
@@ -1045,6 +1070,12 @@ a{color:var(--leaf-d)}
             { type: 'number', numeric: true, step: '0.01', placeholder: tx('phStock') }));
 
           box.appendChild(costBlock(o, 'veg', paintStockTotals));
+
+          if (!(Number(o.price) > 0)) {
+            var np = document.createElement('p'); np.className = 'help bad';
+            np.textContent = tx('noPrice');
+            box.appendChild(np);
+          }
 
           var p2 = document.createElement('p'); p2.className = 'help';
           p2.textContent = tx('vegEditNote');
@@ -1293,13 +1324,20 @@ a{color:var(--leaf-d)}
     if (!files['index.html']) return;
     var d = files['index.html'].data, s = d.store;
     var out = ['🛒 *आज की रेट लिस्ट* 🛒', ''];
+    /* The rate list is the morning's vegetable rates, which is why anyone
+       reads it. The spices are a fixed catalogue of nearly sixty packets and
+       would bury them, so they get one line and a link instead. */
+    var spices = 0;
     (d.products || []).forEach(function (p) {
-      if (p.available === false) return;
+      if (p.available === false || !(Number(p.price) > 0)) return;
+      if (p.cat === 'kokora') { spices++; return; }
       out.push((p.emoji || '•') + ' ' + (p.hi || p.en) + ': ' + unitLabel(p.unit) + ' · ₹' + p.price);
     });
     out.push('', '✨ 100% ताज़ा, रोज़ सुबह मंडी से ✨',
       '🚚 फ्री होम डिलीवरी, ' + (s.deliveryMinutes || '15-20') + ' मिनट में', '',
       '🛒 ऑर्डर: ' + SITE);
+
+    if (spices) out.push('', '🧂 मसाले भी मिलते हैं, ' + spices + ' तरह के');
 
     /* The same message carries the other shop. Most of the society knows
        Tarun for vegetables and has never heard about the clothes. */
@@ -1351,7 +1389,9 @@ a{color:var(--leaf-d)}
 
   function drawRateCard() {
     var d = files['index.html'].data, st = d.store;
-    var list = (d.products || []).filter(function (p) { return p.available !== false; });
+    var list = (d.products || []).filter(function (p) {
+      return p.available !== false && Number(p.price) > 0 && p.cat !== 'kokora';
+    });
     var H = PIC.HEAD + list.length * PIC.ROW + PIC.FOOT;
     var cv = document.createElement('canvas');
     cv.width = PIC.W; cv.height = H;
