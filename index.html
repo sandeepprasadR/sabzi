@@ -82,11 +82,29 @@ a:hover{color:var(--carrot)}
 .quote{margin:10px 0 0;padding:0 2px;font-size:15.5px;line-height:1.65;opacity:.95}
 .quote b{font-weight:700}
 
-.perks{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0 0;padding:0 0 20px}
+.perks{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:14px 0 0;padding:0}
+/* clearance for the 14px cream lip on .hdr:after — on the container, so it
+   holds whether or not the cross-sell strip is showing */
+.hdr .wrap{padding-bottom:20px}
 .perks li{background:rgba(255,255,255,.12);border-radius:12px;padding:9px 7px;font-size:11.5px;
   line-height:1.4;text-align:center;display:flex;flex-direction:column;gap:3px;align-items:center}
 .perks li b{font-size:13.5px;font-weight:800;line-height:1.3}
 .perks li svg{width:20px;height:20px;opacity:.9}
+
+/* ---------- cross-sell strip (garments, shown on the vegetable page) ---------- */
+.xsell{display:flex;align-items:center;gap:11px;margin:12px 0 0;padding:10px 12px;
+  background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);border-radius:14px;
+  color:#fff;text-decoration:none}
+.xsell:active{background:rgba(255,255,255,.2)}
+.xsell .pics{display:flex;flex:0 0 auto}
+.xsell .pics img{width:42px;height:42px;border-radius:10px;object-fit:cover;display:block;
+  border:2px solid rgba(255,255,255,.55);margin-left:-12px;background:#eee}
+.xsell .pics img:first-child{margin-left:0}
+.xsell .xtxt{flex:1;min-width:0;line-height:1.35}
+.xsell .xtxt b{display:block;font-size:14.5px;font-weight:800}
+.xsell .xtxt span{display:block;font-size:12px;opacity:.85;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.xsell .go{flex:0 0 auto;font-size:19px;font-weight:800;opacity:.75}
 
 /* ---------- catalogue ---------- */
 .section{margin-top:24px}
@@ -387,6 +405,12 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       <li><svg aria-hidden="true"><use href="#i-tag"></use></svg><b id="perk2b"></b><span id="perk2a"></span></li>
       <li><svg aria-hidden="true"><use href="#i-home"></use></svg><b id="perk3b"></b><span id="perk3a"></span></li>
     </ul>
+
+    <a class="xsell" id="xsell" href="garments.html" hidden>
+      <span class="pics" id="xsellPics"></span>
+      <span class="xtxt"><b id="xsellTtl"></b><span id="xsellSub"></span></span>
+      <span class="go" aria-hidden="true">&rsaquo;</span>
+    </a>
   </div>
 </header>
 
@@ -578,7 +602,17 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       "upiId": "8400357057@ybl",
       "upiName": "Tarun Bhatia",
       "reportHours": 24,
-      "reviewsApi": "https://guru-ashish-reviews.sandeepniftian2002.workers.dev"
+      "reviewsApi": "https://guru-ashish-reviews.sandeepniftian2002.workers.dev",
+      "crossSell": {
+        "on": true,
+        "photos": [
+          "garments/kurta.jpg",
+          "garments/shirt.jpg",
+          "garments/jeans.jpg",
+          "garments/kurti.jpg"
+        ],
+        "sub": "कुर्ता · कॉटन शर्ट · जीन्स · कुर्ती"
+      }
     },
     "categories": [
       {
@@ -826,6 +860,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       emptyTitle:"अभी कुछ नहीं चुना", emptyBody:"ऊपर की लिस्ट से सब्ज़ी जोड़ें — आलू, प्याज, टमाटर। एक तरफ़ से बढ़ाना-घटाना यहीं हो जाएगा।",
       emptyCta:"रेट लिस्ट देखें",
       foot:"तरुण द्वारा, सोसाइटी के लिए · A3-203", cross:"कपड़े की दुकान देखें",
+      xsellTtl:"कपड़े की दुकान भी", xsellSub:"कुर्ता, जीन्स, कुर्ती और बहुत कुछ — यहीं तरुण की दुकान से",
       photoOn:"फोटो जोड़ें", photoOff:"फोटो मोड बंद करें", photoAdd:"फोटो लगाएं", photoChange:"फोटो बदलें", photoRm:"फोटो हटाएं", photoNote:"अपने फोन से सब्ज़ी की फोटो चुनें। फोटो छोटी कर दी जाएगी और इसी फोन में सेव होगी — सिर्फ आपको दिखेगी। सबको दिखाने के लिए फोटो फाइल के साथ रखें और DATA में photo लिखें।", photoBig:"यह फोटो सेव नहीं हुई — फोन में जगह कम है। एक-दो फोटो हटाकर फिर कोशिश करें।"
     },
     en: {
@@ -885,6 +920,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       emptyTitle:"Nothing chosen yet", emptyBody:"Add vegetables from the list above — potato, onion, tomato. You can change quantities right here.",
       emptyCta:"See the rate list",
       foot:"By Tarun, for the society · A3-203", cross:"See the clothing shop",
+      xsellTtl:"He also runs a clothing shop", xsellSub:"Kurta, jeans, kurti and more — same shopkeeper",
       photoOn:"Add photos", photoOff:"Done adding photos", photoAdd:"Add photo", photoChange:"Change photo", photoRm:"Remove photo", photoNote:"Pick a vegetable photo from this phone. It gets shrunk and saved on this phone only — customers won't see it. For everyone to see it, keep the file next to the page and set photo in DATA.", photoBig:"That photo could not be saved — storage is full. Remove one or two photos and try again."
     },
     bn: {
@@ -943,6 +979,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       emptyTitle:"এখনও কিছু বাছা হয়নি", emptyBody:"উপরের তালিকা থেকে সবজি যোগ করুন — আলু, পেঁয়াজ, টমেটো। পরিমাণ এখানেই বদলাতে পারবেন।",
       emptyCta:"দামের তালিকা দেখুন",
       foot:"তরুণের তরফে, সোসাইটির জন্য · A3-203", cross:"কাপড়ের দোকান দেখুন",
+      xsellTtl:"কাপড়ের দোকানও আছে", xsellSub:"কুর্তা, জিন্স, কুর্তি আরও অনেক কিছু",
       photoOn:"ছবি যোগ করুন", photoOff:"ছবি যোগ করা শেষ", photoAdd:"ছবি দিন", photoChange:"ছবি বদলান", photoRm:"ছবি সরান", photoNote:"এই ফোন থেকে সবজির ছবি বাছুন। ছবি ছোট করে এই ফোনেই সেভ হবে — খদ্দের দেখতে পাবে না। সবাইকে দেখাতে ফাইলটি পেজের পাশে রেখে DATA-তে photo লিখুন।", photoBig:"ছবি সেভ হয়নি — জায়গা নেই। এক-দুটো ছবি সরিয়ে আবার দেখুন।"
     },
     pa: {
@@ -1001,6 +1038,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       emptyTitle:"ਹਾਲੇ ਕੁਝ ਨਹੀਂ ਚੁਣਿਆ", emptyBody:"ਉੱਪਰ ਦੀ ਲਿਸਟ ਤੋਂ ਸਬਜ਼ੀ ਪਾਓ — ਆਲੂ, ਪਿਆਜ਼, ਟਮਾਟਰ। ਮਾਤਰਾ ਇੱਥੇ ਹੀ ਬਦਲ ਸਕਦੇ ਹੋ।",
       emptyCta:"ਭਾਅ ਦੀ ਲਿਸਟ ਵੇਖੋ",
       foot:"ਤਰੁਣ ਵੱਲੋਂ, ਸੋਸਾਇਟੀ ਲਈ · A3-203", cross:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਵੇਖੋ",
+      xsellTtl:"ਕੱਪੜੇ ਦੀ ਦੁਕਾਨ ਵੀ", xsellSub:"ਕੁੜਤਾ, ਜੀਨਸ, ਕੁੜਤੀ ਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ",
       photoOn:"ਫੋਟੋ ਪਾਓ", photoOff:"ਫੋਟੋ ਪਾਉਣਾ ਹੋ ਗਿਆ", photoAdd:"ਫੋਟੋ ਲਾਓ", photoChange:"ਫੋਟੋ ਬਦਲੋ", photoRm:"ਫੋਟੋ ਹਟਾਓ", photoNote:"ਇਸ ਫੋਨ ਤੋਂ ਸਬਜ਼ੀ ਦੀ ਫੋਟੋ ਚੁਣੋ। ਫੋਟੋ ਛੋਟੀ ਕਰਕੇ ਇਸੇ ਫੋਨ ਵਿੱਚ ਸੇਵ ਹੋਵੇਗੀ — ਗਾਹਕਾਂ ਨੂੰ ਨਹੀਂ ਦਿਸੇਗੀ। ਸਭ ਨੂੰ ਦਿਖਾਉਣ ਲਈ ਫਾਈਲ ਪੇਜ ਦੇ ਨਾਲ ਰੱਖੋ ਤੇ DATA ਵਿੱਚ photo ਲਿਖੋ।", photoBig:"ਫੋਟੋ ਸੇਵ ਨਹੀਂ ਹੋਈ — ਥਾਂ ਨਹੀਂ ਹੈ। ਇੱਕ-ਦੋ ਫੋਟੋ ਹਟਾ ਕੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
     },
     te: {
@@ -1059,6 +1097,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
       emptyTitle:"ఇంకా ఏమీ ఎంచుకోలేదు", emptyBody:"పైన ఉన్న జాబితా నుంచి కూరగాయలు చేర్చండి — బంగాళాదుంప, ఉల్లిపాయ, టొమాటో. పరిమాణం ఇక్కడే మార్చుకోవచ్చు.",
       emptyCta:"రేట్ల జాబితా చూడండి",
       foot:"తరుణ్ నుంచి, సొసైటీ కోసం · A3-203", cross:"బట్టల దుకాణం చూడండి",
+      xsellTtl:"బట్టల దుకాణం కూడా", xsellSub:"కుర్తా, జీన్స్, కుర్తీ మరెన్నో",
       photoOn:"ఫోటోలు చేర్చండి", photoOff:"ఫోటోలు చేర్చడం పూర్తి", photoAdd:"ఫోటో పెట్టండి", photoChange:"ఫోటో మార్చండి", photoRm:"ఫోటో తీసేయండి", photoNote:"ఈ ఫోన్ నుంచి కూరగాయ ఫోటో ఎంచుకోండి. ఫోటో చిన్నదిగా మారి ఈ ఫోన్‌లోనే సేవ్ అవుతుంది — కస్టమర్లకు కనిపించదు. అందరికీ కనిపించాలంటే ఫైల్‌ను పేజీ పక్కన ఉంచి DATAలో photo రాయండి.", photoBig:"ఫోటో సేవ్ కాలేదు — స్థలం లేదు. ఒకటి రెండు ఫోటోలు తీసేసి మళ్లీ ప్రయత్నించండి."
     }
   };
@@ -1097,6 +1136,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
    'fName','fFlat','fPhone','fNote','errName','errFlat',
    'langBtn','langMenu','langCur','shopName','shopSub','ownerAvatar','ownerName','ownerFlat',
    'statusPill','statusTxt','ownerQuote','updatedOn','storeAddress','callLink','waLink','footTxt','crossTxt',
+   'xsell','xsellPics','xsellTtl','xsellSub',
    'photoToggle','photoBar',
    'upiBox','upiTtl','upiIdTxt','upiCopy','upiNote','upiPayBtn','ttlHelp','helpLead','btnFeedback','btnComplaint',
    'polTtl','pol1','pol2','pol3','pol4','openFb','openCmp',
@@ -1184,6 +1224,7 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     set('perk1a', t.perk1a);
     set('perk2b', t.perk2b); set('perk2a', t.perk2a);
     set('perk3b', t.perk3b); set('perk3a', t.perk3a);
+    paintXsell();
 
     set('ttlRates', t.ttlRates); set('ratesHint', t.ratesHint);
     el.updatedOn.textContent = store.updatedOn ? fill(t.updated, { d: formatDate(store.updatedOn) }) : '';
@@ -1643,6 +1684,29 @@ input.bad,textarea.bad{border-color:#b3261e;background:#fff6f5}
     photos[p.id] = dataUrl;
     try { localStorage.setItem(PHOTO_KEY, JSON.stringify(photos)); return true; }
     catch (e) { if (prev) photos[p.id] = prev; else delete photos[p.id]; return false; }
+  }
+
+  /* --------------------------- garment cross-sell -------------------------
+     The vegetable page has no knowledge of the garment catalogue, so the
+     admin writes a few photo paths and a subtitle into store.crossSell when
+     it saves. Nothing here fetches the other page. */
+  function paintXsell() {
+    var x = store.crossSell || {};
+    var pics = (x.photos || []).filter(Boolean).slice(0, 4);
+    if (x.on === false) { el.xsell.hidden = true; return; }
+    el.xsell.hidden = false;
+
+    el.xsellPics.innerHTML = '';
+    pics.forEach(function (src) {
+      var im = document.createElement('img');
+      im.src = src; im.alt = ''; im.loading = 'lazy'; im.decoding = 'async';
+      /* a missing photo should shrink the row, not leave a broken icon */
+      im.addEventListener('error', function () { im.remove(); });
+      el.xsellPics.appendChild(im);
+    });
+
+    el.xsellTtl.textContent = t.xsellTtl;
+    el.xsellSub.textContent = x.sub || t.xsellSub;
   }
 
   /* =============================== helpers =============================== */
