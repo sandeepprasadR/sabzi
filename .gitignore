@@ -4,3 +4,6 @@ worker/.wrangler/
 
 # macOS
 .DS_Store
+# scratch a test wrote into the repo root once; belongs in a temp dir
+.test-*.html
+_*.html
